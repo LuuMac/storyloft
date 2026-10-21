@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gác Truyện – Đọc tiểu thuyết</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f5f4;--panel:#fff;--ink:#1d2523;--mute:#69756f;--line:#d9dfdc;--acc:#0f766e;--accink:#fff;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]):not([data-theme="sepia"]){color-scheme:dark;--bg:#10171a;--panel:#182226;--ink:#dbe5e1;--mute:#8a9a94;--line:#2a373b;--acc:#5eead4;--accink:#08201d}}
+:root[data-theme="sepia"]{--bg:#ece3cf;--panel:#f5eddb;--ink:#3a2f22;--mute:#7d6f5a;--line:#d8cbb0;--acc:#8a4b1f;--accink:#fff}
+:root[data-theme="dark"]{--bg:#10171a;--panel:#182226;--ink:#dbe5e1;--mute:#8a9a94;--line:#2a373b;--acc:#5eead4;--accink:#08201d}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Be Vietnam Pro",system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+a{color:inherit;text-decoration:none}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:12px 20px}
+.brand{font:600 20px "Literata",Georgia,serif;margin-right:auto}
+.btn{border:1px solid var(--line);background:var(--panel);padding:8px 14px;border-radius:8px}
+.btn.pri{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:500}
+/* Compact avatar account dropdown */
+.account-wrap{position:relative;display:flex;align-items:center;gap:8px;flex:none}
+.account-name{border:0;background:transparent;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;padding:7px 2px}
+.account-caret{font-size:12px;color:var(--mute);margin-left:3px}
+.account-dropdown{position:absolute;right:0;top:calc(100% + 10px);z-index:20;width:min(270px,calc(100vw - 24px));padding:8px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.3);display:none;color:var(--ink)}
+.account-dropdown.on{display:block;animation:accountDrop .14s ease-out}
+@keyframes accountDrop{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.account-dropdown .account-who{padding:10px 12px 12px;border-bottom:1px solid var(--line);margin-bottom:5px;overflow:hidden}
+.account-dropdown .account-who strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.account-dropdown .account-who small{display:block;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:2px}
+.account-dropdown [hidden]{display:none!important}.account-dropdown button{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:0;border-radius:8px;background:transparent;text-align:left;color:inherit}
+.account-dropdown button:hover{background:var(--bg)}.account-dropdown .account-sep{height:1px;background:var(--line);margin:5px 4px}
+.account-dropdown .menu-icon{width:20px;text-align:center;color:var(--mute);flex:none}
+@media(max-width:600px){.account-name{max-width:92px;font-size:14px}.account-wrap{gap:4px}.account-dropdown{right:-8px}}
+.account-btn{width:42px;height:42px;flex:none;border:1px solid var(--line);border-radius:50%;background:var(--panel);display:grid;place-items:center;padding:0;color:var(--ink);overflow:hidden}.account-btn img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%}.account-btn .account-initial{font-size:16px;font-weight:700;line-height:1}.account-btn:hover{border-color:var(--acc);color:var(--acc)}.login-dialog{width:min(470px,94vw);max-width:470px;padding:34px 34px 28px;text-align:center;border:1px solid #20283a;border-radius:28px;background:#050914;color:#f5f7ff;box-shadow:0 28px 90px rgba(0,0,0,.55)}.login-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(7px)}.login-dialog .login-mark{display:none}.login-dialog h2{font:700 clamp(24px,5vw,31px)/1.2 "Be Vietnam Pro",system-ui,sans-serif;letter-spacing:-.7px;margin:2px 0 12px;color:#f7f8ff}.login-dialog .login-sub{font-size:14px;color:#8791a8;margin:0 0 25px}.login-dialog .provider-btn{display:flex;align-items:center;justify-content:center;gap:13px;width:100%;height:58px;margin:0 0 22px;padding:0 18px;border:1px solid transparent;border-radius:999px;background:#202838;color:#f6f7fb;font-size:16px;font-weight:600;transition:background .18s,transform .18s}.login-dialog .provider-btn:hover{background:#2a3448;transform:translateY(-1px)}.login-dialog .provider-icon{width:24px;height:24px}.login-dialog .provider-icon svg{width:25px;height:25px}.login-dialog .google-label{display:inline}.auth-divider{display:flex;align-items:center;gap:16px;margin:0 0 22px;color:#626d84;font-size:14px}.auth-divider:before,.auth-divider:after{content:"";height:1px;flex:1;background:#202638}.login-dialog #toggleEmailForm{height:56px;border:1px solid #58618d;border-radius:999px;background:transparent;color:#aab4f5;font-size:15px;font-weight:600;margin:0 0 15px}.login-dialog #toggleEmailForm:hover{background:rgba(124,137,255,.08);border-color:#8994e9}.login-dialog input{width:100%;margin:5px 0 12px;padding:12px 14px;border:1px solid #2b3448;border-radius:12px;background:#0b1120;color:#f5f7ff;font:inherit}.login-dialog label{color:#aeb8ce}.login-dialog .btn{border:1px solid #2d374b;border-radius:12px;background:#111827;color:#e9edf7}.login-dialog .btn.pri{background:#6474e8;border-color:#6474e8;color:white}.login-dialog .login-note{font-size:13px;color:#8791a8;margin:12px 0 0}.login-dialog .auth-switch{margin:23px 0 0;color:#66718a;font-size:13px}.login-dialog .auth-switch button{border:0;background:none;color:#e0e5f4;font-weight:600;padding:0 2px;text-decoration:none}.login-dialog .auth-switch button:hover{color:#aab4ff}.login-dialog #authMessage{font-size:12px!important;text-align:center!important;min-height:0!important;margin:0 0 10px!important}.login-dialog .close-auth{margin-top:20px!important;color:#8d97ab!important;background:transparent!important;border-color:transparent!important}.login-dialog .email-actions{display:flex;gap:8px;flex-wrap:wrap}.login-dialog .email-actions button{flex:1}.login-dialog #emailForm[hidden]{display:none!important}@media(max-width:480px){.login-dialog{padding:30px 22px 24px;border-radius:24px}}
+.wrap{max-width:960px;margin:0 auto;padding:28px 20px 64px}
+h1,h2{font-family:"Literata",Georgia,serif;margin:0 0 8px}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:22px;margin-top:22px}
+.book{display:block;text-align:left;background:none;border:0;padding:0}
+.cover{aspect-ratio:2/3;border-radius:4px 10px 10px 4px;padding:18px 16px;display:flex;flex-direction:column;justify-content:space-between;color:#fff;box-shadow:inset 8px 0 0 rgba(0,0,0,.18);font-family:"Literata",Georgia,serif}
+.cover b{font-size:22px;line-height:1.2;font-weight:600}
+.cover span{font-size:13px;opacity:.9}
+.book:hover .cover{transform:translateY(-3px)}
+.cover{transition:transform .15s}
+.meta{margin-top:8px;font-size:13px;color:var(--mute)}
+.bar{height:3px;background:var(--line);border-radius:2px;margin-top:6px}.bar i{display:block;height:100%;background:var(--acc);border-radius:2px}
+.chlist{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.chlist li a{display:flex;justify-content:space-between;gap:12px;padding:14px 4px;border-bottom:1px solid var(--line)}
+.chlist li a:hover{background:var(--panel)}
+.chlist .done{color:var(--mute)}
+.head{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap;margin-top:8px}
+.head p{color:var(--mute);margin:0 0 12px}
+/* reader */
+#prog{position:fixed;left:0;top:0;height:3px;background:var(--acc);width:0;z-index:9}
+.reader{max-width:680px;margin:0 auto;padding:36px 20px 80px;font-family:var(--ff,"Literata",Georgia,serif);font-size:var(--fs,19px);line-height:var(--lh,1.85)}
+.reader h2{font-size:1.5em;margin-bottom:1.4em}
+.reader p{margin:0 0 1.1em;text-indent:1.4em}
+.reader .hint+p{text-indent:0}
+.nav{display:flex;justify-content:space-between;gap:12px;max-width:680px;margin:0 auto;padding:0 20px 60px}
+.pop{position:fixed;right:16px;top:calc(60px + env(safe-area-inset-top,0px));z-index:8;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;width:260px;display:none;box-shadow:0 8px 30px rgba(0,0,0,.15)}
+.pop.on{display:block}
+.pop label{display:block;font-size:13px;color:var(--mute);margin:12px 0 6px}.pop label:first-child{margin-top:0}
+.seg{display:flex;gap:6px}.seg button{flex:1;padding:8px 0;border:1px solid var(--line);background:var(--bg);border-radius:8px}
+.seg button[aria-pressed="true"]{border-color:var(--acc);outline:1px solid var(--acc)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--ink);width:min(560px,92vw);padding:22px}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+dialog input,dialog textarea,dialog select{width:100%;margin:6px 0 14px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit}
+.editor-stats{display:flex;gap:8px;flex-wrap:wrap;margin:-6px 0 14px;color:var(--mute);font-size:12px}
+.editor-stats span{border:1px solid var(--line);border-radius:999px;padding:4px 9px}
+#nx{min-height:240px}
+dialog textarea{min-height:200px;resize:vertical}
+.row{display:flex;gap:10px;justify-content:flex-end}
+.empty{color:var(--mute)}
+.tools{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.tools input{flex:1 1 220px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);font:inherit}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.frow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.frow>a,.frow>span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.frow .btn{padding:6px 12px;font-size:13px;flex:none}
+.fid{font:600 22px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.08em}
+.fbox{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin:14px 0}
+#bFriends{position:relative;overflow:visible}
+.fbadge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#d23b3b;color:#fff;font:600 11px/18px "Be Vietnam Pro",sans-serif;text-align:center;box-sizing:border-box}
+.fbadge[hidden]{display:none}
+#commReload[hidden]{display:none}
+.star{background:none;border:0;padding:0 2px;font-size:26px;line-height:1;cursor:pointer;color:var(--mute)}
+.star.on{color:#e8a317}
+#commSort{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink)}
+#commSort[hidden]{display:none}
+.rank{list-style:none;margin:16px 0 0;padding:0}
+.rank li{display:flex;align-items:center;gap:12px;padding:12px 2px;border-bottom:1px solid var(--line)}
+.rk{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:700 14px "Be Vietnam Pro",sans-serif;background:var(--panel);color:var(--mute);border:1px solid var(--line)}
+.rk.n1{background:#e8a317;color:#fff;border-color:#e8a317}.rk.n2{background:#9aa5b1;color:#fff;border-color:#9aa5b1}.rk.n3{background:#c98b5a;color:#fff;border-color:#c98b5a}
+.rk-t{flex:1;min-width:0;display:flex;flex-direction:column;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rk-t small{font-weight:400;color:var(--mute);font-size:12px;overflow:hidden;text-overflow:ellipsis}
+.rk-s{flex:none;font-size:13px;color:var(--mute)}
+@media (max-width:480px){.top{gap:8px;padding:10px 12px}.brand{font-size:18px}#bAdd{padding:8px 10px}}.tabs button{padding:8px 14px;border:1px solid var(--line);background:var(--panel);border-radius:8px}
+.tabs button[aria-pressed="true"]{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.bk{position:relative}.fav{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(0,0,0,.45);color:#fff;font-size:18px}.fav.on{color:#fcd34d}
+.foot{display:flex;gap:10px;align-items:center;margin-top:36px;flex-wrap:wrap}
+.profile-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:18px 0 24px}.avatar{width:88px;height:88px;flex:none;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:var(--line);color:var(--mute);font-size:30px;font-weight:600;border:2px solid var(--line)}.avatar img{width:100%;height:100%;object-fit:cover}.profile-card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px;margin:16px 0}.profile-card textarea,.profile-card input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;margin:6px 0 12px}.post{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px;margin:12px 0}.post-top{display:flex;align-items:center;gap:10px}.post-top .avatar{width:42px;height:42px;font-size:16px}.post-date{font-size:12px;color:var(--mute)}.post-body{white-space:pre-wrap;overflow-wrap:anywhere;margin:14px 0}.post-img{max-width:100%;max-height:420px;object-fit:contain;border-radius:10px}.post-actions{display:flex;justify-content:flex-end}.profile-actions{display:flex;gap:8px;flex-wrap:wrap}.small-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover}
+.reader p{cursor:pointer}.reader p.mk{background:color-mix(in srgb,var(--acc) 18%,transparent);border-left:3px solid var(--acc);padding-left:10px;margin-left:-13px}
+.hint{font:400 13px "Be Vietnam Pro",sans-serif;color:var(--mute)}.reader p.hint{cursor:default;text-indent:0;margin:-1em 0 1.6em}
+.bkm{font-size:14px;color:var(--mute)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.tagrow:empty{display:none}
+.tag{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--mute)}
+.tag.on{background:var(--acc);color:var(--accink);border-color:var(--acc)}
+.desc{max-width:62ch;margin:4px 0 0}#nd{min-height:70px}
+dialog{max-height:90vh;overflow:auto}
+.cvrow{display:flex;gap:14px;align-items:center;margin:6px 0 14px}
+.cvprev{width:80px;flex:none;aspect-ratio:2/3;border:1px dashed var(--line);border-radius:4px 8px 8px 4px;background:var(--bg) center/cover no-repeat}
+.cvrow .btn{margin:0 6px 6px 0}
+.bcv{width:110px;aspect-ratio:2/3;object-fit:cover;border-radius:4px 10px 10px 4px;box-shadow:inset 8px 0 0 rgba(0,0,0,.18)}
+#lgs{flex-direction:column;margin:4px 0 8px 32px}#lgs[hidden]{display:none}#lgs button{text-align:left;padding:10px 12px;width:100%;border:0;border-radius:8px;background:transparent;color:inherit}#lgs button:hover{background:var(--bg)}
+.cmt{max-width:680px;margin:0 auto;padding:0 20px 90px}
+.cmt-h{font:600 20px "Literata",Georgia,serif;margin:0 0 14px}
+.cmt textarea{width:100%;min-height:84px;resize:vertical;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit}
+.cmt-row{display:flex;justify-content:space-between;align-items:center;margin:8px 0 18px}
+.cmt-list{list-style:none;margin:0;padding:0}
+.cmt-item{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line)}
+.cmt-av{width:36px;height:36px;flex:none;border-radius:50%;background:var(--line);color:var(--mute);display:grid;place-items:center;font-weight:600}
+.cmt-meta{font-size:13px;color:var(--mute)}.cmt-meta b{color:var(--ink);font-weight:600;margin-right:8px}
+.cmt-body{margin:4px 0 0;white-space:pre-wrap;overflow-wrap:anywhere}
+.cmt-del{margin-left:auto;border:0;background:none;color:var(--mute);font-size:13px;padding:2px 6px}
+@media (max-width:520px){.top{padding:10px 14px}.reader{padding-top:24px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+#authToast{position:fixed;z-index:99999;top:22px;left:50%;transform:translate(-50%,-12px);padding:11px 18px;border:1px solid rgba(52,211,153,.35);border-radius:999px;background:#10251f;color:#d1fae5;box-shadow:0 12px 35px rgba(0,0,0,.3);font-size:14px;font-weight:650;opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease;white-space:nowrap;max-width:calc(100vw - 28px)}
+#authToast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Gác Truyện profile layout */
+.profile-showcase{border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--panel);margin:16px 0 24px}
+.profile-showcase-top{display:flex;align-items:center;gap:16px;min-width:0}
+.profile-showcase .avatar{width:94px;height:94px;border-radius:50%;border:0;flex:none}
+.profile-showcase-info{min-width:0;flex:1}
+.profile-showcase-info h1{font:600 20px/1.35 "Be Vietnam Pro",system-ui,sans-serif;margin:0 0 4px;overflow-wrap:anywhere}
+.profile-showcase-info .bio{margin:0;color:var(--mute);overflow-wrap:anywhere}
+.profile-stats{display:flex;gap:24px;flex-wrap:wrap;margin-top:8px}
+.profile-stat{display:flex;flex-direction:column;line-height:1.35;min-width:74px}
+.profile-stat strong{font-size:20px;font-weight:700}
+.profile-stat span{font-size:13px;color:var(--mute)}
+.profile-showcase-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.profile-showcase-actions .btn{min-height:46px;border-radius:10px}
+.profile-showcase-actions .btn.pri{background:#6750a4;border-color:#6750a4;color:#fff}
+.profile-links{border-top:1px solid var(--line);margin-top:18px;padding-top:10px}
+.profile-link{width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:0;background:transparent;padding:12px 2px;color:var(--ink);border-radius:8px}
+.profile-link:hover{background:var(--bg)}
+.profile-link svg{width:20px;height:20px;flex:none}
+.profile-link-copy{flex:1;min-width:0}
+.profile-link-copy strong{display:block;font-weight:600}
+.profile-link-copy span{display:block;color:var(--mute);font-size:14px}
+.profile-link .chev{font-size:24px;line-height:1}
+@media(max-width:480px){.profile-showcase{padding:14px}.profile-showcase-top{gap:12px;align-items:flex-start}.profile-showcase .avatar{width:76px;height:76px}.profile-stats{gap:14px}.profile-stat{min-width:66px}.profile-showcase-actions{gap:8px}.profile-showcase-actions .btn{padding:8px 6px;font-size:14px}}
+
+
+/* ================= Giao diện v2: gọn, thoáng, nhất quán ================= */
+:root{--bg:#f4f6f5;--line:#dfe5e2;--ink:#17211e;--mute:#64716b;--acc:#0e766c;
+ --acc-soft:color-mix(in srgb,var(--acc) 11%,transparent);--pad:16px}
+@media (min-width:720px){:root{--pad:24px}}
+/* khung & tiêu đề */
+.wrap{max-width:1040px;padding:18px var(--pad) 72px}
+#app h1{font-size:26px;line-height:1.2;margin:4px 0 2px;letter-spacing:-.01em}
+#app h2{font-size:18px;line-height:1.3;margin:26px 0 10px}
+@media (min-width:720px){#app h1{font-size:30px}}
+#app>a.empty:first-child{display:inline-flex;align-items:center;gap:2px;font-size:14px;padding:6px 8px 6px 0;margin-bottom:2px;border-radius:8px}
+#app>a.empty:first-child:hover{color:var(--acc)}
+/* nút */
+.btn{border-radius:10px;font-weight:500;transition:border-color .15s,background .15s,transform .1s}
+.btn:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+.btn.pri:hover{filter:brightness(1.07)}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.55;cursor:default}
+.btn.big{display:flex;align-items:center;justify-content:center;min-height:48px;font-size:16px;border-radius:12px}
+.btn.danger{color:#b83a2e;border-color:color-mix(in srgb,#b83a2e 32%,var(--line))}
+.lnk{color:var(--acc);text-decoration:underline;text-underline-offset:2px}
+/* thanh đầu trang */
+.top{min-height:56px;padding:8px max(var(--pad),calc((100vw - 1040px)/2 + var(--pad)));gap:6px;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.brand{display:flex;align-items:center;gap:8px;font:600 19px/1 "Literata",Georgia,serif;letter-spacing:-.01em;white-space:nowrap}
+.brand .logo{flex:none}
+.account-btn,#bAa{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;padding:0;color:var(--ink)}
+.account-btn:hover,#bAa:hover{background:var(--acc-soft);border-color:transparent}
+#bAa{font-weight:700;font-size:15px}
+#bAa[hidden],#bAdd[hidden],#bFriends[hidden]{display:none}
+#bAdd{height:38px;padding:0 16px 0 12px;border-radius:999px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:4px;margin-left:4px}
+#bAdd::before{content:"+";font-size:22px;line-height:1;font-weight:500;margin-top:-2px}
+@media (max-width:540px){#bAdd{font-size:0;gap:0;width:38px;padding:0;justify-content:center;margin-left:2px}#bAdd::before{font-size:26px;margin-top:-1px}.brand{font-size:18px}}
+/* tìm kiếm + tab + nhãn */
+.tools{display:block;margin-top:14px}
+.tools input{width:100%;height:44px;padding:0 14px 0 42px;border-radius:12px;border:1px solid var(--line);-webkit-appearance:none;appearance:none;
+ background:var(--panel) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%2388958f' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E") no-repeat 14px center}
+.tools input::placeholder{color:var(--mute);opacity:.85}
+.tabs{flex-wrap:nowrap;align-items:center;overflow-x:auto;gap:8px;margin:12px calc(var(--pad)*-1) 0;padding:2px var(--pad);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;padding:7px 15px;font-size:14px;font-weight:500;border-radius:999px;color:var(--mute);white-space:nowrap}
+.tabs button[aria-pressed="true"]{color:var(--accink)}
+#commReload{flex:none;width:34px;height:34px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--panel);color:var(--mute);font-size:16px}
+#tagrow{flex-wrap:nowrap;overflow-x:auto;margin:10px calc(var(--pad)*-1) 0;padding:0 var(--pad) 2px;scrollbar-width:none}
+#tagrow::-webkit-scrollbar{display:none}
+.tag{flex:none;font-size:12.5px;padding:3px 11px;background:transparent;white-space:nowrap}
+/* lưới thẻ truyện */
+.shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 14px;margin-top:16px}
+@media (min-width:600px){.shelf{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:26px 18px}}
+@media (min-width:960px){.shelf{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}}
+.cover{position:relative;aspect-ratio:3/4;border-radius:3px 10px 10px 3px;padding:14px 12px 12px 18px;
+ box-shadow:inset 6px 0 0 rgba(0,0,0,.16),0 1px 2px rgba(10,25,20,.18),0 10px 20px -12px rgba(10,25,20,.45)}
+.cover::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.12),transparent 38%,rgba(0,0,0,.2))}
+.cover b{font-size:clamp(14px,3.7vw,18px);line-height:1.22;padding-right:26px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.cover span{font-size:12px;position:relative;z-index:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.book:hover .cover{transform:translateY(-3px)}
+.fav{width:30px;height:30px;top:8px;right:8px;font-size:15px;line-height:1;display:grid;place-items:center;padding:0;background:rgba(0,0,0,.34);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);z-index:2}
+.mtitle{margin-top:9px;font-size:14px;font-weight:600;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.meta{margin-top:8px;font-size:12.5px;line-height:1.4;display:flex;flex-wrap:wrap;align-items:center;gap:3px 6px}
+.mtitle+.meta{margin-top:3px}
+.mstat{flex:0 0 100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.badge{display:inline-block;padding:0 7px;border-radius:999px;font-size:11px;font-weight:600;line-height:18px;background:var(--acc-soft);color:var(--acc);vertical-align:1px}
+.badge.priv{background:color-mix(in srgb,var(--mute) 15%,transparent);color:var(--mute)}
+.badge.warn{background:color-mix(in srgb,#d98a00 18%,transparent);color:#a96800}
+.bar{margin-top:6px}
+.homefoot{margin-top:34px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.homefoot p,.homefoot .foot{margin:0;font-size:13px}.homefoot .foot{margin-top:0}
+/* trang truyện */
+.hero{display:grid;grid-template-columns:104px 1fr;gap:16px;align-items:end;margin:6px 0 16px}
+.hero-cover .cover,.hero-cover .bcv{width:104px;aspect-ratio:3/4;display:flex}
+.hero-cover .bcv{object-fit:cover}
+.hero-cover .cover{padding:10px 8px 10px 14px}.hero-cover .cover b{font-size:13px;-webkit-line-clamp:6;padding-right:0}
+.hero-info{min-width:0}
+.hero h1{font-size:23px;line-height:1.2;margin:0 0 4px;overflow-wrap:anywhere}
+.hero p{margin:0}
+.hero-by{font-size:15px;color:var(--mute)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chips span{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--acc-soft);color:var(--acc)}
+.hero-post,.hero-stats{font-size:13px;color:var(--mute);margin-top:8px!important}
+@media (min-width:720px){.hero{grid-template-columns:150px 1fr;gap:26px}.hero-cover .cover,.hero-cover .bcv{width:150px}.hero-cover .cover{padding:14px 12px 12px 18px}.hero-cover .cover b{font-size:16px}.hero h1{font-size:32px}}
+@media (min-width:720px){.acts,.note{max-width:560px}.chlist{max-width:760px}}
+.note{margin:0 0 14px;padding:10px 12px;border-radius:10px;background:var(--acc-soft);border:1px solid color-mix(in srgb,var(--acc) 22%,transparent);font-size:13.5px;line-height:1.5}
+.acts{display:flex;flex-direction:column;gap:10px}
+.acts2{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:8px}
+.acts2 .btn{padding:9px 6px;font-size:14px;text-align:center;white-space:nowrap}
+.btn[aria-pressed="true"]:not(.pri){border-color:var(--acc);color:var(--acc)}
+.rate{display:flex;align-items:center;gap:4px;padding:2px 2px 0}
+.rate>span{font-size:14px;color:var(--mute);margin-right:6px}
+.star{font-size:24px;padding:0 1px}
+.acts3{display:flex;flex-wrap:wrap;gap:8px;padding-top:12px;margin-top:2px;border-top:1px dashed var(--line)}
+.acts3 .btn{font-size:13px;padding:6px 12px}
+.desc{margin:20px 0 0;max-width:62ch;line-height:1.65}
+.tagrow{margin-top:12px}
+.chlist{margin-top:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.chlist li+li{border-top:1px solid var(--line)}
+.chlist li a{padding:13px 14px;border-bottom:0;align-items:center}
+.chlist li a:hover{background:var(--acc-soft)}
+/* hộp thông tin, hồ sơ, bạn bè */
+.fbox,.profile-card,.post{border-radius:14px}
+.profile-showcase{border-radius:16px}
+.profile-showcase-actions .btn.pri{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+.rank{margin-top:14px}
+#rankTabs{flex-wrap:wrap;overflow:visible;margin:12px 0 0;padding:0}
+.profile-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.profile-stat{min-width:0}.profile-stat span{font-size:12px;line-height:1.3}
+.subbar{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:12px}
+.subbar[hidden]{display:none}
+.reading #bAdd,.reading #bFriends{display:none}
+#app .reader h2{font-size:1.5em;line-height:1.3;margin:0 0 1.2em}
+.reader p.hint{margin:-.9em 0 1.8em}
+/* chuyển động nhẹ */
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+#app>*{animation:rise .28s ease both}
+.shelf .bk{animation:rise .34s ease both}
+.shelf .bk:nth-child(2){animation-delay:.03s}.shelf .bk:nth-child(3){animation-delay:.06s}.shelf .bk:nth-child(4){animation-delay:.09s}.shelf .bk:nth-child(n+5){animation-delay:.12s}
+@media (prefers-reduced-motion:reduce){#app>*,.shelf .bk{animation:none}}
+
+/* Gác Truyện — premium night-library visual refresh */
+:root{--bg:#050b12;--panel:rgba(19,29,39,.86);--ink:#edf3fb;--mute:#a0adbd;--line:rgba(148,169,195,.2);--acc:#91bfff;--accink:#07111f;--acc-soft:rgba(95,151,220,.16);color-scheme:dark}
+body{background:radial-gradient(ellipse at 18% 5%,rgba(27,77,113,.22),transparent 34%),radial-gradient(ellipse at 83% 34%,rgba(23,91,111,.17),transparent 35%),linear-gradient(180deg,#050a11 0%,#07111b 55%,#060b12 100%);background-attachment:fixed;color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.45;background-image:radial-gradient(1px 1px at 8% 16%,#9fc6e9 99%,transparent),radial-gradient(1px 1px at 27% 69%,#7fa9c8 99%,transparent),radial-gradient(2px 2px at 63% 22%,#8db6d8 99%,transparent),radial-gradient(1px 1px at 82% 78%,#b4d8f1 99%,transparent),radial-gradient(1px 1px at 45% 43%,#7da7cb 99%,transparent);background-size:173px 191px,227px 211px,263px 239px,197px 251px,311px 281px}
+.top{background:rgba(5,11,18,.82);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-bottom:1px solid rgba(143,177,210,.16);padding-top:16px;padding-bottom:16px}
+.brand{font-size:22px;letter-spacing:.1px}.brand .logo{filter:drop-shadow(0 0 10px rgba(98,164,255,.25))}
+.btn,.tabs button,.tag{background:rgba(24,36,49,.82);border-color:rgba(151,177,205,.22);color:#dce7f4;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
+.btn:hover,.tabs button:hover,.tag:hover{border-color:rgba(145,191,255,.68);transform:translateY(-1px);box-shadow:0 5px 22px rgba(0,0,0,.18)}
+.btn.pri{background:linear-gradient(135deg,#b5d5ff,#76aef0);border-color:transparent;color:#07111f;box-shadow:0 5px 22px rgba(80,147,226,.2)}
+.wrap{max-width:1320px;padding-top:30px}
+#homeH{font-size:clamp(25px,3vw,34px);letter-spacing:-.7px;margin-bottom:18px}
+.tools{gap:12px}.tools input{background:rgba(17,27,38,.86);border-color:rgba(151,177,205,.23);color:var(--ink)}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:20px 17px;margin-top:18px}
+.bk{position:relative;min-width:0;padding:12px;border:1px solid rgba(150,174,200,.13);border-radius:15px;background:linear-gradient(145deg,rgba(27,40,53,.9),rgba(12,21,31,.88));box-shadow:0 12px 32px rgba(0,0,0,.17);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;overflow:hidden}
+.bk:hover{transform:translateY(-5px);border-color:rgba(143,190,248,.42);box-shadow:0 18px 40px rgba(0,0,0,.32),0 0 0 1px rgba(143,190,248,.05)}
+.bk .cover,.bk .bcv{border-radius:3px;box-shadow:0 9px 22px rgba(0,0,0,.3)}
+.mtitle{font-size:14px;color:#f1f5fb;margin-top:11px}.meta{color:#aab8c8}.badge{background:rgba(123,175,235,.15);color:#a9d0ff}
+.homefoot{border-color:rgba(151,177,205,.16)}
+.pop{background:#101b28;border-color:rgba(151,177,205,.25);box-shadow:0 20px 60px rgba(0,0,0,.45)}
+@media(max-width:600px){.wrap{padding-top:20px}.shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.bk{padding:9px;border-radius:12px}.top{padding-left:13px;padding-right:13px}.brand{font-size:19px}}
+
+
+/* Header: keep the brand left and place account controls at the far-right end */
+.top .brand{margin-right:auto}
+.top #bFriends{margin-left:0;order:2}
+.top #bAdd{order:3;margin-left:clamp(12px,2vw,28px)}
+.top #accountWrap{order:4;margin-left:clamp(12px,2vw,28px)}
+/* Use the available screen width instead of constraining the header content to the center */
+.top{padding-left:max(16px,var(--pad));padding-right:max(16px,var(--pad))}
+@media(max-width:600px){.top{gap:6px;padding-left:10px;padding-right:10px}.top #bFriends{margin-left:0}.top #bAdd{margin-left:4px}.top #accountWrap{margin-left:4px}.account-name{max-width:82px}}
+
+
+/* Menu viết truyện và danh sách truyện đang viết */
+.write-wrap{position:relative;display:inline-flex;align-items:center}
+#writeMenu{position:absolute;right:0;top:calc(100% + 10px);z-index:1200;width:250px;padding:7px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 40px #0003;display:none}
+#writeMenu.on{display:block}
+#writeMenu button{display:flex;width:100%;align-items:center;gap:11px;padding:12px 11px;border:0;border-radius:9px;background:transparent;color:var(--text);text-align:left;cursor:pointer;font:inherit}
+#writeMenu button:hover{background:var(--panel2,var(--line))}
+#writeMenu .write-icon{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;font-size:18px;flex:none}
+#writeMenu small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+#draftDlg{width:min(900px,calc(100vw - 28px));max-width:900px;max-height:85vh;overflow:auto}
+#draftDlg .draft-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+#draftDlg .draft-head h2{margin:0}
+.draft-tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:0 0 20px;padding-bottom:10px;color:var(--muted);font-weight:650}
+.draft-tabs span:first-child{color:var(--text);border-bottom:3px solid var(--acc);padding-bottom:8px;margin-bottom:-11px}
+.draft-list{display:grid;gap:14px}
+.draft-card{display:grid;grid-template-columns:38px 96px minmax(0,1fr) minmax(190px,260px);align-items:center;gap:16px;padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}
+.draft-grip{font-size:22px;text-align:center;color:var(--muted)}
+.draft-cover{width:96px;height:136px;border-radius:5px;background:linear-gradient(145deg,#44558c,#21172f);background-position:center;background-size:cover}
+.draft-title{font-weight:750;font-size:17px;margin-bottom:8px}
+.draft-meta{font-size:13px;color:var(--muted);margin-top:6px}
+.draft-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.draft-actions .btn{white-space:nowrap}
+.draft-empty{padding:32px 12px;text-align:center;color:var(--muted)}
+@media(max-width:640px){.draft-card{grid-template-columns:22px 66px minmax(0,1fr);gap:10px;padding:10px}.draft-cover{width:66px;height:96px}.draft-actions{grid-column:2/4;justify-content:flex-start}.draft-title{font-size:15px}#writeMenu{right:-5px;width:min(250px,calc(100vw - 24px))}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<header class="top">
+  <a class="brand" href="#/" aria-label="Gác Truyện"><svg class="logo" width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true"><path d="M3 12.2 13 4l10 8.2" stroke="var(--acc)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.2 11v10.2h13.6V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.6 21.2v-5.4a2.4 2.4 0 0 1 4.8 0v5.4" stroke="var(--acc)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Gác Truyện</span></a>
+  <button class="btn" id="bAa" aria-label="Tuỳ chỉnh đọc" hidden>Aa</button>
+  <button class="account-btn" id="bFriends" type="button" aria-label="Bạn bè" title="Bạn bè"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5M16 5.2a3 3 0 0 1 0 5.6M17.5 14.3c1.7.6 2.7 2.1 3 4.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="fbadge" id="fBadge" hidden></span></button>
+  <div class="account-wrap" id="accountWrap">
+    <button class="account-btn" id="bProfile" aria-label="Đăng nhập hoặc mở tài khoản" title="Tài khoản" aria-haspopup="true" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 20c.7-4 3.2-6 7.5-6s6.8 2 7.5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+    <button class="account-name" id="accountNameBtn" type="button" hidden> Tài khoản <span class="account-caret">▾</span></button>
+    <nav class="account-dropdown" id="accountDropdown" aria-label="Menu tài khoản">
+      <div class="account-who"><strong id="accountMenuName">Tài khoản Gác Truyện</strong><small id="accountMenuEmail"></small></div>
+      <button type="button" data-account-action="profile"><span class="menu-icon">♙</span>Hồ sơ của tôi</button>
+      <button type="button" data-account-action="inbox"><span class="menu-icon">✉</span>Hộp thư / Bạn bè</button>
+      <button type="button" data-account-action="updates"><span class="menu-icon">◉</span>Cập nhật</button>
+      <button type="button" data-account-action="library"><span class="menu-icon">▤</span>Thư viện</button>
+      <div class="account-sep"></div>
+      <button type="button" data-account-action="language" id="accountLanguageButton" aria-expanded="false"><span class="menu-icon">文</span><span id="accountLanguageLabel">Ngôn ngữ: Tiếng Việt</span><span class="account-caret" aria-hidden="true">▾</span></button>
+      <div class="seg" id="lgs" hidden></div>
+      <p id="menuAuthMessage" class="empty" role="status" aria-live="polite" style="font-size:12px;margin:8px 0 0" hidden></p>
+      <button type="button" data-account-action="help"><span class="menu-icon">?</span>Trợ giúp</button>
+      <button type="button" data-account-action="settings"><span class="menu-icon">⚙</span>Cài đặt đọc</button>
+      <div class="account-sep"></div>
+      <button type="button" data-account-action="logout" id="accountMenuLogout"><span class="menu-icon">↪</span>Đăng xuất</button>
+    </nav>
+  </div>
+  <div class="write-wrap" id="writeWrap">
+    <button class="btn pri" id="bAdd" aria-haspopup="true" aria-expanded="false">Thêm truyện</button>
+    <div id="writeMenu" role="menu" aria-label="Lựa chọn viết truyện">
+      <button type="button" id="writeNewBtn" role="menuitem"><span class="write-icon">＋</span><span>Viết một truyện mới<small>Bắt đầu từ đầu</small></span></button>
+      <button type="button" id="writeContinueBtn" role="menuitem"><span class="write-icon">▤</span><span>Tiếp tục truyện<small>Mở truyện đang viết dở</small></span></button>
+    </div>
+  </div>
+</header>
+<div class="pop" id="pop">
+  <label>Cỡ chữ</label>
+  <div class="seg"><button id="fm">A−</button><button id="fp">A+</button></div>
+  <label>Phông chữ</label>
+  <div class="seg" id="ffs"><button data-v="serif">Có chân</button><button data-v="sans">Không chân</button></div>
+  <label>Giãn dòng</label>
+  <div class="seg" id="lhs"><button data-v="1.6">Chặt</button><button data-v="1.85">Vừa</button><button data-v="2.1">Thoáng</button></div>
+  <label>Nền</label>
+  <div class="seg" id="ths"><button data-v="light">Sáng</button><button data-v="sepia">Giấy</button><button data-v="dark">Tối</button></div>
+</div>
+<main id="app" class="wrap"></main>
+<div id="authToast" role="status" aria-live="polite"></div>
+
+<dialog id="loginDlg" class="login-dialog" aria-labelledby="loginTitle">
+  <h2 id="loginTitle">Tạo tài khoản Gác Truyện</h2>
+  <p class="login-sub" id="authSubtitle">Lưu lại hành trình đọc và chia sẻ truyện của bạn.</p>
+  <div id="authSignedOut">
+    <button class="provider-btn" id="googleSignIn" type="button" aria-label="Tiếp tục với Google" title="Tiếp tục với Google"><span class="provider-icon" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 3.01 13.22l7.98 6.19C12.68 13.72 17.9 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.76 7.18l7.73 6C44.42 37.98 46.98 31.88 46.98 24.55z"/><path fill="#FBBC05" d="M10.99 28.59A14.4 14.4 0 0 1 10.23 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.9 23.9 0 0 0 0 24c0 3.87.93 7.52 2.58 10.78l8.41-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.1 0-11.32-4.22-13.01-9.91l-8.41 6.19C6.08 42.62 14.19 48 24 48z"/></svg></span><span class="google-label">Tiếp tục với Google</span></button>
+    <div class="auth-divider" aria-hidden="true">hoặc</div>
+    <button class="btn" id="toggleEmailForm" type="button" style="width:100%">✉ &nbsp; Tiếp tục với email</button>
+    <p id="authMessage" role="status" aria-live="polite"></p>
+    <div id="emailForm" hidden>
+      <label for="authEmail" style="display:block;text-align:left;font-size:13px">Email</label>
+      <input id="authEmail" type="email" autocomplete="email" placeholder="ban@example.com">
+      <label for="authPassword" style="display:block;text-align:left;font-size:13px">Mật khẩu</label>
+      <input id="authPassword" type="password" autocomplete="current-password" placeholder="Ít nhất 6 ký tự">
+      <div class="email-actions">
+        <button class="btn pri" id="emailSignIn" type="button">Đăng nhập</button>
+        <button class="btn" id="emailSignUp" type="button">Tạo tài khoản</button>
+      </div>
+      <button class="btn" id="resetPassword" type="button" style="margin-top:9px;width:100%">Quên mật khẩu?</button>
+    </div>
+    <p class="auth-switch" id="authSwitchText">Đã có tài khoản? <button type="button" id="switchAuthMode">Đăng nhập</button></p>
+  </div>
+  <div id="authSignedIn" hidden>
+    <p id="authUserInfo" style="overflow-wrap:anywhere"></p>
+    <p class="login-note">Bạn đã đăng nhập. Mở trang cá nhân để chỉnh sửa hồ sơ và chia sẻ bài viết.</p>
+    <div class="row" style="margin-top:18px;justify-content:center"><button class="btn pri" id="openProfileBtn" type="button">Trang cá nhân</button></div>
+  </div>
+  <div class="row" style="justify-content:center"><button class="btn close-auth" id="closeLogin" type="button">Đóng</button></div>
+</dialog>
+
+<dialog id="dlg">
+  <h2>Thêm truyện của bạn</h2>
+  <label id="lcv">Ảnh bìa</label>
+  <div class="cvrow"><div class="cvprev" id="cvp"></div><div><button class="btn" id="cvb" type="button">Chọn ảnh</button><button class="btn" id="cvx" type="button" hidden>Xoá ảnh</button><input type="file" id="cvf" accept="image/*" hidden></div></div>
+  <label for="nt">Tên truyện</label><input id="nt" maxlength="80">
+  <label for="na">Tác giả</label><input id="na" maxlength="60">
+  <label for="nd">Mô tả</label><textarea id="nd" maxlength="400"></textarea>
+  <label for="nstatus">Trạng thái truyện</label>
+  <select id="nstatus"><option value="ongoing">Đang ra</option><option value="completed">Đã hoàn thành</option><option value="paused">Tạm ngưng</option></select>
+  <label for="ngenre">Thể loại chính</label><input id="ngenre" list="genreOptions" maxlength="60" placeholder="Chọn thể loại hoặc tự nhập…" autocomplete="off">
+  <datalist id="genreOptions"><option value="Tiên hiệp"><option value="Kiếm hiệp"><option value="Huyền huyễn"><option value="Đô thị"><option value="Khoa huyễn"><option value="Kỳ ảo"><option value="Tận thế"><option value="Sinh tồn"><option value="Xuyên không"><option value="Trọng sinh"><option value="Võng du"><option value="Lịch sử"><option value="Trinh thám"><option value="Kinh dị"><option value="Huyền bí"><option value="Tình cảm"><option value="Đời thường"><option value="Phiêu lưu"><option value="Hài hước"><option value="Fanfiction"></datalist>
+  <label for="ng">Thẻ / từ khóa <span class="empty" style="font-weight:400">(tối đa 8 thẻ)</span></label><input id="ng" maxlength="120" placeholder="Chọn thẻ gợi ý hoặc tự nhập…" autocomplete="off">
+  <div id="tagSuggestions" class="tagrow" aria-label="Thẻ gợi ý"></div>
+  <p class="empty" style="font-size:12px;margin-top:5px">Bấm thẻ gợi ý để thêm/bỏ; hoặc tự nhập nhiều thẻ, cách nhau bằng dấu phẩy.</p>
+  <label for="nx">Nội dung các chương</label>
+  <textarea id="nx" placeholder="Dán nội dung vào đây. Mỗi dòng bắt đầu bằng &quot;Chương 1&quot;, &quot;Chương 2&quot;… sẽ tách thành một chương."></textarea>
+  <div class="editor-stats" id="editorStats"><span>0 chương</span><span>0 từ</span></div>
+  <p class="empty" style="font-size:12px;margin-top:-6px">Mẹo: đặt tên chương trên một dòng riêng, ví dụ “Chương 1: Khởi đầu”. Nội dung sẽ được tách tự động khi lưu.</p>
+  <div class="row"><button class="btn" id="dc">Huỷ</button><button class="btn pri" id="ds">Lưu truyện</button></div>
+</dialog>
+
+<dialog id="draftDlg" aria-labelledby="draftTitle">
+  <div class="draft-head"><h2 id="draftTitle">Truyện của tôi</h2><button class="btn pri" id="draftNewBtn" type="button">+ Truyện mới</button></div>
+  <div class="draft-tabs"><span>Đã đăng tải / Bản thảo</span><span>Tất cả truyện</span><span>Series</span></div>
+  <div id="draftList" class="draft-list"></div>
+  <div class="row" style="justify-content:flex-end;margin-top:18px"><button class="btn" id="draftCloseBtn" type="button">Đóng</button></div>
+</dialog>
+
+<dialog id="recDlg" aria-labelledby="recT">
+  <h2 id="recT"></h2>
+  <label for="recTo" id="recL1"></label><select id="recTo"></select>
+  <label for="recNote" id="recL2"></label><input id="recNote" maxlength="120" autocomplete="off">
+  <div class="row"><button class="btn" id="recClose" type="button"></button><button class="btn pri" id="recSend" type="button"></button></div>
+</dialog>
+
+<script>
+const $=s=>document.querySelector(s),app=$("#app");
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){let ok=false;try{localStorage.setItem(k,JSON.stringify(v));ok=true}catch(e){}if(ok&&(k==="gt.fav"||k==="gt.prog"))scheduleShelf();return ok}};
+let favs=ls.get("gt.fav",[]),bms=ls.get("gt.bm",{}),q="",tab="all",tagf="";
+let mine=ls.get("gt.mine",[]),prog=ls.get("gt.prog",{}),st=ls.get("gt.set",{fs:19,lh:1.85,th:null,ff:"serif"});
+const defaultProfile={name:"Độc giả",bio:"",avatar:""};
+const profileStorageKey = uid => uid ? `gt.profile.${uid}` : "gt.profile";
+function loadProfileForUser(user){
+  const key=profileStorageKey(user?.uid);
+  let saved=ls.get(key,null);
+  // Migrate the old shared profile only once, to the first signed-in account.
+  if(!saved && user && !localStorage.getItem("gt.profile.migrated")){
+    const legacy=ls.get("gt.profile",null);
+    if(legacy){saved=legacy;ls.set(key,legacy);}
+    try{localStorage.setItem("gt.profile.migrated","1")}catch{}
+  }
+  profile=saved||{...defaultProfile,name:user?.displayName||"Độc giả"};
+}
+function saveCurrentProfile(){ls.set(profileStorageKey(window.gtFirebaseAuth?.currentUser?.uid),profile)}
+let profile=ls.get("gt.profile",{...defaultProfile}),posts=[],postImage=null,profileAvatar=null;
+window.gtGetProfile=()=>profile;
+let cloudCache={},commIds=[],commState="",commErr="",commAt=0;const cloudMissing=new Set();
+window.gtSetProfile=p=>{profile={...defaultProfile,...p,name:(p&&p.name)||"Độc giả"};saveCurrentProfile()};
+const SAMPLE=[
+{id:"s1",title:"Con đò cuối mùa nước",author:"",genre:"Đời thường",desc:"Chuyến đò cuối cùng của ông Sáu trước khi cầu mới khánh thành, và một vị khách mang theo chiếc hộp gỗ.",tags:["Tình cảm","Gia đình","Hoài niệm","Làng quê","Cảm động"],chapters:[
+{t:"Chương 1: Bến sông",x:"Sương còn đặc trên mặt sông khi ông Sáu đẩy chiếc đò ra khỏi bến. Mùa nước nổi sắp hết, phù sa đã lắng xuống thành từng mảng nâu mịn bên bờ.\n\nÔng chèo chậm, như thể dòng nước cũng cần thời gian để nhớ lại đường đi của mình. Phía xa, tiếng gà gáy loãng dần vào sương.\n\nHôm nay là chuyến đò cuối cùng trước khi cây cầu mới được khánh thành. Ông không nói với ai, nhưng đã lau chiếc đò kỹ hơn mọi ngày."},
+{t:"Chương 2: Vị khách lạ",x:"Người khách đến khi mặt trời vừa lên khỏi ngọn dừa. Một cô gái trẻ, vai đeo chiếc túi vải cũ, tay ôm khư khư một chiếc hộp gỗ nhỏ.\n\n— Chú cho cháu qua bên kia sông.\n\nÔng Sáu gật đầu, không hỏi gì. Năm mươi năm đưa đò dạy ông rằng người ta sang sông vì nhiều lý do, và phần lớn không muốn kể.\n\nĐến giữa dòng, cô gái khẽ hỏi: — Chú có nhớ một người tên Hạnh không?"},
+{t:"Chương 3: Chiếc hộp gỗ",x:"Mái chèo khựng lại một nhịp. Nước vỗ nhẹ vào mạn đò, đều đặn như tiếng tim đập.\n\n— Mẹ cháu nhờ trao lại thứ này, — cô gái mở hộp. Bên trong là một chiếc nón lá đã ngả màu, dây quai khâu bằng chỉ đỏ.\n\nÔng Sáu nhìn rất lâu. Rồi ông cười, lần đầu tiên trong buổi sáng ấy, và chèo tiếp về phía bờ bên kia."}]},
+{id:"s2",title:"Thư viện lúc nửa đêm",author:"",genre:"Huyền bí",desc:"Đêm thứ chín mươi mốt, kệ số bảy có thêm một cuốn sách không tên tác giả.",tags:["Huyền ảo","Bí ẩn","Thư viện","Sách ma thuật","Bí mật"],chapters:[
+{t:"Chương 1: Cuốn sách thừa",x:"Minh làm thủ thư ca đêm đã ba tháng, và đêm nào cũng đếm đủ sách trên kệ. Vậy mà đêm thứ chín mươi mốt, kệ số bảy có thêm một cuốn.\n\nBìa màu xanh đen, không tên tác giả, gáy sách còn ấm như vừa có ai cầm.\n\nAnh mở trang đầu. Dòng chữ viết tay nghiêng nghiêng: “Nếu bạn đang đọc dòng này, thư viện đã chọn bạn.”"},
+{t:"Chương 2: Trang chưa viết",x:"Những trang sau đều trắng. Minh lật hết một lượt, rồi đặt cuốn sách xuống bàn và pha cà phê để tỉnh táo.\n\nKhi quay lại, trên trang thứ nhất đã có thêm một câu: “Hôm nay anh mệt lắm phải không?”\n\nMinh đứng yên. Ngoài cửa sổ, đèn đường nhấp nháy một lần, rồi ổn định lại. Anh cầm bút, chậm rãi viết: “Một chút thôi.”"}]}
+];
+const all=()=>SAMPLE.concat(mine,Object.values(cloudCache));
+const libAll=()=>SAMPLE.concat(mine.filter(b=>!b.own||!window.gtFirebaseAuth||!window.gtFirebaseAuth.currentUser||b.own===window.gtFirebaseAuth.currentUser.uid),Object.values(cloudCache).filter(b=>favs.includes(b.id)||prog[b.id]));
+const cacheBooks=l=>{l.forEach(b=>{cloudCache[b.id]=b});return l};
+const isImgData=v=>typeof v==="string"&&/^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(v);
+const ve=(vi,en)=>L()==="vi"?vi:en;
+const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
+const stLabel=x=>STATUS[x]?STATUS[x][L()==="vi"?0:1]:"";
+const outside=(e,d)=>{const r=d.getBoundingClientRect();return e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom};
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+const T={vi:{title:"Gác Truyện – Đọc tiểu thuyết",add:"Thêm truyện",aa:"Tuỳ chỉnh đọc",menu:"Menu",lang:"Ngôn ngữ",fs:"Cỡ chữ",ff:"Phông chữ",serif:"Có chân",sans:"Không chân",lh:"Giãn dòng",tight:"Chặt",mid:"Vừa",loose:"Thoáng",th:"Nền",light:"Sáng",sepia:"Giấy",dark:"Tối",
+dtitle:"Thêm truyện của bạn",dn:"Tên truyện",da:"Tác giả",dx:"Nội dung",dph:'Dán nội dung vào đây. Mỗi dòng bắt đầu bằng "Chương 1", "Chương 2"… sẽ tách thành một chương.',cancel:"Huỷ",save:"Lưu truyện",
+
+sample:"Truyện mẫu",anon:"Khuyết danh",lib:"Thư viện của bạn",search:"Tìm theo tên truyện hoặc tác giả",all:"Tất cả",favs:"Yêu thích",going:"Đang đọc",
+stat:(c,m)=>`Đã đọc xong ${c} chương, khoảng ${m} phút.`,none:"Không có truyện nào khớp.",chs:n=>`${n} chương`,read:p=>`đã đọc ${p}%`,
+back:"← Thư viện",start:"Bắt đầu đọc",cont:"Đọc tiếp",favd:"★ Đã yêu thích",fav:"☆ Yêu thích",del:"Xoá truyện",delq:"Xoá truyện này?",min:n=>`${n} phút`,done:"Đã đọc",cur:"Đang đọc",
+bmh:"Đoạn đã đánh dấu",bmempty:"Khi đọc, chạm vào một đoạn để đánh dấu. Chạm lần nữa để bỏ.",chn:n=>`Chương ${n}`,hint:m=>`${m} phút đọc · chạm vào đoạn để đánh dấu`,prev:"← Chương trước",toc:"Mục lục",next:"Chương sau →",need:"Cần nhập tên truyện và nội dung."},
+en:{title:"Gác Truyện – Read novels",add:"Add novel",aa:"Reading settings",menu:"Menu",lang:"Language",fs:"Font size",ff:"Typeface",serif:"Serif",sans:"Sans",lh:"Line spacing",tight:"Tight",mid:"Medium",loose:"Airy",th:"Background",light:"Light",sepia:"Paper",dark:"Dark",
+dtitle:"Add your own novel",dn:"Title",da:"Author",dx:"Text",dph:'Paste your text here. A line starting with "Chapter 1", "Chapter 2"… starts a new chapter.',cancel:"Cancel",save:"Save novel",
+
+sample:"Sample story",anon:"Unknown",lib:"Your library",search:"Search by title or author",all:"All",favs:"Favorites",going:"Reading",
+stat:(c,m)=>`${c} chapter${c===1?"":"s"} finished, about ${m} min.`,none:"No novels match.",chs:n=>`${n} chapter${n===1?"":"s"}`,read:p=>`${p}% read`,
+back:"← Library",start:"Start reading",cont:"Continue",favd:"★ Favorited",fav:"☆ Favorite",del:"Delete novel",delq:"Delete this novel?",min:n=>`${n} min`,done:"Read",cur:"Reading",
+bmh:"Bookmarked passages",bmempty:"While reading, tap a paragraph to bookmark it. Tap again to remove.",chn:n=>`Chapter ${n}`,hint:m=>`${m} min read · tap a paragraph to bookmark`,prev:"← Previous chapter",toc:"Contents",next:"Next chapter →",need:"Enter a title and some text."}};
+const K="title,add,aa,menu,lang,fs,ff,serif,sans,lh,tight,mid,loose,th,light,sepia,dark,dtitle,dn,da,dx,dph,cancel,save,sample,anon,lib,search,all,favs,going,stat,none,chs,read,back,start,cont,favd,fav,del,delq,min,done,cur,bmh,bmempty,chn,hint,prev,toc,next,need,desc,tg,tgph,edit,editT,saveChg,cover,pick,rmcov,badimg".split(",");
+const LANGS=[["vi","Tiếng Việt"],["en","English"],["zh","中文"],["ja","日本語"],["ko","한국어"],["es","Español"],["fr","Français"],["de","Deutsch"],["pt","Português"],["ru","Русский"]];
+const PK={
+zh:"Gác Truyện – 阅读小说|添加小说|阅读设置|菜单|语言|字号|字体|衬线|无衬线|行距|紧凑|适中|宽松|背景|浅色|纸张|深色|添加你的小说|标题|作者|正文|在此粘贴正文。以“第1章”“第2章”开头的行会作为新章节。|取消|保存小说|示例小说|佚名|我的书架|按书名或作者搜索|全部|收藏|在读|已读完 {0} 章，约 {1} 分钟。|没有匹配的小说。|{0} 章|已读 {0}%|← 书架|开始阅读|继续阅读|★ 已收藏|☆ 收藏|删除小说|删除这本小说？|{0} 分钟|已读|在读|已标记的段落|阅读时点按段落即可标记，再次点按取消。|第{0}章|约 {0} 分钟 · 点按段落可标记|← 上一章|目录|下一章 →|请输入标题和正文。",
+ja:"Gác Truyện – 小説を読む|小説を追加|読書設定|メニュー|言語|文字サイズ|書体|明朝|ゴシック|行間|狭い|標準|広い|背景|ライト|ペーパー|ダーク|自分の小説を追加|タイトル|著者|本文|ここに本文を貼り付けてください。「第1章」「第2章」で始まる行から新しい章になります。|キャンセル|小説を保存|サンプル作品|作者不詳|あなたの本棚|タイトルまたは著者で検索|すべて|お気に入り|読書中|{0} 章を読了、約 {1} 分。|一致する小説がありません。|{0} 章|{0}% 読了|← 本棚|読み始める|続きを読む|★ お気に入り済み|☆ お気に入り|小説を削除|この小説を削除しますか？|{0} 分|読了|読書中|しおりを付けた段落|読書中に段落をタップするとしおりを付けられます。もう一度タップで解除。|第{0}章|約 {0} 分 · 段落をタップでしおり|← 前の章|目次|次の章 →|タイトルと本文を入力してください。",
+ko:"Gác Truyện – 소설 읽기|소설 추가|읽기 설정|메뉴|언어|글자 크기|글꼴|명조|고딕|줄 간격|좁게|보통|넓게|배경|라이트|종이|다크|내 소설 추가|제목|작가|본문|여기에 본문을 붙여넣으세요. “제1장”, “제2장”으로 시작하는 줄부터 새 장이 됩니다.|취소|소설 저장|샘플 소설|작자 미상|내 서재|제목 또는 작가로 검색|전체|즐겨찾기|읽는 중|{0}장 완독, 약 {1}분.|일치하는 소설이 없습니다.|{0}장|{0}% 읽음|← 서재|읽기 시작|이어 읽기|★ 즐겨찾기됨|☆ 즐겨찾기|소설 삭제|이 소설을 삭제할까요?|{0}분|읽음|읽는 중|책갈피한 문단|읽는 중 문단을 탭하면 책갈피가 추가됩니다. 다시 탭하면 해제됩니다.|제{0}장|약 {0}분 · 문단을 탭해 책갈피|← 이전 장|목차|다음 장 →|제목과 본문을 입력하세요.",
+es:"Gác Truyện – Leer novelas|Añadir novela|Ajustes de lectura|Menú|Idioma|Tamaño de letra|Tipografía|Serif|Sans|Interlineado|Compacto|Medio|Amplio|Fondo|Claro|Papel|Oscuro|Añade tu propia novela|Título|Autor|Texto|Pega aquí tu texto. Cada línea que empiece por “Capítulo 1”, “Capítulo 2”… inicia un capítulo nuevo.|Cancelar|Guardar novela|Relato de muestra|Desconocido|Tu biblioteca|Buscar por título o autor|Todas|Favoritas|Leyendo|{0} capítulos terminados, unos {1} min.|Ninguna novela coincide.|{0} capítulos|{0}% leído|← Biblioteca|Empezar a leer|Continuar|★ En favoritas|☆ Añadir a favoritas|Eliminar novela|¿Eliminar esta novela?|{0} min|Leído|Leyendo|Pasajes marcados|Al leer, toca un párrafo para marcarlo. Tócalo otra vez para quitar la marca.|Capítulo {0}|{0} min de lectura · toca un párrafo para marcarlo|← Capítulo anterior|Índice|Capítulo siguiente →|Escribe un título y un texto.",
+fr:"Gác Truyện – Lire des romans|Ajouter un roman|Réglages de lecture|Menu|Langue|Taille du texte|Police|Avec empattement|Sans empattement|Interligne|Serré|Moyen|Aéré|Arrière-plan|Clair|Papier|Sombre|Ajouter votre roman|Titre|Auteur|Texte|Collez votre texte ici. Chaque ligne commençant par « Chapitre 1 », « Chapitre 2 »… ouvre un nouveau chapitre.|Annuler|Enregistrer le roman|Récit d’exemple|Anonyme|Votre bibliothèque|Rechercher par titre ou auteur|Tous|Favoris|En cours|{0} chapitres terminés, environ {1} min.|Aucun roman ne correspond.|{0} chapitres|{0} % lu|← Bibliothèque|Commencer la lecture|Continuer|★ Dans les favoris|☆ Ajouter aux favoris|Supprimer le roman|Supprimer ce roman ?|{0} min|Lu|En cours|Passages marqués|Pendant la lecture, touchez un paragraphe pour le marquer. Touchez-le à nouveau pour retirer la marque.|Chapitre {0}|{0} min de lecture · touchez un paragraphe pour le marquer|← Chapitre précédent|Sommaire|Chapitre suivant →|Saisissez un titre et un texte.",
+de:"Gác Truyện – Romane lesen|Roman hinzufügen|Leseeinstellungen|Menü|Sprache|Schriftgröße|Schriftart|Serif|Sans|Zeilenabstand|Eng|Mittel|Weit|Hintergrund|Hell|Papier|Dunkel|Eigenen Roman hinzufügen|Titel|Autor|Text|Text hier einfügen. Jede Zeile, die mit „Kapitel 1“, „Kapitel 2“ … beginnt, startet ein neues Kapitel.|Abbrechen|Roman speichern|Beispielgeschichte|Unbekannt|Deine Bibliothek|Nach Titel oder Autor suchen|Alle|Favoriten|Lese ich|{0} Kapitel gelesen, etwa {1} Min.|Keine passenden Romane.|{0} Kapitel|{0} % gelesen|← Bibliothek|Lesen beginnen|Weiterlesen|★ Favorit|☆ Favorisieren|Roman löschen|Diesen Roman löschen?|{0} Min.|Gelesen|Lese ich|Markierte Absätze|Tippe beim Lesen auf einen Absatz, um ihn zu markieren. Erneut tippen entfernt die Markierung.|Kapitel {0}|{0} Min. Lesezeit · Absatz antippen zum Markieren|← Vorheriges Kapitel|Inhalt|Nächstes Kapitel →|Bitte Titel und Text eingeben.",
+pt:"Gác Truyện – Ler romances|Adicionar romance|Ajustes de leitura|Menu|Idioma|Tamanho da fonte|Fonte|Serifa|Sem serifa|Espaçamento|Compacto|Médio|Amplo|Fundo|Claro|Papel|Escuro|Adicione seu romance|Título|Autor|Texto|Cole o texto aqui. Cada linha que começa com “Capítulo 1”, “Capítulo 2”… inicia um novo capítulo.|Cancelar|Salvar romance|História de exemplo|Desconhecido|Sua biblioteca|Buscar por título ou autor|Todos|Favoritos|Lendo|{0} capítulos concluídos, cerca de {1} min.|Nenhum romance encontrado.|{0} capítulos|{0}% lido|← Biblioteca|Começar a ler|Continuar|★ Favoritado|☆ Favoritar|Excluir romance|Excluir este romance?|{0} min|Lido|Lendo|Trechos marcados|Ao ler, toque em um parágrafo para marcá-lo. Toque de novo para remover.|Capítulo {0}|{0} min de leitura · toque num parágrafo para marcar|← Capítulo anterior|Índice|Próximo capítulo →|Informe um título e um texto.",
+ru:"Gác Truyện – Читать романы|Добавить роман|Настройки чтения|Меню|Язык|Размер шрифта|Шрифт|С засечками|Без засечек|Межстрочный интервал|Плотный|Средний|Свободный|Фон|Светлый|Бумага|Тёмный|Добавить свой роман|Название|Автор|Текст|Вставьте текст сюда. Каждая строка, начинающаяся с «Глава 1», «Глава 2»…, начинает новую главу.|Отмена|Сохранить роман|Пример рассказа|Неизвестен|Ваша библиотека|Поиск по названию или автору|Все|Избранное|Читаю|Прочитано глав: {0}, около {1} мин.|Ничего не найдено.|Глав: {0}|Прочитано {0}%|← Библиотека|Начать чтение|Продолжить|★ В избранном|☆ В избранное|Удалить роман|Удалить этот роман?|{0} мин|Прочитано|Читаю|Закладки|При чтении коснитесь абзаца, чтобы поставить закладку. Коснитесь ещё раз, чтобы убрать.|Глава {0}|{0} мин чтения · коснитесь абзаца для закладки|← Предыдущая глава|Содержание|Следующая глава →|Введите название и текст."};
+const X={zh:"简介|标签|用逗号分隔，例如：奇幻, 爱情|编辑小说|编辑小说|保存更改",ja:"あらすじ|タグ|カンマ区切り（例：ファンタジー, 恋愛）|小説を編集|小説を編集|変更を保存",ko:"소개|태그|쉼표로 구분 (예: 판타지, 로맨스)|소설 편집|소설 편집|변경 사항 저장",es:"Descripción|Etiquetas|Separadas por comas, p. ej.: fantasía, romance|Editar novela|Editar novela|Guardar cambios",fr:"Description|Étiquettes|Séparées par des virgules, ex. : fantasy, romance|Modifier le roman|Modifier le roman|Enregistrer les modifications",de:"Beschreibung|Tags|Durch Kommas trennen, z. B. Fantasy, Liebe|Roman bearbeiten|Roman bearbeiten|Änderungen speichern",pt:"Descrição|Tags|Separe por vírgulas, ex.: fantasia, romance|Editar romance|Editar romance|Salvar alterações",ru:"Описание|Теги|Через запятую, например: фэнтези, романтика|Редактировать роман|Редактировать роман|Сохранить изменения"};
+for(const l in X)PK[l]+="|"+X[l];
+Object.assign(T.vi,{desc:"Mô tả",tg:"Thẻ",tgph:"Phân cách bằng dấu phẩy, ví dụ: tiên hiệp, tình cảm",edit:"Sửa truyện",editT:"Sửa truyện",saveChg:"Lưu thay đổi"});
+Object.assign(T.en,{desc:"Description",tg:"Tags",tgph:"Separate with commas, e.g. fantasy, romance",edit:"Edit novel",editT:"Edit novel",saveChg:"Save changes"});
+const Y={zh:"封面图片|选择图片|移除图片|无法读取此图片。",ja:"表紙画像|画像を選択|画像を削除|この画像を読み込めません。",ko:"표지 이미지|이미지 선택|이미지 삭제|이 이미지를 읽을 수 없습니다.",es:"Portada|Elegir imagen|Quitar imagen|No se pudo leer esta imagen.",fr:"Couverture|Choisir une image|Retirer l’image|Impossible de lire cette image.",de:"Titelbild|Bild wählen|Bild entfernen|Dieses Bild kann nicht gelesen werden.",pt:"Capa|Escolher imagem|Remover imagem|Não foi possível ler esta imagem.",ru:"Обложка|Выбрать изображение|Удалить изображение|Не удалось прочитать изображение."};
+for(const l in Y)PK[l]+="|"+Y[l];
+Object.assign(T.vi,{cover:"Ảnh bìa",pick:"Chọn ảnh",rmcov:"Xoá ảnh",badimg:"Không đọc được ảnh này."});
+Object.assign(T.en,{cover:"Cover image",pick:"Choose image",rmcov:"Remove image",badimg:"Couldn't read this image."});
+for(const l in PK){const a=PK[l].split("|");if(a.length!==K.length)console.warn("lang",l,a.length);T[l]=Object.fromEntries(K.map((k,i)=>[k,a[i]]))}
+const L=()=>{const n=(navigator.language||"").slice(0,2);return st.lang||(T[n]?n:"vi")},t=(k,...a)=>{const v=(T[L()]||T.vi)[k];if(typeof v==="function")return v(...a);return typeof v==="string"&&a.length?v.replace(/\{(\d)\}/g,(m,i)=>a[i]):v};
+const PATT="(?:chương|chapter|capítulo|chapitre|kapitel|глава)\\s*\\d+|第\\s*\\d+\\s*[章话話]|제?\\s*\\d+\\s*장";
+const auth=b=>b.author||b.ownerName||(b.id[0]==="s"?t("sample"):t("anon"));
+const SEL=[["#bAdd","add"],["#bAdd","add","aria-label"],["#bAa","aa","aria-label"],["#lL","lang"],["#pop label:nth-of-type(1)","fs"],["#pop label:nth-of-type(2)","ff"],["#pop label:nth-of-type(3)","lh"],["#pop label:nth-of-type(4)","th"],
+['#ffs [data-v="serif"]',"serif"],['#ffs [data-v="sans"]',"sans"],['#lhs [data-v="1.6"]',"tight"],['#lhs [data-v="1.85"]',"mid"],['#lhs [data-v="2.1"]',"loose"],['#ths [data-v="light"]',"light"],['#ths [data-v="sepia"]',"sepia"],['#ths [data-v="dark"]',"dark"],
+["#dlg h2","dtitle"],["label[for=nt]","dn"],["label[for=na]","da"],["label[for=nx]","dx"],["#nx","dph","placeholder"],["#dc","cancel"],["#ds","save"],["#lcv","cover"],["#cvb","pick"],["#cvx","rmcov"],["label[for=nd]","desc"],["label[for=ng]","tg"],["#ng","tgph","placeholder"]];
+function applyLang(){document.documentElement.lang=L();document.title=t("title");
+ SEL.forEach(([q,k,a])=>{const e=document.querySelector(q);if(e)a?e.setAttribute(a,t(k)):e.textContent=t(k)});
+ $("#lgn").textContent=t("lang")+": "+LANGS.find(x=>x[0]===L())[1];
+ document.querySelectorAll("#lgs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===L())));window.gtL=L;if(window.gtLang)window.gtLang()}
+function applySet(){
+ applyLang();
+ const r=document.documentElement;
+ if(st.th)r.dataset.theme=st.th;else delete r.dataset.theme;
+ r.style.setProperty("--fs",st.fs+"px");r.style.setProperty("--ff",st.ff==="sans"?'"Be Vietnam Pro",system-ui,sans-serif':'"Literata",Georgia,serif');
+ document.querySelectorAll("#ffs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===(st.ff||"serif"))));r.style.setProperty("--lh",st.lh);
+ document.querySelectorAll("#ths button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===st.th)));
+ document.querySelectorAll("#lhs button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===st.lh)));
+ ls.set("gt.set",st);
+}
+function pct(b){const p=prog[b.id];return p?Math.round(((p.done||[]).length/b.chapters.length)*100):0}
+function card(b){const h=hue(b.title);return `<div class="bk"><a class="book" href="#/b/${b.id}"><div class="cover" ${b.cover?`style="background:url('${b.cover}') center/cover" role="img" aria-label="${esc(b.title)}"`:`style="background:linear-gradient(160deg,hsl(${h} 45% 32%),hsl(${(h+40)%360} 50% 20%))"`}>${b.cover?"":`<b>${esc(b.title)}</b><span>${esc(auth(b))}</span>`}</div>
+ ${b.cover?`<div class="mtitle">${esc(b.title)}</div>`:""}<div class="meta"><span>${t("chs",b.chapters.length)}${pct(b)?" · "+t("read",pct(b)):""}</span>${b.id.startsWith("u")?` <span class="badge ${b.pubBy?(b.dirty?"warn":""):"priv"}">${b.pubBy?(b.dirty?ve("Chưa đồng bộ","Unsynced"):ve("Đã đăng","Published")):ve("Riêng tư","Private")}</span>`:""}${b.cloud?`<span class="mstat">${esc("♥ "+(b.likeCount||0)+(b.ratingCount?" · ★ "+avgStar(b).toFixed(1):"")+" · "+(b.readCount||0)+ve(" đọc"," reads"))}</span>`:""}</div>${pct(b)?`<div class="bar"><i style="width:${pct(b)}%"></i></div>`:""}</a>
+ <button class="fav ${favs.includes(b.id)?"on":""}" data-id="${b.id}" aria-label="${t("favs")}" aria-pressed="${favs.includes(b.id)}">★</button></div>`}
+function home(){
+ app.innerHTML=`<h1 id="homeH">${tab==="pub"?ve("Cộng đồng","Community"):t("lib")}</h1>
+ <div class="tools"><input id="q" type="search" placeholder="${t("search")}" value="${esc(q)}" aria-label="${t("search")}">
+ <div class="tabs" id="tabs">${[["all",t("all")],["fav",t("favs")],["go",t("going")],["pub",ve("Cộng đồng","Community")],["rank",ve("Xếp hạng","Ranking")]].map(([k,l])=>`<button data-k="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div><div class="subbar" id="commBar" ${tab==="pub"?"":"hidden"}><select id="commSort" aria-label="${ve("Sắp xếp","Sort")}"><option value="new">${ve("Mới cập nhật","Recently updated")}</option><option value="likes">${ve("Nhiều lượt thích","Most liked")}</option><option value="reads">${ve("Nhiều lượt đọc","Most read")}</option></select><button id="commReload" type="button" aria-label="${ve("Tải lại","Reload")}" title="${ve("Tải lại","Reload")}">↻</button></div></div>
+ <div class="shelf" id="shelf"></div>
+ <div class="homefoot"><p class="empty" id="syncNote">${syncNoteHtml()}</p><div class="foot"><span class="empty" id="stat"></span></div></div>`;
+ shelf();libCloud();
+ $("#q").oninput=e=>{q=e.target.value;shelf()};
+ $("#tabs").onclick=e=>{if(e.target.dataset.k==="rank"){location.hash="#/rank";return}if(e.target.dataset.k){tab=e.target.dataset.k;document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.k===tab)));$("#commBar").hidden=tab!=="pub";$("#homeH").textContent=tab==="pub"?ve("Cộng đồng","Community"):t("lib");if(tab==="pub"&&(commState!=="ok"||Date.now()-commAt>15000))loadComm();else shelf()}};
+ $("#commReload").onclick=()=>{commAt=0;loadComm()};
+ $("#commSort").value=commSort;$("#commSort").onchange=e=>{commSort=e.target.value;commAt=0;loadComm()};
+ $("#syncBtn").onclick=()=>{if(window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser)syncLibrary();else loginDlg.showModal()};
+ $("#shelf").onclick=e=>{const f=e.target.closest(".fav");if(f){const i=f.dataset.id;favs=favs.includes(i)?favs.filter(x=>x!==i):favs.concat(i);ls.set("gt.fav",favs);shelf()}};
+}
+function shelf(){
+ const k=q.trim().toLowerCase(),pub=tab==="pub";
+ const src=pub?commIds.map(id=>cloudCache[id]).filter(Boolean):libAll();
+ const list=src.filter(b=>(!k||(b.title+" "+(b.author||"")+" "+(b.ownerName||"")+" "+(b.tags||[]).join(" ")+" "+(b.desc||"")+" "+(b.genre||"")).toLowerCase().includes(k))&&(!tagf||(b.tags||[]).includes(tagf))&&(pub||tab==="all"||(tab==="fav"?favs.includes(b.id):prog[b.id]&&prog[b.id].last!=null&&pct(b)<100)));
+ const none=pub?(commState==="loading"?ve("Đang tải truyện cộng đồng…","Loading community novels…"):commState==="err"?commErr:(commState==="ok"&&!commIds.length?ve("Chưa có truyện nào được đăng. Hãy là người đầu tiên!","Nothing has been published yet. Be the first!"):t("none"))):t("none");
+ $("#shelf").innerHTML=list.length?list.map(card).join(""):`<p class="empty">${esc(none)}</p>`;
+ const ch=Object.values(prog).reduce((a,p)=>a+(p.done||[]).length,0),mn=Object.entries(prog).reduce((a,[id,p])=>{const b=all().find(x=>x.id===id);return a+(b?(p.done||[]).reduce((t,i)=>t+(b.chapters[i]?mins(b.chapters[i]):0),0):0)},0);
+ $("#stat").textContent=t("stat",ch,mn);
+}
+const mins=c=>Math.max(1,Math.round((c.w!=null?c.w:c.x.split(/\s+/).length)/200));
+const relTime=ms=>{if(!ms)return"";const s=Math.round((ms-Date.now())/1000),a=Math.abs(s),r=new Intl.RelativeTimeFormat(L(),{numeric:"auto"});
+ if(a<3600)return r.format(Math.round(s/60),"minute");if(a<86400)return r.format(Math.round(s/3600),"hour");if(a<2592000)return r.format(Math.round(s/86400),"day");return new Date(ms).toLocaleDateString(L())};
+const cloudMsg=e=>{const m=e&&e.message||"",c=e&&e.code||"";
+ if(c==="permission-denied"||c==="PERMISSION_DENIED"||/PERMISSION_DENIED/.test(m))return ve("Chưa có quyền: hãy Publish Firestore Rules và Realtime Database Rules mới (file firestore.rules và database.rules.json) trong Firebase Console.","Permission denied: publish the new Firestore and Realtime Database rules (firestore.rules / database.rules.json) in the Firebase Console.");
+ if(m.startsWith("chapter-too-long:"))return ve("Chương "+m.split(":")[1]+" dài quá 200.000 ký tự. Hãy tách nhỏ chương rồi đăng lại.","Chapter "+m.split(":")[1]+" is over 200,000 characters. Split it and try again.");
+ if(m==="too-many-chapters")return ve("Mỗi truyện đăng được tối đa 500 chương.","A novel can have at most 500 chapters.");
+ if(m==="image-too-large")return ve("Ảnh quá lớn, hãy chọn ảnh nhỏ hơn.","The image is too large, choose a smaller one.");
+ if(m==="auth")return ve("Bạn hãy đăng nhập trước nhé.","Please sign in first.");
+ if(m==="bad-id")return ve("ID gồm đúng 10 chữ số.","An ID has exactly 10 digits.");
+ if(m==="no-user")return ve("Không tìm thấy người dùng có ID này.","No user found with this ID.");
+ if(m==="self-friend")return ve("Đó là ID của bạn.","That's your own ID.");
+ if(m==="id-failed")return ve("Chưa tạo được ID, hãy thử lại.","Couldn't create an ID, try again.");
+ if(m==="self-follow")return ve("Bạn không thể tự theo dõi chính mình.","You can't follow yourself.");
+ if(c==="unavailable"||c==="auth/network-request-failed")return ve("Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.","Can't reach the server. Check your connection.");
+ return ve("Chưa thực hiện được: ","Couldn't do that: ")+(c||m)};
+const sh=()=>{if($("#shelf"))shelf()};
+var shT=null;const SH_OK=/^(?:s[0-9]+|c_[A-Za-z0-9_-]{6,200})$/;
+function scheduleShelf(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!u||!window.gtCloud||!ls.get("gt.share."+u.uid,false))return;clearTimeout(shT);shT=setTimeout(pushShelf,15000)}
+async function pushShelf(){
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!u||!window.gtCloud)return;
+ const fav={},reading={};favs.filter(i=>SH_OK.test(i)).slice(0,200).forEach(i=>{fav[i]=true});
+ Object.keys(prog).filter(i=>SH_OK.test(i)&&prog[i]&&prog[i].last!=null).slice(0,200).forEach(i=>{const b=all().find(x=>x.id===i);if(!(b&&pct(b)>=100))reading[i]=prog[i].last});
+ await window.gtCloud.saveShelf({fav,reading});
+}
+async function openRec(id){
+ const me=window.gtFirebaseAuth?.currentUser;if(!me){loginDlg.showModal();return}
+ if(!window.gtCloud){alert(ve("Đang kết nối máy chủ, thử lại sau vài giây nhé.","Still connecting, try again in a few seconds."));return}
+ try{const fr=await window.gtCloud.listFriends();
+  if(!fr.length){alert(ve("Bạn chưa có bạn bè nào. Hãy kết bạn trước bằng nút Bạn bè trên thanh trên cùng.","You have no friends yet. Add some first with the Friends button at the top."));return}
+  $("#recT").textContent=ve("Gợi ý truyện cho bạn bè","Recommend to a friend");$("#recL1").textContent=ve("Gửi cho","Send to");$("#recL2").textContent=ve("Lời nhắn (không bắt buộc)","Note (optional)");
+  $("#recClose").textContent=ve("Huỷ","Cancel");$("#recSend").textContent=ve("Gửi","Send");
+  $("#recTo").innerHTML=fr.map(f=>`<option value="${esc(f.id)}">${esc(f.name)}</option>`).join("");$("#recNote").value="";
+  $("#recSend").onclick=async()=>{const b=$("#recSend");b.disabled=true;
+   try{await window.gtCloud.recommend($("#recTo").value,id,$("#recNote").value);recDlg.close();alert(ve("Đã gửi gợi ý!","Sent!"))}
+   catch(e){console.error(e);alert(cloudMsg(e))}finally{b.disabled=false}};
+  recDlg.showModal()}
+ catch(e){console.error(e);alert(cloudMsg(e))}
+}
+async function friendsPage(){
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/" class="empty">${t("back")}</a>`,title=`<h1 style="margin-top:12px">${ve("Bạn bè","Friends")}</h1>`;
+ if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để kết bạn.","Sign in to add friends.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
+ app.innerHTML=back+title+`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ const C=window.gtCloud;
+ try{
+  const [fid,friends,incoming,sent,inbox]=await Promise.all([C.myFriendId(),C.listFriends(),C.listIncoming(),C.listSent(),C.inbox()]);
+  if(location.hash!==h)return;
+  refreshFriendBadge(true);
+  const cids=[...new Set(inbox.map(x=>x.book))].filter(i=>i.startsWith("c_")&&!cloudCache[i]);
+  if(cids.length)try{cacheBooks(await C.getBooks(cids))}catch(e){}
+  const share=ls.get("gt.share."+me.uid,false),em=x=>`<p class="empty">${x}</p>`;
+  const row=(inner,btns)=>`<div class="frow">${inner}<span style="flex:none;display:flex;gap:6px">${btns}</span></div>`;
+  const sec=(ttl,body)=>`<h2 style="margin-top:26px">${ttl}</h2>${body}`;
+  app.innerHTML=back+title+`<div id="friendsBox">
+   <div class="fbox"><div class="empty" style="margin:0 0 6px">${ve("ID của bạn","Your ID")}</div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="fid">${esc(fid)}</span><button class="btn" id="fCopy" type="button">${ve("Sao chép","Copy")}</button></div>
+    <p class="empty" style="margin:8px 0 0;font-size:13px">${ve("Gửi ID này cho người bạn muốn kết bạn.","Share this ID with people you want to befriend.")}</p></div>
+   <div class="fbox"><label for="fAddId" style="font-weight:600">${ve("Thêm bạn bằng ID","Add a friend by ID")}</label>
+    <div style="display:flex;gap:8px;margin-top:8px"><input id="fAddId" inputmode="numeric" maxlength="14" placeholder="${ve("Nhập ID 10 chữ số","Enter 10-digit ID")}" style="flex:1;min-width:0;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit"><button class="btn pri" id="fAddBtn" type="button">${ve("Tìm","Find")}</button></div>
+    <div id="fAddRes" style="margin-top:10px"></div></div>
+   ${incoming.length?sec(ve("Lời mời kết bạn","Friend requests")+" ("+incoming.length+")",incoming.map(x=>row(`<a href="#/u/${esc(x.id)}">${esc(x.name)}</a>`,`<button class="btn pri" data-act="acc" data-id="${esc(x.id)}">${ve("Chấp nhận","Accept")}</button><button class="btn" data-act="dec" data-id="${esc(x.id)}">${ve("Từ chối","Decline")}</button>`)).join("")):""}
+   ${inbox.length?sec(ve("Gợi ý từ bạn bè","Recommended by friends"),inbox.map(x=>{const bk=all().find(b=>b.id===x.book);return row(`<span>${esc(x.name)}: <a href="#/b/${esc(x.book)}" style="color:var(--acc);text-decoration:underline">${esc(bk?bk.title:ve("(xem truyện)","(open novel)"))}</a>${x.note?" — "+esc(x.note):""}</span>`,`<button class="btn" data-act="rec" data-id="${esc(x.key)}" aria-label="${ve("Xoá","Dismiss")}">✕</button>`)}).join("")):""}
+   ${sec(ve("Bạn bè","Friends")+" ("+friends.length+")",friends.length?friends.map(x=>row(`<a href="#/u/${esc(x.id)}">${esc(x.name)}</a>`,`<button class="btn" data-act="unf" data-id="${esc(x.id)}">${ve("Huỷ kết bạn","Unfriend")}</button>`)).join(""):em(ve("Chưa có bạn bè nào. Nhập ID ở trên để thêm.","No friends yet. Enter an ID above to add one.")))}
+   ${sent.length?sec(ve("Lời mời đã gửi","Sent requests"),sent.map(x=>row(`<a href="#/u/${esc(x.id)}">${esc(x.name)}</a>`,`<button class="btn" data-act="cnl" data-id="${esc(x.id)}">${ve("Huỷ lời mời","Cancel")}</button>`)).join("")):""}
+   <label style="display:flex;gap:10px;align-items:flex-start;margin-top:26px"><input type="checkbox" id="fShare" ${share?"checked":""} style="margin-top:4px"><span>${ve("Cho bạn bè xem truyện đang đọc và truyện yêu thích của tôi","Let friends see what I'm reading and my favorites")}<br><span class="empty" style="font-size:13px">${ve("Chỉ hiện truyện mẫu và truyện đã đăng công khai, chỉ bạn bè mới xem được.","Only sample and published novels are shown, and only to friends.")}</span></span></label>
+  </div>`;
+  $("#fCopy").onclick=async()=>{try{await navigator.clipboard.writeText(fid)}catch(e){}const b=$("#fCopy");b.textContent=ve("Đã chép","Copied");setTimeout(()=>{if(b.isConnected)b.textContent=ve("Sao chép","Copy")},1500)};
+  $("#fShare").onchange=async e=>{ls.set("gt.share."+me.uid,e.target.checked);try{if(e.target.checked)await pushShelf();else await C.clearShelf()}catch(err){console.error(err);alert(cloudMsg(err))}};
+  const find=async()=>{const out=$("#fAddRes");out.textContent=ve("Đang tìm…","Searching…");
+   try{const uid=await C.findByInput($("#fAddId").value);
+    if(uid===me.uid){out.textContent=ve("Đó là ID của bạn.","That's your own ID.");return}
+    const [pf,stt]=await Promise.all([C.profile(uid),C.friendState(uid)]);
+    const lab={none:ve("Gửi lời mời","Send request"),incoming:ve("Chấp nhận","Accept"),sent:ve("Đã gửi lời mời","Request sent"),friends:ve("Đã là bạn bè","Already friends")}[stt];
+    out.innerHTML=row(`<a href="#/u/${esc(uid)}">${esc(pf.name)}</a>`,`<button class="btn ${stt==="none"||stt==="incoming"?"pri":""}" id="fGo" type="button" ${stt==="sent"||stt==="friends"?"disabled":""}>${lab}</button>`);
+    const go=$("#fGo");go.onclick=async()=>{go.disabled=true;try{if(stt==="none")await C.sendRequest(uid);else if(stt==="incoming")await C.acceptRequest(uid);friendsPage()}catch(e){console.error(e);alert(cloudMsg(e));go.disabled=false}};
+   }catch(e){out.textContent=cloudMsg(e)}};
+  $("#fAddBtn").onclick=find;$("#fAddId").onkeydown=e=>{if(e.key==="Enter")find()};
+  $("#friendsBox").onclick=async e=>{const b=e.target.closest("[data-act]");if(!b)return;const id=b.dataset.id,act=b.dataset.act;
+   try{
+    if(act==="unf"&&!confirm(ve("Huỷ kết bạn?","Remove this friend?")))return;
+    b.disabled=true;
+    if(act==="acc")await C.acceptRequest(id);else if(act==="dec")await C.declineRequest(id);else if(act==="unf")await C.unfriend(id);
+    else if(act==="cnl")await C.cancelRequest(id);else if(act==="rec")await C.dismissRec(id);else return;
+    friendsPage()}
+   catch(err){console.error(err);alert(cloudMsg(err));b.disabled=false}};
+ }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
+}
+var syncBusy=false,syncAgain=false,syncMsg="",syncAt=0;
+function syncStatus(m){syncMsg=m;const el=$("#syncTxt");if(el)el.textContent=m}
+function syncNoteHtml(){
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b='<button class="btn" id="syncBtn" type="button" style="padding:2px 10px;font-size:12px;margin-left:6px">';
+ return u?`☁ <span id="syncTxt">${esc(syncMsg||ve("Thư viện của bạn được đồng bộ với tài khoản.","Your library syncs with your account."))}</span> ${b}${ve("Đồng bộ ngay","Sync now")}</button>`
+  :`☁ ${ve("Đăng nhập để thư viện của bạn có mặt trên mọi thiết bị.","Sign in to keep your library on all your devices.")} ${b}${ve("Đăng nhập","Sign in")}</button>`;
+}
+async function dropFromCloud(b){
+ if(!b||!b.own)return;
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,dk="gt.del."+b.own;
+ const tomb=()=>{const l=ls.get(dk,[]);if(!l.includes(b.id))ls.set(dk,l.concat(b.id))};
+ if(u&&u.uid===b.own&&window.gtCloud){try{await window.gtCloud.libDelete(b.id)}catch(e){console.error(e);tomb()}}else tomb();
+}
+async function syncLibrary(){
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
+ if(!u||!window.gtCloud)return;
+ if(syncBusy){syncAgain=true;return}
+ syncBusy=true;syncStatus(ve("Đang đồng bộ…","Syncing…"));
+ const C=window.gtCloud;let pushed=0,pulled=0,removed=0,err=null;
+ try{
+  const dk="gt.del."+u.uid;let dels=ls.get(dk,[]);
+  for(const id of dels.slice()){await C.libDelete(id);dels=dels.filter(x=>x!==id);ls.set(dk,dels)}
+  const metas=new Map((await C.libList()).map(m=>[m.id,m])),trash=new Set(await C.libTrash());
+  for(const id0 of mine.map(x=>x.id)){
+   let b=mine.find(x=>x.id===id0);if(!b||(b.own&&b.own!==u.uid))continue;
+   if(!b.own){b={...b,own:u.uid};mine=mine.map(x=>x.id===b.id?b:x)}
+   const m=metas.get(b.id),lut=b.ut||0,syn=b.syn||0;
+   if(!m){
+    if(trash.has(b.id)&&syn&&lut===syn){mine=mine.filter(x=>x.id!==b.id);removed++;continue}   // đã xoá ở thiết bị khác
+    const nb={...b,ut:lut||Date.now()};await C.libPush(nb);mine=mine.map(x=>x.id===b.id?{...nb,syn:nb.ut}:x);pushed++;
+   }else if(m.ut>lut&&syn===lut){                                                              // trên cloud mới hơn, máy này chưa sửa gì
+    const full=await C.libPull(b.id);mine=mine.map(x=>x.id===b.id?{...full,own:u.uid,syn:full.ut}:x);pulled++;
+   }else if(lut>m.ut||m.ut>lut){                                                               // máy này mới hơn (hoặc xung đột: bản trên máy này thắng)
+    const nb={...b,ut:Math.max(lut,m.ut+1)};await C.libPush(nb);mine=mine.map(x=>x.id===b.id?{...nb,syn:nb.ut}:x);pushed++;
+   }else if(syn!==lut){mine=mine.map(x=>x.id===b.id?{...b,syn:lut}:x)}
+  }
+  const have=new Set(mine.map(x=>x.id));
+  for(const m of metas.values()){if(have.has(m.id))continue;
+   const full=await C.libPull(m.id);mine=mine.concat({...full,own:u.uid,syn:full.ut});pulled++}
+  if(!ls.set("gt.mine",mine))throw new Error("quota");
+ }catch(e){console.error(e);err=e}
+ syncBusy=false;syncAt=Date.now();
+ const tm=new Date().toLocaleTimeString(L(),{hour:"2-digit",minute:"2-digit"});
+ syncStatus(err?(err.message==="quota"?ve("Bộ nhớ trình duyệt đầy, chưa tải hết truyện về máy.","Browser storage is full; some novels weren't downloaded."):cloudMsg(err)):ve("Đã đồng bộ lúc "+tm,"Synced at "+tm)+((pushed||pulled||removed)?" ("+[pushed?ve("đẩy lên "+pushed,"pushed "+pushed):"",pulled?ve("tải về "+pulled,"pulled "+pulled):"",removed?ve("xoá "+removed,"removed "+removed):""].filter(Boolean).join(", ")+")":""));
+ if(pulled||removed)sh();
+ if(syncAgain){syncAgain=false;syncLibrary()}
+}
+var commSort="new",readBusy=new Set();
+const pubDocId=b=>b.pubBy?b.pubBy+"-"+b.id+(b.pubGen?"_g"+b.pubGen:""):"";
+const avgStar=b=>b.ratingCount?b.ratingSum/b.ratingCount:0;
+const statText=b=>"♥ "+(b.likeCount||0)+" · ★ "+(b.ratingCount?avgStar(b).toFixed(1)+" ("+b.ratingCount+")":"–")+" · "+ve((b.readCount||0)+" lượt đọc",(b.readCount||0)+" reads");
+async function markReadOnce(b){
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
+ if(!u||!window.gtCloud||!b.cloud||b.ownerUid===u.uid||readBusy.has(b.id))return;
+ const k="gt.reads."+u.uid,done=ls.get(k,[]);if(done.includes(b.id))return;
+ readBusy.add(b.id);                                  // chỉ thử 1 lần mỗi phiên, tránh lặp lỗi
+ try{const counted=await window.gtCloud.markRead(b.id.slice(2));if(counted)b.readCount=(b.readCount||0)+1;ls.set(k,done.concat(b.id).slice(-500))}
+ catch(e){console.error(e);return}
+ readBusy.delete(b.id);
+}
+function bindSocial(b,me){
+ const docId=b.id.slice(2),lb=$("#likeBtn"),rr=$("#rateRow");if(!lb||!rr)return;
+ let liked=false,stars=0;
+ const paint=()=>{lb.setAttribute("aria-pressed",String(liked));lb.className=liked?"btn pri":"btn";lb.textContent="♥ "+ve("Thích","Like")+" ("+(b.likeCount||0)+")";
+  rr.querySelectorAll(".star").forEach(x=>x.classList.toggle("on",+x.dataset.s<=stars));const st=$("#bStats");if(st)st.textContent=statText(b)};
+ paint();
+ const need=()=>{if(window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser&&window.gtCloud)return true;loginDlg.showModal();return false};
+ if(me&&window.gtCloud)window.gtCloud.myMarks(docId).then(m=>{liked=m.liked;stars=m.stars;if($("#likeBtn")===lb)paint()}).catch(()=>{});
+ lb.onclick=async()=>{if(!need())return;lb.disabled=true;
+  try{await window.gtCloud.setLike(docId,!liked);liked=!liked;b.likeCount=(b.likeCount||0)+(liked?1:-1);paint()}
+  catch(e){console.error(e);alert(cloudMsg(e))}finally{lb.disabled=false}};
+ rr.onclick=async e=>{const x=e.target.closest(".star");if(!x||!need())return;const sv=+x.dataset.s;if(sv===stars)return;
+  try{await window.gtCloud.setRating(docId,sv,stars);
+   if(stars){b.ratingSum=(b.ratingSum||0)+sv-stars}else{b.ratingSum=(b.ratingSum||0)+sv;b.ratingCount=(b.ratingCount||0)+1}
+   stars=sv;paint()}
+  catch(err){console.error(err);alert(cloudMsg(err))}};
+}
+var rankCat="likes",rankCache={};
+async function rankData(cat){
+ const c=rankCache[cat];if(c&&Date.now()-c.at<60000)return c.data;
+ const C=window.gtCloud;let data;
+ if(cat==="likes"||cat==="reads"){data=cacheBooks(await C.listBooks(20,cat))}
+ else if(cat==="rated"){
+  // điểm cân bằng: truyện ít lượt chấm bị kéo về điểm trung bình chung, nên 1 lượt 5 sao không vượt truyện được nhiều người chấm
+  const l=cacheBooks(await C.listBooks(100,"rated")).filter(b=>b.ratingCount>0),m=3,mean=l.length?l.reduce((a,b)=>a+avgStar(b),0)/l.length:0;
+  data=l.map(b=>({b,sc:(b.ratingCount/(b.ratingCount+m))*avgStar(b)+(m/(b.ratingCount+m))*mean})).sort((x,y)=>y.sc-x.sc||y.b.ratingCount-x.b.ratingCount).slice(0,20).map(x=>x.b);
+ }else{
+  const l=cacheBooks(await C.listBooks(100,"likes")),by=new Map();
+  l.forEach(b=>{if(!b.ownerUid)return;const a=by.get(b.ownerUid)||{uid:b.ownerUid,name:b.ownerName||ve("Độc giả","Reader"),likes:0,reads:0,books:0};a.likes+=b.likeCount||0;a.reads+=b.readCount||0;a.books++;by.set(b.ownerUid,a)});
+  data=[...by.values()].sort((x,y)=>y.likes-x.likes||y.reads-x.reads).slice(0,10);
+ }
+ rankCache[cat]={at:Date.now(),data};return data;
+}
+async function rankPage(){
+ const h=location.hash,back=`<a href="#/" class="empty">${t("back")}</a>`;
+ const cats=[["likes",ve("Thích nhiều","Most liked")],["reads",ve("Đọc nhiều","Most read")],["rated",ve("Đánh giá cao","Top rated")],["authors",ve("Tác giả","Authors")]];
+ app.innerHTML=back+`<h1 style="margin-top:12px">${ve("Bảng xếp hạng","Ranking")}</h1><div class="tabs" id="rankTabs" role="group">${cats.map(([k,l])=>`<button type="button" data-k="${k}" aria-pressed="${rankCat===k}">${l}</button>`).join("")}</div><div id="rankBody"><p class="empty">${ve("Đang tải…","Loading…")}</p></div>`;
+ $("#rankTabs").onclick=e=>{const k=e.target.dataset.k;if(!k||k===rankCat)return;rankCat=k;rankPage()};
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ try{
+  const cat=rankCat,data=await rankData(cat);if(location.hash!==h||cat!==rankCat)return;
+  const box=$("#rankBody");if(!box)return;
+  if(!data.length){box.innerHTML=`<p class="empty">${ve("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Cộng đồng để lên bảng!","No ranking data yet. Like, rate or read novels in the Community tab to get on the board!")}</p>`;return}
+  const medal=i=>`<span class="rk n${i<3?i+1:0}">${i+1}</span>`;
+  const note=cat==="authors"?ve("Tính trên 100 truyện nhiều lượt thích nhất.","Based on the 100 most-liked novels."):cat==="rated"?ve("Xếp theo điểm đã cân bằng theo số lượt chấm: truyện chỉ có 1 lượt 5 sao không vượt được truyện nhiều người chấm.","Ranked by a score weighted by the number of ratings, so a single 5-star vote can't beat a widely rated novel."):ve("Bảng được làm mới mỗi phút.","The board refreshes every minute.");
+  box.innerHTML=`<ol class="rank">${data.map((x,i)=>cat==="authors"
+   ?`<li>${medal(i)}<a class="rk-t" href="#/u/${esc(x.uid)}">${esc(x.name)}<small>${esc(ve(x.books+" truyện",x.books+" novel(s)"))}</small></a><span class="rk-s">♥ ${x.likes} · ${esc(ve(x.reads+" lượt đọc",x.reads+" reads"))}</span></li>`
+   :`<li>${medal(i)}<a class="rk-t" href="#/b/${esc(x.id)}">${esc(x.title)}<small>${esc(auth(x))}</small></a><span class="rk-s">${cat==="likes"?"♥ "+(x.likeCount||0):cat==="reads"?esc(ve((x.readCount||0)+" lượt đọc",(x.readCount||0)+" reads")):"★ "+avgStar(x).toFixed(1)+" ("+x.ratingCount+")"}</span></li>`).join("")}</ol><p class="empty" style="font-size:12px;margin-top:14px">${note}</p>`;
+ }catch(e){console.error(e);const box=$("#rankBody");if(box&&location.hash===h)box.innerHTML=`<p class="empty">${esc(cloudMsg(e))}</p>`}
+}
+function loadComm(){
+ const go=()=>{commState="loading";sh();window.gtCloud.listBooks(40,commSort).then(l=>{commIds=cacheBooks(l).map(b=>b.id);commState="ok";commAt=Date.now()}).catch(e=>{console.error(e);commState="err";commErr=cloudMsg(e)}).finally(()=>{if(tab==="pub")sh()})};
+ if(window.gtCloud)go();else{commState="loading";sh();addEventListener("gtcloud",go,{once:true})}
+}
+function libCloud(){
+ const ids=[...new Set(favs.concat(Object.keys(prog)))].filter(i=>i.startsWith("c_")&&!cloudCache[i]&&!cloudMissing.has(i));
+ if(!ids.length)return;
+ const go=()=>window.gtCloud.getBooks(ids).then(l=>{cacheBooks(l);ids.forEach(i=>{if(!cloudCache[i])cloudMissing.add(i)});sh()}).catch(()=>{});
+ if(window.gtCloud)go();else addEventListener("gtcloud",go,{once:true});
+}
+function needCloud(id){
+ if(!id.startsWith("c_")||cloudCache[id])return false;
+ const h=location.hash,msg=x=>`<a href="#/" class="empty">${t("back")}</a><p class="empty" style="margin-top:24px">${x}</p>`;
+ app.innerHTML=msg(ve("Đang tải truyện…","Loading…"));
+ const go=()=>window.gtCloud.getBooks([id]).then(l=>{cacheBooks(l);if(location.hash!==h)return;
+   if(cloudCache[id])route();else{cloudMissing.add(id);app.innerHTML=msg(ve("Không tìm thấy truyện này, có thể tác giả đã gỡ.","Novel not found. It may have been removed."))}})
+  .catch(e=>{if(location.hash===h)app.innerHTML=msg(esc(cloudMsg(e)))});
+ if(window.gtCloud)go();else addEventListener("gtcloud",go,{once:true});
+ return true;
+}
+async function publishBook(id){
+ const b=mine.find(x=>x.id===id),me=window.gtFirebaseAuth?.currentUser;if(!b)return;
+ if(!me){alert(ve("Hãy đăng nhập để đăng truyện lên cộng đồng.","Sign in to publish to the community."));loginDlg.showModal();return}
+ if(b.pubBy&&b.pubBy!==me.uid){alert(ve("Truyện này đã được đăng bởi tài khoản khác nên bạn không thể đăng hay cập nhật.","This novel was published by another account, so you can't publish or update it."));return}
+ if(!window.gtCloud){alert(ve("Đang kết nối máy chủ, thử lại sau vài giây nhé.","Still connecting, try again in a few seconds."));return}
+ if(b.pubBy!==me.uid&&!confirm(ve("Đăng công khai: mọi người đều đọc được toàn bộ truyện này và thấy tên hiển thị của bạn. Tiếp tục?","Publish publicly: everyone can read this novel and see your display name. Continue?")))return;
+ const btn=$("#pub");if(btn){btn.disabled=true;btn.textContent=ve("Đang đăng…","Publishing…")}
+ try{await window.gtCloud.publish(b);
+  mine=mine.map(x=>x.id===id?{...x,pubBy:me.uid,pubAt:Date.now(),dirty:false,ut:Date.now()}:x);ls.set("gt.mine",mine);commAt=0;syncLibrary();delete cloudCache["c_"+me.uid+"-"+id+(b.pubGen?"_g"+b.pubGen:"")];
+  alert(ve("Đã đăng lên cộng đồng! Mọi người thấy truyện ở tab Cộng đồng (bấm ↻ để tải lại).","Published! Everyone can find it in the Community tab (tap ↻ to reload)."))}
+ catch(e){console.error(e);alert(cloudMsg(e))}
+ if(location.hash==="#/b/"+id)book(id);
+}
+async function unpublishBook(id){
+ const b=mine.find(x=>x.id===id);if(!b||!window.gtCloud)return;
+ if(!confirm(ve("Gỡ truyện khỏi cộng đồng? Bản trong máy của bạn vẫn được giữ.","Remove from the community? Your local copy is kept.")))return;
+ try{await window.gtCloud.unpublish(id,b.pubGen||0);delete cloudCache["c_"+pubDocId(b)];mine=mine.map(x=>x.id===id?{...x,pubBy:null,pubAt:null,dirty:false,pubGen:(b.pubGen||0)+1,ut:Date.now()}:x);ls.set("gt.mine",mine);commAt=0;syncLibrary()}
+ catch(e){console.error(e);alert(cloudMsg(e))}
+ if(location.hash==="#/b/"+id)book(id);
+}
+async function syncLegacyPosts(){
+ const old=ls.get("gt.posts",[]);if(!old.length||!window.gtCloud)return;
+ for(const p of old.slice().reverse()){if(!p||(!p.body&&!p.image))continue;
+  await window.gtCloud.addPost({id:String(p.id||Date.now().toString(36)),body:p.body||"",image:isImgData(p.image)&&p.image.length<=580000?p.image:""})}
+ ls.set("gt.posts",[]);
+}
+async function authorPage(uid){
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/" class="empty">${t("back")}</a>`;
+ if(me&&me.uid===uid){location.hash="#/profile";return}
+ app.innerHTML=back+`<p class="empty" style="margin-top:24px">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ if(location.hash!==h)return;
+ const C=window.gtCloud;
+ try{
+  const [pf,st,books,ps,fl,fst]=await Promise.all([C.profile(uid),C.stats(uid),C.booksByOwner(uid),C.listPosts(uid).catch(()=>[]),C.isFollowing(uid),C.friendState(uid).catch(()=>"none")]);
+  if(location.hash!==h)return;
+  cacheBooks(books);
+  let following=fl,followers=st.followers;
+  const av=isImgData(pf.avatar)?`<img src="${pf.avatar}" alt="">`:esc((pf.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
+  app.innerHTML=back+`<section class="profile-showcase"><div class="profile-showcase-top"><div class="avatar">${av}</div><div class="profile-showcase-info"><h1>${esc(pf.name)}</h1><p class="bio">${esc(pf.bio||"")}</p>
+   <div class="profile-stats"><div class="profile-stat"><strong>${st.following}</strong><span>Đang theo dõi</span></div><div class="profile-stat"><strong id="folCount">${followers}</strong><span>Người theo dõi</span></div><div class="profile-stat"><strong>${books.length}</strong><span>Truyện đã đăng</span></div></div></div></div>
+   <div class="profile-showcase-actions"><button class="btn pri" id="followBtn" type="button"></button><button class="btn" id="friendBtn" type="button"></button></div></section>
+   <div id="friendShelf"></div>
+   <h2>Truyện của tác giả <span class="empty" style="font:400 14px 'Be Vietnam Pro',sans-serif">(${books.length})</span></h2>
+   ${books.length?`<div class="shelf" id="authShelf">${books.map(card).join("")}</div>`:`<p class="empty">Tác giả chưa đăng truyện nào.</p>`}
+   <h2 style="margin-top:28px">Bài viết</h2>
+   ${ps.length?ps.map(x=>postCard(x,pf,false)).join(""):`<p class="empty">Chưa có bài viết nào.</p>`}`;
+  const sg=$("#authShelf");if(sg)sg.onclick=e=>{const f=e.target.closest(".fav");if(!f)return;const i=f.dataset.id;favs=favs.includes(i)?favs.filter(x=>x!==i):favs.concat(i);ls.set("gt.fav",favs);f.classList.toggle("on",favs.includes(i));f.setAttribute("aria-pressed",String(favs.includes(i)))};
+  const fb=$("#followBtn"),paint=()=>{fb.textContent=following?ve("✓ Đang theo dõi","✓ Following"):ve("+ Theo dõi","+ Follow");fb.className=following?"btn":"btn pri";fb.setAttribute("aria-pressed",String(following))};paint();
+  fb.onclick=async()=>{if(!window.gtFirebaseAuth?.currentUser){loginDlg.showModal();return}
+   fb.disabled=true;try{const on=await C.toggle(uid);followers+=on?1:-1;following=on;$("#folCount").textContent=followers;paint()}catch(e){console.error(e);alert(cloudMsg(e))}finally{fb.disabled=false}};
+  const frb=$("#friendBtn");let fs=fst;
+  const paintF=()=>{frb.textContent={none:ve("+ Kết bạn","+ Add friend"),sent:ve("Đã gửi lời mời (bấm để huỷ)","Request sent (tap to cancel)"),incoming:ve("Chấp nhận kết bạn","Accept request"),friends:ve("✓ Bạn bè","✓ Friends")}[fs];frb.className=(fs==="none"||fs==="incoming")?"btn pri":"btn"};paintF();
+  const loadFShelf=async()=>{const box=$("#friendShelf");if(!box)return;
+   try{const sh=await C.loadShelf(uid);
+    if(!sh||(!sh.fav.length&&!sh.reading.length)){box.innerHTML=`<p class="empty">${ve("Bạn bè này chưa chia sẻ thư viện.","This friend hasn't shared their library.")}</p>`;return}
+    const ids=[...new Set(sh.fav.concat(sh.reading.map(x=>x.id)))].filter(i=>i.startsWith("c_")&&!cloudCache[i]);
+    if(ids.length)try{cacheBooks(await C.getBooks(ids))}catch(e){}
+    const line=(id,ex)=>{const b=all().find(x=>x.id===id);return b?`<li><a href="#/b/${esc(id)}"><span>${esc(b.title)}</span><span class="bkm">${esc(ex||"")}</span></a></li>`:""};
+    const rd=sh.reading.map(x=>line(x.id,t("chn",x.c+1))).join(""),fv=sh.fav.map(x=>line(x,"")).join("");
+    box.innerHTML=`<h2 style="margin-top:24px">${ve("Đang đọc","Reading")}</h2>${rd?`<ul class="chlist">${rd}</ul>`:`<p class="empty">–</p>`}<h2 style="margin-top:24px">${ve("Yêu thích","Favorites")}</h2>${fv?`<ul class="chlist">${fv}</ul>`:`<p class="empty">–</p>`}`}
+   catch(e){console.error(e);box.innerHTML=`<p class="empty">${esc(cloudMsg(e))}</p>`}};
+  frb.onclick=async()=>{if(!window.gtFirebaseAuth?.currentUser){loginDlg.showModal();return}
+   frb.disabled=true;
+   try{if(fs==="none"){await C.sendRequest(uid);fs="sent"}
+    else if(fs==="sent"){await C.cancelRequest(uid);fs="none"}
+    else if(fs==="incoming"){await C.acceptRequest(uid);fs="friends";loadFShelf()}
+    else if(fs==="friends"&&confirm(ve("Huỷ kết bạn?","Remove this friend?"))){await C.unfriend(uid);fs="none";$("#friendShelf").innerHTML=""}
+    paintF()}
+   catch(e){console.error(e);alert(cloudMsg(e))}finally{frb.disabled=false}};
+  if(fs==="friends")loadFShelf();
+ }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+`<p class="empty" style="margin-top:24px">${esc(cloudMsg(e))}</p>`}
+}
+async function followingPage(){
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Cập nhật từ tác giả đang theo dõi","Updates from authors you follow")}</h1>`;
+ if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
+ app.innerHTML=back+title+`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ try{
+  const C=window.gtCloud,list=await C.listFollowing(me.uid),books=list.length?cacheBooks(await C.booksByOwners(list.map(x=>x.id))):[];
+  if(location.hash!==h)return;
+  const seen=ls.get("gt.followSeen",0);
+  app.innerHTML=back+title+(list.length?`<div class="tagrow">${list.map(x=>`<a class="tag" href="#/u/${esc(x.id)}">${esc(x.name)}</a>`).join("")}</div>
+   <h2 style="margin-top:28px">${ve("Truyện mới cập nhật","Recently updated")}</h2>
+   ${books.length?`<ul class="chlist">${books.slice(0,40).map(b=>`<li><a href="#/b/${esc(b.id)}"><span>${esc(b.title)} <span class="bkm">· ${esc(b.ownerName||"")} · ${t("chs",b.chapters.length)}</span>${b.updatedAt>seen?` <span class="tag on" style="padding:1px 8px;font-size:11px">${ve("Mới","New")}</span>`:""}</span><span class="bkm">${esc(relTime(b.updatedAt))}</span></a></li>`).join("")}</ul>`:`<p class="empty">${ve("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.")}</p>`}`
+   :`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.")}</p>`);
+  ls.set("gt.followSeen",Date.now());
+ }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
+}
+function book(id){
+ const b=all().find(x=>x.id===id);if(!b)return location.hash="#/";
+ const p=prog[id]||{done:[]},cont=p.last??0,bl=bms[id]||[],fv=favs.includes(id),me=window.gtFirebaseAuth?.currentUser;
+ const own=id.startsWith("u"),pubd=!!(own&&me&&b.pubBy===me.uid),foreign=!!(own&&me&&b.pubBy&&b.pubBy!==me.uid),lk='style="color:var(--acc);text-decoration:underline"';
+ app.innerHTML=`<a href="#/" class="empty">${t("back")}</a>
+ <section class="head hero">
+  <div class="hero-cover">${b.cover?`<img class="bcv" src="${b.cover}" alt="">`:`<div class="cover" style="background:linear-gradient(160deg,hsl(${hue(b.title)} 45% 32%),hsl(${(hue(b.title)+40)%360} 50% 20%))"><b>${esc(b.title)}</b></div>`}</div>
+  <div class="hero-info">
+   <h1>${esc(b.title)}</h1>
+   <p class="hero-by">${esc(auth(b))}</p>
+   <div class="chips">${[stLabel(b.status),b.genre?esc(b.genre):"",t("chs",b.chapters.length),pct(b)?t("read",pct(b)):""].filter(Boolean).map(x=>`<span>${x}</span>`).join("")}</div>
+   ${b.cloud&&b.ownerUid?`<p class="hero-post">${ve("Đăng bởi ","Posted by ")}<a href="#/u/${esc(b.ownerUid)}" class="lnk">${esc(b.ownerName||"Độc giả")}</a>${b.updatedAt?" · "+esc(relTime(b.updatedAt)):""}</p>`:""}
+   ${b.cloud?`<p id="bStats" class="hero-stats">${esc(statText(b))}</p>`:""}
+  </div>
+ </section>
+ ${own&&!b.pubBy?`<p class="note">${me?ve("Truyện này đang ở chế độ riêng tư: chỉ bạn thấy, và được đồng bộ giữa các thiết bị của bạn. Bấm “Đăng lên cộng đồng” để mọi người cùng đọc.","This novel is private: only you can see it, and it syncs across your devices. Press “Publish” to share it with everyone."):ve("Truyện này mới chỉ lưu trong máy bạn. Đăng nhập để dùng ở thiết bị khác, và bấm “Đăng lên cộng đồng” để mọi người cùng đọc.","This novel is only saved on this device. Sign in to use it on other devices, and press “Publish” to share it.")}</p>`:""}${foreign?`<p class="note">${ve("Bản này đã được đăng bởi một tài khoản khác. Hãy đăng nhập đúng tài khoản đó để sửa hoặc cập nhật.","This novel was published by another account. Sign in with that account to edit or update it.")}</p>`:""}${pubd?`<p class="note">${ve("Đã đăng công khai","Published")} · <a href="#/b/c_${esc(pubDocId(b))}" class="lnk">${ve("Xem bản công khai","View public copy")}</a>${b.dirty?" · "+ve("có thay đổi chưa đồng bộ","unsynced changes"):""}</p>`:""}
+ <div class="acts">
+  <a class="btn pri big" href="#/b/${id}/c/${cont}">${p.last!=null?t("cont"):t("start")}</a>
+  <div class="acts2">
+   <button class="btn" id="fv" aria-pressed="${fv}">${fv?t("favd"):t("fav")}</button>${b.cloud?`<button class="btn" id="likeBtn" type="button" aria-pressed="false">♥ ${ve("Thích","Like")}</button>`:""}${(b.cloud||id[0]==="s")?`<button class="btn" id="rec" type="button" title="${ve("Gợi ý cho bạn bè","Recommend to a friend")}">${ve("Gợi ý","Suggest")}</button>`:""}
+  </div>
+  ${b.cloud?`<div id="rateRow" class="rate"><span>${ve("Đánh giá","Rate")}</span>${[1,2,3,4,5].map(i=>`<button class="star" type="button" data-s="${i}" aria-label="${i} ${ve("sao","stars")}">★</button>`).join("")}</div>`:""}
+  ${own?`<div class="acts3">${foreign?"":`<button class="btn" id="ed">${t("edit")}</button>`}${foreign?"":`<button class="btn" id="pub">${pubd?ve("Cập nhật bản đăng","Update published copy"):ve("Đăng lên cộng đồng","Publish")}</button>`}${pubd?`<button class="btn" id="unpub">${ve("Gỡ khỏi cộng đồng","Unpublish")}</button>`:""}<button class="btn danger" id="del">${t("del")}</button></div>`:""}
+ </div>
+ ${b.desc?`<p class="desc">${esc(b.desc)}</p>`:""}<div class="tagrow">${(b.tags||[]).map(g=>`<button class="tag" data-g="${esc(g)}">#${esc(g)}</button>`).join("")}</div>
+ <ul class="chlist">${b.chapters.map((c,i)=>`<li><a href="#/b/${id}/c/${i}" class="${(p.done||[]).includes(i)?"done":""}"><span>${esc(c.t)} <span class="bkm">· ${t("min",mins(c))}</span></span><span>${(p.done||[]).includes(i)?t("done"):p.last===i?t("cur"):""}</span></a></li>`).join("")}</ul>
+ <h2 style="margin-top:36px">${t("bmh")}</h2>
+ ${bl.length?`<ul class="chlist">${bl.map(m=>`<li><a href="#/b/${id}/c/${m.c}/p${m.p}"><span>${esc(m.t)}…</span><span class="bkm">${t("chn",m.c+1)}</span></a></li>`).join("")}</ul>`:`<p class="empty">${t("bmempty")}</p>`}`;
+ app.querySelectorAll(".tag").forEach(el=>el.onclick=()=>{tagf=el.dataset.g;tab=b.cloud?"pub":"all";q="";location.hash="#/"});
+ $("#fv").onclick=()=>{favs=fv?favs.filter(x=>x!==id):favs.concat(id);ls.set("gt.fav",favs);book(id)};
+ const ed=$("#ed");if(ed)ed.onclick=()=>openEd(id);
+ const rc=$("#rec");if(rc)rc.onclick=()=>openRec(id);
+ if(b.cloud)bindSocial(b,me);
+ const pb=$("#pub");if(pb)pb.onclick=()=>publishBook(id);
+ const ub=$("#unpub");if(ub)ub.onclick=()=>unpublishBook(id);
+ const d=$("#del");if(d)d.onclick=async()=>{if(!confirm(t("delq")))return;
+  if(pubd&&window.gtCloud&&confirm(ve("Truyện này đang đăng công khai. Gỡ luôn bản công khai?","This novel is published. Remove the public copy too?"))){try{await window.gtCloud.unpublish(id,b.pubGen||0);commAt=0}catch(e){alert(cloudMsg(e))}}
+  await dropFromCloud(b);mine=mine.filter(x=>x.id!==id);favs=favs.filter(x=>x!==id);delete prog[id];delete bms[id];ls.set("gt.mine",mine);ls.set("gt.fav",favs);ls.set("gt.prog",prog);ls.set("gt.bm",bms);location.hash="#/"};
+}
+function avatarMarkup(sizeClass=""){
+ const label=esc((profile.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
+ return profile.avatar?`<img class="${sizeClass?sizeClass+" ":""}avatar-img" src="${profile.avatar}" alt="Ảnh đại diện">`:`<span>${label}</span>`;
+}
+function profilePage(){
+ const av=profile.avatar?`<img src="${profile.avatar}" alt="Ảnh đại diện">`:esc((profile.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
+ const currentUser=window.gtFirebaseAuth?.currentUser;
+ const publishedCount=mine.filter(b=>currentUser&&b.pubBy===currentUser.uid).length;
+ app.innerHTML=`<a href="#/" class="empty">← Quay lại thư viện</a>
+ <section class="profile-showcase">
+   <div class="profile-showcase-top">
+     <div class="avatar" id="profileAvatarView">${av}</div>
+     <div class="profile-showcase-info">
+       <h1>${esc(profile.name||"Độc giả")}</h1>
+       <p class="bio">${esc(profile.bio||"Một vài dòng giới thiệu bản thân...")}</p><p class="bio" id="myFid" style="margin-top:6px"></p>
+       <div class="profile-stats">
+         <div class="profile-stat"><strong>–</strong><span>Đang theo dõi</span></div>
+         <div class="profile-stat"><strong>–</strong><span>Người theo dõi</span></div>
+         <div class="profile-stat"><strong>${publishedCount}</strong><span>Truyện đã đăng</span></div>
+       </div>
+     </div>
+   </div>
+   <div class="profile-showcase-actions">
+     <button class="btn pri" id="editProfileBtn">Chỉnh sửa hồ sơ</button>
+     <button class="btn" id="shareProfileBtn">Chia sẻ hồ sơ</button>
+   </div>
+   <div class="profile-links">
+     <button class="profile-link" id="profileStoriesBtn" type="button">
+       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v17H6.5A2.5 2.5 0 0 0 4 22V5.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 6v16m4-15h8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+       <span class="profile-link-copy"><strong>Truyện của tác giả</strong><span>Danh sách truyện đã xuất bản</span></span><span class="chev">›</span>
+     </button>
+     <button class="profile-link" id="profileFollowingBtn" type="button">
+       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+       <span class="profile-link-copy"><strong>Cập nhật từ tác giả đang theo dõi</strong><span>Thông báo khi có chương mới</span></span><span class="chev">›</span>
+     </button>
+   </div>
+ </section>
+ <section class="profile-card" id="profileEditor" hidden><h2>Thông tin cá nhân</h2><label for="profileName">Tên hiển thị</label><input id="profileName" maxlength="40" value="${esc(profile.name||"")}" placeholder="Tên bạn muốn mọi người thấy"><label for="profileBio">Giới thiệu bản thân</label><textarea id="profileBio" maxlength="240" rows="3" placeholder="Sở thích, thể loại truyện yêu thích…">${esc(profile.bio||"")}</textarea><label>Ảnh đại diện</label><div class="profile-actions"><button class="btn" id="chooseAvatar">Chọn ảnh</button><button class="btn" id="removeAvatar" ${profile.avatar?"":"hidden"}>Gỡ ảnh</button><input id="avatarFile" type="file" accept="image/*" hidden></div><div class="row" style="margin-top:14px"><button class="btn" id="cancelProfile">Huỷ</button><button class="btn pri" id="saveProfile">Lưu hồ sơ</button></div></section>
+ <section class="profile-card"><h2>Chia sẻ điều gì đó</h2><p class="empty" style="font-size:13px">Viết cảm nghĩ, cập nhật, review truyện hoặc kể về sở thích của bạn.</p><textarea id="newPostText" maxlength="2000" rows="4" placeholder="Hôm nay bạn muốn chia sẻ gì?…"></textarea><div class="profile-actions"><button class="btn" id="choosePostImage">Đính kèm ảnh</button><button class="btn" id="clearPostImage" ${postImage?"":"hidden"}>Bỏ ảnh</button><input id="postImageFile" type="file" accept="image/*" hidden><span class="empty" id="postImageNote">${postImage?"Đã chọn ảnh đính kèm.":"Có thể đăng bài chỉ bằng chữ."}</span></div><div class="row" style="margin-top:12px"><button class="btn pri" id="publishPost">Đăng bài</button></div></section>
+ <h2>Bài viết của bạn <span id="postCount" class="empty" style="font:400 14px 'Be Vietnam Pro',sans-serif"></span></h2>
+ <div id="postFeed"><p class="empty">Đang tải…</p></div>`;
+ const editor=$("#profileEditor");
+ $("#editProfileBtn").onclick=()=>{editor.hidden=!editor.hidden;};
+ $("#shareProfileBtn").onclick=async()=>{const url=location.href.split("#")[0]+(currentUser?"#/u/"+currentUser.uid:"#/");try{if(navigator.share)await navigator.share({title:`Hồ sơ ${profile.name||"Độc giả"} · Gác Truyện`,url});else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(url);alert("Đã sao chép liên kết hồ sơ.");}else prompt("Sao chép liên kết hồ sơ:",url)}catch(e){if(e?.name!=="AbortError")prompt("Sao chép liên kết hồ sơ:",url)}};
+ $("#profileStoriesBtn").onclick=()=>{location.hash="#/";q="";tab="all";};
+ $("#cancelProfile").onclick=()=>{profileAvatar=null;editor.hidden=true;};
+ $("#chooseAvatar").onclick=()=>$("#avatarFile").click();
+ $("#profileFollowingBtn").onclick=()=>{location.hash="#/following"};
+ if(currentUser&&window.gtCloud)window.gtCloud.myFriendId().then(id=>{const el=$("#myFid");if(!el)return;
+  el.innerHTML=`ID: <b style="font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.06em">${esc(id)}</b> <button class="btn" id="copyFid" type="button" style="padding:2px 10px;font-size:12px;margin-left:6px">${ve("Sao chép","Copy")}</button>`;
+  $("#copyFid").onclick=async()=>{try{await navigator.clipboard.writeText(id)}catch(e){}const b=$("#copyFid");b.textContent=ve("Đã chép","Copied");setTimeout(()=>{if(b.isConnected)b.textContent=ve("Sao chép","Copy")},1500)}}).catch(()=>{});
+ if(currentUser&&window.gtCloud)window.gtCloud.stats(currentUser.uid).then(x=>{const el=app.querySelectorAll(".profile-stat strong");if(el[0])el[0].textContent=x.following;if(el[1])el[1].textContent=x.followers}).catch(()=>{});
+ const feed=()=>{const f=$("#postFeed");if(!f)return;$("#postCount").textContent="("+posts.length+")";
+  f.innerHTML=posts.length?posts.map(x=>postCard(x,profile,true)).join(""):`<p class="empty">Bạn chưa đăng bài nào. Bài viết đầu tiên có thể bắt đầu từ một dòng cảm nghĩ về cuốn truyện đang đọc.</p>`};
+ (async()=>{const f=$("#postFeed");
+  if(!currentUser||!window.gtCloud){if(f)f.innerHTML=`<p class="empty">Đăng nhập để xem và đăng bài viết.</p>`;return}
+  try{await syncLegacyPosts();posts=await window.gtCloud.listPosts(currentUser.uid);feed()}
+  catch(e){console.error(e);const g=$("#postFeed");if(g)g.innerHTML=`<p class="empty">${esc(cloudMsg(e))}</p>`}})();
+ $("#removeAvatar").onclick=()=>{profileAvatar="";profile.avatar="";saveCurrentProfile();profilePage();if(window.gtRefreshAccountButton)window.gtRefreshAccountButton();$("#profileEditor").hidden=false;};
+ $("#avatarFile").onchange=e=>readImage(e.target.files[0],data=>{profileAvatar=data;$("#profileAvatarView").innerHTML=`<img src="${data}" alt="Ảnh đại diện">`;},320);
+ $("#saveProfile").onclick=()=>{profile.name=$("#profileName").value.trim()||"Độc giả";profile.bio=$("#profileBio").value.trim();if(profileAvatar!==null)profile.avatar=profileAvatar;saveCurrentProfile();profileAvatar=null;profilePage();if(window.gtRefreshAccountButton)window.gtRefreshAccountButton();if(window.gtSaveProfile)window.gtSaveProfile(profile);if(window.gtFollowApi&&window.gtFirebaseAuth?.currentUser)window.gtFollowApi.saveProfile(window.gtFirebaseAuth.currentUser,profile).catch(()=>alert("Chưa đồng bộ được hồ sơ lên Firebase. Kiểm tra quy tắc Realtime Database nhé."));};
+ $("#choosePostImage").onclick=()=>$("#postImageFile").click();
+ $("#clearPostImage").onclick=()=>{postImage=null;$("#postImageNote").textContent="Có thể đăng bài chỉ bằng chữ.";$("#clearPostImage").hidden=true;};
+ $("#postImageFile").onchange=e=>readImage(e.target.files[0],data=>{postImage=data;$("#postImageNote").textContent="Đã chọn ảnh đính kèm.";$("#clearPostImage").hidden=false;},800);
+ $("#publishPost").onclick=async()=>{const body=$("#newPostText").value.trim();
+  if(!currentUser||!window.gtCloud){loginDlg.showModal();return}
+  if(!body&&!postImage){alert("Bạn viết vài dòng hoặc chọn ảnh trước khi đăng nhé.");return}
+  const btn=$("#publishPost");btn.disabled=true;
+  try{await window.gtCloud.addPost({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),body,image:postImage||""});postImage=null;profilePage()}
+  catch(e){console.error(e);alert(cloudMsg(e));btn.disabled=false}};
+ $("#postFeed").onclick=async e=>{const b=e.target.closest("[data-delete-post]");if(!b||!confirm("Xoá bài viết này nhé?"))return;
+  try{await window.gtCloud.deletePost(b.dataset.deletePost);posts=posts.filter(x=>x.id!==b.dataset.deletePost);feed()}catch(err){console.error(err);alert(cloudMsg(err))}};
+}
+function postCard(p,prof,own){
+ prof=prof||profile;
+ const when=(()=>{try{return new Date(p.date).toLocaleString("vi-VN",{dateStyle:"medium",timeStyle:"short"})}catch(e){return ""}})();
+ const initial=esc((prof.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
+ return `<article class="post"><div class="post-top"><div class="avatar">${isImgData(prof.avatar)?`<img src="${prof.avatar}" alt="">`:initial}</div><div><strong>${esc(prof.name||"Độc giả")}</strong><div class="post-date">${esc(when)}</div></div></div>${p.body?`<div class="post-body">${esc(p.body)}</div>`:""}${p.image?`<img class="post-img" src="${p.image}" alt="Ảnh trong bài viết">`:""}${own?`<div class="post-actions"><button class="btn" data-delete-post="${esc(p.id)}">Xoá bài</button></div>`:""}</article>`;
+}
+function readImage(file,done,max=900){
+ if(!file)return;if(!file.type.startsWith("image/")){alert("Hãy chọn một tệp ảnh nhé.");return}
+ const rd=new FileReader();rd.onload=()=>{const im=new Image();im.onload=()=>{const r=Math.min(1,max/Math.max(im.width,im.height)),w=Math.max(1,Math.round(im.width*r)),h=Math.max(1,Math.round(im.height*r)),c=document.createElement("canvas");c.width=w;c.height=h;c.getContext("2d").drawImage(im,0,0,w,h);done(c.toDataURL("image/jpeg",.8));};im.onerror=()=>alert("Không đọc được ảnh này.");im.src=rd.result;};rd.onerror=()=>alert("Không đọc được ảnh này.");rd.readAsDataURL(file);
+}
+let onScroll;
+function chapter(id,n,pi){
+ const b=all().find(x=>x.id===id);n=+n;if(!b||!b.chapters[n])return location.hash="#/";
+ if(b.cloud)markReadOnce(b);
+ if(b.cloud&&b.chapters[n].x==null){const h=location.hash,box=x=>`<p class="empty" style="padding:36px 20px;text-align:center">${x}</p>`;app.className="";
+  app.innerHTML=box(ve("Đang tải chương…","Loading chapter…"));
+  window.gtCloud.chapter(id.slice(2),n).then(x=>{b.chapters[n].x=x;if(location.hash===h)route()})
+   .catch(e=>{console.error(e);if(location.hash===h)app.innerHTML=box(esc(cloudMsg(e)))+`<p style="text-align:center"><a class="btn" href="#/b/${esc(id)}">${t("toc")}</a></p>`});
+  return}
+ const c=b.chapters[n],p=prog[id]=prog[id]||{done:[]},mk=(bms[id]||[]).filter(m=>m.c===n).map(m=>m.p);p.last=n;ls.set("gt.prog",prog);
+ app.className="";
+ app.innerHTML=`<article class="reader"><h2>${esc(c.t)}</h2><p class="hint">${t("hint",mins(c))}</p>${c.x.split(/\n+/).filter(Boolean).map((t,i)=>`<p data-i="${i}" class="${mk.includes(i)?"mk":""}">${esc(t)}</p>`).join("")}</article>
+ <div class="nav">${n>0?`<a class="btn" href="#/b/${id}/c/${n-1}">${t("prev")}</a>`:`<a class="btn" href="#/b/${id}">${t("toc")}</a>`}
+ ${n<b.chapters.length-1?`<a class="btn pri" href="#/b/${id}/c/${n+1}">${t("next")}</a>`:`<a class="btn pri" href="#/b/${id}">${t("toc")}</a>`}</div>
+ <section class="cmt" id="comments" data-b="${esc(id)}" data-c="${n}"></section>`;
+ if(window.gtComments)window.gtComments(id,n);
+ app.querySelectorAll(".reader p[data-i]").forEach(el=>el.onclick=()=>{if(getSelection().toString())return;const i=+el.dataset.i,a=bms[id]=bms[id]||[],j=a.findIndex(m=>m.c===n&&m.p===i);if(j>=0)a.splice(j,1);else a.push({c:n,p:i,t:el.textContent.slice(0,70)});el.classList.toggle("mk",j<0);ls.set("gt.bm",bms)});
+ const target=pi!=null?app.querySelector(`[data-i="${pi}"]`):null,saved=(p.pos&&p.pos[n])||0;
+ window.scrollTo(0,target?target.getBoundingClientRect().top+scrollY-90:saved);
+ const rd=app.querySelector(".reader");
+ onScroll=()=>{const end=rd.offsetTop+rd.offsetHeight-innerHeight,y=scrollY,r=end>0?Math.min(1,y/end):1;
+  $("#prog").style.width=(r*100)+"%";
+  p.pos=p.pos||{};p.pos[n]=y;
+  if(r>.92&&!p.done.includes(n)){p.done.push(n)}
+  clearTimeout(onScroll.t);onScroll.t=setTimeout(()=>ls.set("gt.prog",prog),400)};
+ addEventListener("scroll",onScroll,{passive:true});
+ {const fn=onScroll;requestAnimationFrame(()=>{if(rd.isConnected)fn()})}
+}
+var fbT=0;
+async function refreshFriendBadge(force){
+ const el=$("#fBadge");if(!el)return;
+ const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
+ if(!u||!window.gtCloud){el.hidden=true;return}
+ if(!force&&Date.now()-fbT<60000)return;fbT=Date.now();
+ try{const n=await window.gtCloud.pendingCount();el.textContent=n>9?"9+":String(n);el.hidden=!n;
+  $("#bFriends").setAttribute("aria-label",ve("Bạn bè","Friends")+(n?" ("+n+")":""))}catch(e){el.hidden=true}
+}
+function route(){refreshFriendBadge();
+ if(window.gtCommentsOff)window.gtCommentsOff();
+ if(onScroll){removeEventListener("scroll",onScroll);onScroll=null}
+ $("#prog").style.width="0";$("#pop").classList.remove("on");$("#accountDropdown")?.classList.remove("on");$("#bProfile")?.setAttribute("aria-expanded","false");$("#accountNameBtn")?.setAttribute("aria-expanded","false");$("#accountLanguageButton")?.setAttribute("aria-expanded","false");$("#lgs").hidden=true;
+ const m=location.hash.match(/^#\/b\/([^/]+)(?:\/c\/(\d+))?(?:\/p(\d+))?$/);
+ const inRead=m&&m[2]!=null;
+ $("#bAa").hidden=!inRead;document.body.classList.toggle("reading",inRead);
+ app.className=inRead?"":"wrap";
+ const um=location.hash.match(/^#\/u\/([^/]+)$/);
+ if(location.hash==="#/profile"){profilePage();window.scrollTo(0,0)}
+ else if(um){const u=decodeURIComponent(um[1]);if(/^[A-Za-z0-9_-]{6,128}$/.test(u)){authorPage(u);window.scrollTo(0,0)}else location.hash="#/"}
+ else if(location.hash==="#/following"){followingPage();window.scrollTo(0,0)}
+ else if(location.hash==="#/friends"){friendsPage();window.scrollTo(0,0)}
+ else if(location.hash==="#/rank"){rankPage();window.scrollTo(0,0)}
+ else if(!m){home();window.scrollTo(0,0)}
+ else if(m[2]!=null){if(!needCloud(m[1]))chapter(m[1],m[2],m[3])}
+ else if(!needCloud(m[1])){book(m[1]);window.scrollTo(0,0)}
+}
+addEventListener("hashchange",route);
+const loginDlg=$("#loginDlg");
+const accountDropdown=$("#accountDropdown"), accountNameBtn=$("#accountNameBtn");
+function toggleAccountDropdown(force){const user=window.gtFirebaseAuth?.currentUser;if(!user){loginDlg.showModal();return}const open=typeof force==="boolean"?force:!accountDropdown.classList.contains("on");accountDropdown.classList.toggle("on",open);$("#bProfile").setAttribute("aria-expanded",String(open));accountNameBtn.setAttribute("aria-expanded",String(open))}
+$("#bProfile").onclick=()=>toggleAccountDropdown();accountNameBtn.onclick=()=>toggleAccountDropdown();
+accountDropdown.addEventListener("click",async e=>{const b=e.target.closest("[data-account-action]");if(!b)return;const act=b.dataset.accountAction;if(act!=="language")toggleAccountDropdown(false);if(act==="profile")location.hash="#/profile";else if(act==="inbox")location.hash="#/friends";else if(act==="updates")location.hash="#/following";else if(act==="library"){location.hash="#/";setTimeout(()=>{const f=document.querySelector('[data-filter="mine"]');if(f)f.click();else document.querySelector("#bAdd")?.scrollIntoView({behavior:"smooth",block:"nearest"})},0)}else if(act==="language"){const l=$("#lgs");l.hidden=!l.hidden;$("#accountLanguageButton").setAttribute("aria-expanded",String(!l.hidden))}else if(act==="settings"){$("#pop").classList.add("on")}else if(act==="help"){alert("Trợ giúp Gác Truyện\n\n• Hồ sơ: chỉnh tên, ảnh đại diện và giới thiệu.\n• Thư viện: quản lý truyện và tiến độ đọc.\n• Cập nhật: xem hoạt động từ tác giả bạn theo dõi.")}else if(act==="logout"){e.preventDefault();e.stopPropagation();const logoutBtn=document.getElementById("accountMenuLogout");if(logoutBtn.disabled)return;logoutBtn.disabled=true;logoutBtn.setAttribute("aria-busy","true");menuAuthMessage.hidden=true;try{await signOut(auth);accountDropdown.classList.remove("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","false");accountNameBtn?.setAttribute("aria-expanded","false");showAuthToast("Đã đăng xuất thành công");}catch(error){console.error("Lỗi đăng xuất Firebase:",error);menuAuthMessage.textContent=readableError(error);menuAuthMessage.hidden=false;accountDropdown.classList.add("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","true");accountNameBtn?.setAttribute("aria-expanded","true");}finally{logoutBtn.disabled=false;logoutBtn.removeAttribute("aria-busy")}}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleAccountDropdown(false)});
+$("#closeLogin").onclick=()=>loginDlg.close();
+loginDlg.addEventListener("click",e=>{if(e.target===loginDlg&&outside(e,loginDlg))loginDlg.close()});
+$("#bAa").onclick=()=>{$("#pop").classList.toggle("on")};
+$("#lgs").onclick=e=>{if(e.target.dataset.v){st.lang=e.target.dataset.v;$("#lgs").hidden=true;$("#accountLanguageButton").setAttribute("aria-expanded","false");applySet();route();refreshAccountButton()}};
+document.addEventListener("click",e=>{if(!e.target.closest("#accountWrap")){toggleAccountDropdown(false);$("#lgs").hidden=true;$("#accountLanguageButton").setAttribute("aria-expanded","false")}if(!e.target.closest("#pop,#bAa"))$("#pop").classList.remove("on")});
+$("#fm").onclick=()=>{st.fs=Math.max(14,st.fs-1);applySet()};
+$("#fp").onclick=()=>{st.fs=Math.min(30,st.fs+1);applySet()};
+$("#ffs").onclick=e=>{if(e.target.dataset.v){st.ff=e.target.dataset.v;applySet()}};
+$("#lhs").onclick=e=>{if(e.target.dataset.v){st.lh=+e.target.dataset.v;applySet()}};
+$("#ths").onclick=e=>{if(e.target.dataset.v){st.th=e.target.dataset.v;applySet()}};
+const dlg=$("#dlg"),writeMenu=$("#writeMenu"),draftDlg=$("#draftDlg");
+function closeWriteMenu(){writeMenu.classList.remove("on");$("#bAdd").setAttribute("aria-expanded","false")}
+$("#bAdd").onclick=e=>{e.stopPropagation();const open=!writeMenu.classList.contains("on");writeMenu.classList.toggle("on",open);$("#bAdd").setAttribute("aria-expanded",String(open))};
+document.addEventListener("click",e=>{if(!e.target.closest("#writeWrap"))closeWriteMenu()});
+$("#writeNewBtn").onclick=()=>{closeWriteMenu();openEd()};
+$("#writeContinueBtn").onclick=()=>{closeWriteMenu();renderDraftList();draftDlg.showModal()};
+$("#draftCloseBtn").onclick=()=>draftDlg.close();
+$("#draftNewBtn").onclick=()=>{draftDlg.close();openEd()};
+function renderDraftList(){
+ const u=window.gtFirebaseAuth?.currentUser;
+ const list=mine.filter(b=>!b.own||!u||b.own===u.uid).slice().sort((a,b)=>(b.ut||0)-(a.ut||0));
+ const el=$("#draftList");
+ if(!list.length){el.innerHTML='<div class="draft-empty"><div style="font-size:34px;margin-bottom:8px">✍</div><strong>Chưa có truyện nào đang viết.</strong><p>Bấm “Truyện mới” để bắt đầu sáng tác nhé.</p></div>';return}
+ el.innerHTML=list.map(b=>`<article class="draft-card"><div class="draft-grip" aria-hidden="true">☰</div><div class="draft-cover" style="${b.cover?`background-image:url(&quot;${esc(b.cover)}&quot;)`:''}"></div><div><div class="draft-title">${esc(b.title||'Chưa đặt tên')}</div><div style="color:var(--acc);font-size:13px;font-weight:650">${(b.chapters||[]).length} chương đã lưu${b.pubBy?' · Đã đăng':' · Bản thảo'}</div><div class="draft-meta">Cập nhật ${new Date(b.ut||Date.now()).toLocaleString(L()==='vi'?'vi-VN':'en-US',{dateStyle:'medium',timeStyle:'short'})}</div><div class="draft-meta">${esc(b.author||'')}</div></div><div class="draft-actions"><button type="button" class="btn pri" data-continue-id="${esc(b.id)}">Tiếp tục viết</button><button type="button" class="btn" data-edit-draft-id="${esc(b.id)}">⋯</button></div></article>`).join('');
+}
+$("#draftList").onclick=e=>{const c=e.target.closest('[data-continue-id],[data-edit-draft-id]');if(!c)return;const id=c.dataset.continueId||c.dataset.editDraftId;draftDlg.close();openEd(id)};
+$("#dc").onclick=()=>dlg.close();
+let editId=null,cover=null;
+function updateCv(){$("#cvp").style.backgroundImage=cover?`url("${cover}")`:"none";$("#cvx").hidden=!cover}
+$("#cvb").onclick=()=>$("#cvf").click();
+$("#cvx").onclick=()=>{cover=null;$("#cvf").value="";updateCv()};
+$("#cvf").onchange=e=>{const fl=e.target.files[0];if(!fl)return;const rd=new FileReader();
+ rd.onload=()=>{const im=new Image();
+  im.onload=()=>{const W=400,H=600,c=document.createElement("canvas");c.width=W;c.height=H;const x=c.getContext("2d");
+   const r=Math.max(W/im.width,H/im.height),w=im.width*r,h=im.height*r;x.fillStyle="#000";x.fillRect(0,0,W,H);x.drawImage(im,(W-w)/2,(H-h)/2,w,h);
+   cover=c.toDataURL("image/jpeg",.82);updateCv()};
+  im.onerror=()=>alert(t("badimg"));im.src=rd.result};
+ rd.onerror=()=>alert(t("badimg"));rd.readAsDataURL(fl)};
+const GENRE_SUGGESTIONS=["Tiên hiệp","Kiếm hiệp","Huyền huyễn","Đô thị","Khoa huyễn","Kỳ ảo","Tận thế","Sinh tồn","Xuyên không","Trọng sinh","Võng du","Lịch sử","Trinh thám","Kinh dị","Huyền bí","Tình cảm","Đời thường","Phiêu lưu","Hài hước","Fanfiction"];
+const TAG_SUGGESTIONS=["Hệ thống","Xuyên không","Trọng sinh","Tu luyện","Vô địch","Bá đạo","Xây dựng căn cứ","Sinh tồn","Quái vật","Dị năng","Tiến hóa","Bí ẩn","Huyền ảo","Ma thuật","Học đường","Thanh xuân","Tình cảm","Gia đình","Hài hước","Phiêu lưu","Phản diện","Nữ cường","Nam cường","Chữa lành","HE","BE","OE","Nhiều thế giới","Xuyên nhanh","Linh dị"];
+const parseTags=v=>[...new Set(v.split(/[,，、;；]/).map(x=>x.trim()).filter(Boolean))].slice(0,8);
+function renderTagSuggestions(){const chosen=parseTags($("#ng").value);$("#tagSuggestions").innerHTML=TAG_SUGGESTIONS.map(g=>`<button type="button" class="tag ${chosen.includes(g)?"on":""}" data-suggest-tag="${esc(g)}" aria-pressed="${chosen.includes(g)}">${esc(g)}</button>`).join("")}
+$("#tagSuggestions").onclick=e=>{const g=e.target.closest("[data-suggest-tag]")?.dataset.suggestTag;if(!g)return;let tags=parseTags($("#ng").value);tags=tags.includes(g)?tags.filter(x=>x!==g):tags.length<8?[...tags,g]:tags;$("#ng").value=tags.join(", ");renderTagSuggestions()};
+$("#ng").addEventListener("input",renderTagSuggestions);
+function openEd(id){
+ editId=id||null;const b=id&&mine.find(x=>x.id===id);
+ $("#nt").value=b?b.title:"";$("#na").value=b?b.author||"":"";$("#nd").value=b?b.desc||"":"";$("#ng").value=b?(b.tags||[]).join(", "):"";
+ cover=b?b.cover||null:null;updateCv();$("#cvf").value="";
+ $("#nx").value=b?b.chapters.map(c=>c.t+"\n"+c.x).join("\n\n"):"";
+ $("#nstatus").value=b&&STATUS[b.status]?b.status:"ongoing";$("#ngenre").value=b?b.genre||"":"";renderTagSuggestions();updateEditorStats();
+ $("#dlg h2").textContent=t(b?"editT":"dtitle");$("#ds").textContent=t(b?"saveChg":"save");dlg.showModal();
+}
+function updateEditorStats(){
+ const raw=$("#nx").value||"",words=(raw.match(/\S+/g)||[]).length;
+ const heads=(raw.match(new RegExp("^\\s*(?:"+PATT+")","gim"))||[]).length;
+ const chapters=raw.trim()?(heads||1):0;
+ $("#editorStats").innerHTML=`<span>${chapters} chương dự kiến</span><span>${words.toLocaleString("vi-VN")} từ</span>`;
+}
+$("#nx").addEventListener("input",updateEditorStats);
+$("#ds").onclick=()=>{
+ const title=$("#nt").value.trim(),text=$("#nx").value.trim();
+ if(!title||!text){alert(t("need"));return}
+ const parts=text.split(new RegExp("^\\s*(?=(?:"+PATT+"))","gim")).map(s=>s.trim()).filter(Boolean);
+ const chapters=parts.map((s,i)=>{const [first,...rest]=s.split("\n");const isHead=new RegExp("^(?:"+PATT+")","i").test(first);
+  return isHead&&rest.join("").trim()?{t:first.trim(),x:rest.join("\n")}:{t:t("chn",i+1),x:s}});
+ const author=$("#na").value.trim(),desc=$("#nd").value.trim(),tags=parseTags($("#ng").value),genre=$("#ngenre").value.trim(),status=$("#nstatus").value;
+ const id=editId||"u"+Date.now().toString(36),meU=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,data={title,author,desc,tags,chapters,cover,genre,status,ut:Date.now()};
+ const next=editId?mine.map(x=>x.id===id?{...x,...data,dirty:!!x.pubBy||x.dirty,own:x.own||(meU?meU.uid:undefined)}:x):mine.concat({id,...data,own:meU?meU.uid:undefined});
+ if(!ls.set("gt.mine",next)){alert(ve("Bộ nhớ trình duyệt đã đầy nên chưa lưu được truyện. Hãy xoá bớt truyện hoặc ảnh bìa cũ (hoặc bỏ ảnh bìa) rồi thử lại.","Browser storage is full, so the novel was not saved. Remove old novels or covers (or the cover image) and try again."));return}
+ mine=next;
+ if(editId){
+  const pr=prog[id];if(pr){pr.done=(pr.done||[]).filter(i=>i<chapters.length);if(pr.last>=chapters.length)pr.last=chapters.length-1;ls.set("gt.prog",prog)}
+  if(bms[id]){bms[id]=bms[id].filter(m=>m.c<chapters.length);ls.set("gt.bm",bms)}
+ }
+ dlg.close();syncLibrary();
+ if(location.hash==="#/b/"+id)route();else location.hash="#/b/"+id;
+};
+addEventListener("keydown",e=>{if(dlg.open||/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;
+ const m=location.hash.match(/^#\/b\/([^/]+)\/c\/(\d+)/);if(!m)return;const b=all().find(x=>x.id===m[1]),n=+m[2];if(!b)return;
+ if(e.key==="ArrowRight"&&n<b.chapters.length-1)location.hash=`#/b/${m[1]}/c/${n+1}`;
+ if(e.key==="ArrowLeft"&&n>0)location.hash=`#/b/${m[1]}/c/${n-1}`});
+const recDlg=$("#recDlg");$("#recClose").onclick=()=>recDlg.close();
+document.addEventListener("visibilitychange",()=>{if(document.hidden)return;if(tab==="pub"&&$("#shelf")&&Date.now()-commAt>15000)loadComm();if(Date.now()-syncAt>120000)syncLibrary()});
+$("#bFriends").onclick=()=>{if(!(window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser)){loginDlg.showModal();return}location.hash="#/friends"};
+$("#lgs").innerHTML=LANGS.map(([c,n])=>`<button data-v="${c}">${n}</button>`).join("");
+applySet();route();
+</script>
+
+
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import {
+  getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect,
+  getRedirectResult, onAuthStateChanged, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, sendPasswordResetEmail, signOut
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+import {
+  getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, limit,
+  onSnapshot, serverTimestamp, getDoc, getDocs, setDoc, writeBatch, where, increment
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+import { getDatabase, ref as rtdbRef, get as rtdbGet, set as rtdbSet, remove as rtdbRemove, update as rtdbUpdate } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCLiIxyizpWrmwT2usyfqrcdrDRuWPHdwk",
+  authDomain: "storyloft01.firebaseapp.com",
+  databaseURL: "https://storyloft01-default-rtdb.firebaseio.com",
+  projectId: "storyloft01",
+  storageBucket: "storyloft01.firebasestorage.app",
+  messagingSenderId: "70426462243",
+  appId: "1:70426462243:web:15fd8d49d2a270de9e8996",
+  measurementId: "G-2YYQ2T748X"
+};
+
+const appFirebase = initializeApp(firebaseConfig);
+const auth = getAuth(appFirebase);
+const followDb = getDatabase(appFirebase);
+
+// ===== Cloud API (Firestore: books, chapters, posts | Realtime DB: profiles, follow) =====
+// following/{follower}/{author} = true  và  followers/{author}/{follower} = true (ghi đồng thời)
+const isImg = v => typeof v === "string" && /^data:image\/(?:jpeg|png|webp);base64,[A-Za-z0-9+\/=]+$/.test(v);
+const clean = (v, n) => String(v ?? "").slice(0, n);
+const wordCount = x => String(x).split(/\s+/).filter(Boolean).length;
+const toBook = (docId, d) => ({
+  id: "c_" + docId, cloud: true,
+  title: clean(d.title, 80), author: clean(d.author, 60), desc: clean(d.desc, 400), genre: clean(d.genre, 60),
+  status: ["ongoing", "completed", "paused"].includes(d.status) ? d.status : "ongoing",
+  tags: Array.isArray(d.tags) ? d.tags.slice(0, 8).map(x => clean(x, 40)) : [],
+  cover: isImg(d.cover) ? d.cover : null,
+  ownerUid: clean(d.ownerUid, 128), ownerName: clean(d.ownerName, 60),
+  likeCount: Number(d.likeCount) || 0, readCount: Number(d.readCount) || 0,
+  ratingSum: Number(d.ratingSum) || 0, ratingCount: Number(d.ratingCount) || 0,
+  updatedAt: d.updatedAt && d.updatedAt.toMillis ? d.updatedAt.toMillis() : 0,
+  chapters: (Array.isArray(d.chs) ? d.chs : []).slice(0, 500).map(c => ({ t: clean(c && c.t, 200), w: Number(c && c.w) || 0, x: null }))
+});
+const byNewest = (a, b) => b.updatedAt - a.updatedAt;
+const genFriendId = () => { const a = new Uint32Array(2); crypto.getRandomValues(a); return String((BigInt(a[0]) << 32n | BigInt(a[1])) % 9000000000n + 1000000000n); };
+const nameOf = async id => clean((await rtdbGet(rtdbRef(followDb, `profiles/${id}/name`))).val(), 40) || "Độc giả";
+const rootRef = () => rtdbRef(followDb);
+async function deleteChapters(docId, from, to) {
+  for (let i = from; i < to; i += 400) {
+    const batch = writeBatch(db);
+    for (let k = i; k < Math.min(to, i + 400); k++) batch.delete(doc(db, "books", docId, "chapters", String(k)));
+    await batch.commit();
+  }
+}
+const cloud = {
+  async toggle(authorUid) {
+    const user = auth.currentUser;
+    if (!user) throw new Error("auth");
+    if (!authorUid || authorUid === user.uid) throw new Error("self-follow");
+    const a = `following/${user.uid}/${authorUid}`, b = `followers/${authorUid}/${user.uid}`;
+    const snap = await rtdbGet(rtdbRef(followDb, a));
+    if (snap.val() === true) { await rtdbUpdate(rtdbRef(followDb), { [a]: null, [b]: null }); return false; }
+    await rtdbUpdate(rtdbRef(followDb), { [a]: true, [b]: true });
+    return true;
+  },
+  async isFollowing(authorUid) {
+    const u = auth.currentUser; if (!u) return false;
+    const s = await rtdbGet(rtdbRef(followDb, `following/${u.uid}/${authorUid}`));
+    return s.val() === true;
+  },
+  async stats(uid) {
+    const [a, b] = await Promise.all([rtdbGet(rtdbRef(followDb, `following/${uid}`)), rtdbGet(rtdbRef(followDb, `followers/${uid}`))]);
+    const f = a.val() || {}, g = b.val() || {}, ids = Object.keys(f).filter(k => f[k] === true);
+    return { following: ids.length, followers: Object.keys(g).filter(k => g[k] === true).length, followingIds: ids };
+  },
+  async profile(uid) {
+    const p = (await rtdbGet(rtdbRef(followDb, `profiles/${uid}`))).val() || {};
+    return { name: clean(p.name, 40) || "Độc giả", bio: clean(p.bio, 240), avatar: isImg(p.avatar) ? p.avatar : "" };
+  },
+  async listFollowing(uid) {
+    const st = await this.stats(uid);
+    return Promise.all(st.followingIds.map(async id => {
+      const s = await rtdbGet(rtdbRef(followDb, `profiles/${id}/name`));
+      return { id, name: clean(s.val(), 40) || "Độc giả" };
+    }));
+  },
+  async saveProfile(user, data) {
+    if (!user) return;
+    const safe = { name: String(data.name || user.displayName || "Độc giả").slice(0,40),
+      bio: String(data.bio || "").slice(0,240),
+      avatar: (data.avatar && String(data.avatar).length <= 200000) ? String(data.avatar) : "",
+      updatedAt: Date.now() };
+    await rtdbSet(rtdbRef(followDb, `profiles/${user.uid}`), safe);
+  },
+  // ---------- Bạn bè ----------
+  async myFriendId() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const mineRef = rtdbRef(followDb, `idOf/${u.uid}`);
+    let s = await rtdbGet(mineRef); if (s.exists()) return String(s.val());
+    for (let i = 0; i < 6; i++) {
+      const id = genFriendId();
+      try { await rtdbUpdate(rootRef(), { [`uidOf/${id}`]: u.uid, [`idOf/${u.uid}`]: id }); return id; }
+      catch (e) {
+        s = await rtdbGet(mineRef); if (s.exists()) return String(s.val());
+        const t = await rtdbGet(rtdbRef(followDb, `uidOf/${id}`)).catch(() => null);
+        if (!(t && t.exists())) throw e;   // không phải trùng ID thì báo lỗi thật (vd. thiếu quyền)
+      }
+    }
+    throw new Error("id-failed");
+  },
+  async findByInput(text) {
+    const d = String(text || "").replace(/\D/g, "");
+    if (d.length !== 10) throw new Error("bad-id");
+    const s = await rtdbGet(rtdbRef(followDb, `uidOf/${d}`));
+    if (!s.exists()) throw new Error("no-user");
+    return String(s.val());
+  },
+  async friendState(uid) {
+    const u = auth.currentUser; if (!u || uid === u.uid) return "none";
+    const [f, s, r] = await Promise.all([
+      rtdbGet(rtdbRef(followDb, `friends/${u.uid}/${uid}`)),
+      rtdbGet(rtdbRef(followDb, `sent/${u.uid}/${uid}`)),
+      rtdbGet(rtdbRef(followDb, `requests/${u.uid}/${uid}`))]);
+    return f.val() === true ? "friends" : r.exists() ? "incoming" : s.exists() ? "sent" : "none";
+  },
+  async sendRequest(uid) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    if (!uid || uid === u.uid) throw new Error("self-friend");
+    await rtdbUpdate(rootRef(), { [`requests/${uid}/${u.uid}`]: { ts: Date.now() }, [`sent/${u.uid}/${uid}`]: true });
+  },
+  async cancelRequest(uid) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbUpdate(rootRef(), { [`requests/${uid}/${u.uid}`]: null, [`sent/${u.uid}/${uid}`]: null });
+  },
+  async declineRequest(from) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbUpdate(rootRef(), { [`requests/${u.uid}/${from}`]: null, [`sent/${from}/${u.uid}`]: null });
+  },
+  async acceptRequest(from) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbSet(rtdbRef(followDb, `friends/${u.uid}/${from}`), true);   // từng bước, vì Rules kiểm tra lời mời còn tồn tại
+    await rtdbSet(rtdbRef(followDb, `friends/${from}/${u.uid}`), true);
+    await rtdbUpdate(rootRef(), { [`requests/${u.uid}/${from}`]: null, [`sent/${from}/${u.uid}`]: null });
+  },
+  async unfriend(uid) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbUpdate(rootRef(), { [`friends/${u.uid}/${uid}`]: null, [`friends/${uid}/${u.uid}`]: null });
+  },
+  async listFriends() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const v = (await rtdbGet(rtdbRef(followDb, `friends/${u.uid}`))).val() || {};
+    return Promise.all(Object.keys(v).filter(k => v[k] === true).map(async id => ({ id, name: await nameOf(id) })));
+  },
+  async listIncoming() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const v = (await rtdbGet(rtdbRef(followDb, `requests/${u.uid}`))).val() || {};
+    const out = await Promise.all(Object.keys(v).map(async id => ({ id, ts: Number(v[id] && v[id].ts) || 0, name: await nameOf(id) })));
+    return out.sort((a, b) => b.ts - a.ts);
+  },
+  async listSent() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const v = (await rtdbGet(rtdbRef(followDb, `sent/${u.uid}`))).val() || {};
+    return Promise.all(Object.keys(v).map(async id => ({ id, name: await nameOf(id) })));
+  },
+  async recommend(toUid, bookId, note) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const key = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    await rtdbSet(rtdbRef(followDb, `inbox/${toUid}/${key}`), { from: u.uid, book: String(bookId), note: clean(note, 120), ts: Date.now() });
+  },
+  async inbox() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const v = (await rtdbGet(rtdbRef(followDb, `inbox/${u.uid}`))).val() || {};
+    const out = await Promise.all(Object.keys(v).map(async key => {
+      const x = v[key] || {};
+      return { key, from: clean(x.from, 128), book: clean(x.book, 220), note: clean(x.note, 120), ts: Number(x.ts) || 0, name: await nameOf(clean(x.from, 128)) };
+    }));
+    return out.sort((a, b) => b.ts - a.ts).slice(0, 30);
+  },
+  async pendingCount() {
+    const u = auth.currentUser; if (!u) return 0;
+    const v = (await rtdbGet(rtdbRef(followDb, `requests/${u.uid}`))).val() || {};
+    return Object.keys(v).length;
+  },
+  async dismissRec(key) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbRemove(rtdbRef(followDb, `inbox/${u.uid}/${key}`));
+  },
+  async saveShelf(sh) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbSet(rtdbRef(followDb, `shelf/${u.uid}`), { fav: sh.fav || {}, reading: sh.reading || {}, ts: Date.now() });
+  },
+  async clearShelf() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await rtdbRemove(rtdbRef(followDb, `shelf/${u.uid}`));
+  },
+  async loadShelf(uid) {
+    try {
+      const v = (await rtdbGet(rtdbRef(followDb, `shelf/${uid}`))).val();
+      if (!v) return null;
+      return { fav: Object.keys(v.fav || {}), reading: Object.entries(v.reading || {}).map(([id, c]) => ({ id, c: Number(c) || 0 })), ts: Number(v.ts) || 0 };
+    } catch (e) { if (/permission/i.test(String(e && (e.code || e.message)))) return null; throw e; }
+  },
+  // ---------- Thư viện riêng tư theo tài khoản (đồng bộ giữa các thiết bị) ----------
+  async libList() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const s = await getDocs(collection(db, "users", u.uid, "library"));
+    return s.docs.map(d => { const x = d.data(); return { id: d.id, ut: Number(x.ut) || 0, n: Number(x.n) || 0 }; });
+  },
+  async libTrash() {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const s = await getDocs(collection(db, "users", u.uid, "trash"));
+    return s.docs.map(d => d.id);
+  },
+  async libPush(b) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const n = b.chapters.length;
+    if (n < 1 || n > 500) throw new Error("too-many-chapters");
+    const bad = b.chapters.findIndex(c => String(c.x).length > 200000);
+    if (bad >= 0) throw new Error("chapter-too-long:" + (bad + 1));
+    const ref = doc(db, "users", u.uid, "library", b.id);
+    let oldN = 0;
+    try { const s = await getDoc(ref); if (s.exists()) oldN = Number(s.data().n) || 0; } catch (e) {}
+    let batch = writeBatch(db), cnt = 0, bytes = 0;
+    for (let i = 0; i < n; i++) {
+      const c = b.chapters[i], x = String(c.x);
+      batch.set(doc(db, "users", u.uid, "library", b.id, "chapters", String(i)), { i, t: clean(c.t, 100), x });
+      cnt++; bytes += x.length * 3;
+      if (cnt >= 400 || bytes > 4000000) { await batch.commit(); batch = writeBatch(db); cnt = 0; bytes = 0; }
+    }
+    if (cnt) await batch.commit();
+    for (let i = n; i < oldN; i += 400) {
+      const bt = writeBatch(db);
+      for (let k = i; k < Math.min(oldN, i + 400); k++) bt.delete(doc(db, "users", u.uid, "library", b.id, "chapters", String(k)));
+      await bt.commit();
+    }
+    await setDoc(ref, {
+      title: clean(b.title, 80), author: clean(b.author, 60), desc: clean(b.desc, 400), genre: clean(b.genre, 60),
+      status: ["ongoing", "completed", "paused"].includes(b.status) ? b.status : "ongoing",
+      tags: (b.tags || []).slice(0, 8).map(x => clean(x, 40)),
+      cover: isImg(b.cover) ? b.cover : "",
+      n, chs: b.chapters.map(c => ({ t: clean(c.t, 100), w: wordCount(c.x) })),
+      ut: Number(b.ut) || Date.now(), pubBy: clean(b.pubBy || "", 128), pubGen: Number(b.pubGen) || 0, dirty: !!b.dirty,
+      updatedAt: serverTimestamp()
+    });
+    try { await deleteDoc(doc(db, "users", u.uid, "trash", b.id)); } catch (e) {}
+  },
+  async libPull(id) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const s = await getDoc(doc(db, "users", u.uid, "library", id));
+    if (!s.exists()) throw new Error("not-found");
+    const d = s.data();
+    const cs = await getDocs(query(collection(db, "users", u.uid, "library", id, "chapters"), orderBy("i", "asc")));
+    const chapters = cs.docs.map(c => { const x = c.data(); return { t: clean(x.t, 200), x: String(x.x || "") }; });
+    if (!chapters.length) throw new Error("not-found");
+    return {
+      id, title: clean(d.title, 80), author: clean(d.author, 60), desc: clean(d.desc, 400), genre: clean(d.genre, 60),
+      status: ["ongoing", "completed", "paused"].includes(d.status) ? d.status : "ongoing",
+      tags: Array.isArray(d.tags) ? d.tags.slice(0, 8).map(x => clean(x, 40)) : [],
+      cover: isImg(d.cover) ? d.cover : null, chapters,
+      ut: Number(d.ut) || 0, pubBy: clean(d.pubBy, 128) || null, pubGen: Number(d.pubGen) || 0, dirty: !!d.dirty
+    };
+  },
+  async libDelete(id) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const ref = doc(db, "users", u.uid, "library", id), s = await getDoc(ref);
+    if (s.exists()) {
+      const n = Number(s.data().n) || 0;
+      await deleteDoc(ref);
+      for (let i = 0; i < n; i += 400) {
+        const bt = writeBatch(db);
+        for (let k = i; k < Math.min(n, i + 400); k++) bt.delete(doc(db, "users", u.uid, "library", id, "chapters", String(k)));
+        await bt.commit();
+      }
+    }
+    await setDoc(doc(db, "users", u.uid, "trash", id), { ts: serverTimestamp() });  // để thiết bị khác biết đã xoá
+  },
+  // ---------- Thích / đánh giá / lượt đọc (mỗi tài khoản 1 lần cho mỗi truyện) ----------
+  async myMarks(docId) {
+    const u = auth.currentUser; if (!u) return { liked: false, stars: 0 };
+    const [l, r] = await Promise.all([
+      getDoc(doc(db, "books", docId, "likes", u.uid)),
+      getDoc(doc(db, "books", docId, "ratings", u.uid))]);
+    return { liked: l.exists(), stars: r.exists() ? Number(r.data().stars) || 0 : 0 };
+  },
+  async setLike(docId, on) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const batch = writeBatch(db), mk = doc(db, "books", docId, "likes", u.uid);
+    if (on) batch.set(mk, { ts: serverTimestamp() }); else batch.delete(mk);
+    batch.update(doc(db, "books", docId), { likeCount: increment(on ? 1 : -1) });
+    await batch.commit();
+  },
+  async setRating(docId, stars, oldStars) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    stars = Math.round(Number(stars)); oldStars = Number(oldStars) || 0;
+    if (!(stars >= 1 && stars <= 5)) throw new Error("bad-stars");
+    if (oldStars === stars) return;
+    const batch = writeBatch(db);
+    batch.set(doc(db, "books", docId, "ratings", u.uid), { stars, ts: serverTimestamp() });
+    batch.update(doc(db, "books", docId), oldStars
+      ? { ratingSum: increment(stars - oldStars) }
+      : { ratingSum: increment(stars), ratingCount: increment(1) });
+    await batch.commit();
+  },
+  async markRead(docId) {
+    const u = auth.currentUser; if (!u) return false;
+    const mk = doc(db, "books", docId, "readers", u.uid);
+    if ((await getDoc(mk)).exists()) return false;
+    const batch = writeBatch(db);
+    batch.set(mk, { ts: serverTimestamp() });
+    batch.update(doc(db, "books", docId), { readCount: increment(1) });
+    await batch.commit();
+    return true;
+  },
+  async publish(b) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const n = b.chapters.length;
+    if (n < 1 || n > 500) throw new Error("too-many-chapters");
+    const bad = b.chapters.findIndex(c => String(c.x).length > 200000);
+    if (bad >= 0) throw new Error("chapter-too-long:" + (bad + 1));
+    const docId = `${u.uid}-${b.id}${b.pubGen ? "_g" + b.pubGen : ""}`, bref = doc(db, "books", docId);
+    let oldN = 0, oldData = null;
+    try { const s = await getDoc(bref); if (s.exists()) { oldData = s.data(); oldN = Number(oldData.n) || 0; } } catch (e) {}
+    let batch = writeBatch(db), cnt = 0, bytes = 0;
+    for (let i = 0; i < n; i++) {
+      const c = b.chapters[i], x = String(c.x);
+      batch.set(doc(db, "books", docId, "chapters", String(i)), { i, t: clean(c.t, 100), x });
+      cnt++; bytes += x.length * 3;
+      if (cnt >= 400 || bytes > 4000000) { await batch.commit(); batch = writeBatch(db); cnt = 0; bytes = 0; }
+    }
+    if (cnt) await batch.commit();
+    if (oldN > n) await deleteChapters(docId, n, oldN);
+    const initCounters = {};
+    for (const f of ["likeCount", "readCount", "ratingSum", "ratingCount"]) if (!oldData || oldData[f] === undefined) initCounters[f] = 0;
+    await setDoc(bref, {
+      ...initCounters,
+      ownerUid: u.uid, ownerName: displayName(u),
+      title: clean(b.title, 80), author: clean(b.author, 60), desc: clean(b.desc, 400), genre: clean(b.genre, 60),
+      status: ["ongoing", "completed", "paused"].includes(b.status) ? b.status : "ongoing",
+      tags: (b.tags || []).slice(0, 8).map(x => clean(x, 40)),
+      cover: isImg(b.cover) ? b.cover : "",
+      n, chs: b.chapters.map(c => ({ t: clean(c.t, 100), w: wordCount(c.x) })),
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+  },
+  async unpublish(localId, gen) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const docId = `${u.uid}-${localId}${gen ? "_g" + gen : ""}`, bref = doc(db, "books", docId), s = await getDoc(bref);
+    if (!s.exists()) return;
+    const n = Number(s.data().n) || 0;
+    await deleteDoc(bref);            // gỡ khỏi danh sách trước
+    await deleteChapters(docId, 0, n); // rồi dọn các chương
+  },
+  async listBooks(n = 40, sort = "new") {
+    const f = sort === "likes" ? "likeCount" : sort === "reads" ? "readCount" : sort === "rated" ? "ratingCount" : "updatedAt";
+    const s = await getDocs(query(collection(db, "books"), orderBy(f, "desc"), limit(n)));
+    return s.docs.map(d => toBook(d.id, d.data()));
+  },
+  async getBooks(ids) {
+    const rs = await Promise.allSettled(ids.map(id => getDoc(doc(db, "books", id.slice(2)))));
+    const out = []; let err = null;
+    rs.forEach(r => { if (r.status === "fulfilled") { if (r.value.exists()) out.push(toBook(r.value.id, r.value.data())); } else err = r.reason; });
+    if (!out.length && err) throw err;
+    return out;
+  },
+  async booksByOwner(uid) {
+    const s = await getDocs(query(collection(db, "books"), where("ownerUid", "==", uid)));
+    return s.docs.map(d => toBook(d.id, d.data())).sort(byNewest);
+  },
+  async booksByOwners(uids) {
+    const out = [];
+    for (let i = 0; i < uids.length; i += 30) {
+      const s = await getDocs(query(collection(db, "books"), where("ownerUid", "in", uids.slice(i, i + 30))));
+      s.docs.forEach(d => out.push(toBook(d.id, d.data())));
+    }
+    return out.sort(byNewest);
+  },
+  async chapter(docId, i) {
+    const s = await getDoc(doc(db, "books", docId, "chapters", String(i)));
+    if (!s.exists()) throw new Error("not-found");
+    return String(s.data().x || "");
+  },
+  async listPosts(uid) {
+    const s = await getDocs(query(collection(db, "users", uid, "posts"), orderBy("ts", "desc"), limit(50)));
+    return s.docs.map(d => { const p = d.data();
+      return { id: d.id, body: clean(p.body, 2000), image: isImg(p.image) ? p.image : "",
+        date: p.ts && p.ts.toDate ? p.ts.toDate().toISOString() : new Date().toISOString() }; });
+  },
+  async addPost(p) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    if (p.image && p.image.length > 580000) throw new Error("image-too-large");
+    await setDoc(doc(db, "users", u.uid, "posts", p.id), { body: clean(p.body, 2000), image: isImg(p.image) ? p.image : "", ts: serverTimestamp() });
+  },
+  async deletePost(id) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    await deleteDoc(doc(db, "users", u.uid, "posts", id));
+  }
+};
+window.gtCloud = cloud;
+window.gtFollowApi = cloud; // tên cũ, giữ để tương thích
+
+const googleProvider = new GoogleAuthProvider();
+const authDlg = document.getElementById("loginDlg");
+const authSignedOut = document.getElementById("authSignedOut");
+const authSignedIn = document.getElementById("authSignedIn");
+const authMessage = document.getElementById("authMessage");
+const authEmail = document.getElementById("authEmail");
+const authPassword = document.getElementById("authPassword");
+const authSubtitle = document.getElementById("authSubtitle");
+const authUserInfo = document.getElementById("authUserInfo");
+const profileButton = document.getElementById("bProfile");
+
+const menuAuthMessage = document.getElementById("menuAuthMessage");
+
+function message(text, isError=false) {
+  authMessage.textContent = text;
+  authMessage.style.color = isError ? "#dc2626" : "var(--mute)";
+}
+function readableError(error) {
+  const codes = {
+    "auth/invalid-email":"Địa chỉ email chưa hợp lệ.",
+    "auth/missing-password":"Vui lòng nhập mật khẩu.",
+    "auth/weak-password":"Mật khẩu cần có ít nhất 6 ký tự.",
+    "auth/email-already-in-use":"Email này đã được đăng ký. Vui lòng đăng nhập.",
+    "auth/invalid-credential":"Email hoặc mật khẩu chưa đúng.",
+    "auth/user-not-found":"Chưa tìm thấy tài khoản này.",
+    "auth/wrong-password":"Email hoặc mật khẩu chưa đúng.",
+    "auth/popup-closed-by-user":"Cửa sổ đăng nhập Google đã bị đóng.",
+    "auth/popup-blocked":"Trình duyệt chặn cửa sổ đăng nhập. Hãy cho phép cửa sổ bật lên rồi thử lại.",
+    "auth/unauthorized-domain":"Tên miền website chưa được thêm vào Firebase Authentication → Cài đặt.",
+    "auth/operation-not-allowed":"Phương thức đăng nhập này chưa được bật trong Firebase Authentication.",
+    "auth/account-exists-with-different-credential":"Email này đã được dùng với một phương thức đăng nhập khác. Hãy đăng nhập bằng phương thức đã đăng ký.",
+    "auth/network-request-failed":"Lỗi mạng. Vui lòng kiểm tra kết nối mạng rồi thử lại.",
+    "auth/too-many-requests":"Có quá nhiều lần thử. Đợi một lúc rồi thử lại.",
+    "auth/user-disabled":"Tài khoản này đã bị vô hiệu hoá."
+  };
+  return codes[error?.code] || ("Chưa thực hiện được: " + (error?.message || "lỗi không xác định"));
+}
+async function runAuth(action) {
+  message("Đang xử lý…");
+  for (const id of ["googleSignIn","emailSignIn","emailSignUp","resetPassword"]) {
+    const el=document.getElementById(id); if(el) el.disabled=true;
+  }
+  try { await action(); }
+  catch(error) { if (error?.code === "auth/cancelled-popup-request") message(""); else message(readableError(error), true); }
+  finally {
+    for (const id of ["googleSignIn","emailSignIn","emailSignUp","resetPassword"]) {
+      const el=document.getElementById(id); if(el) el.disabled=false;
+    }
+  }
+}
+const emailForm = document.getElementById("emailForm");
+let authMode = "signup";
+function updateAuthMode() {
+  const isSignup = authMode === "signup";
+  document.getElementById("loginTitle").textContent = isSignup ? "Tạo tài khoản Gác Truyện" : "Đăng nhập Gác Truyện";
+  authSubtitle.textContent = isSignup ? "Lưu lại hành trình đọc và chia sẻ truyện của bạn." : "Chào mừng bạn quay trở lại Gác Truyện.";
+  document.getElementById("emailSignIn").hidden = isSignup;
+  document.getElementById("emailSignUp").hidden = !isSignup;
+  document.getElementById("authSwitchText").firstChild.textContent = isSignup ? "Đã có tài khoản? " : "Chưa có tài khoản? ";
+  document.getElementById("switchAuthMode").textContent = isSignup ? "Đăng nhập" : "Tạo tài khoản";
+  authPassword.autocomplete = isSignup ? "new-password" : "current-password";
+  message("");
+}
+document.getElementById("toggleEmailForm").addEventListener("click", () => {
+  emailForm.hidden = !emailForm.hidden;
+  if (!emailForm.hidden) authEmail.focus();
+});
+document.getElementById("switchAuthMode").addEventListener("click", () => {
+  authMode = authMode === "signup" ? "signin" : "signup";
+  updateAuthMode();
+  emailForm.hidden = false;
+});
+updateAuthMode();
+document.getElementById("googleSignIn").addEventListener("click", () => runAuth(async () => {
+  try { await signInWithPopup(auth, googleProvider); }
+  catch(error) {
+    if (error?.code === "auth/popup-blocked") {
+      await signInWithRedirect(auth, googleProvider);
+      return;
+    }
+    throw error;
+  }
+}));
+[authEmail, authPassword].forEach(input => input.addEventListener("keydown", event => {
+  if (event.key === "Enter" && !emailForm.hidden) {
+    event.preventDefault();
+    document.getElementById(authMode === "signup" ? "emailSignUp" : "emailSignIn").click();
+  }
+}));
+document.getElementById("emailSignIn").addEventListener("click", () => runAuth(async () => {
+  const email=authEmail.value.trim(), password=authPassword.value;
+  if(!email || !password) { message("Vui lòng nhập email và mật khẩu trước.", true); return; }
+  await signInWithEmailAndPassword(auth,email,password);
+}));
+document.getElementById("emailSignUp").addEventListener("click", () => runAuth(async () => {
+  const email=authEmail.value.trim(), password=authPassword.value;
+  if(!email || !password) { message("Vui lòng nhập email và mật khẩu trước.", true); return; }
+  if(password.length<6) { message("Mật khẩu cần có ít nhất 6 ký tự.", true); return; }
+  await createUserWithEmailAndPassword(auth,email,password);
+}));
+document.getElementById("resetPassword").addEventListener("click", () => runAuth(async () => {
+  const email=authEmail.value.trim();
+  if(!email) { message("Vui lòng nhập email trước khi yêu cầu đặt lại mật khẩu.", true); return; }
+  await sendPasswordResetEmail(auth,email);
+  message("Đã gửi email đặt lại mật khẩu nếu địa chỉ này có tài khoản.");
+}));
+document.getElementById("openProfileBtn").addEventListener("click", () => {
+  authDlg.close();
+  location.hash = "#/profile";
+});
+getRedirectResult(auth).catch(error => message(readableError(error), true));
+function refreshAccountButton(user = auth.currentUser) {
+  authSignedOut.hidden=!!user;
+  authSignedIn.hidden=!user;
+  if (user) authSubtitle.textContent = "Tài khoản Gác Truyện"; else updateAuthMode();
+  authUserInfo.textContent=user ? (user.displayName ? user.displayName+" · " : "") + (user.email || "Đã đăng nhập") : "";
+  profileButton.title=user ? (user.displayName || user.email || "Tài khoản") : "Đăng nhập hoặc mở tài khoản";
+  profileButton.setAttribute("aria-label",user ? "Mở menu tài khoản" : "Đăng nhập hoặc mở tài khoản");
+  accountNameBtn.hidden=!user;
+  accountNameBtn.innerHTML = `${(user?.displayName || user?.email || "Tài khoản").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))} <span class="account-caret">▾</span>`;
+  $("#accountMenuName").textContent = profile.name && profile.name !== "Độc giả" ? profile.name : (user?.displayName || "Tài khoản Gác Truyện");
+  $("#accountMenuEmail").textContent = user?.email || "";
+  $("#accountLanguageLabel").textContent = "Ngôn ngữ: "+(st.lang==="en"?"English":st.lang==="vi"?"Tiếng Việt":st.lang||"Tiếng Việt");
+  if (user) {
+    let localProfile = {}; try { localProfile = JSON.parse(localStorage.getItem(profileStorageKey(user.uid))) || {}; } catch {}
+    const avatarUrl = localProfile.avatar || user.photoURL || "";
+    const initial = (localProfile.name && localProfile.name !== "Độc giả" ? localProfile.name : (user.displayName || user.email || "Đ")).trim().slice(0,1).toUpperCase() || "Đ";
+    profileButton.innerHTML = avatarUrl
+      ? `<img src="${String(avatarUrl).replace(/&/g,"&amp;").replace(/\"/g,"&quot;")}" alt="Ảnh đại diện">`
+      : `<span class="account-initial">${initial.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]))}</span>`;
+  } else {
+    profileButton.innerHTML = '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M4.5 20c.7-4 3.2-6 7.5-6s6.8 2 7.5 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  }
+}
+window.gtRefreshAccountButton = refreshAccountButton;
+let authToastTimer = null;
+function showAuthToast(text) {
+  const toast = document.getElementById("authToast");
+  if (!toast) return;
+  toast.textContent = text;
+  toast.classList.add("show");
+  clearTimeout(authToastTimer);
+  authToastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+}
+onAuthStateChanged(auth, user => {
+  loadProfileForUser(user);
+  if (user && window.gtFollowApi) {
+    setTimeout(async () => {
+      try {
+        const p = window.gtGetProfile && window.gtGetProfile();
+        if (!p) return;
+        if (localStorage.getItem(profileStorageKey(user.uid))) { await window.gtFollowApi.saveProfile(user, p); return; }
+        const snap = await rtdbGet(rtdbRef(followDb, `profiles/${user.uid}`));
+        if (!snap.exists()) await window.gtFollowApi.saveProfile(user, p);
+        else if (window.gtSetProfile) {
+          const c = snap.val() || {};
+          window.gtSetProfile({ name: c.name, bio: c.bio || "", avatar: isImg(c.avatar) ? c.avatar : "" });
+          refreshAccountButton(user);
+          if (location.hash === "#/profile") profilePage();
+        }
+      } catch(e) {}
+    }, 400);
+  }
+  refreshAccountButton(user);
+  if (user && typeof scheduleShelf === "function") scheduleShelf();
+  if (typeof refreshFriendBadge === "function") refreshFriendBadge(true);
+  if (user && typeof syncLibrary === "function") setTimeout(() => syncLibrary(), 700);
+  if (location.hash === "#/profile") { if (user) profilePage(); else location.hash = "#/"; }
+  else if (/^#\/(?:u\/[^/]+|following|friends)$|^#\/b\/[^/]+$|^(?:#\/?)?$/.test(location.hash)) route();
+  if(user) {
+    menuAuthMessage.hidden=true;
+    // Khi đăng nhập thành công, đóng hộp thoại lớn và chỉ hiện thông báo nhỏ.
+    if (authDlg.open) {
+      authDlg.close();
+      showAuthToast("Đăng nhập thành công");
+    }
+  }
+});
+window.gtFirebaseAuth = auth;
+
+/* ================= Bình luận ================= */
+const db = getFirestore(appFirebase);
+const gL = () => (window.gtL ? window.gtL() : "vi"), ctx = (vi, en) => gL() === "vi" ? vi : en;
+const cesc = x => String(x ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const cq = s => document.querySelector(s);
+let cmtUnsub = null, cmtCtx = null, cmtLimit = 30, cmtItems = [], cmtFull = false, cmtErr = "", lastSent = 0;
+
+// Truyện mẫu dùng chung cho mọi người; truyện tự thêm gắn với tài khoản chủ truyện
+const threadOf = (bookId, ch) => {
+  if (!bookId.startsWith("u")) return bookId + "__" + ch;
+  const u = auth.currentUser; return u ? u.uid + "_" + bookId + "__" + ch : null;
+};
+function displayName(u) {
+  let p = {}; try { p = JSON.parse(localStorage.getItem(profileStorageKey(u?.uid))) || {}; } catch {}
+  return ((p.name && p.name !== "Độc giả") ? p.name : (u.displayName || "Độc giả")).slice(0, 60);
+}
+function ago(d) {
+  const sec = Math.round((d.getTime() - Date.now()) / 1000), r = new Intl.RelativeTimeFormat(gL(), { numeric: "auto" }), a = Math.abs(sec);
+  if (a < 45) return r.format(0, "second");
+  if (a < 3600) return r.format(Math.round(sec / 60), "minute");
+  if (a < 86400) return r.format(Math.round(sec / 3600), "hour");
+  if (a < 2592000) return r.format(Math.round(sec / 86400), "day");
+  return d.toLocaleDateString(gL());
+}
+function cmtOff() { if (cmtUnsub) { cmtUnsub(); cmtUnsub = null; } cmtCtx = null; }
+function cmtSkeleton() {
+  const box = cq("#comments"); if (!box) return;
+  box.innerHTML = `<h3 class="cmt-h" id="cmtTitle"></h3><div id="cmtForm"></div><ul class="cmt-list" id="cmtList"></ul><div id="cmtMore" style="text-align:center;margin-top:12px"></div>`;
+}
+function cmtForm() {
+  const f = cq("#cmtForm"); if (!f || !cmtCtx) return;
+  const u = auth.currentUser;
+  if (!u) {
+    f.innerHTML = `<p class="empty">${cmtCtx.thread ? ctx("Đăng nhập để viết bình luận.", "Sign in to write a comment.") : ctx("Đăng nhập để xem và viết bình luận cho truyện của bạn.", "Sign in to see and write comments on your own story.")}</p><button class="btn pri" id="cmtLogin" type="button">${ctx("Đăng nhập", "Sign in")}</button>`;
+    cq("#cmtLogin").onclick = () => authDlg.showModal(); return;
+  }
+  f.innerHTML = `<textarea id="cmtText" maxlength="500" placeholder="${ctx("Viết bình luận…", "Write a comment…")}" aria-label="${ctx("Bình luận", "Comment")}"></textarea>
+  <div class="cmt-row"><span class="empty" id="cmtCount" style="font-size:13px">0/500</span><button class="btn pri" id="cmtSend" type="button">${ctx("Gửi bình luận", "Post comment")}</button></div>`;
+  const ta = cq("#cmtText");
+  ta.oninput = () => cq("#cmtCount").textContent = ta.value.length + "/500";
+  ta.onkeydown = e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") cmtSend(); };
+  cq("#cmtSend").onclick = cmtSend;
+}
+function cmtList() {
+  const ul = cq("#cmtList"), me = auth.currentUser; if (!ul) return;
+  cq("#cmtTitle").textContent = ctx("Bình luận", "Comments") + (cmtItems.length ? " (" + cmtItems.length + (cmtFull ? "+" : "") + ")" : "");
+  if (cmtErr) { ul.innerHTML = `<li class="empty">${cesc(cmtErr)}</li>`; cq("#cmtMore").innerHTML = ""; return; }
+  ul.innerHTML = cmtItems.length ? cmtItems.map(c => {
+    const d = c.ts && c.ts.toDate ? c.ts.toDate() : new Date();
+    return `<li class="cmt-item"><div class="cmt-av" aria-hidden="true">${cesc((c.name || "?").trim().slice(0, 1).toUpperCase())}</div>
+    <div style="flex:1;min-width:0"><div class="cmt-meta" style="display:flex;align-items:center"><span><b>${cesc(c.name)}</b>${cesc(ago(d))}</span>${me && c.uid === me.uid ? `<button class="cmt-del" data-id="${cesc(c.id)}" type="button">${ctx("Xoá", "Delete")}</button>` : ""}</div>
+    <p class="cmt-body">${cesc(c.text)}</p></div></li>`;
+  }).join("") : `<li class="empty" style="padding:14px 0;border-top:1px solid var(--line)">${cmtCtx && cmtCtx.thread ? ctx("Chưa có bình luận nào. Hãy là người đầu tiên!", "No comments yet. Be the first!") : ""}</li>`;
+  ul.querySelectorAll(".cmt-del").forEach(b => b.onclick = async () => {
+    if (!confirm(ctx("Xoá bình luận này?", "Delete this comment?"))) return;
+    try { await deleteDoc(doc(db, "comments", cmtCtx.thread, "items", b.dataset.id)); } catch (e) { alert(cmtMsg(e)); }
+  });
+  cq("#cmtMore").innerHTML = cmtFull ? `<button class="btn" id="cmtMoreBtn" type="button">${ctx("Xem thêm bình luận", "Load more")}</button>` : "";
+  if (cmtFull) cq("#cmtMoreBtn").onclick = () => { cmtLimit += 30; cmtSubscribe(); };
+}
+const cmtMsg = e => e && e.code === "permission-denied"
+  ? ctx("Chưa có quyền: hãy xuất bản Firestore Rules (file firestore.rules) trong Firebase Console.", "Permission denied: publish the Firestore Rules (firestore.rules) in the Firebase Console.")
+  : ctx("Chưa thực hiện được: ", "Couldn't do that: ") + (e && (e.code || e.message) || "");
+function cmtSubscribe() {
+  if (cmtUnsub) { cmtUnsub(); cmtUnsub = null; }
+  if (!cmtCtx || !cmtCtx.thread) { cmtItems = []; cmtErr = ""; cmtList(); return; }
+  const q = query(collection(db, "comments", cmtCtx.thread, "items"), orderBy("ts", "desc"), limit(cmtLimit));
+  cmtUnsub = onSnapshot(q, snap => {
+    cmtErr = ""; cmtFull = snap.size >= cmtLimit;
+    cmtItems = snap.docs.map(d => ({ id: d.id, ...d.data({ serverTimestamps: "estimate" }) })); cmtList();
+  }, e => { console.error(e); cmtErr = cmtMsg(e); cmtItems = []; cmtList(); });
+}
+async function cmtSend() {
+  const u = auth.currentUser, ta = cq("#cmtText"), btn = cq("#cmtSend");
+  if (!u || !ta || !cmtCtx || !cmtCtx.thread) return;
+  const text = ta.value.trim(); if (!text) return;
+  if (Date.now() - lastSent < 8000) { alert(ctx("Bạn gửi hơi nhanh, đợi vài giây nhé.", "You're posting too fast, wait a few seconds.")); return; }
+  btn.disabled = true;
+  try {
+    await addDoc(collection(db, "comments", cmtCtx.thread, "items"), { uid: u.uid, name: displayName(u), text, ts: serverTimestamp() });
+    ta.value = ""; cq("#cmtCount").textContent = "0/500"; lastSent = Date.now();
+  } catch (e) { console.error(e); alert(cmtMsg(e)); }
+  finally { btn.disabled = false; }
+}
+window.gtComments = (bookId, ch) => {
+  cmtOff(); cmtCtx = { bookId, ch, thread: threadOf(bookId, ch) }; cmtLimit = 30; cmtItems = []; cmtErr = "";
+  cmtSkeleton(); cmtForm(); cmtSubscribe();
+};
+window.gtCommentsOff = cmtOff;
+window.gtLang = () => { if (cmtCtx && cq("#comments")) { cmtSkeleton(); cmtForm(); cmtList(); } };
+onAuthStateChanged(auth, () => {
+  if (!cmtCtx || !cq("#comments")) return;
+  cmtCtx.thread = threadOf(cmtCtx.bookId, cmtCtx.ch); cmtForm(); cmtSubscribe();
+});
+{ const box = cq("#comments"); if (box && box.dataset.b) window.gtComments(box.dataset.b, +box.dataset.c); }
+window.dispatchEvent(new Event("gtcloud"));
+
+</script>
+
+<!-- RULES: dán vào Firebase Console rồi Publish (các file firestore.rules và database.rules.json đi kèm có nội dung giống hệt).
+
+Realtime Database Rules:
+{
+  "rules": {
+    "profiles": {
+      "$uid": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === $uid",
+        ".validate": "newData.hasChildren(['name'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length <= 40"
+        },
+        "bio": {
+          ".validate": "newData.isString() && newData.val().length <= 240"
+        },
+        "avatar": {
+          ".validate": "newData.isString() && newData.val().length <= 200000"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "following": {
+      "$follower": {
+        ".read": true,
+        "$author": {
+          ".write": "auth != null && auth.uid === $follower",
+          ".validate": "newData.isBoolean() && $author !== $follower"
+        }
+      }
+    },
+    "followers": {
+      "$author": {
+        ".read": true,
+        "$follower": {
+          ".write": "auth != null && auth.uid === $follower",
+          ".validate": "newData.isBoolean() && $follower !== $author"
+        }
+      }
+    },
+    "idOf": {
+      "$uid": {
+        ".read": true,
+        ".write": "auth != null && auth.uid === $uid && !data.exists()",
+        ".validate": "newData.isString() && newData.val().matches(/^[1-9][0-9]{9}$/)"
+      }
+    },
+    "uidOf": {
+      "$id": {
+        ".read": true,
+        ".write": "auth != null && !data.exists()",
+        ".validate": "$id.matches(/^[1-9][0-9]{9}$/) && newData.isString() && newData.val() === auth.uid"
+      }
+    },
+    "requests": {
+      "$to": {
+        ".read": "auth != null && auth.uid === $to",
+        "$from": {
+          ".write": "auth != null && ((auth.uid === $from && $from !== $to) || (auth.uid === $to && !newData.exists()))",
+          ".validate": "newData.hasChildren(['ts']) && newData.child('ts').isNumber() && $from !== $to",
+          "ts": {
+            ".validate": true
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "sent": {
+      "$me": {
+        ".read": "auth != null && auth.uid === $me",
+        "$to": {
+          ".write": "auth != null && (auth.uid === $me || (auth.uid === $to && !newData.exists()))",
+          ".validate": "newData.isBoolean() && $me !== $to"
+        }
+      }
+    },
+    "friends": {
+      "$a": {
+        ".read": "auth != null && auth.uid === $a",
+        "$b": {
+          ".write": "auth != null && ((newData.val() === true && ((auth.uid === $a && root.child('requests').child($a).child($b).exists()) || (auth.uid === $b && root.child('requests').child($b).child($a).exists()))) || (!newData.exists() && (auth.uid === $a || auth.uid === $b)))",
+          ".validate": "newData.isBoolean() && $a !== $b"
+        }
+      }
+    },
+    "shelf": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('friends').child($uid).child(auth.uid).val() === true)",
+        ".write": "auth != null && auth.uid === $uid",
+        "fav": {
+          "$bid": {
+            ".validate": "newData.isBoolean() && $bid.matches(/^(s[0-9]+|c_[A-Za-z0-9_-]{6,200})$/)"
+          }
+        },
+        "reading": {
+          "$bid": {
+            ".validate": "newData.isNumber() && $bid.matches(/^(s[0-9]+|c_[A-Za-z0-9_-]{6,200})$/)"
+          }
+        },
+        "ts": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "inbox": {
+      "$to": {
+        ".read": "auth != null && auth.uid === $to",
+        "$id": {
+          ".write": "auth != null && ((auth.uid === $to && !newData.exists()) || (newData.exists() && newData.child('from').val() === auth.uid && root.child('friends').child($to).child(auth.uid).val() === true))",
+          ".validate": "newData.hasChildren(['from','book','ts']) && newData.child('book').isString() && newData.child('book').val().matches(/^(s[0-9]+|c_[A-Za-z0-9_-]{6,200})$/) && newData.child('ts').isNumber() && (!newData.child('note').exists() || (newData.child('note').isString() && newData.child('note').val().length <= 120))",
+          "from": {
+            ".validate": "newData.isString()"
+          },
+          "book": {
+            ".validate": true
+          },
+          "note": {
+            ".validate": true
+          },
+          "ts": {
+            ".validate": true
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    }
+  }
+}
+
+Firestore Rules:
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Binh luan
+    match /comments/{thread}/items/{item} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid','name','text','ts'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 500
+        && request.resource.data.name is string && request.resource.data.name.size() <= 60
+        && request.resource.data.ts == request.time;
+      allow delete: if request.auth != null && resource.data.uid == request.auth.uid;
+    }
+
+    // Truyen dang cong khai: id tai lieu luon bat dau bang uid cua chu truyen.
+    // Cac bo dem (likeCount, readCount, ratingSum, ratingCount) chi doi khi co "dau" cua chinh nguoi dung
+    // (likes/readers/ratings/{uid}) duoc tao hoac xoa trong cung mot batch, nen moi tai khoan chi tinh 1 lan.
+    match /books/{bookId} {
+      function bookPath() { return /databases/$(database)/documents/books/$(bookId); }
+      function mark(col) { return /databases/$(database)/documents/books/$(bookId)/$(col)/$(request.auth.uid); }
+      function keep(f) { return request.resource.data.get(f, 0) == (resource == null ? 0 : resource.data.get(f, 0)); }
+      function aff() { return request.resource.data.diff(resource.data).affectedKeys(); }
+      function likeOn() {
+        return aff().hasOnly(['likeCount'])
+          && request.resource.data.get('likeCount', 0) == resource.data.get('likeCount', 0) + 1
+          && !exists(mark('likes')) && existsAfter(mark('likes'));
+      }
+      function likeOff() {
+        return aff().hasOnly(['likeCount'])
+          && request.resource.data.get('likeCount', 0) == resource.data.get('likeCount', 0) - 1
+          && exists(mark('likes')) && !existsAfter(mark('likes'));
+      }
+      function readOn() {
+        return aff().hasOnly(['readCount'])
+          && request.resource.data.get('readCount', 0) == resource.data.get('readCount', 0) + 1
+          && !exists(mark('readers')) && existsAfter(mark('readers'));
+      }
+      function rateNew() {
+        return aff().hasOnly(['ratingSum', 'ratingCount'])
+          && !exists(mark('ratings')) && existsAfter(mark('ratings'))
+          && request.resource.data.get('ratingCount', 0) == resource.data.get('ratingCount', 0) + 1
+          && request.resource.data.get('ratingSum', 0) == resource.data.get('ratingSum', 0) + getAfter(mark('ratings')).data.stars;
+      }
+      function rateChange() {
+        return aff().hasOnly(['ratingSum'])
+          && exists(mark('ratings')) && existsAfter(mark('ratings'))
+          && request.resource.data.get('ratingSum', 0) == resource.data.get('ratingSum', 0) + getAfter(mark('ratings')).data.stars - get(mark('ratings')).data.stars;
+      }
+
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && bookId.matches(request.auth.uid + '-.+')
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 80
+        && request.resource.data.author is string && request.resource.data.author.size() <= 60
+        && request.resource.data.desc is string && request.resource.data.desc.size() <= 400
+        && request.resource.data.genre is string && request.resource.data.genre.size() <= 60
+        && request.resource.data.status in ['ongoing','completed','paused']
+        && request.resource.data.tags is list && request.resource.data.tags.size() <= 8
+        && request.resource.data.cover is string && request.resource.data.cover.size() <= 300000
+        && request.resource.data.n is int && request.resource.data.n >= 1 && request.resource.data.n <= 500
+        && request.resource.data.chs is list && request.resource.data.chs.size() == request.resource.data.n
+        && keep('likeCount') && keep('readCount') && keep('ratingSum') && keep('ratingCount')
+        && request.resource.data.updatedAt == request.time;
+      allow update: if request.auth != null
+        && (likeOn() || likeOff() || readOn() || rateNew() || rateChange());
+      allow delete: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+
+      match /chapters/{ch} {
+        allow read: if true;
+        allow create, update: if request.auth != null
+          && bookId.matches(request.auth.uid + '-.+')
+          && request.resource.data.t is string && request.resource.data.t.size() <= 200
+          && request.resource.data.x is string && request.resource.data.x.size() <= 200000;
+        allow delete: if request.auth != null && bookId.matches(request.auth.uid + '-.+');
+      }
+
+      match /likes/{uid} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow create: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['ts']) && request.resource.data.ts == request.time
+          && getAfter(bookPath()).data.get('likeCount', 0) == get(bookPath()).data.get('likeCount', 0) + 1;
+        allow delete: if request.auth != null && request.auth.uid == uid
+          && getAfter(bookPath()).data.get('likeCount', 0) == get(bookPath()).data.get('likeCount', 0) - 1;
+      }
+
+      match /readers/{uid} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow create: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['ts']) && request.resource.data.ts == request.time
+          && getAfter(bookPath()).data.get('readCount', 0) == get(bookPath()).data.get('readCount', 0) + 1;
+      }
+
+      match /ratings/{uid} {
+        allow read: if request.auth != null && request.auth.uid == uid;
+        allow create: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['stars', 'ts'])
+          && request.resource.data.stars is int && request.resource.data.stars >= 1 && request.resource.data.stars <= 5
+          && request.resource.data.ts == request.time
+          && getAfter(bookPath()).data.get('ratingCount', 0) == get(bookPath()).data.get('ratingCount', 0) + 1
+          && getAfter(bookPath()).data.get('ratingSum', 0) == get(bookPath()).data.get('ratingSum', 0) + request.resource.data.stars;
+        allow update: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['stars', 'ts'])
+          && request.resource.data.stars is int && request.resource.data.stars >= 1 && request.resource.data.stars <= 5
+          && request.resource.data.ts == request.time
+          && getAfter(bookPath()).data.get('ratingCount', 0) == get(bookPath()).data.get('ratingCount', 0)
+          && getAfter(bookPath()).data.get('ratingSum', 0) == get(bookPath()).data.get('ratingSum', 0) + request.resource.data.stars - resource.data.stars;
+      }
+    }
+
+    // Bai viet tren trang ca nhan
+    match /users/{uid}/posts/{post} {
+      allow read: if true;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['body','image','ts'])
+        && request.resource.data.body is string && request.resource.data.body.size() <= 2000
+        && request.resource.data.image is string && request.resource.data.image.size() <= 600000
+        && request.resource.data.ts == request.time;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+    // Thu vien rieng tu cua tung tai khoan (dong bo giua cac thiet bi, chi chu tai khoan doc/ghi)
+    match /users/{uid}/library/{bookId} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && bookId.matches('u[a-z0-9]+')
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0 && request.resource.data.title.size() <= 80
+        && request.resource.data.author is string && request.resource.data.author.size() <= 60
+        && request.resource.data.desc is string && request.resource.data.desc.size() <= 400
+        && request.resource.data.genre is string && request.resource.data.genre.size() <= 60
+        && request.resource.data.status in ['ongoing','completed','paused']
+        && request.resource.data.tags is list && request.resource.data.tags.size() <= 8
+        && request.resource.data.cover is string && request.resource.data.cover.size() <= 300000
+        && request.resource.data.n is int && request.resource.data.n >= 1 && request.resource.data.n <= 500
+        && request.resource.data.chs is list && request.resource.data.chs.size() == request.resource.data.n
+        && request.resource.data.ut is number
+        && request.resource.data.pubBy is string && request.resource.data.pubBy.size() <= 128
+        && request.resource.data.dirty is bool
+        && request.resource.data.updatedAt == request.time;
+
+      match /chapters/{ch} {
+        allow read, delete: if request.auth != null && request.auth.uid == uid;
+        allow create, update: if request.auth != null && request.auth.uid == uid
+          && request.resource.data.t is string && request.resource.data.t.size() <= 200
+          && request.resource.data.x is string && request.resource.data.x.size() <= 200000;
+      }
+    }
+
+    // Dau "da xoa" de cac thiet bi khac cua cung tai khoan xoa theo
+    match /users/{uid}/trash/{id} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['ts'])
+        && request.resource.data.ts == request.time;
+    }
+  }
+}
+-->
+</body>
+</html>
+
