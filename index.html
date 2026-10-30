@@ -2230,10 +2230,8 @@ const cq = s => document.querySelector(s);
 let cmtUnsub = null, cmtCtx = null, cmtLimit = 30, cmtItems = [], cmtFull = false, cmtErr = "", lastSent = 0;
 
 // Truyện mẫu dùng chung cho mọi người; truyện tự thêm gắn với tài khoản chủ truyện
-const threadOf = (bookId, ch) => {
-  if (!bookId.startsWith("u")) return bookId + "__" + ch;
-  const u = auth.currentUser; return u ? u.uid + "_" + bookId + "__" + ch : null;
-};
+// Dùng cùng một mã luồng bình luận cho mọi người đọc cùng truyện/chương.
+const threadOf = (bookId, ch) => bookId + "__" + ch;
 function displayName(u) {
   let p = {}; try { p = JSON.parse(localStorage.getItem(profileStorageKey(u?.uid))) || {}; } catch {}
   return ((p.name && p.name !== "Độc giả") ? p.name : (u.displayName || "Độc giả")).slice(0, 60);
