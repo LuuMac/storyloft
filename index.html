@@ -166,8 +166,7 @@ dialog{max-height:90vh;overflow:auto}
 
 
 /* ================= Giao diện v2: gọn, thoáng, nhất quán ================= */
-:root{--bg:#f4f6f5;--line:#dfe5e2;--ink:#17211e;--mute:#64716b;--acc:#0e766c;
- --acc-soft:color-mix(in srgb,var(--acc) 11%,transparent);--pad:16px}
+:root{--pad:16px}
 @media (min-width:720px){:root{--pad:24px}}
 /* khung & tiêu đề */
 .wrap{max-width:1040px;padding:18px var(--pad) 72px}
@@ -316,10 +315,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 .write-wrap{position:relative;display:inline-flex;align-items:center}
 #writeMenu{position:absolute;right:0;top:calc(100% + 10px);z-index:1200;width:250px;padding:7px;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 40px #0003;display:none}
 #writeMenu.on{display:block}
-#writeMenu button{display:flex;width:100%;align-items:center;gap:11px;padding:12px 11px;border:0;border-radius:9px;background:transparent;color:var(--text);text-align:left;cursor:pointer;font:inherit}
-#writeMenu button:hover{background:var(--panel2,var(--line))}
+#writeMenu button{display:flex;width:100%;align-items:center;gap:11px;padding:12px 11px;border:0;border-radius:9px;background:transparent;color:var(--ink);text-align:left;cursor:pointer;font:inherit}
+#writeMenu button:hover{background:var(--acc-soft)}
 #writeMenu .write-icon{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;font-size:18px;flex:none}
-#writeMenu small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+#writeMenu small{display:block;color:var(--mute);font-size:12px;margin-top:2px}
 #draftDlg{width:min(900px,calc(100vw - 28px));max-width:900px;max-height:85vh;overflow:auto}
 #draftDlg .draft-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
 #draftDlg .draft-head h2{margin:0}
@@ -327,10 +326,10 @@ body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opa
 .draft-card{display:grid;grid-template-columns:96px minmax(0,1fr) auto;align-items:start;gap:16px;padding:16px;border:1px solid var(--line);border-radius:13px;background:var(--panel)}
 .draft-cover{width:96px;height:136px;border-radius:5px;background:linear-gradient(145deg,#44558c,#21172f);background-position:center;background-size:cover}
 .draft-title{font-weight:750;font-size:17px;margin-bottom:8px}
-.draft-meta{font-size:13px;color:var(--muted);margin-top:6px}
+.draft-meta{font-size:13px;color:var(--mute);margin-top:6px}
 .draft-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 .draft-actions .btn{white-space:nowrap}
-.draft-empty{padding:32px 12px;text-align:center;color:var(--muted)}
+.draft-empty{padding:32px 12px;text-align:center;color:var(--mute)}
 @media(max-width:640px){.draft-card{grid-template-columns:66px minmax(0,1fr);gap:10px;padding:10px}.draft-cover{width:66px;height:96px}.draft-actions{grid-column:1/3;justify-content:flex-start}.draft-split,.draft-split>.btn:first-child{flex:1}.draft-menu{left:0;right:auto;width:100%}.draft-title{font-size:15px}#writeMenu{right:-5px;width:min(250px,calc(100vw - 24px))}}
 .stats{display:flex;align-items:center;flex-wrap:wrap;gap:6px 18px;color:var(--ink)}
 .stats span{display:inline-flex;align-items:center;gap:6px;font-size:15px;white-space:nowrap}
@@ -422,6 +421,15 @@ img{-webkit-user-drag:none;user-drag:none}
 .dm-link{border:0;background:none;color:var(--mute);font-size:13px;text-decoration:underline;text-underline-offset:2px;padding:4px}
 .dm-link:hover{color:var(--acc)}
 #chDlg{width:min(720px,94vw)}#chx{min-height:340px}
+
+/* ===== Chủ đề Sáng / Giấy (trước đây bị lớp giao diện tối ép lại) ===== */
+:root[data-theme="light"]{--bg:#f4f6f5;--panel:#fff;--ink:#17211e;--mute:#64716b;--line:#dfe5e2;--acc:#0e766c;--accink:#fff;--acc-soft:color-mix(in srgb,#0e766c 12%,transparent);color-scheme:light}
+:root[data-theme="sepia"]{color-scheme:light;--panel:#fbf3e2;--accink:#fff;--acc-soft:color-mix(in srgb,var(--acc) 14%,transparent)}
+:root[data-theme="light"] body,:root[data-theme="sepia"] body{background:var(--bg);color:var(--ink)}
+:root[data-theme="light"] body::before,:root[data-theme="sepia"] body::before{opacity:0}
+:root[data-theme="light"] .top,:root[data-theme="sepia"] .top{background:color-mix(in srgb,var(--bg) 90%,transparent);border-color:var(--line)}
+:root[data-theme="light"] :is(.btn,.tag,.tabs button,.tools input,.pop,.bk),:root[data-theme="sepia"] :is(.btn,.tag,.tabs button,.tools input,.pop,.bk){background:var(--panel);border-color:var(--line);color:var(--ink);box-shadow:none}
+:root[data-theme="light"] .btn.pri,:root[data-theme="sepia"] .btn.pri,:root[data-theme="light"] .tag.on,:root[data-theme="sepia"] .tag.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
 </style>
 </head>
 <body>
@@ -624,6 +632,133 @@ x("Đóng","Close|关闭|閉じる|닫기|Cerrar|Fermer|Schließen|Fechar|Зак
 x("Đang ra","Ongoing|连载中|連載中|연재 중|En curso|En cours|Laufend|Em andamento|Выходит")
 x("Đã hoàn thành","Completed|已完结|完結|완결|Completado|Terminé|Abgeschlossen|Concluído|Завершён")
 x("Tạm ngưng","On hiatus|暂停更新|休載中|휴재|En pausa|En pause|Pausiert|Em pausa|Приостановлен")
+x("Truyện mới cập nhật","Recently updated|最近更新的小说|最近更新された小説|최근 업데이트된 소설|Novelas actualizadas recientemente|Romans récemment mis à jour|Kürzlich aktualisierte Romane|Romances atualizados recentemente|Недавно обновлённые романы");
+x("Hôm nay","Today|今天|今日|오늘|Hoy|Aujourd’hui|Heute|Hoje|Сегодня");
+x("Tuần này","This week|本周|今週|이번 주|Esta semana|Cette semaine|Diese Woche|Esta semana|На этой неделе");
+x("Trước đó","Earlier|更早|それ以前|이전|Antes|Plus tôt|Früher|Anteriormente|Ранее");
+x("Tác giả đang theo dõi","Authors you follow|你关注的作者|フォロー中の作者|팔로우 중인 작가|Autores que sigues|Auteurs suivis|Autoren, denen du folgst|Autores que você segue|Авторы, на которых вы подписаны");
+x("Xem truyện mới cập nhật","See latest updates|查看最新更新|最新の更新を見る|최신 업데이트 보기|Ver últimas actualizaciones|Voir les dernières mises à jour|Neueste Updates ansehen|Ver últimas atualizações|Смотреть последние обновления");
+x("Mới","New|新|新着|새 글|Nuevo|Nouveau|Neu|Novo|Новое");
+x("Ví xu","Wallet|钱包|ウォレット|지갑|Monedero|Portefeuille|Geldbörse|Carteira|Кошелёк");
+x("Mở khóa","Unlock|解锁|ロック解除|잠금 해제|Desbloquear|Débloquer|Freischalten|Desbloquear|Открыть");
+x("Đăng nhập để mở khóa","Sign in to unlock|登录后解锁|ログインして解除|로그인하여 잠금 해제|Inicia sesión para desbloquear|Connectez-vous pour débloquer|Zum Freischalten anmelden|Entre para desbloquear|Войдите, чтобы открыть");
+x("xu","coins|金币|コイン|코인|monedas|pièces|Münzen|moedas|монет");
+x("Xu","Coins|金币|コイン|코인|Monedas|Pièces|Münzen|Moedas|Монеты");
+x("Số dư của bạn:","Your balance:|你的余额：|残高：|내 잔액:|Tu saldo:|Votre solde :|Dein Guthaben:|Seu saldo:|Ваш баланс:");
+x("Chương này cần","This chapter costs|本章需要|この章には|이 장을 읽으려면|Este capítulo cuesta|Ce chapitre coûte|Dieses Kapitel kostet|Este capítulo custa|Эта глава стоит");
+x("xu để đọc.","coins to read.|金币才能阅读。|コインが必要です。|코인이 필요합니다.|monedas para leerse.|pièces à lire.|Münzen zum Lesen.|moedas para ler.|монет.");
+x("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more.|金币不足。每天签到可获得更多。|コインが足りません。毎日チェックインして増やしましょう。|코인이 부족합니다. 매일 출석하면 더 받을 수 있어요.|No tienes suficientes monedas. Regístrate cada día para conseguir más.|Pas assez de pièces. Pointez chaque jour pour en gagner.|Nicht genug Münzen. Check dich täglich ein, um mehr zu bekommen.|Moedas insuficientes. Faça check-in diário para ganhar mais.|Недостаточно монет. Отмечайтесь каждый день, чтобы получать больше.");
+x("Nhận ngay","Claim|领取|受け取る|받기|Reclamar|Récupérer|Abholen|Resgatar|Забрать");
+x("Đã nhận","Claimed|已领取|受取済み|받음|Reclamado|Récupéré|Abgeholt|Resgatado|Получено");
+x("Bảng xếp hạng","Ranking|排行榜|ランキング|랭킹|Clasificación|Classement|Rangliste|Ranking|Рейтинг");
+x("Tác giả","Authors|作者|作者|작가|Autores|Auteurs|Autoren|Autores|Авторы");
+x("Người theo dõi","Followers|关注者|フォロワー|팔로워|Seguidores|Abonnés|Follower|Seguidores|Подписчики");
+x("Đang theo dõi","Following|关注中|フォロー中|팔로잉|Siguiendo|Abonnements|Folge ich|Seguindo|Подписки");
+x("Truyện đã đăng","Published|已发布|公開済み|게시한 소설|Publicadas|Publiés|Veröffentlicht|Publicados|Опубликовано");
+x("Chỉnh sửa hồ sơ","Edit profile|编辑资料|プロフィールを編集|프로필 편집|Editar perfil|Modifier le profil|Profil bearbeiten|Editar perfil|Редактировать профиль");
+x("Chia sẻ","Share|分享|共有|공유|Compartir|Partager|Teilen|Compartilhar|Поделиться");
+x("Truyện của tôi","My novels|我的小说|私の小説|내 소설|Mis novelas|Mes romans|Meine Romane|Meus romances|Мои романы");
+x("Bài viết","Posts|动态|投稿|게시물|Publicaciones|Publications|Beiträge|Publicações|Публикации");
+x("Đăng bài","Post|发布|投稿する|게시|Publicar|Publier|Posten|Publicar|Опубликовать");
+x("Huỷ","Cancel|取消|キャンセル|취소|Cancelar|Annuler|Abbrechen|Cancelar|Отмена");
+x("Lưu hồ sơ","Save|保存|保存|저장|Guardar|Enregistrer|Speichern|Salvar|Сохранить");
+x("Ảnh đại diện","Avatar|头像|アイコン|프로필 사진|Avatar|Avatar|Avatar|Avatar|Аватар");
+x("Tên hiển thị","Display name|显示名称|表示名|표시 이름|Nombre visible|Nom affiché|Anzeigename|Nome de exibição|Отображаемое имя");
+x("Chưa có quyền: hãy Publish Firestore Rules và Realtime Database Rules mới (file firestore.rules và database.rules.json) trong Firebase Console.","Permission denied: publish the new Firestore and Realtime Database rules (firestore.rules / database.rules.json) in the Firebase Console.|权限不足：请在 Firebase 控制台发布新的 Firestore 和 Realtime Database 规则（firestore.rules / database.rules.json）。|権限がありません。Firebase コンソールで新しい Firestore と Realtime Database のルール（firestore.rules / database.rules.json）を公開してください。|권한이 없습니다. Firebase 콘솔에서 새 Firestore 및 Realtime Database 규칙(firestore.rules / database.rules.json)을 게시하세요.|Permiso denegado: publica las nuevas reglas de Firestore y Realtime Database (firestore.rules / database.rules.json) en la consola de Firebase.|Autorisation refusée : publiez les nouvelles règles Firestore et Realtime Database (firestore.rules / database.rules.json) dans la console Firebase.|Zugriff verweigert: Veröffentliche die neuen Firestore- und Realtime-Database-Regeln (firestore.rules / database.rules.json) in der Firebase-Konsole.|Permissão negada: publique as novas regras do Firestore e do Realtime Database (firestore.rules / database.rules.json) no console do Firebase.|Доступ запрещён: опубликуйте новые правила Firestore и Realtime Database (firestore.rules / database.rules.json) в консоли Firebase.");
+x("Mỗi truyện đăng được tối đa 500 chương.","A novel can have at most 500 chapters.|每部小说最多可发布 500 章。|1つの小説は最大500章までです。|소설 한 편은 최대 500장까지 가능합니다.|Una novela puede tener como máximo 500 capítulos.|Un roman peut avoir au maximum 500 chapitres.|Ein Roman kann höchstens 500 Kapitel haben.|Um romance pode ter no máximo 500 capítulos.|В романе может быть не более 500 глав.");
+x("Ảnh quá lớn, hãy chọn ảnh nhỏ hơn.","The image is too large, choose a smaller one.|图片太大，请选择更小的图片。|画像が大きすぎます。小さい画像を選んでください。|이미지가 너무 큽니다. 더 작은 이미지를 선택하세요.|La imagen es demasiado grande; elige una más pequeña.|L’image est trop volumineuse, choisissez-en une plus petite.|Das Bild ist zu groß, wähle ein kleineres.|A imagem é muito grande; escolha uma menor.|Изображение слишком большое, выберите поменьше.");
+x("Bạn hãy đăng nhập trước nhé.","Please sign in first.|请先登录。|先にログインしてください。|먼저 로그인해 주세요.|Inicia sesión primero.|Veuillez d’abord vous connecter.|Bitte melde dich zuerst an.|Entre primeiro, por favor.|Сначала войдите в аккаунт.");
+x("ID gồm đúng 10 chữ số.","An ID has exactly 10 digits.|ID 由 10 位数字组成。|IDは10桁の数字です。|ID는 정확히 10자리 숫자입니다.|Un ID tiene exactamente 10 dígitos.|Un ID comporte exactement 10 chiffres.|Eine ID besteht aus genau 10 Ziffern.|Um ID tem exatamente 10 dígitos.|ID состоит ровно из 10 цифр.");
+x("Không tìm thấy người dùng có ID này.","No user found with this ID.|找不到该 ID 对应的用户。|このIDのユーザーが見つかりません。|이 ID의 사용자를 찾을 수 없습니다.|No se encontró ningún usuario con este ID.|Aucun utilisateur trouvé avec cet ID.|Kein Nutzer mit dieser ID gefunden.|Nenhum usuário encontrado com este ID.|Пользователь с таким ID не найден.");
+x("Đó là ID của bạn.","That's your own ID.|这是你自己的 ID。|それはあなた自身のIDです。|본인의 ID입니다.|Ese es tu propio ID.|C’est votre propre ID.|Das ist deine eigene ID.|Esse é o seu próprio ID.|Это ваш собственный ID.");
+x("Chưa tạo được ID, hãy thử lại.","Couldn't create an ID, try again.|无法生成 ID，请重试。|IDを作成できませんでした。もう一度お試しください。|ID를 만들지 못했습니다. 다시 시도해 주세요.|No se pudo crear un ID; inténtalo de nuevo.|Impossible de créer un ID, réessayez.|ID konnte nicht erstellt werden, versuche es erneut.|Não foi possível criar um ID; tente novamente.|Не удалось создать ID, попробуйте ещё раз.");
+x("Bạn không thể tự theo dõi chính mình.","You can't follow yourself.|你不能关注自己。|自分自身をフォローすることはできません。|자기 자신을 팔로우할 수 없습니다.|No puedes seguirte a ti mismo.|Vous ne pouvez pas vous suivre vous-même.|Du kannst dir nicht selbst folgen.|Você não pode seguir a si mesmo.|Нельзя подписаться на самого себя.");
+x("Không kết nối được máy chủ. Kiểm tra mạng rồi thử lại.","Can't reach the server. Check your connection.|无法连接服务器，请检查网络后重试。|サーバーに接続できません。ネットワークを確認してください。|서버에 연결할 수 없습니다. 네트워크를 확인해 주세요.|No se puede conectar con el servidor. Revisa tu conexión.|Impossible de joindre le serveur. Vérifiez votre connexion.|Server nicht erreichbar. Prüfe deine Verbindung.|Não foi possível conectar ao servidor. Verifique sua conexão.|Не удаётся связаться с сервером. Проверьте подключение.");
+x("Chưa thực hiện được: ","Couldn't do that: |操作未成功： |実行できませんでした： |실행하지 못했습니다: |No se pudo completar: |Impossible de le faire : |Das hat nicht geklappt: |Não foi possível concluir: |Не удалось выполнить: ");
+x("Mỗi ngày đăng nhập - Nhận ngay phần thưởng!","Log in every day and claim your reward!|每天登录，立即领取奖励！|毎日ログインして報酬を受け取ろう！|매일 로그인하고 보상을 받으세요!|¡Inicia sesión cada día y reclama tu recompensa!|Connectez-vous chaque jour et récupérez votre récompense !|Melde dich jeden Tag an und hol dir deine Belohnung!|Entre todos os dias e resgate sua recompensa!|Заходите каждый день и забирайте награду!");
+x("Mai nhận tiếp","Come back tomorrow|明天再来领取|明日また受け取れます|내일 다시 받을 수 있어요|Vuelve mañana|Revenez demain|Komm morgen wieder|Volte amanhã|Возвращайтесь завтра");
+x("Chưa nhận","Locked|未解锁|未解放|잠김|Bloqueado|Verrouillé|Gesperrt|Bloqueado|Закрыто");
+x("Ngày","Day|第|Day|Day|Día|Jour|Tag|Dia|День");
+x("Thích nhiều","Most liked|最多点赞|いいね数順|좋아요순|Más gustadas|Les plus aimés|Am beliebtesten|Mais curtidos|Больше всего лайков");
+x("Đọc nhiều","Most read|阅读最多|閲覧数順|조회순|Más leídas|Les plus lus|Meistgelesen|Mais lidos|Самые читаемые");
+x("Đánh giá cao","Top rated|评分最高|高評価順|평점 높은순|Mejor valoradas|Les mieux notés|Bestbewertet|Mais bem avaliados|С высоким рейтингом");
+x("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Cộng đồng để lên bảng!","No ranking data yet. Like, rate or read novels in the Community tab to get on the board!|暂无排行数据。去社区标签页点赞、评分或阅读小说，让它们上榜吧！|ランキングのデータはまだありません。コミュニティタブで小説にいいね・評価・閲覧をして、ランクインさせましょう！|아직 랭킹 데이터가 없습니다. 커뮤니티 탭에서 소설에 좋아요, 평가, 읽기를 하면 순위에 오릅니다!|Aún no hay datos de clasificación. ¡Da me gusta, valora o lee novelas en la pestaña Comunidad para aparecer!|Pas encore de données de classement. Aimez, notez ou lisez des romans dans l’onglet Communauté pour y figurer !|Noch keine Ranglistendaten. Like, bewerte oder lies Romane im Tab „Community“, damit sie in die Rangliste kommen!|Ainda não há dados de ranking. Curta, avalie ou leia romances na aba Comunidade para entrar no ranking!|Данных для рейтинга пока нет. Ставьте лайки, оценивайте или читайте романы во вкладке «Сообщество», чтобы попасть в список!");
+x("Tính trên 100 truyện nhiều lượt thích nhất.","Based on the 100 most-liked novels.|基于点赞最多的 100 部小说统计。|いいね数の多い上位100作品をもとに集計しています。|좋아요가 많은 상위 100편을 기준으로 합니다.|Basado en las 100 novelas con más me gusta.|Basé sur les 100 romans les plus aimés.|Basiert auf den 100 meistgelikten Romanen.|Baseado nos 100 romances mais curtidos.|На основе 100 романов с наибольшим числом лайков.");
+x("Xếp theo điểm đã cân bằng theo số lượt chấm: truyện chỉ có 1 lượt 5 sao không vượt được truyện nhiều người chấm.","Ranked by a score weighted by the number of ratings, so a single 5-star vote can't beat a widely rated novel.|按评分人数加权计分：只有 1 个五星评分的小说无法超过评分人数多的小说。|評価数で重み付けしたスコアで順位を決めています。5つ星が1件だけの作品が、多くの人に評価された作品を上回ることはありません。|평가 수를 반영한 가중 점수로 순위를 매깁니다. 별 다섯 개가 한 번뿐인 소설은 많은 사람이 평가한 소설을 앞지를 수 없습니다.|Se ordena con una puntuación ponderada por el número de valoraciones, así que una sola de 5 estrellas no supera a una novela muy valorada.|Classement par score pondéré selon le nombre de notes : un seul vote 5 étoiles ne dépasse pas un roman très noté.|Die Rangfolge nutzt eine nach Anzahl der Bewertungen gewichtete Punktzahl, sodass eine einzelne 5-Sterne-Stimme einen vielfach bewerteten Roman nicht übertrifft.|A ordem usa uma pontuação ponderada pelo número de avaliações; uma única nota 5 estrelas não supera um romance muito avaliado.|Рейтинг считается по баллу с учётом числа оценок, поэтому одна пятизвёздочная оценка не обгонит роман с множеством оценок.");
+x("Bảng được làm mới mỗi phút.","The board refreshes every minute.|榜单每分钟刷新一次。|ランキングは1分ごとに更新されます。|랭킹은 1분마다 갱신됩니다.|La clasificación se actualiza cada minuto.|Le classement est actualisé chaque minute.|Die Rangliste wird jede Minute aktualisiert.|O ranking é atualizado a cada minuto.|Рейтинг обновляется каждую минуту.");
+x("Đã đăng cho mọi người đọc","Published for everyone to read|已发布，所有人都能阅读|公開済み：誰でも読めます|모두가 읽을 수 있게 게시되었습니다|Publicada para que todos la lean|Publié pour que tout le monde puisse le lire|Für alle zum Lesen veröffentlicht|Publicado para todos lerem|Опубликовано для всех читателей");
+x("+ Theo dõi","+ Follow|+ 关注|+ フォロー|+ 팔로우|+ Seguir|+ Suivre|+ Folgen|+ Seguir|+ Подписаться");
+x("← Hồ sơ","← Profile|← 个人资料|← プロフィール|← 프로필|← Perfil|← Profil|← Profil|← Perfil|← Профиль");
+x("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.|登录后可查看你关注的作者的更新。|ログインすると、フォロー中の作者の更新を確認できます。|로그인하면 팔로우한 작가의 업데이트를 볼 수 있습니다.|Inicia sesión para ver las novedades de los autores que sigues.|Connectez-vous pour voir les nouveautés des auteurs que vous suivez.|Melde dich an, um Neuigkeiten der Autoren zu sehen, denen du folgst.|Entre para ver as novidades dos autores que você segue.|Войдите, чтобы видеть обновления авторов, на которых вы подписаны.");
+x("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.|你还没有关注任何作者。在社区标签页打开一部小说，点击作者名字，再选择关注。|まだ誰もフォローしていません。コミュニティタブで小説を開き、作者名をタップして「フォロー」を押してください。|아직 팔로우한 작가가 없습니다. 커뮤니티 탭에서 소설을 열고 작가 이름을 눌러 팔로우하세요.|Aún no sigues a nadie. Abre una novela en la pestaña Comunidad, toca el nombre del autor y pulsa Seguir.|Vous ne suivez personne pour l’instant. Ouvrez un roman dans l’onglet Communauté, touchez le nom de l’auteur et appuyez sur Suivre.|Du folgst noch niemandem. Öffne im Tab „Community“ einen Roman, tippe auf den Namen des Autors und wähle Folgen.|Você ainda não segue ninguém. Abra um romance na aba Comunidade, toque no nome do autor e pressione Seguir.|Вы пока ни на кого не подписаны. Откройте роман во вкладке «Сообщество», нажмите на имя автора и выберите «Подписаться».");
+x("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.|你关注的作者还没有发布小说。|フォロー中の作者はまだ小説を公開していません。|팔로우한 작가가 아직 게시한 소설이 없습니다.|Los autores que sigues aún no han publicado nada.|Les auteurs que vous suivez n’ont encore rien publié.|Die Autoren, denen du folgst, haben noch nichts veröffentlicht.|Os autores que você segue ainda não publicaram nada.|Авторы, на которых вы подписаны, пока ничего не опубликовали.");
+x("Xoá truyện này khỏi cộng đồng? Không thể hoàn tác.","Delete this novel from the community? This can't be undone.|要从社区删除这部小说吗？此操作无法撤销。|この小説をコミュニティから削除しますか？元に戻せません。|이 소설을 커뮤니티에서 삭제할까요? 되돌릴 수 없습니다.|¿Eliminar esta novela de la comunidad? No se puede deshacer.|Supprimer ce roman de la communauté ? Cette action est irréversible.|Diesen Roman aus der Community löschen? Das kann nicht rückgängig gemacht werden.|Excluir este romance da comunidade? Isso não pode ser desfeito.|Удалить этот роман из сообщества? Это действие нельзя отменить.");
+x("Đang khôi phục…","Restoring…|正在恢复…|復元中…|복원 중…|Restaurando…|Restauration…|Wird wiederhergestellt…|Restaurando…|Восстановление…");
+x("Khôi phục vào thư viện để sửa","Restore to my library to edit|恢复到我的书架后编辑|本棚に復元して編集|내 서재로 복원하여 편집|Restaurar en mi biblioteca para editar|Restaurer dans ma bibliothèque pour modifier|Zum Bearbeiten in meine Bibliothek wiederherstellen|Restaurar na minha biblioteca para editar|Восстановить в мою библиотеку для редактирования");
+x("Có chương trả xu","Paid chapters|含付费章节|有料の章あり|유료 장 포함|Capítulos de pago|Chapitres payants|Kostenpflichtige Kapitel|Capítulos pagos|Платные главы");
+x("Bạn chưa đăng nhập nên truyện này mới chỉ lưu trong máy bạn. Hãy đăng nhập — truyện sẽ tự được đăng cho mọi người đọc.","You are not signed in, so this novel is only saved on this device. Sign in and it will be published for everyone to read.|你尚未登录，这部小说目前只保存在本设备上。登录后会自动发布，供所有人阅读。|ログインしていないため、この小説はこの端末にのみ保存されています。ログインすると自動的に公開され、誰でも読めるようになります。|로그인하지 않아 이 소설은 이 기기에만 저장되어 있습니다. 로그인하면 자동으로 게시되어 모두가 읽을 수 있습니다.|No has iniciado sesión, así que esta novela solo se guarda en este dispositivo. Inicia sesión y se publicará para que todos la lean.|Vous n’êtes pas connecté : ce roman n’est enregistré que sur cet appareil. Connectez-vous et il sera publié pour tous.|Du bist nicht angemeldet, daher ist dieser Roman nur auf diesem Gerät gespeichert. Melde dich an, dann wird er für alle veröffentlicht.|Você não está conectado, então este romance está salvo apenas neste dispositivo. Entre e ele será publicado para todos lerem.|Вы не вошли в аккаунт, поэтому роман сохранён только на этом устройстве. Войдите, и он будет опубликован для всех.");
+x("Xoá truyện","Delete novel|删除小说|小説を削除|소설 삭제|Eliminar novela|Supprimer le roman|Roman löschen|Excluir romance|Удалить роман");
+x("đã mở","unlocked|已解锁|解除済み|잠금 해제됨|desbloqueados|débloqués|freigeschaltet|desbloqueados|открыто");
+x("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one.|暂无简介。点击“编辑资料”添加。|自己紹介はまだありません。「プロフィールを編集」から追加できます。|아직 소개가 없습니다. “프로필 편집”을 눌러 추가하세요.|Aún no hay biografía. Toca “Editar perfil” para añadir una.|Pas encore de bio. Touchez « Modifier le profil » pour en ajouter une.|Noch keine Bio. Tippe auf „Profil bearbeiten“, um eine hinzuzufügen.|Ainda não há bio. Toque em “Editar perfil” para adicionar.|Описания пока нет. Нажмите «Редактировать профиль», чтобы добавить.");
+x("Thông tin cá nhân","Personal info|个人信息|個人情報|개인 정보|Información personal|Informations personnelles|Persönliche Angaben|Informações pessoais|Личные данные");
+x("Giới thiệu bản thân","Bio|个人简介|自己紹介|소개|Biografía|Bio|Über mich|Bio|О себе");
+x("Chọn ảnh","Choose image|选择图片|画像を選択|이미지 선택|Elegir imagen|Choisir une image|Bild auswählen|Escolher imagem|Выбрать изображение");
+x("Gỡ ảnh","Remove|移除|削除|삭제|Quitar|Retirer|Entfernen|Remover|Убрать");
+x("Bạn chưa đăng bài nào.","You haven't posted anything yet.|你还没有发布过动态。|まだ投稿がありません。|아직 게시한 글이 없습니다.|Aún no has publicado nada.|Vous n’avez encore rien publié.|Du hast noch nichts gepostet.|Você ainda não publicou nada.|Вы пока ничего не публиковали.");
+x("Bạn chưa có truyện nào.","You have no novels yet.|你还没有小说。|まだ小説がありません。|아직 소설이 없습니다.|Aún no tienes novelas.|Vous n’avez encore aucun roman.|Du hast noch keine Romane.|Você ainda não tem romances.|У вас пока нет романов.");
+x("Viết truyện mới","Write a new novel|写新小说|新しい小説を書く|새 소설 쓰기|Escribir una novela nueva|Écrire un nouveau roman|Neuen Roman schreiben|Escrever um novo romance|Написать новый роман");
+x("Hôm nay bạn muốn chia sẻ gì?…","What's on your mind?…|今天想分享什么？…|今日は何を共有しますか？…|오늘은 어떤 이야기를 나누고 싶으세요?…|¿Qué quieres compartir hoy?…|Que souhaitez-vous partager aujourd’hui ?…|Was möchtest du heute teilen?…|O que você quer compartilhar hoje?…|Чем хотите поделиться сегодня?…");
+x("Đính kèm ảnh","Attach image|添加图片|画像を添付|이미지 첨부|Adjuntar imagen|Joindre une image|Bild anhängen|Anexar imagem|Прикрепить изображение");
+x("Bỏ ảnh","Remove image|移除图片|画像を削除|이미지 삭제|Quitar imagen|Retirer l’image|Bild entfernen|Remover imagem|Убрать изображение");
+x("Đã chọn ảnh đính kèm.","Image attached.|已添加图片。|画像を添付しました。|이미지가 첨부되었습니다.|Imagen adjunta.|Image jointe.|Bild angehängt.|Imagem anexada.|Изображение прикреплено.");
+x("Bạn viết vài dòng hoặc chọn ảnh trước khi đăng nhé.","Write something or attach an image first.|请先写几句话或添加图片再发布。|投稿する前に、文章を書くか画像を添付してください。|게시하기 전에 글을 쓰거나 이미지를 첨부하세요.|Escribe algo o adjunta una imagen antes de publicar.|Écrivez quelque chose ou joignez une image avant de publier.|Schreibe etwas oder hänge zuerst ein Bild an.|Escreva algo ou anexe uma imagem antes de publicar.|Сначала напишите текст или прикрепите изображение.");
+x("Xoá bài viết này nhé?","Delete this post?|要删除这条动态吗？|この投稿を削除しますか？|이 글을 삭제할까요?|¿Eliminar esta publicación?|Supprimer cette publication ?|Diesen Beitrag löschen?|Excluir esta publicação?|Удалить эту публикацию?");
+x("Đăng nhập để xem.","Sign in to view.|登录后查看。|ログインして表示します。|로그인하여 확인하세요.|Inicia sesión para ver.|Connectez-vous pour voir.|Zum Ansehen anmelden.|Entre para ver.|Войдите, чтобы посмотреть.");
+x("Bạn chưa theo dõi tác giả nào.","You aren't following anyone yet.|你还没有关注任何作者。|まだ誰もフォローしていません。|아직 팔로우한 작가가 없습니다.|Aún no sigues a nadie.|Vous ne suivez personne pour l’instant.|Du folgst noch niemandem.|Você ainda não segue ninguém.|Вы пока ни на кого не подписаны.");
+x("Mở một truyện và bấm “Theo dõi tác giả”.","Open a novel and tap “Follow author”.|打开一部小说并点击“关注作者”。|小説を開いて「作者をフォロー」をタップしてください。|소설을 열고 “작가 팔로우”를 누르세요.|Abre una novela y toca “Seguir autor”.|Ouvrez un roman et touchez « Suivre l’auteur ».|Öffne einen Roman und tippe auf „Autor folgen“.|Abra um romance e toque em “Seguir autor”.|Откройте роман и нажмите «Подписаться на автора».");
+x("Số dư xu","Coin balance|金币余额|コイン残高|코인 잔액|Saldo de monedas|Solde de pièces|Münzguthaben|Saldo de moedas|Баланс монет");
+x("Xem phần thưởng","View rewards|查看奖励|報酬を見る|보상 보기|Ver recompensas|Voir les récompenses|Belohnungen ansehen|Ver recompensas|Посмотреть награды");
+x("Dùng xu để mở khóa chương trả phí của tác giả.","Use coins to unlock authors' paid chapters.|用金币解锁作者的付费章节。|コインで作者の有料の章を解放できます。|코인으로 작가의 유료 장을 열 수 있습니다.|Usa monedas para desbloquear los capítulos de pago de los autores.|Utilisez des pièces pour débloquer les chapitres payants des auteurs.|Mit Münzen schaltest du kostenpflichtige Kapitel der Autoren frei.|Use moedas para desbloquear os capítulos pagos dos autores.|Монеты открывают платные главы авторов.");
+x("Xu thu được từ độc giả","Earned from readers|读者带来的收入|読者から得たコイン|독자로부터 얻은 코인|Ganado de los lectores|Gagné auprès des lecteurs|Von Lesern verdient|Ganho com leitores|Получено от читателей");
+x("Đang tính…","Calculating…|计算中…|計算中…|계산 중…|Calculando…|Calcul en cours…|Wird berechnet…|Calculando…|Подсчёт…");
+x("Quản trị: cấp xu","Admin: grant coins|管理员：发放金币|管理者：コインを付与|관리자: 코인 지급|Admin: conceder monedas|Admin : attribuer des pièces|Admin: Münzen vergeben|Admin: conceder moedas|Админ: выдать монеты");
+x("ID người dùng (hoặc dán liên kết hồ sơ #/u/…)","User ID (or paste profile link #/u/…)|用户 ID（或粘贴个人主页链接 #/u/…）|ユーザーID（またはプロフィールのリンク #/u/… を貼り付け）|사용자 ID(또는 프로필 링크 #/u/… 붙여넣기)|ID de usuario (o pega el enlace del perfil #/u/…)|ID utilisateur (ou collez le lien du profil #/u/…)|Nutzer-ID (oder Profillink #/u/… einfügen)|ID do usuário (ou cole o link do perfil #/u/…)|ID пользователя (или вставьте ссылку на профиль #/u/…)");
+x("Số xu (âm để thu hồi)","Amount (negative to revoke)|金币数量（负数表示收回）|コイン数（マイナスで回収）|코인 수(음수는 회수)|Cantidad (negativa para retirar)|Montant (négatif pour retirer)|Anzahl (negativ zum Entziehen)|Quantidade (negativa para retirar)|Количество (отрицательное — списать)");
+x("Cấp xu","Grant|发放|付与|지급|Conceder|Attribuer|Vergeben|Conceder|Выдать");
+x("Quản trị: phần thưởng đăng nhập","Admin: login rewards|管理员：登录奖励|管理者：ログイン報酬|관리자: 로그인 보상|Admin: recompensas de inicio de sesión|Admin : récompenses de connexion|Admin: Login-Belohnungen|Admin: recompensas de login|Админ: награды за вход");
+x("Số xu mỗi ngày, cách nhau dấu phẩy. Thêm số vào cuối để mở thêm ngày cho người đã nhận đủ.","Coins per day, comma-separated. Add numbers at the end to open more days for users who finished.|每天的金币数，用逗号分隔。在末尾添加数字，可为已领完的用户开放更多天数。|1日ごとのコイン数をカンマ区切りで入力します。末尾に数字を足すと、受け取りを終えたユーザーにも日数が追加されます。|하루별 코인 수를 쉼표로 구분해 입력하세요. 끝에 숫자를 추가하면 모두 받은 사용자에게도 날짜가 늘어납니다.|Monedas por día, separadas por comas. Añade números al final para abrir más días a quienes ya terminaron.|Pièces par jour, séparées par des virgules. Ajoutez des nombres à la fin pour ouvrir plus de jours à ceux qui ont terminé.|Münzen pro Tag, durch Kommas getrennt. Hänge am Ende Zahlen an, um weitere Tage für Nutzer freizuschalten, die schon alle erhalten haben.|Moedas por dia, separadas por vírgulas. Adicione números no final para abrir mais dias a quem já completou.|Количество монет на каждый день через запятую. Добавьте числа в конец, чтобы открыть дополнительные дни тем, кто уже получил все.");
+x("Lưu phần thưởng","Save rewards|保存奖励|報酬を保存|보상 저장|Guardar recompensas|Enregistrer les récompenses|Belohnungen speichern|Salvar recompensas|Сохранить награды");
+x("Chưa có chương trả phí nào được mở khóa.","No paid chapters unlocked yet.|还没有付费章节被解锁。|解放された有料の章はまだありません。|아직 잠금 해제된 유료 장이 없습니다.|Aún no se ha desbloqueado ningún capítulo de pago.|Aucun chapitre payant n’a encore été débloqué.|Noch keine kostenpflichtigen Kapitel freigeschaltet.|Nenhum capítulo pago foi desbloqueado ainda.|Платные главы пока никто не открывал.");
+x("lượt mở khóa","unlocks|次解锁|回の解放|회 잠금 해제|desbloqueos|déblocages|Freischaltungen|desbloqueios|открытий");
+x("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.|请输入有效的用户 ID 和金币数量。|有効なユーザーIDとコイン数を入力してください。|올바른 사용자 ID와 코인 수를 입력하세요.|Introduce un ID de usuario y una cantidad válidos.|Saisissez un ID utilisateur et un montant valides.|Gib eine gültige Nutzer-ID und Anzahl ein.|Informe um ID de usuário e uma quantidade válidos.|Введите корректный ID пользователя и количество.");
+x("Đã sao chép liên kết hồ sơ.","Profile link copied.|已复制个人主页链接。|プロフィールのリンクをコピーしました。|프로필 링크를 복사했습니다.|Enlace del perfil copiado.|Lien du profil copié.|Profillink kopiert.|Link do perfil copiado.|Ссылка на профиль скопирована.");
+x("Sao chép liên kết hồ sơ:","Copy profile link:|复制个人主页链接：|プロフィールのリンクをコピー：|프로필 링크 복사:|Copia el enlace del perfil:|Copiez le lien du profil :|Profillink kopieren:|Copie o link do perfil:|Скопируйте ссылку на профиль:");
+x("Chưa đồng bộ được hồ sơ lên máy chủ. Hãy thử lại sau.","Couldn't sync your profile. Try again later.|无法将资料同步到服务器，请稍后重试。|プロフィールを同期できませんでした。後でもう一度お試しください。|프로필을 동기화하지 못했습니다. 나중에 다시 시도해 주세요.|No se pudo sincronizar tu perfil. Inténtalo más tarde.|Impossible de synchroniser votre profil. Réessayez plus tard.|Profil konnte nicht synchronisiert werden. Versuche es später erneut.|Não foi possível sincronizar seu perfil. Tente novamente mais tarde.|Не удалось синхронизировать профиль. Повторите позже.");
+x("Chưa có truyện nào đang viết.","No novels in progress.|没有正在写的小说。|執筆中の小説はありません。|집필 중인 소설이 없습니다.|No hay novelas en curso.|Aucun roman en cours.|Keine Romane in Arbeit.|Nenhum romance em andamento.|Нет романов в работе.");
+x("Bấm “Truyện mới” để bắt đầu sáng tác nhé.","Tap “New novel” to start writing.|点击“新小说”开始创作。|「新しい小説」をタップして書き始めましょう。|“새 소설”을 눌러 집필을 시작하세요.|Toca “Nueva novela” para empezar a escribir.|Touchez « Nouveau roman » pour commencer à écrire.|Tippe auf „Neuer Roman“, um mit dem Schreiben zu beginnen.|Toque em “Novo romance” para começar a escrever.|Нажмите «Новый роман», чтобы начать писать.");
+x("Chưa đặt tên","Untitled|未命名|無題|제목 없음|Sin título|Sans titre|Ohne Titel|Sem título|Без названия");
+x("chương","chapters|章|章|장|capítulos|chapitres|Kapitel|capítulos|глав");
+x("Đã đăng","Published|已发布|公開済み|게시됨|Publicada|Publié|Veröffentlicht|Publicado|Опубликовано");
+x("Cập nhật","Updated|更新于|更新|업데이트|Actualizada|Mis à jour|Aktualisiert|Atualizado|Обновлено");
+x("Tiếp tục viết","Continue writing|继续写作|続きを書く|이어서 쓰기|Seguir escribiendo|Continuer à écrire|Weiterschreiben|Continuar escrevendo|Продолжить писать");
+x("Danh sách chương","Chapters|章节列表|章一覧|장 목록|Capítulos|Chapitres|Kapitel|Capítulos|Главы");
+x("Chưa đặt tiêu đề","Untitled|未设标题|タイトル未設定|제목 미설정|Sin título|Sans titre|Ohne Titel|Sem título|Без заголовка");
+x("Chương mới","New chapter|新章节|新しい章|새 장|Capítulo nuevo|Nouveau chapitre|Neues Kapitel|Novo capítulo|Новая глава");
+x("Sửa thông tin truyện","Edit novel details|编辑小说信息|小説の情報を編集|소설 정보 수정|Editar datos de la novela|Modifier les infos du roman|Romandetails bearbeiten|Editar detalhes do romance|Изменить сведения о романе");
+x("từ","words|字|語|단어|palabras|mots|Wörter|palavras|слов");
+x("phút đọc","min read|分钟阅读|分で読める|분 읽기|min de lectura|min de lecture|Min. Lesezeit|min de leitura|мин чтения");
+x("Sửa chương","Edit chapter|编辑章节|章を編集|장 수정|Editar capítulo|Modifier le chapitre|Kapitel bearbeiten|Editar capítulo|Редактировать главу");
+x("chương ","chapter |第 |第 |제 |capítulo |chapitre |Kapitel |capítulo |глава ");
+x("Tiêu đề chương","Chapter title|章节标题|章のタイトル|장 제목|Título del capítulo|Titre du chapitre|Kapitelüberschrift|Título do capítulo|Название главы");
+x("Nội dung","Content|内容|本文|내용|Contenido|Contenu|Inhalt|Conteúdo|Содержание");
+x("Viết hoặc dán nội dung chương vào đây…","Write or paste the chapter text here…|在此输入或粘贴章节内容…|ここに章の本文を書くか貼り付けてください…|여기에 장 내용을 쓰거나 붙여넣으세요…|Escribe o pega aquí el texto del capítulo…|Écrivez ou collez ici le texte du chapitre…|Schreibe oder füge hier den Kapiteltext ein…|Escreva ou cole aqui o texto do capítulo…|Напишите или вставьте текст главы здесь…");
+x("Lưu chương","Save chapter|保存章节|章を保存|장 저장|Guardar capítulo|Enregistrer le chapitre|Kapitel speichern|Salvar capítulo|Сохранить главу");
+x("Xoá chương","Delete chapter|删除章节|章を削除|장 삭제|Eliminar capítulo|Supprimer le chapitre|Kapitel löschen|Excluir capítulo|Удалить главу");
+x("Hãy nhập nội dung chương.","Please enter the chapter text.|请输入章节内容。|章の本文を入力してください。|장 내용을 입력해 주세요.|Introduce el texto del capítulo.|Saisissez le texte du chapitre.|Bitte gib den Kapiteltext ein.|Insira o texto do capítulo.|Введите текст главы.");
+x("Chương dài quá 200.000 ký tự, hãy tách nhỏ ra.","Chapter is over 200,000 characters. Please split it.|章节超过 200,000 个字符，请拆分。|章が200,000文字を超えています。分割してください。|장이 200,000자를 넘습니다. 나눠 주세요.|El capítulo supera los 200.000 caracteres. Divídelo.|Le chapitre dépasse 200 000 caractères. Veuillez le scinder.|Das Kapitel hat über 200.000 Zeichen. Bitte teile es auf.|O capítulo passa de 200.000 caracteres. Divida-o.|В главе больше 200 000 символов. Разделите её.");
+x("Bộ nhớ trình duyệt đã đầy nên chưa lưu được chương.","Browser storage is full, so the chapter was not saved.|浏览器存储已满，章节未能保存。|ブラウザの保存領域がいっぱいのため、章を保存できませんでした。|브라우저 저장 공간이 가득 차 장을 저장하지 못했습니다.|El almacenamiento del navegador está lleno, así que no se guardó el capítulo.|Le stockage du navigateur est plein : le chapitre n’a pas été enregistré.|Der Browser-Speicher ist voll, das Kapitel wurde nicht gespeichert.|O armazenamento do navegador está cheio; o capítulo não foi salvo.|Хранилище браузера заполнено, глава не сохранена.");
+x("Xoá chương cuối này?","Delete this last chapter?|要删除最后一章吗？|この最後の章を削除しますか？|마지막 장을 삭제할까요?|¿Eliminar este último capítulo?|Supprimer ce dernier chapitre ?|Dieses letzte Kapitel löschen?|Excluir este último capítulo?|Удалить последнюю главу?");
+x("Bộ nhớ trình duyệt đã đầy nên chưa lưu được truyện. Hãy xoá bớt truyện hoặc ảnh bìa cũ (hoặc bỏ ảnh bìa) rồi thử lại.","Browser storage is full, so the novel was not saved. Remove old novels or covers (or the cover image) and try again.|浏览器存储已满，小说未能保存。请删除旧小说或封面（或移除封面图片）后重试。|ブラウザの保存領域がいっぱいのため、小説を保存できませんでした。古い小説や表紙（または表紙画像）を削除してからお試しください。|브라우저 저장 공간이 가득 차 소설을 저장하지 못했습니다. 오래된 소설이나 표지(또는 표지 이미지)를 삭제한 뒤 다시 시도해 주세요.|El almacenamiento del navegador está lleno y no se guardó la novela. Elimina novelas o portadas antiguas (o quita la portada) e inténtalo de nuevo.|Le stockage du navigateur est plein : le roman n’a pas été enregistré. Supprimez d’anciens romans ou couvertures (ou retirez la couverture) puis réessayez.|Der Browser-Speicher ist voll, der Roman wurde nicht gespeichert. Lösche alte Romane oder Cover (oder entferne das Cover) und versuche es erneut.|O armazenamento do navegador está cheio e o romance não foi salvo. Exclua romances ou capas antigos (ou remova a capa) e tente novamente.|Хранилище браузера заполнено, роман не сохранён. Удалите старые романы или обложки (или уберите обложку) и повторите.");
 
 const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
 const stLabel=k=>STATUS[k]?ve(STATUS[k][0],STATUS[k][1]):"";
@@ -983,8 +1118,25 @@ async function authorPage(uid){
    fb.disabled=true;try{const on=await C.toggle(uid);followers+=on?1:-1;following=on;$("#folCount").textContent=followers;paint()}catch(e){console.error(e);alert(cloudMsg(e))}finally{fb.disabled=false}};
  }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+`<p class="empty" style="margin-top:24px">${esc(cloudMsg(e))}</p>`}
 }
+async function updatesPage(){
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Truyện mới cập nhật","Recently updated")}</h1>`;
+ if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
+ app.innerHTML=back+title+`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ try{
+  const C=window.gtCloud,list=await C.listFollowing(me.uid),books=list.length?cacheBooks(await C.booksByOwners(list.map(x=>x.id))):[];
+  if(location.hash!==h)return;
+  const seen=ls.get("gt.followSeen",0),day=864e5,now=Date.now();
+  books.sort((x,y)=>y.updatedAt-x.updatedAt);
+  const G=[[ve("Hôm nay","Today"),x=>now-x.updatedAt<day],[ve("Tuần này","This week"),x=>now-x.updatedAt<7*day],[ve("Trước đó","Earlier"),()=>true]],rest=books.slice(0,60);
+  const row=b=>`<li><a href="#/b/${esc(b.id)}"><span>${esc(b.title)} <span class="bkm">· ${esc(b.ownerName||"")} · ${t("chs",b.chapters.length)}</span>${b.updatedAt>seen?` <span class="tag on" style="padding:1px 8px;font-size:11px">${ve("Mới","New")}</span>`:""}</span><span class="bkm">${esc(relTime(b.updatedAt))}</span></a></li>`;
+  const sec=G.map(([lab,f])=>{const g=rest.filter(f);g.forEach(x=>rest.splice(rest.indexOf(x),1));return g.length?`<h2 style="margin-top:24px">${lab}</h2><ul class="chlist">${g.map(row).join("")}</ul>`:""}).join("");
+  app.innerHTML=back+title+(!list.length?`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.")}</p><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a>`:sec||`<p class="empty">${ve("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.")}</p>`)+(list.length?`<p style="margin-top:22px"><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a></p>`:"");
+  ls.set("gt.followSeen",Date.now());
+ }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
+}
 async function followingPage(){
- const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Cập nhật từ tác giả đang theo dõi","Updates from authors you follow")}</h1>`;
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Tác giả đang theo dõi","Authors you follow")}</h1>`;
  if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
  app.innerHTML=back+title+`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
  if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
@@ -993,10 +1145,9 @@ async function followingPage(){
   if(location.hash!==h)return;
   const seen=ls.get("gt.followSeen",0);
   app.innerHTML=back+title+(list.length?`<div class="tagrow">${list.map(x=>`<a class="tag" href="#/u/${esc(x.id)}">${esc(x.name)}</a>`).join("")}</div>
-   <h2 style="margin-top:28px">${ve("Truyện mới cập nhật","Recently updated")}</h2>
-   ${books.length?`<ul class="chlist">${books.slice(0,40).map(b=>`<li><a href="#/b/${esc(b.id)}"><span>${esc(b.title)} <span class="bkm">· ${esc(b.ownerName||"")} · ${t("chs",b.chapters.length)}</span>${b.updatedAt>seen?` <span class="tag on" style="padding:1px 8px;font-size:11px">${ve("Mới","New")}</span>`:""}</span><span class="bkm">${esc(relTime(b.updatedAt))}</span></a></li>`).join("")}</ul>`:`<p class="empty">${ve("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.")}</p>`}`
+   <p style="margin-top:20px"><a class="btn pri" href="#/updates">${ve("Xem truyện mới cập nhật","See latest updates")}</a></p>`
    :`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.")}</p>`);
-  ls.set("gt.followSeen",Date.now());
+  
  }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
 }
 function bindOwnCloud(b){
@@ -1093,7 +1244,7 @@ function profilePage(){
  const renderFollow=async()=>{panel.innerHTML=`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
   if(!me||!window.gtCloud){panel.innerHTML=`<p class="empty">${ve("Đăng nhập để xem.","Sign in to view.")}</p>`;return}
   try{const list=await window.gtCloud.listFollowing(me.uid);if(pfTab!=="follow"||!panel.isConnected)return;
-   panel.innerHTML=list.length?`<div class="tagrow">${list.map(x=>`<a class="tag" href="#/u/${esc(x.id)}">${esc(x.name)}</a>`).join("")}</div><div style="margin-top:16px"><a class="btn pri" href="#/following">${ve("Xem truyện mới cập nhật","See latest updates")}</a></div>`:`<div class="pf-empty"><p>${ve("Bạn chưa theo dõi tác giả nào.","You aren't following anyone yet.")}</p><p class="empty" style="font-size:13px">${ve("Mở một truyện và bấm “Theo dõi tác giả”.","Open a novel and tap “Follow author”.")}</p></div>`}
+   panel.innerHTML=list.length?`<div class="tagrow">${list.map(x=>`<a class="tag" href="#/u/${esc(x.id)}">${esc(x.name)}</a>`).join("")}</div><div style="margin-top:16px"><a class="btn pri" href="#/updates">${ve("Xem truyện mới cập nhật","See latest updates")}</a></div>`:`<div class="pf-empty"><p>${ve("Bạn chưa theo dõi tác giả nào.","You aren't following anyone yet.")}</p><p class="empty" style="font-size:13px">${ve("Mở một truyện và bấm “Theo dõi tác giả”.","Open a novel and tap “Follow author”.")}</p></div>`}
   catch(e){console.error(e);if(panel.isConnected)panel.innerHTML=`<p class="empty">${esc(cloudMsg(e))}</p>`}};
  const renderWallet=()=>{const adm=isAdminUser(me);
   panel.innerHTML=`<div class="wallet-hero">${IC.coin}<div><div class="empty" style="font-size:13px">${ve("Số dư xu","Coin balance")}</div><strong id="wCoins">${wallet?wallet.coins:"…"}</strong></div><div style="margin-left:auto;text-align:right"><button class="btn pri" id="dailyBtn" type="button">${ve("Điểm danh +"+COIN.daily,"Check in +"+COIN.daily)}</button><div class="empty" id="dailyNote" style="font-size:12px;margin-top:6px"></div></div></div>
@@ -1184,6 +1335,7 @@ function route(){
  if(location.hash==="#/profile"){profilePage();window.scrollTo(0,0)}
  else if(um){const u=decodeURIComponent(um[1]);if(/^[A-Za-z0-9_-]{6,128}$/.test(u)){authorPage(u);window.scrollTo(0,0)}else location.hash="#/"}
  else if(location.hash==="#/following"){followingPage();window.scrollTo(0,0)}
+ else if(location.hash==="#/updates"){updatesPage();window.scrollTo(0,0)}
  else if(location.hash==="#/rank"){rankPage();window.scrollTo(0,0)}
  else if(!m){home();window.scrollTo(0,0)}
  else if(m[2]!=null){if(!needCloud(m[1]))chapter(m[1],m[2],m[3])}
@@ -1200,7 +1352,7 @@ const loginDlg=$("#loginDlg");
 const accountDropdown=$("#accountDropdown"), accountNameBtn=$("#accountNameBtn");
 function toggleAccountDropdown(force){const user=window.gtFirebaseAuth?.currentUser;if(force===false){accountDropdown.classList.remove("on");$("#bProfile").setAttribute("aria-expanded","false");accountNameBtn.setAttribute("aria-expanded","false");return}if(!user){if(!loginDlg.open)loginDlg.showModal();return}const open=typeof force==="boolean"?force:!accountDropdown.classList.contains("on");accountDropdown.classList.toggle("on",open);$("#bProfile").setAttribute("aria-expanded",String(open));accountNameBtn.setAttribute("aria-expanded",String(open))}
 $("#bProfile").onclick=()=>toggleAccountDropdown();accountNameBtn.onclick=()=>toggleAccountDropdown();
-accountDropdown.addEventListener("click",async e=>{const b=e.target.closest("[data-account-action]");if(!b)return;const act=b.dataset.accountAction;if(act!=="language")toggleAccountDropdown(false);if(act==="profile")location.hash="#/profile";else if(act==="wallet"){pfTab="wallet";if(location.hash==="#/profile")profilePage();else location.hash="#/profile"}else if(act==="updates")location.hash="#/following";else if(act==="language"){toggleAccountDropdown(false);openLang()}else if(act==="settings"){$("#pop").classList.add("on")}else if(act==="help"){alert("Trợ giúp Gác Truyện\n\n• Hồ sơ: chỉnh tên, ảnh đại diện, xem truyện và bài viết của bạn.\n• Ví xu: điểm danh nhận xu, mở khóa chương trả phí.\n• Cập nhật: truyện mới từ tác giả bạn theo dõi.")}else if(act==="logout"){e.preventDefault();e.stopPropagation();const logoutBtn=document.getElementById("accountMenuLogout"),authMsg=document.getElementById("menuAuthMessage");if(logoutBtn.disabled)return;logoutBtn.disabled=true;logoutBtn.setAttribute("aria-busy","true");authMsg.hidden=true;try{if(typeof window.gtSignOut!=="function")throw new Error("Chức năng đăng xuất chưa sẵn sàng. Hãy tải lại trang rồi thử lại.");await window.gtSignOut();accountDropdown.classList.remove("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","false");accountNameBtn?.setAttribute("aria-expanded","false");window.gtShowAuthToast?.("Đã đăng xuất thành công");}catch(error){console.error("Lỗi đăng xuất Firebase:",error);authMsg.textContent=window.gtReadableAuthError?window.gtReadableAuthError(error):(error?.message||"Chưa đăng xuất được. Hãy thử lại.");authMsg.hidden=false;accountDropdown.classList.add("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","true");accountNameBtn?.setAttribute("aria-expanded","true");}finally{logoutBtn.disabled=false;logoutBtn.removeAttribute("aria-busy")}}});
+accountDropdown.addEventListener("click",async e=>{const b=e.target.closest("[data-account-action]");if(!b)return;const act=b.dataset.accountAction;if(act!=="language")toggleAccountDropdown(false);if(act==="profile")location.hash="#/profile";else if(act==="wallet"){pfTab="wallet";if(location.hash==="#/profile")profilePage();else location.hash="#/profile"}else if(act==="updates")location.hash="#/updates";else if(act==="language"){toggleAccountDropdown(false);openLang()}else if(act==="settings"){$("#pop").classList.add("on")}else if(act==="help"){alert("Trợ giúp Gác Truyện\n\n• Hồ sơ: chỉnh tên, ảnh đại diện, xem truyện và bài viết của bạn.\n• Ví xu: điểm danh nhận xu, mở khóa chương trả phí.\n• Cập nhật: truyện mới từ tác giả bạn theo dõi.")}else if(act==="logout"){e.preventDefault();e.stopPropagation();const logoutBtn=document.getElementById("accountMenuLogout"),authMsg=document.getElementById("menuAuthMessage");if(logoutBtn.disabled)return;logoutBtn.disabled=true;logoutBtn.setAttribute("aria-busy","true");authMsg.hidden=true;try{if(typeof window.gtSignOut!=="function")throw new Error("Chức năng đăng xuất chưa sẵn sàng. Hãy tải lại trang rồi thử lại.");await window.gtSignOut();accountDropdown.classList.remove("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","false");accountNameBtn?.setAttribute("aria-expanded","false");window.gtShowAuthToast?.("Đã đăng xuất thành công");}catch(error){console.error("Lỗi đăng xuất Firebase:",error);authMsg.textContent=window.gtReadableAuthError?window.gtReadableAuthError(error):(error?.message||"Chưa đăng xuất được. Hãy thử lại.");authMsg.hidden=false;accountDropdown.classList.add("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","true");accountNameBtn?.setAttribute("aria-expanded","true");}finally{logoutBtn.disabled=false;logoutBtn.removeAttribute("aria-busy")}}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleAccountDropdown(false)});
 $("#closeLogin").onclick=()=>loginDlg.close();
 loginDlg.addEventListener("click",e=>{if(e.target===loginDlg&&outside(e,loginDlg))loginDlg.close()});
@@ -1886,7 +2038,7 @@ onAuthStateChanged(auth, user => {
   setTimeout(() => { if (window.gtLoadWallet) window.gtLoadWallet(); }, 400);
   if (user && typeof syncLibrary === "function") setTimeout(async () => { await syncLibrary(); if (typeof publishAllMine === "function") publishAllMine(); }, 700);
   if (location.hash === "#/profile") { if (user) profilePage(); else location.hash = "#/"; }
-  else if (/^#\/(?:u\/[^/]+|following|friends)$|^#\/b\/[^/]+$|^(?:#\/?)?$/.test(location.hash)) route();
+  else if (/^#\/(?:u\/[^/]+|following|updates|friends)$|^#\/b\/[^/]+$|^(?:#\/?)?$/.test(location.hash)) route();
   if(user) {
     menuAuthMessage.hidden=true;
     // Khi đăng nhập thành công, đóng hộp thoại lớn và chỉ hiện thông báo nhỏ.
