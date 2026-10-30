@@ -808,6 +808,15 @@ x("Viền phát sáng","Glowing ring|发光边框|光るフチ|빛나는 테두�
 x("Vàng ánh kim","Gold|金色|ゴールド|골드|Dorado|Or|Gold|Dourado|Золотой");
 x("Hồng đào","Peach rose|桃红|ピーチローズ|피치 로즈|Rosa melocotón|Rose pêche|Pfirsichrosa|Rosa pêssego|Персиково-розовый");
 x("Gradient tím – xanh","Violet–teal gradient|紫青渐变|紫からティールのグラデ|보라–청록 그라데이션|Degradado violeta–turquesa|Dégradé violet–turquoise|Violett-Türkis-Verlauf|Gradiente violeta–turquesa|Градиент фиолетовый–бирюзовый");
+x("ID của bạn","Your ID|你的 ID|あなたのID|내 ID|Tu ID|Votre ID|Deine ID|Seu ID|Ваш ID");
+x("Sao chép","Copy|复制|コピー|복사|Copiar|Copier|Kopieren|Copiar|Копировать");
+x("Đã sao chép ID.","ID copied.|已复制 ID。|IDをコピーしました。|ID를 복사했습니다.|ID copiado.|ID copié.|ID kopiert.|ID copiado.|ID скопирован.");
+x("Quản trị: tặng vật phẩm","Admin: gift items|管理员：赠送物品|管理者：アイテムを付与|관리자: 아이템 선물|Admin: regalar objetos|Admin : offrir des objets|Admin: Items schenken|Admin: presentear itens|Админ: подарить предметы");
+x("Tặng","Gift|赠送|付与|선물|Regalar|Offrir|Schenken|Presentear|Подарить");
+x("Thu hồi","Revoke|收回|取り消し|회수|Retirar|Retirer|Entziehen|Retirar|Отозвать");
+x("Đã tặng vật phẩm.","Item gifted.|已赠送物品。|アイテムを付与しました。|아이템을 선물했습니다.|Objeto regalado.|Objet offert.|Item geschenkt.|Item presenteado.|Предмет подарен.");
+x("Đã thu hồi vật phẩm.","Item revoked.|已收回物品。|アイテムを取り消しました。|아이템을 회수했습니다.|Objeto retirado.|Objet retiré.|Item entzogen.|Item retirado.|Предмет отозван.");
+x("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)|10 位 ID（或 UID / 个人主页链接）|10桁のID（またはUID／プロフィールのリンク）|10자리 ID(또는 UID / 프로필 링크)|ID de 10 dígitos (o UID / enlace del perfil)|ID à 10 chiffres (ou UID / lien du profil)|10-stellige ID (oder UID / Profillink)|ID de 10 dígitos (ou UID / link do perfil)|10-значный ID (или UID / ссылка на профиль)");
 
 const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
 const stLabel=k=>STATUS[k]?ve(STATUS[k][0],STATUS[k][1]):"";
@@ -982,7 +991,7 @@ const COS=[
  {id:"n_gold",k:"name",n:["Vàng ánh kim","Gold"],p:150},
  {id:"n_rose",k:"name",n:["Hồng đào","Peach rose"],p:250},
  {id:"n_grad",k:"name",n:["Gradient tím – xanh","Violet–teal gradient"],p:400}];  /* giá phải khớp prices() trong firestore.rules */
-let inv=[];
+let inv=[],myCode=null;
 const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.gtCloud.cos(uid);return c&&c[k]?(k==="frame"?" fr-":" nm-")+c[k]:""};
 const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
 const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
@@ -991,8 +1000,9 @@ const isAdminUser=u=>!!u&&ADMIN_UIDS.includes(u.uid);
 const coinHtml=n=>`<span class="coinb">${IC.coin}${fmtN(n)}</span>`;
 const canDaily=()=>!!wallet&&Date.now()-(wallet.lastDaily||0)>=20*36e5;
 async function loadWallet(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
- if(!u||!window.gtCloud){wallet=null;ent=null;inv=[];refreshWallet();return}
- try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}try{inv=await window.gtCloud.inventory();await window.gtCloud.plusOf([u.uid])}catch(e){inv=[]}if(plusOn()&&!window.__plusSynced){window.__plusSynced=1;window.gtCloud.syncPlusPublic().catch(()=>{})}refreshWallet();maybeLoginReward()}
+ if(!u||!window.gtCloud){wallet=null;ent=null;inv=[];myCode=null;refreshWallet();return}
+ try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}if(!window.__codeTried){window.__codeTried=1;window.gtCloud.ensureCode().then(c=>{myCode=c}).catch(e=>console.error(e))}
+try{inv=await window.gtCloud.inventory();await window.gtCloud.plusOf([u.uid])}catch(e){inv=[]}if(plusOn()&&!window.__plusSynced){window.__plusSynced=1;window.gtCloud.syncPlusPublic().catch(()=>{})}refreshWallet();maybeLoginReward()}
 window.gtLoadWallet=loadWallet;
 function refreshWallet(){const sl=$("#accountShopLabel");if(sl)sl.textContent=ve("Cửa hàng","Shop")+(plusOn()?" ✦":"");const l=$("#accountCoinsLabel");if(l)l.innerHTML=ve("Ví xu","Coin wallet")+(wallet?` · ${coinHtml(wallet.coins)}`:"");
  const e=$("#wCoins");if(e)e.textContent=wallet?wallet.coins:"–";const pc=$("#pwCoins");if(pc)pc.textContent=wallet?wallet.coins:"–";const st=$("#stCoins");if(st)st.textContent=wallet?fmtN(wallet.coins):"–";
@@ -1208,7 +1218,8 @@ async function shopPage(){
  if(location.hash!==h)return;
  const adm=isAdminUser(me);
  app.innerHTML=back+title+`<p style="margin:6px 0 0">${ve("Số dư của bạn:","Your balance:")} ${wallet?coinHtml(wallet.coins):"–"}</p><div class="shop-grid">${SHOP.map(i=>i.id==="plus"?plusCard():i.id==="cosmetic"?cosCard(me.uid):soonCard(i)).join("")}</div>
- ${adm?`<h3 style="margin:26px 0 8px">${ve("Quản trị: tặng Plus","Admin: gift Plus")}</h3><div class="pf-compose"><input id="shUid" placeholder="${ve("ID người dùng (hoặc dán liên kết hồ sơ #/u/…)","User ID (or paste profile link #/u/…)")}"><input id="shDays" type="number" min="0" placeholder="${ve("Số ngày (0 để thu hồi)","Days (0 to revoke)")}"><button class="btn" id="shGrant" type="button">${ve("Áp dụng","Apply")}</button><p class="bkm" id="shGMsg"></p></div>`:""}`;
+ ${adm?`<h3 style="margin:26px 0 8px">${ve("Quản trị: tặng Plus","Admin: gift Plus")}</h3><div class="pf-compose"><input id="shUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}"><input id="shDays" type="number" min="0" placeholder="${ve("Số ngày (0 để thu hồi)","Days (0 to revoke)")}"><button class="btn" id="shGrant" type="button">${ve("Áp dụng","Apply")}</button><p class="bkm" id="shGMsg"></p></div>
+ <h3 style="margin:22px 0 8px">${ve("Quản trị: tặng vật phẩm","Admin: gift items")}</h3><div class="pf-compose"><input id="shiUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}"><select id="shiItem" style="width:100%;margin:8px 0">${COS.map(i=>`<option value="${i.id}">${ve(i.n[0],i.n[1])}</option>`).join("")}</select><div class="pw-actions"><button class="btn pri" id="shiGive" type="button">${ve("Tặng","Gift")}</button><button class="btn" id="shiTake" type="button">${ve("Thu hồi","Revoke")}</button></div><p class="bkm" id="shiMsg"></p></div>`:""}`;
  const msg=$("#shMsg"),bb=$("#shBuy");
  const done=async()=>{wallet=await window.gtCloud.wallet();ent=await window.gtCloud.entitlement();refreshWallet();if(location.hash===h)shopPage()};
  if(bb)bb.onclick=async()=>{if(!wallet||wallet.coins<PLUS.price){msg.textContent=ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more.");return}
@@ -1221,9 +1232,12 @@ async function shopPage(){
    else if(b.dataset.off)await window.gtCloud.equip({...cur,[b.dataset.off]:""});
    if(location.hash===h)shopPage()}catch(er){console.error(er);cm.textContent=cloudMsg(er);b.disabled=false}};
  const bo=$("#shBonus");if(bo)bo.onclick=async()=>{bo.disabled=true;try{await window.gtCloud.claimPlusBonus(PLUS);await done()}catch(e){console.error(e);msg.textContent=cloudMsg(e);bo.disabled=false}};
- const g=$("#shGrant");if(g)g.onclick=async()=>{const uid=$("#shUid").value.trim().replace(/^.*#\/u\//,""),d=parseInt($("#shDays").value),gm=$("#shGMsg");
-  if(!/^[A-Za-z0-9_-]{6,128}$/.test(uid)||!(d>=0)){gm.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.");return}
-  g.disabled=true;try{await window.gtCloud.adminSetPlus(uid,d);gm.textContent="OK"}catch(e){console.error(e);gm.textContent=cloudMsg(e)}g.disabled=false}};
+ const gi=$("#shiGive"),ti=$("#shiTake");
+ const itemOp=(fn,ok)=>async()=>{const m=$("#shiMsg");try{const uid=await window.gtCloud.resolveUser($("#shiUid").value);await fn(uid,$("#shiItem").value);m.textContent=ve(ok[0],ok[1])}catch(e){console.error(e);m.textContent=cloudMsg(e)}};
+ if(gi){gi.onclick=itemOp((u,i)=>window.gtCloud.adminGiveItem(u,i),["Đã tặng vật phẩm.","Item gifted."]);ti.onclick=itemOp((u,i)=>window.gtCloud.adminRevokeItem(u,i),["Đã thu hồi vật phẩm.","Item revoked."])}
+ const g=$("#shGrant");if(g)g.onclick=async()=>{const raw=$("#shUid").value.trim(),d=parseInt($("#shDays").value),gm=$("#shGMsg");
+  if(!raw||!(d>=0)){gm.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.");return}
+  g.disabled=true;try{const uid=await window.gtCloud.resolveUser(raw);await window.gtCloud.adminSetPlus(uid,d);gm.textContent="OK"}catch(e){console.error(e);gm.textContent=cloudMsg(e)}g.disabled=false}};
 async function updatesPage(){
  const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Truyện mới cập nhật","Recently updated")}</h1>`;
  if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
@@ -1312,14 +1326,26 @@ function book(id){
   await dropFromCloud(b);mine=mine.filter(x=>x.id!==id);favs=favs.filter(x=>x!==id);delete prog[id];delete bms[id];ls.set("gt.mine",mine);ls.set("gt.fav",favs);ls.set("gt.prog",prog);ls.set("gt.bm",bms);location.hash="#/"};
 }
 let pfTab="books";
+function fillMyCode(){
+ const show=c=>{myCode=c;const el=$("#pfCode");if(!el)return;el.innerHTML=`${ve("ID của bạn","Your ID")}: <b style="letter-spacing:.05em">${c}</b> <button class="btn" type="button" id="pfCodeCopy" style="padding:2px 10px;font-size:12px;margin-left:6px">${ve("Sao chép","Copy")}</button>`;
+  $("#pfCodeCopy").onclick=()=>{if(navigator.clipboard)navigator.clipboard.writeText(c).then(()=>{if(window.gtShowAuthToast)window.gtShowAuthToast(ve("Đã sao chép ID.","ID copied."))}).catch(()=>{})}};
+ if(myCode)return show(myCode);
+ if(!(window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser)||!window.gtCloud)return;
+ window.gtCloud.ensureCode().then(show).catch(e=>console.error(e))}
+async function codePage(code){
+ const h=location.hash;app.innerHTML=`<p class="empty" style="margin-top:24px">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ try{const uid=await window.gtCloud.uidFromCode(code);if(location.hash===h)authorPage(uid)}
+ catch(e){if(location.hash===h)app.innerHTML=`<a href="#/" class="empty">${t("back")}</a><p class="empty" style="margin-top:24px">${esc(cloudMsg(e))}</p>`}}
 function profilePage(){
  const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
  const av=profile.avatar?`<img src="${profile.avatar}" alt="">`:esc((profile.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
  const myBooks=mine.filter(b=>!b.own||!me||b.own===me.uid),pubCount=myBooks.filter(b=>me&&b.pubBy===me.uid).length;
+ setTimeout(fillMyCode,0);
  app.innerHTML=`<a href="#/" class="empty">${t("back")}</a>
  <section class="pf-card"><div class="pf-cover"></div>
   <div class="pf-body"><div class="pf-av${cosCls(me&&me.uid,"frame")}" id="profileAvatarView">${av}</div>
-   <div class="pf-main"><h1 class="pf-name${cosCls(me&&me.uid,"name")}">${esc(profile.name||ve("Độc giả","Reader"))}${plusOn()?`<span class="plusb">✦ Plus</span>`:""}</h1><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
+   <div class="pf-main"><h1 class="pf-name${cosCls(me&&me.uid,"name")}">${esc(profile.name||ve("Độc giả","Reader"))}${plusOn()?`<span class="plusb">✦ Plus</span>`:""}</h1><p class="bkm" id="pfCode" style="margin:2px 0 6px"></p><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
    <div class="pf-actions"><button class="btn pri" id="editProfileBtn" type="button">${ve("Chỉnh sửa hồ sơ","Edit profile")}</button><button class="btn" id="shareProfileBtn" type="button">${ve("Chia sẻ","Share")}</button></div></div>
   <div class="pf-stats"><button type="button" id="stFollowingBtn"><strong id="stFollowing">–</strong><span>${ve("Đang theo dõi","Following")}</span></button><div><strong id="stFollowers">–</strong><span>${ve("Người theo dõi","Followers")}</span></div><div><strong>${pubCount}</strong><span>${ve("Truyện đã đăng","Published")}</span></div><button type="button" id="stCoinsBtn"><strong id="stCoins">${wallet?fmtN(wallet.coins):"–"}</strong><span>${ve("Xu","Coins")}</span></button></div>
  </section>
@@ -1357,7 +1383,7 @@ function profilePage(){
   ${loginActive()?`<div class="wallet-hero" style="margin-top:0"><div style="flex:1;min-width:200px"><strong style="font-size:17px">${ve("Đăng nhập "+loginRewards.length+" ngày","Daily login")}</strong><div class="empty" style="font-size:13px">${ve("Đã nhận "+wallet.loginDay+"/"+loginRewards.length+" ngày","Claimed "+wallet.loginDay+"/"+loginRewards.length+" days")}</div></div><button class="btn pri" id="lrOpen" type="button">${ve("Xem phần thưởng","View rewards")}</button></div>`:""}
   <ul class="wallet-rules empty"><li>${ve("Tặng "+COIN.welcome+" xu khi tạo ví lần đầu.","Get "+COIN.welcome+" coins when your wallet is created.")}</li><li>${ve("Điểm danh mỗi ngày nhận +"+COIN.daily+" xu.","Daily check-in gives +"+COIN.daily+" coins.")}</li><li>${ve("Dùng xu để mở khóa chương trả phí của tác giả.","Use coins to unlock authors' paid chapters.")}</li></ul>
   <h3 style="margin:18px 0 8px">${ve("Xu thu được từ độc giả","Earned from readers")}</h3><p class="empty" id="earnBox">${ve("Đang tính…","Calculating…")}</p>
-  ${adm?`<h3 style="margin:22px 0 8px">${ve("Quản trị: cấp xu","Admin: grant coins")}</h3><div class="pf-compose"><input id="grantUid" placeholder="${ve("ID người dùng (hoặc dán liên kết hồ sơ #/u/…)","User ID (or paste profile link #/u/…)")}" style="width:100%;margin:0 0 8px"><input id="grantAmt" type="number" placeholder="${ve("Số xu (âm để thu hồi)","Amount (negative to revoke)")}" style="width:100%;margin:0 0 8px"><button class="btn pri" id="grantBtn" type="button">${ve("Cấp xu","Grant")}</button><p class="empty" id="grantMsg" style="margin:8px 0 0;font-size:13px"></p></div><h3 style="margin:22px 0 8px">${ve("Quản trị: phần thưởng đăng nhập","Admin: login rewards")}</h3><div class="pf-compose"><p class="empty" style="margin:0 0 8px;font-size:13px">${ve("Số xu mỗi ngày, cách nhau dấu phẩy. Thêm số vào cuối để mở thêm ngày cho người đã nhận đủ.","Coins per day, comma-separated. Add numbers at the end to open more days for users who finished.")}</p><input id="lrCfg" value="${loginRewards.join(", ")}" style="width:100%;margin:0 0 8px"><button class="btn pri" id="lrCfgBtn" type="button">${ve("Lưu phần thưởng","Save rewards")}</button><p class="empty" id="lrCfgMsg" style="margin:8px 0 0;font-size:13px"></p></div>`:""}`;
+  ${adm?`<h3 style="margin:22px 0 8px">${ve("Quản trị: cấp xu","Admin: grant coins")}</h3><div class="pf-compose"><input id="grantUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}" style="width:100%;margin:0 0 8px"><input id="grantAmt" type="number" placeholder="${ve("Số xu (âm để thu hồi)","Amount (negative to revoke)")}" style="width:100%;margin:0 0 8px"><button class="btn pri" id="grantBtn" type="button">${ve("Cấp xu","Grant")}</button><p class="empty" id="grantMsg" style="margin:8px 0 0;font-size:13px"></p></div><h3 style="margin:22px 0 8px">${ve("Quản trị: phần thưởng đăng nhập","Admin: login rewards")}</h3><div class="pf-compose"><p class="empty" style="margin:0 0 8px;font-size:13px">${ve("Số xu mỗi ngày, cách nhau dấu phẩy. Thêm số vào cuối để mở thêm ngày cho người đã nhận đủ.","Coins per day, comma-separated. Add numbers at the end to open more days for users who finished.")}</p><input id="lrCfg" value="${loginRewards.join(", ")}" style="width:100%;margin:0 0 8px"><button class="btn pri" id="lrCfgBtn" type="button">${ve("Lưu phần thưởng","Save rewards")}</button><p class="empty" id="lrCfgMsg" style="margin:8px 0 0;font-size:13px"></p></div>`:""}`;
   const note=()=>{const d=$("#dailyBtn"),n=$("#dailyNote");if(!d)return;d.disabled=!canDaily();if(n)n.textContent=wallet&&!canDaily()?ve("Lần sau sau khoảng "+Math.max(1,Math.ceil((20*36e5-(Date.now()-wallet.lastDaily))/36e5))+" giờ","Next check-in in about "+Math.max(1,Math.ceil((20*36e5-(Date.now()-wallet.lastDaily))/36e5))+" h"):""};
   $("#dailyBtn").onclick=async()=>{await claimDaily($("#dailyBtn"));note()};
   const lo=$("#lrOpen");if(lo)lo.onclick=openLoginReward;
@@ -1365,9 +1391,9 @@ function profilePage(){
   const ids=myBooks.filter(b=>me&&b.pubBy===me.uid).map(pubDocId),none=ve("Chưa có chương trả phí nào được mở khóa.","No paid chapters unlocked yet.");
   if(!ids.length||!window.gtCloud)$("#earnBox").textContent=none;
   else window.gtCloud.earnings(ids).then(r=>{const e=$("#earnBox");if(e)e.innerHTML=r.sales?`${coinHtml(r.coins)} <span class="empty">· ${r.sales} ${ve("lượt mở khóa","unlocks")}</span>`:none}).catch(()=>{const e=$("#earnBox");if(e)e.textContent="–"});
-  if(adm)$("#grantBtn").onclick=async()=>{const uid=$("#grantUid").value.trim().replace(/^.*#\/u\//,""),amt=parseInt($("#grantAmt").value),msg=$("#grantMsg"),btn=$("#grantBtn");
-   if(!/^[A-Za-z0-9_-]{6,128}$/.test(uid)||!Number.isInteger(amt)||amt===0||Math.abs(amt)>1e6){msg.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.")+" (|xu| ≤ 1.000.000)";return}
-   btn.disabled=true;try{await window.gtCloud.adminGrant(uid,amt);msg.textContent=ve("Đã cấp "+amt+" xu cho "+uid,"Granted "+amt+" coins to "+uid)}catch(e){console.error(e);msg.textContent=cloudMsg(e)}btn.disabled=false};
+  if(adm)$("#grantBtn").onclick=async()=>{const raw=$("#grantUid").value.trim(),amt=parseInt($("#grantAmt").value),msg=$("#grantMsg"),btn=$("#grantBtn");
+   if(!raw||!Number.isInteger(amt)||amt===0||Math.abs(amt)>1e6){msg.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.")+" (|xu| ≤ 1.000.000)";return}
+   btn.disabled=true;try{const uid=await window.gtCloud.resolveUser(raw);await window.gtCloud.adminGrant(uid,amt);msg.textContent=ve("Đã cấp "+amt+" xu cho "+raw,"Granted "+amt+" coins to "+raw)}catch(e){console.error(e);msg.textContent=cloudMsg(e)}btn.disabled=false};
   if(adm)$("#lrCfgBtn").onclick=async()=>{const arr=$("#lrCfg").value.split(/[,\s]+/).filter(Boolean).map(x=>parseInt(x)),msg=$("#lrCfgMsg"),btn=$("#lrCfgBtn");
    if(!arr.length||arr.length>60||arr.some(v=>!Number.isInteger(v)||v<0||v>COIN.max)){msg.textContent=ve("Nhập 1–60 số nguyên từ 0 đến "+COIN.max+".","Enter 1–60 whole numbers from 0 to "+COIN.max+".");return}
    btn.disabled=true;try{await window.gtCloud.setLoginRewards(arr);loginRewards=arr;msg.textContent=ve("Đã lưu "+arr.length+" ngày thưởng.","Saved "+arr.length+" reward days.")}catch(e){console.error(e);msg.textContent=cloudMsg(e)}btn.disabled=false}};
@@ -1439,7 +1465,7 @@ function route(){
  app.className=inRead?"":"wrap";
  const um=location.hash.match(/^#\/u\/([^/]+)$/);
  if(location.hash==="#/profile"){profilePage();window.scrollTo(0,0)}
- else if(um){const u=decodeURIComponent(um[1]);if(/^[A-Za-z0-9_-]{6,128}$/.test(u)){authorPage(u);window.scrollTo(0,0)}else location.hash="#/"}
+ else if(um){const u=decodeURIComponent(um[1]);if(/^\d{10}$/.test(u)){codePage(u);window.scrollTo(0,0)}else if(/^[A-Za-z0-9_-]{6,128}$/.test(u)){authorPage(u);window.scrollTo(0,0)}else location.hash="#/"}
  else if(location.hash==="#/following"){followingPage();window.scrollTo(0,0)}
  else if(location.hash==="#/updates"){updatesPage();window.scrollTo(0,0)}
  else if(location.hash==="#/shop"){shopPage();window.scrollTo(0,0)}
@@ -1902,6 +1928,58 @@ const cloud = {
     }));
   },
   cos(uid) { return cosMap.get(uid) || null; },
+  async ensureCode() {
+    const u = auth.currentUser; if (!u) return null;
+    const mine = await getDoc(doc(db, "userCodes", u.uid));
+    if (mine.exists() && /^\d{10}$/.test(String(mine.data().code))) return String(mine.data().code);
+    for (let i = 0; i < 8; i++) {
+      const a = new Uint32Array(2); crypto.getRandomValues(a);
+      const code = String(1 + (a[0] % 9)) + String(a[1] % 1e9).padStart(9, "0");
+      try {
+        const b = writeBatch(db);
+        b.set(doc(db, "publicIds", code), { uid: u.uid });
+        b.set(doc(db, "userCodes", u.uid), { code });
+        await b.commit(); return code;
+      } catch (e) {
+        if (!e || e.code !== "permission-denied") throw e;
+        const again = await getDoc(doc(db, "userCodes", u.uid));
+        if (again.exists()) return String(again.data().code);
+      }
+    }
+    throw new Error("id-failed");
+  },
+  async uidFromCode(code) {
+    code = String(code || "").trim();
+    if (!/^\d{10}$/.test(code)) throw new Error("bad-id");
+    const s = await getDoc(doc(db, "publicIds", code));
+    if (!s.exists()) throw new Error("no-user");
+    return String(s.data().uid);
+  },
+  async resolveUser(input) {
+    const v = String(input || "").trim().replace(/^.*#\/u\//, "");
+    if (/^\d{10}$/.test(v)) return this.uidFromCode(v);
+    if (/^[A-Za-z0-9_-]{6,128}$/.test(v)) return v;
+    throw new Error("bad-id");
+  },
+  async adminGiveItem(target, id) {
+    if (!auth.currentUser) throw new Error("auth");
+    if (!/^[fn]_[a-z]+$/.test(id)) throw new Error("bad-grant");
+    const r = doc(db, "inventory", target, "items", id);
+    if ((await getDoc(r)).exists()) return;
+    await setDoc(r, { ts: serverTimestamp() });
+  },
+  async adminRevokeItem(target, id) {
+    if (!auth.currentUser) throw new Error("auth");
+    if (!/^[fn]_[a-z]+$/.test(id)) throw new Error("bad-grant");
+    const b = writeBatch(db); b.delete(doc(db, "inventory", target, "items", id));
+    const c = await getDoc(doc(db, "cosmetics", target));
+    if (c.exists()) {
+      const d = c.data(), v = { frame: String(d.frame || ""), name: String(d.name || "") };
+      if (v.frame === id) v.frame = ""; if (v.name === id) v.name = "";
+      b.set(doc(db, "cosmetics", target), v);
+    }
+    await b.commit(); cosMap.delete(target);
+  },
   async inventory() {
     const u = auth.currentUser; if (!u) return [];
     const s = await getDocs(collection(db, "inventory", u.uid, "items"));
@@ -2230,8 +2308,10 @@ const cq = s => document.querySelector(s);
 let cmtUnsub = null, cmtCtx = null, cmtLimit = 30, cmtItems = [], cmtFull = false, cmtErr = "", lastSent = 0;
 
 // Truyện mẫu dùng chung cho mọi người; truyện tự thêm gắn với tài khoản chủ truyện
-// Dùng cùng một mã luồng bình luận cho mọi người đọc cùng truyện/chương.
-const threadOf = (bookId, ch) => bookId + "__" + ch;
+const threadOf = (bookId, ch) => {
+  if (!bookId.startsWith("u")) return bookId + "__" + ch;
+  const u = auth.currentUser; return u ? u.uid + "_" + bookId + "__" + ch : null;
+};
 function displayName(u) {
   let p = {}; try { p = JSON.parse(localStorage.getItem(profileStorageKey(u?.uid))) || {}; } catch {}
   return ((p.name && p.name !== "Độc giả") ? p.name : (u.displayName || "Độc giả")).slice(0, 60);
