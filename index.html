@@ -1904,13 +1904,13 @@ const cloud = {
   cos(uid) { return cosMap.get(uid) || null; },
   async inventory() {
     const u = auth.currentUser; if (!u) return [];
-    const s = await getDoc(doc(db, "inventory", u.uid));
-    return s.exists() && Array.isArray(s.data().items) ? s.data().items : [];
+    const s = await getDocs(collection(db, "inventory", u.uid, "items"));
+    return s.docs.map(d => d.id);
   },
   async buyItem(id, price) {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     const batch = writeBatch(db);
-    batch.set(doc(db, "inventory", u.uid), { items: arrayUnion(id) }, { merge: true });
+    batch.set(doc(db, "inventory", u.uid, "items", id), { ts: serverTimestamp() });
     batch.set(doc(db, "wallets", u.uid), { coins: increment(-price), lastTx: "shop/item:" + id }, { merge: true });
     await batch.commit();
   },
