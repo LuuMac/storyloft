@@ -434,6 +434,7 @@ img{-webkit-user-drag:none;user-drag:none}
 .shop-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:16px}
 .shop-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
 .shop-card h3{margin:0}.shop-card.plus{border-color:var(--acc)}.shop-card.soon{opacity:.62}
+.plusb{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;font-size:11px;line-height:19px;font-weight:700;letter-spacing:.02em;color:var(--accink);background:var(--acc);vertical-align:middle}
 .shop-ic{font-size:22px;color:var(--acc)}.shop-ul{margin:4px 0 8px;padding-left:18px;line-height:1.7}
 </style>
 </head>
@@ -946,9 +947,10 @@ const normPay=p=>{p=p||{};const from=Number.isInteger(p.from)&&p.from>=0?Math.mi
 const chPrice=(b,i)=>{const p=b&&b.pay;if(!p)return 0;const o=p.over&&p.over[String(i)];if(o!==undefined)return o;return p.from>=0&&i>=p.from?p.price:0};
 const hasPay=b=>{const p=b&&b.pay;return !!p&&((p.from>=0&&p.price>0)||Object.values(p.over||{}).some(v=>v>0))};
 let wallet=null;const UNL={};
-/* Cấu hình Plus: PHẢI khớp các số trong firestore.rules (giá 500, 30 ngày, giảm 30%, thưởng 100) */
-const PLUS={price:500,days:30,discount:30,bonus:100,bonusDays:30};
+/* Cấu hình Plus: PHẢI khớp các số trong firestore.rules (giá 1000, 30 ngày, giảm 30%, thưởng 50) */
+const PLUS={price:1000,days:30,discount:30,bonus:50,bonusDays:30};
 let ent=null;const plusOn=()=>!!ent&&ent.plusUntil>Date.now();
+const plusBadge=uid=>window.gtCloud&&window.gtCloud.isPlus&&window.gtCloud.isPlus(uid)?`<span class="plusb" title="Gác Truyện Plus">✦ Plus</span>`:"";
 const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
 const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
 const fmtD=ms=>new Date(ms).toLocaleDateString(L()==="vi"?"vi-VN":L());
@@ -957,7 +959,7 @@ const coinHtml=n=>`<span class="coinb">${IC.coin}${fmtN(n)}</span>`;
 const canDaily=()=>!!wallet&&Date.now()-(wallet.lastDaily||0)>=20*36e5;
 async function loadWallet(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
  if(!u||!window.gtCloud){wallet=null;ent=null;refreshWallet();return}
- try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}refreshWallet();maybeLoginReward()}
+ try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}if(plusOn()&&!window.__plusSynced){window.__plusSynced=1;window.gtCloud.syncPlusPublic().catch(()=>{})}refreshWallet();maybeLoginReward()}
 window.gtLoadWallet=loadWallet;
 function refreshWallet(){const sl=$("#accountShopLabel");if(sl)sl.textContent=ve("Cửa hàng","Shop")+(plusOn()?" ✦":"");const l=$("#accountCoinsLabel");if(l)l.innerHTML=ve("Ví xu","Coin wallet")+(wallet?` · ${coinHtml(wallet.coins)}`:"");
  const e=$("#wCoins");if(e)e.textContent=wallet?wallet.coins:"–";const pc=$("#pwCoins");if(pc)pc.textContent=wallet?wallet.coins:"–";const st=$("#stCoins");if(st)st.textContent=wallet?fmtN(wallet.coins):"–";
@@ -1130,12 +1132,12 @@ async function authorPage(uid){
  if(location.hash!==h)return;
  const C=window.gtCloud;
  try{
-  const [pf,st,books,ps,fl]=await Promise.all([C.profile(uid),C.stats(uid),C.booksByOwner(uid),C.listPosts(uid).catch(()=>[]),C.isFollowing(uid)]);
+  const [pf,st,books,ps,fl]=await Promise.all([C.profile(uid),C.stats(uid),C.booksByOwner(uid),C.listPosts(uid).catch(()=>[]),C.isFollowing(uid),C.plusOf([uid])]);
   if(location.hash!==h)return;
   cacheBooks(books);
   let following=fl,followers=st.followers;
   const av=isImgData(pf.avatar)?`<img src="${pf.avatar}" alt="">`:esc((pf.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
-  app.innerHTML=back+`<section class="profile-showcase"><div class="profile-showcase-top"><div class="avatar">${av}</div><div class="profile-showcase-info"><h1>${esc(pf.name)}</h1><p class="bio">${esc(pf.bio||"")}</p>
+  app.innerHTML=back+`<section class="profile-showcase"><div class="profile-showcase-top"><div class="avatar">${av}</div><div class="profile-showcase-info"><h1>${esc(pf.name)}${plusBadge(uid)}</h1><p class="bio">${esc(pf.bio||"")}</p>
    <div class="profile-stats"><div class="profile-stat"><strong>${st.following}</strong><span>Đang theo dõi</span></div><div class="profile-stat"><strong id="folCount">${followers}</strong><span>Người theo dõi</span></div><div class="profile-stat"><strong>${books.length}</strong><span>Truyện đã đăng</span></div></div></div></div>
    <div class="profile-showcase-actions" style="grid-template-columns:1fr"><button class="btn pri" id="followBtn" type="button"></button></div></section>
    <h2>Truyện của tác giả <span class="empty" style="font:400 14px 'Be Vietnam Pro',sans-serif">(${books.length})</span></h2>
@@ -1270,7 +1272,7 @@ function profilePage(){
  app.innerHTML=`<a href="#/" class="empty">${t("back")}</a>
  <section class="pf-card"><div class="pf-cover"></div>
   <div class="pf-body"><div class="pf-av" id="profileAvatarView">${av}</div>
-   <div class="pf-main"><h1 class="pf-name">${esc(profile.name||ve("Độc giả","Reader"))}</h1><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
+   <div class="pf-main"><h1 class="pf-name">${esc(profile.name||ve("Độc giả","Reader"))}${plusOn()?`<span class="plusb">✦ Plus</span>`:""}</h1><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
    <div class="pf-actions"><button class="btn pri" id="editProfileBtn" type="button">${ve("Chỉnh sửa hồ sơ","Edit profile")}</button><button class="btn" id="shareProfileBtn" type="button">${ve("Chia sẻ","Share")}</button></div></div>
   <div class="pf-stats"><button type="button" id="stFollowingBtn"><strong id="stFollowing">–</strong><span>${ve("Đang theo dõi","Following")}</span></button><div><strong id="stFollowers">–</strong><span>${ve("Người theo dõi","Followers")}</span></div><div><strong>${pubCount}</strong><span>${ve("Truyện đã đăng","Published")}</span></div><button type="button" id="stCoinsBtn"><strong id="stCoins">${wallet?fmtN(wallet.coins):"–"}</strong><span>${ve("Xu","Coins")}</span></button></div>
  </section>
@@ -1622,6 +1624,7 @@ async function deleteChapters(docId, from, to) {
     await batch.commit();
   }
 }
+const plusMap = new Map();
 const cloud = {
   async toggle(authorUid) {
     const user = auth.currentUser;
@@ -1841,6 +1844,20 @@ const cloud = {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     await setDoc(doc(db, "wallets", u.uid), { coins: increment(10), lastDaily: serverTimestamp() }, { merge: true });
   },
+  async plusOf(uids) {
+    const need = [...new Set(uids)].filter(x => x && !plusMap.has(x));
+    await Promise.all(need.map(async id => {
+      try { const s = await getDoc(doc(db, "plusPublic", id)), v = s.exists() && s.data().until && s.data().until.toMillis ? s.data().until.toMillis() : 0; plusMap.set(id, v); }
+      catch (e) { plusMap.set(id, 0); }
+    }));
+  },
+  isPlus(uid) { return (plusMap.get(uid) || 0) > Date.now(); },
+  async syncPlusPublic() {
+    const u = auth.currentUser; if (!u) return;
+    const e = await this.entitlement(); if (!e || e.plusUntil <= Date.now()) return;
+    await setDoc(doc(db, "plusPublic", u.uid), { until: Timestamp.fromMillis(e.plusUntil) });
+    plusMap.set(u.uid, e.plusUntil);
+  },
   async entitlement() {
     const u = auth.currentUser; if (!u) return null;
     const s = await getDoc(doc(db, "entitlements", u.uid)), d = s.exists() ? s.data() : {};
@@ -1851,6 +1868,7 @@ const cloud = {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     const e = await this.entitlement(), until = Math.max(Date.now(), e ? e.plusUntil : 0) + cfg.days * 864e5, batch = writeBatch(db);
     batch.set(doc(db, "entitlements", u.uid), { plusUntil: Timestamp.fromMillis(until) }, { merge: true });
+    batch.set(doc(db, "plusPublic", u.uid), { until: Timestamp.fromMillis(until) });
     batch.set(doc(db, "wallets", u.uid), { coins: increment(-cfg.price), lastTx: "shop/plus" }, { merge: true });
     await batch.commit();
   },
@@ -1864,7 +1882,10 @@ const cloud = {
   async adminSetPlus(target, days) {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     if (!/^[A-Za-z0-9_-]{6,128}$/.test(target) || !(days >= 0)) throw new Error("bad-grant");
-    await setDoc(doc(db, "entitlements", target), { plusUntil: Timestamp.fromMillis(Date.now() + days * 864e5) }, { merge: true });
+    const ts = Timestamp.fromMillis(Date.now() + days * 864e5), batch = writeBatch(db);
+    batch.set(doc(db, "entitlements", target), { plusUntil: ts }, { merge: true });
+    batch.set(doc(db, "plusPublic", target), { until: ts });
+    await batch.commit(); plusMap.delete(target);
   },
   async myUnlocks(docId) {
     const u = auth.currentUser; if (!u) return [];
@@ -2183,13 +2204,14 @@ function cmtList() {
   ul.innerHTML = cmtItems.length ? cmtItems.map(c => {
     const d = c.ts && c.ts.toDate ? c.ts.toDate() : new Date();
     return `<li class="cmt-item"><div class="cmt-av" aria-hidden="true">${cesc((c.name || "?").trim().slice(0, 1).toUpperCase())}</div>
-    <div style="flex:1;min-width:0"><div class="cmt-meta" style="display:flex;align-items:center"><span><b>${cesc(c.name)}</b>${cesc(ago(d))}</span>${me && c.uid === me.uid ? `<button class="cmt-del" data-id="${cesc(c.id)}" type="button">${ctx("Xoá", "Delete")}</button>` : ""}</div>
+    <div style="flex:1;min-width:0"><div class="cmt-meta" style="display:flex;align-items:center"><span><b>${cesc(c.name)}</b>${cloud.isPlus(c.uid) ? `<span class="plusb">✦ Plus</span>` : ""} ${cesc(ago(d))}</span>${me && c.uid === me.uid ? `<button class="cmt-del" data-id="${cesc(c.id)}" type="button">${ctx("Xoá", "Delete")}</button>` : ""}</div>
     <p class="cmt-body">${cesc(c.text)}</p></div></li>`;
   }).join("") : `<li class="empty" style="padding:14px 0;border-top:1px solid var(--line)">${cmtCtx && cmtCtx.thread ? ctx("Chưa có bình luận nào. Hãy là người đầu tiên!", "No comments yet. Be the first!") : ""}</li>`;
   ul.querySelectorAll(".cmt-del").forEach(b => b.onclick = async () => {
     if (!confirm(ctx("Xoá bình luận này?", "Delete this comment?"))) return;
     try { await deleteDoc(doc(db, "comments", cmtCtx.thread, "items", b.dataset.id)); } catch (e) { alert(cmtMsg(e)); }
   });
+  { const miss = cmtItems.map(c => c.uid).filter(x => x && !plusMap.has(x)); if (miss.length) cloud.plusOf(miss).then(() => { if (cq("#cmtList")) cmtList(); }); }
   cq("#cmtMore").innerHTML = cmtFull ? `<button class="btn" id="cmtMoreBtn" type="button">${ctx("Xem thêm bình luận", "Load more")}</button>` : "";
   if (cmtFull) cq("#cmtMoreBtn").onclick = () => { cmtLimit += 30; cmtSubscribe(); };
 }
