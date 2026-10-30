@@ -897,7 +897,7 @@ function home(){
 }
 function shelf(){
  const k=q.trim().toLowerCase(),pub=tab==="pub";
- const commList=commIds.map(id=>cloudCache[id]).filter(Boolean);let src;if(pub)src=commList;else{src=libAll();if(tab==="all"){const have=new Set(src.map(b=>b.id));const meU=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,ownLocal=meU?src.filter(b=>b.id.startsWith("u")):[];src.forEach(b=>{if(b.pubBy)have.add("c_"+pubDocId(b))});commList.forEach(b=>{if(!have.has(b.id)&&!(meU&&ownLocal.some(l=>b.id.startsWith("c_"+meU.uid+"-"+l.id)))){have.add(b.id);src.push(b)}})}}
+ const commList=commIds.map(id=>cloudCache[id]).filter(Boolean);let src;if(pub)src=commList;else{src=libAll();{const twin=new Set(src.filter(b=>b.pubBy).map(b=>"c_"+pubDocId(b)));src=src.filter(b=>!(b.cloud&&twin.has(b.id)))}if(tab==="all"){const have=new Set(src.map(b=>b.id));const meU=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,ownLocal=meU?src.filter(b=>b.id.startsWith("u")):[];src.forEach(b=>{if(b.pubBy)have.add("c_"+pubDocId(b))});commList.forEach(b=>{if(!have.has(b.id)&&!(meU&&ownLocal.some(l=>b.id.startsWith("c_"+meU.uid+"-"+l.id)))){have.add(b.id);src.push(b)}})}}
  const list=src.filter(b=>(!k||(b.title+" "+(b.author||"")+" "+(b.ownerName||"")+" "+(b.tags||[]).join(" ")+" "+(b.desc||"")+" "+(b.genre||"")).toLowerCase().includes(k))&&(!tagf||(b.tags||[]).includes(tagf))&&(pub||tab==="all"||(tab==="fav"?favs.includes(b.id):prog[b.id]&&prog[b.id].last!=null&&pct(b)<100)));
  const none=pub?(commState==="loading"?ve("Đang tải truyện cộng đồng…","Loading community novels…"):commState==="err"?commErr:(commState==="ok"&&!commIds.length&&pub?ve("Chưa có truyện nào được đăng. Hãy là người đầu tiên!","Nothing has been published yet. Be the first!"):t("none"))):t("none");
  $("#shelf").innerHTML=list.length?list.map(card).join(""):`<p class="empty">${esc(none)}</p>`;
@@ -993,7 +993,7 @@ const COS=[
  {id:"n_grad",k:"name",n:["Gradient tím – xanh","Violet–teal gradient"],p:400}];  /* giá phải khớp prices() trong firestore.rules */
 let inv=[],myCode=null;
 const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.gtCloud.cos(uid);return c&&c[k]?(k==="frame"?" fr-":" nm-")+c[k]:""};
-window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c-"+me.uid+"-"+b.id+(b.pubGen?"_g"+b.pubGen:""):null};
+window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c_"+pubDocId(b):null};
 const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
 const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
 const fmtD=ms=>new Date(ms).toLocaleDateString(L()==="vi"?"vi-VN":L());
