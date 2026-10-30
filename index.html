@@ -430,6 +430,11 @@ img{-webkit-user-drag:none;user-drag:none}
 :root[data-theme="light"] .top,:root[data-theme="sepia"] .top{background:color-mix(in srgb,var(--bg) 90%,transparent);border-color:var(--line)}
 :root[data-theme="light"] :is(.btn,.tag,.tabs button,.tools input,.pop,.bk),:root[data-theme="sepia"] :is(.btn,.tag,.tabs button,.tools input,.pop,.bk){background:var(--panel);border-color:var(--line);color:var(--ink);box-shadow:none}
 :root[data-theme="light"] .btn.pri,:root[data-theme="sepia"] .btn.pri,:root[data-theme="light"] .tag.on,:root[data-theme="sepia"] .tag.on{background:var(--acc);border-color:var(--acc);color:var(--accink)}
+
+.shop-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));margin-top:16px}
+.shop-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.shop-card h3{margin:0}.shop-card.plus{border-color:var(--acc)}.shop-card.soon{opacity:.62}
+.shop-ic{font-size:22px;color:var(--acc)}.shop-ul{margin:4px 0 8px;padding-left:18px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -445,6 +450,7 @@ img{-webkit-user-drag:none;user-drag:none}
       <div class="account-who"><strong id="accountMenuName">Tài khoản Gác Truyện</strong><small id="accountMenuEmail"></small></div>
       <button type="button" data-account-action="profile"><span class="menu-icon">♙</span>Hồ sơ của tôi</button>
       <button type="button" data-account-action="wallet"><span class="menu-icon">●</span><span id="accountCoinsLabel">Ví xu</span></button>
+      <button type="button" data-account-action="shop"><span class="menu-icon">✦</span><span id="accountShopLabel">Cửa hàng</span></button>
       <button type="button" data-account-action="updates"><span class="menu-icon">◉</span>Cập nhật</button>
       <div class="account-sep"></div>
       <button type="button" data-account-action="language" id="accountLanguageButton" aria-expanded="false"><span class="menu-icon">文</span><span id="accountLanguageLabel">Ngôn ngữ: Tiếng Việt</span><span class="account-caret" aria-hidden="true">▾</span></button>
@@ -759,6 +765,24 @@ x("Chương dài quá 200.000 ký tự, hãy tách nhỏ ra.","Chapter is over 2
 x("Bộ nhớ trình duyệt đã đầy nên chưa lưu được chương.","Browser storage is full, so the chapter was not saved.|浏览器存储已满，章节未能保存。|ブラウザの保存領域がいっぱいのため、章を保存できませんでした。|브라우저 저장 공간이 가득 차 장을 저장하지 못했습니다.|El almacenamiento del navegador está lleno, así que no se guardó el capítulo.|Le stockage du navigateur est plein : le chapitre n’a pas été enregistré.|Der Browser-Speicher ist voll, das Kapitel wurde nicht gespeichert.|O armazenamento do navegador está cheio; o capítulo não foi salvo.|Хранилище браузера заполнено, глава не сохранена.");
 x("Xoá chương cuối này?","Delete this last chapter?|要删除最后一章吗？|この最後の章を削除しますか？|마지막 장을 삭제할까요?|¿Eliminar este último capítulo?|Supprimer ce dernier chapitre ?|Dieses letzte Kapitel löschen?|Excluir este último capítulo?|Удалить последнюю главу?");
 x("Bộ nhớ trình duyệt đã đầy nên chưa lưu được truyện. Hãy xoá bớt truyện hoặc ảnh bìa cũ (hoặc bỏ ảnh bìa) rồi thử lại.","Browser storage is full, so the novel was not saved. Remove old novels or covers (or the cover image) and try again.|浏览器存储已满，小说未能保存。请删除旧小说或封面（或移除封面图片）后重试。|ブラウザの保存領域がいっぱいのため、小説を保存できませんでした。古い小説や表紙（または表紙画像）を削除してからお試しください。|브라우저 저장 공간이 가득 차 소설을 저장하지 못했습니다. 오래된 소설이나 표지(또는 표지 이미지)를 삭제한 뒤 다시 시도해 주세요.|El almacenamiento del navegador está lleno y no se guardó la novela. Elimina novelas o portadas antiguas (o quita la portada) e inténtalo de nuevo.|Le stockage du navigateur est plein : le roman n’a pas été enregistré. Supprimez d’anciens romans ou couvertures (ou retirez la couverture) puis réessayez.|Der Browser-Speicher ist voll, der Roman wurde nicht gespeichert. Lösche alte Romane oder Cover (oder entferne das Cover) und versuche es erneut.|O armazenamento do navegador está cheio e o romance não foi salvo. Exclua romances ou capas antigos (ou remova a capa) e tente novamente.|Хранилище браузера заполнено, роман не сохранён. Удалите старые романы или обложки (или уберите обложку) и повторите.");
+x("Cửa hàng","Shop|商店|ショップ|상점|Tienda|Boutique|Shop|Loja|Магазин");
+x("Giảm {0}% giá mọi chương trả phí","{0}% off every paid chapter|所有付费章节减价 {0}%|有料の章がすべて {0}% オフ|모든 유료 장 {0}% 할인|{0} % de descuento en cada capítulo de pago|{0} % de réduction sur chaque chapitre payant|{0} % Rabatt auf jedes kostenpflichtige Kapitel|{0}% de desconto em cada capítulo pago|Скидка {0}% на каждую платную главу");
+x("Nhận {0} xu mỗi {1} ngày","Get {0} coins every {1} days|每 {1} 天领取 {0} 金币|{1}日ごとに {0} コインを獲得|{1}일마다 코인 {0}개 지급|Recibe {0} monedas cada {1} días|Recevez {0} pièces tous les {1} jours|Erhalte alle {1} Tage {0} Münzen|Ganhe {0} moedas a cada {1} dias|Получайте {0} монет каждые {1} дн.");
+x("Mua · {0} xu / {1} ngày","Buy · {0} coins / {1} days|购买 · {0} 金币 / {1} 天|購入 · {0} コイン / {1}日|구매 · {0}코인 / {1}일|Comprar · {0} monedas / {1} días|Acheter · {0} pièces / {1} jours|Kaufen · {0} Münzen / {1} Tage|Comprar · {0} moedas / {1} dias|Купить · {0} монет / {1} дн.");
+x("Gia hạn · {0} xu / {1} ngày","Renew · {0} coins / {1} days|续费 · {0} 金币 / {1} 天|更新 · {0} コイン / {1}日|연장 · {0}코인 / {1}일|Renovar · {0} monedas / {1} días|Renouveler · {0} pièces / {1} jours|Verlängern · {0} Münzen / {1} Tage|Renovar · {0} moedas / {1} dias|Продлить · {0} монет / {1} дн.");
+x("Đang hoạt động đến {0}","Active until {0}|有效期至 {0}|{0} まで有効|{0}까지 이용 가능|Activo hasta el {0}|Actif jusqu’au {0}|Aktiv bis {0}|Ativo até {0}|Действует до {0}");
+x("Chưa kích hoạt","Not active|未开通|未加入|이용 중 아님|No activo|Inactif|Nicht aktiv|Inativo|Не активно");
+x("Nhận {0} xu thưởng","Claim {0} bonus coins|领取 {0} 金币奖励|ボーナス {0} コインを受け取る|보너스 코인 {0}개 받기|Reclamar {0} monedas de bonificación|Récupérer {0} pièces bonus|{0} Bonusmünzen abholen|Resgatar {0} moedas de bônus|Забрать {0} бонусных монет");
+x("Sắp ra mắt","Coming soon|即将推出|近日公開|출시 예정|Próximamente|Bientôt disponible|Demnächst|Em breve|Скоро");
+x("Gói xu","Coin packs|金币包|コインパック|코인 팩|Paquetes de monedas|Packs de pièces|Münzpakete|Pacotes de moedas|Наборы монет");
+x("Nạp xu bằng tiền thật để mở khóa nhiều chương hơn.","Top up coins with real money to unlock more chapters.|用真实货币充值金币，解锁更多章节。|現金でコインをチャージして、より多くの章を解放。|실제 결제로 코인을 충전해 더 많은 장을 열어 보세요.|Recarga monedas con dinero real para desbloquear más capítulos.|Rechargez des pièces avec de l’argent réel pour débloquer plus de chapitres.|Lade Münzen mit echtem Geld auf, um mehr Kapitel freizuschalten.|Recarregue moedas com dinheiro real para desbloquear mais capítulos.|Пополняйте монеты за реальные деньги, чтобы открывать больше глав.");
+x("Vật phẩm hồ sơ","Profile items|资料装饰|プロフィールアイテム|프로필 아이템|Objetos de perfil|Objets de profil|Profil-Items|Itens de perfil|Предметы профиля");
+x("Khung ảnh đại diện, huy hiệu và nhiều thứ khác.","Avatar frames, badges and more.|头像框、徽章等。|アイコンフレーム、バッジなど。|프로필 사진 테두리, 배지 등.|Marcos de avatar, insignias y más.|Cadres d’avatar, badges et plus encore.|Avatarrahmen, Abzeichen und mehr.|Molduras de avatar, selos e mais.|Рамки аватара, значки и многое другое.");
+x("Mua thành công!","Purchase successful!|购买成功！|購入しました！|구매 완료!|¡Compra realizada!|Achat réussi !|Kauf erfolgreich!|Compra concluída!|Покупка выполнена!");
+x("Quản trị: tặng Plus","Admin: gift Plus|管理员：赠送 Plus|管理者：Plus を付与|관리자: Plus 선물|Admin: regalar Plus|Admin : offrir Plus|Admin: Plus schenken|Admin: presentear Plus|Админ: подарить Plus");
+x("Số ngày (0 để thu hồi)","Days (0 to revoke)|天数（0 表示收回）|日数（0で取り消し）|일수(0은 회수)|Días (0 para retirar)|Jours (0 pour retirer)|Tage (0 zum Entziehen)|Dias (0 para retirar)|Дней (0 — отозвать)");
+x("Áp dụng","Apply|应用|適用|적용|Aplicar|Appliquer|Anwenden|Aplicar|Применить");
+x("Đăng nhập để vào cửa hàng.","Sign in to open the shop.|登录后进入商店。|ログインしてショップを開きます。|로그인하여 상점을 이용하세요.|Inicia sesión para entrar en la tienda.|Connectez-vous pour accéder à la boutique.|Melde dich an, um den Shop zu öffnen.|Entre para acessar a loja.|Войдите, чтобы открыть магазин.");
 
 const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
 const stLabel=k=>STATUS[k]?ve(STATUS[k][0],STATUS[k][1]):"";
@@ -922,14 +946,20 @@ const normPay=p=>{p=p||{};const from=Number.isInteger(p.from)&&p.from>=0?Math.mi
 const chPrice=(b,i)=>{const p=b&&b.pay;if(!p)return 0;const o=p.over&&p.over[String(i)];if(o!==undefined)return o;return p.from>=0&&i>=p.from?p.price:0};
 const hasPay=b=>{const p=b&&b.pay;return !!p&&((p.from>=0&&p.price>0)||Object.values(p.over||{}).some(v=>v>0))};
 let wallet=null;const UNL={};
+/* Cấu hình Plus: PHẢI khớp các số trong firestore.rules (giá 500, 30 ngày, giảm 30%, thưởng 100) */
+const PLUS={price:500,days:30,discount:30,bonus:100,bonusDays:30};
+let ent=null;const plusOn=()=>!!ent&&ent.plusUntil>Date.now();
+const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
+const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
+const fmtD=ms=>new Date(ms).toLocaleDateString(L()==="vi"?"vi-VN":L());
 const isAdminUser=u=>!!u&&ADMIN_UIDS.includes(u.uid);
 const coinHtml=n=>`<span class="coinb">${IC.coin}${fmtN(n)}</span>`;
 const canDaily=()=>!!wallet&&Date.now()-(wallet.lastDaily||0)>=20*36e5;
 async function loadWallet(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
- if(!u||!window.gtCloud){wallet=null;refreshWallet();return}
- try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}refreshWallet();maybeLoginReward()}
+ if(!u||!window.gtCloud){wallet=null;ent=null;refreshWallet();return}
+ try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}refreshWallet();maybeLoginReward()}
 window.gtLoadWallet=loadWallet;
-function refreshWallet(){const l=$("#accountCoinsLabel");if(l)l.innerHTML=ve("Ví xu","Coin wallet")+(wallet?` · ${coinHtml(wallet.coins)}`:"");
+function refreshWallet(){const sl=$("#accountShopLabel");if(sl)sl.textContent=ve("Cửa hàng","Shop")+(plusOn()?" ✦":"");const l=$("#accountCoinsLabel");if(l)l.innerHTML=ve("Ví xu","Coin wallet")+(wallet?` · ${coinHtml(wallet.coins)}`:"");
  const e=$("#wCoins");if(e)e.textContent=wallet?wallet.coins:"–";const pc=$("#pwCoins");if(pc)pc.textContent=wallet?wallet.coins:"–";const st=$("#stCoins");if(st)st.textContent=wallet?fmtN(wallet.coins):"–";
  const d=$("#dailyBtn");if(d)d.disabled=!canDaily()}
 async function claimDaily(btn){if(btn)btn.disabled=true;
@@ -941,16 +971,16 @@ function paywall(b,n){
  app.innerHTML=`<div class="paywall"><div class="pw-lock" aria-hidden="true">🔒</div><h2>${esc(b.chapters[n].t)}</h2>
   <p>${ve("Chương này cần","This chapter costs")} <span class="pw-price">${IC.coin}${price}</span> ${ve("xu để đọc.","coins to read.")}</p>
   ${me?`<p class="empty">${ve("Số dư của bạn:","Your balance:")} <b id="pwCoins">${wallet?wallet.coins:"…"}</b> ${ve("xu","coins")}</p><p class="empty" id="pwMsg" style="font-size:13px;min-height:1.4em"></p>
-   <div class="pw-actions"><button class="btn pri" id="pwUnlock" type="button">${ve("Mở khóa","Unlock")} · ${price} ${ve("xu","coins")}</button><button class="btn" id="dailyBtn" type="button">${ve("Điểm danh +"+COIN.daily+" xu","Check in +"+COIN.daily)}</button></div>`
+   <div class="pw-actions"><button class="btn pri" id="pwUnlock" type="button">${ve("Mở khóa","Unlock")} · ${payFor(price)<price?`<s style="opacity:.6">${price}</s> `:""}${payFor(price)} ${ve("xu","coins")}</button><button class="btn" id="dailyBtn" type="button">${ve("Điểm danh +"+COIN.daily+" xu","Check in +"+COIN.daily)}</button></div>`
    :`<div class="pw-actions"><button class="btn pri" id="pwLogin" type="button">${ve("Đăng nhập để mở khóa","Sign in to unlock")}</button></div>`}
   <div class="pw-nav"><a class="btn" href="#/b/${esc(b.id)}">${t("toc")}</a>${n>0?`<a class="btn" href="#/b/${esc(b.id)}/c/${n-1}">${t("prev")}</a>`:""}</div></div>`;
  if(!me){$("#pwLogin").onclick=()=>loginDlg.showModal();return}
  const msg=$("#pwMsg"),ub=$("#pwUnlock");
- const state=()=>{refreshWallet();const low=!!wallet&&wallet.coins<price;ub.disabled=!wallet||low;msg.textContent=low?ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more."):""};
+ const state=()=>{refreshWallet();const low=!!wallet&&wallet.coins<payFor(price);ub.disabled=!wallet||low;msg.textContent=low?ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more."):""};
  state();if(!wallet)loadWallet().then(()=>{if($("#pwUnlock"))state()});
  $("#dailyBtn").onclick=async()=>{await claimDaily($("#dailyBtn"));if($("#pwUnlock"))state()};
  ub.onclick=async()=>{ub.disabled=true;
-  try{await window.gtCloud.unlock(b.id.slice(2),n,price,b.ownerUid);(UNL[b.id]=UNL[b.id]||new Set()).add(n);wallet=await window.gtCloud.wallet();refreshWallet();route()}
+  try{await window.gtCloud.unlock(b.id.slice(2),n,price,b.ownerUid,payFor(price));(UNL[b.id]=UNL[b.id]||new Set()).add(n);wallet=await window.gtCloud.wallet();refreshWallet();route()}
   catch(e){console.error(e);msg.textContent=cloudMsg(e);ub.disabled=false}};
 }
 let loginRewards=[2,3,3,4,4,5,8];
@@ -1118,6 +1148,33 @@ async function authorPage(uid){
    fb.disabled=true;try{const on=await C.toggle(uid);followers+=on?1:-1;following=on;$("#folCount").textContent=followers;paint()}catch(e){console.error(e);alert(cloudMsg(e))}finally{fb.disabled=false}};
  }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+`<p class="empty" style="margin-top:24px">${esc(cloudMsg(e))}</p>`}
 }
+const SHOP=[
+ {id:"plus"},
+ {id:"coins",ic:"●",name:["Gói xu","Coin packs"],desc:["Nạp xu bằng tiền thật để mở khóa nhiều chương hơn.","Top up coins with real money to unlock more chapters."]},
+ {id:"cosmetic",ic:"❖",name:["Vật phẩm hồ sơ","Profile items"],desc:["Khung ảnh đại diện, huy hiệu và nhiều thứ khác.","Avatar frames, badges and more."]}];
+const plusCard=()=>{const on=plusOn(),canB=on&&Date.now()-(ent.bonusAt||0)>=PLUS.bonusDays*864e5,buy=on?["Gia hạn · {0} xu / {1} ngày","Renew · {0} coins / {1} days"]:["Mua · {0} xu / {1} ngày","Buy · {0} coins / {1} days"];
+ return `<div class="shop-card plus"><div class="shop-ic">✦</div><h3>Gác Truyện Plus</h3><p class="bkm" style="margin:0">${on?vf("Đang hoạt động đến {0}","Active until {0}",fmtD(ent.plusUntil)):ve("Chưa kích hoạt","Not active")}</p>
+ <ul class="shop-ul"><li>${vf("Giảm {0}% giá mọi chương trả phí","{0}% off every paid chapter",PLUS.discount)}</li><li>${vf("Nhận {0} xu mỗi {1} ngày","Get {0} coins every {1} days",PLUS.bonus,PLUS.bonusDays)}</li></ul>
+ <div class="pw-actions"><button class="btn pri" id="shBuy" type="button">${vf(buy[0],buy[1],PLUS.price,PLUS.days)}</button>${canB?`<button class="btn" id="shBonus" type="button">${vf("Nhận {0} xu thưởng","Claim {0} bonus coins",PLUS.bonus)}</button>`:""}</div><p class="bkm" id="shMsg" style="margin:0"></p></div>`};
+const soonCard=i=>`<div class="shop-card soon"><div class="shop-ic">${i.ic}</div><h3>${ve(i.name[0],i.name[1])}</h3><p class="bkm" style="margin:0">${ve(i.desc[0],i.desc[1])}</p><div class="pw-actions"><button class="btn" type="button" disabled>${ve("Sắp ra mắt","Coming soon")}</button></div></div>`;
+async function shopPage(){
+ const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/" class="empty">${t("back")}</a>`,title=`<h1 style="margin-top:12px">${ve("Cửa hàng","Shop")}</h1>`;
+ if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để vào cửa hàng.","Sign in to open the shop.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
+ app.innerHTML=back+title+`<p class="empty">${ve("Đang tải…","Loading…")}</p>`;
+ if(!window.gtCloud)await new Promise(r=>addEventListener("gtcloud",r,{once:true}));
+ if(!wallet||!ent)await loadWallet();
+ if(location.hash!==h)return;
+ const adm=isAdminUser(me);
+ app.innerHTML=back+title+`<p style="margin:6px 0 0">${ve("Số dư của bạn:","Your balance:")} ${wallet?coinHtml(wallet.coins):"–"}</p><div class="shop-grid">${SHOP.map(i=>i.id==="plus"?plusCard():soonCard(i)).join("")}</div>
+ ${adm?`<h3 style="margin:26px 0 8px">${ve("Quản trị: tặng Plus","Admin: gift Plus")}</h3><div class="pf-compose"><input id="shUid" placeholder="${ve("ID người dùng (hoặc dán liên kết hồ sơ #/u/…)","User ID (or paste profile link #/u/…)")}"><input id="shDays" type="number" min="0" placeholder="${ve("Số ngày (0 để thu hồi)","Days (0 to revoke)")}"><button class="btn" id="shGrant" type="button">${ve("Áp dụng","Apply")}</button><p class="bkm" id="shGMsg"></p></div>`:""}`;
+ const msg=$("#shMsg"),bb=$("#shBuy");
+ const done=async()=>{wallet=await window.gtCloud.wallet();ent=await window.gtCloud.entitlement();refreshWallet();if(location.hash===h)shopPage()};
+ if(bb)bb.onclick=async()=>{if(!wallet||wallet.coins<PLUS.price){msg.textContent=ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more.");return}
+  bb.disabled=true;try{await window.gtCloud.buyPlus(PLUS);if(window.gtShowAuthToast)window.gtShowAuthToast(ve("Mua thành công!","Purchase successful!"));await done()}catch(e){console.error(e);msg.textContent=cloudMsg(e);bb.disabled=false}};
+ const bo=$("#shBonus");if(bo)bo.onclick=async()=>{bo.disabled=true;try{await window.gtCloud.claimPlusBonus(PLUS);await done()}catch(e){console.error(e);msg.textContent=cloudMsg(e);bo.disabled=false}};
+ const g=$("#shGrant");if(g)g.onclick=async()=>{const uid=$("#shUid").value.trim().replace(/^.*#\/u\//,""),d=parseInt($("#shDays").value),gm=$("#shGMsg");
+  if(!/^[A-Za-z0-9_-]{6,128}$/.test(uid)||!(d>=0)){gm.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.");return}
+  g.disabled=true;try{await window.gtCloud.adminSetPlus(uid,d);gm.textContent="OK"}catch(e){console.error(e);gm.textContent=cloudMsg(e)}g.disabled=false}};
 async function updatesPage(){
  const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/profile" class="empty">${ve("← Hồ sơ","← Profile")}</a>`,title=`<h1 style="margin-top:12px">${ve("Truyện mới cập nhật","Recently updated")}</h1>`;
  if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
@@ -1336,6 +1393,7 @@ function route(){
  else if(um){const u=decodeURIComponent(um[1]);if(/^[A-Za-z0-9_-]{6,128}$/.test(u)){authorPage(u);window.scrollTo(0,0)}else location.hash="#/"}
  else if(location.hash==="#/following"){followingPage();window.scrollTo(0,0)}
  else if(location.hash==="#/updates"){updatesPage();window.scrollTo(0,0)}
+ else if(location.hash==="#/shop"){shopPage();window.scrollTo(0,0)}
  else if(location.hash==="#/rank"){rankPage();window.scrollTo(0,0)}
  else if(!m){home();window.scrollTo(0,0)}
  else if(m[2]!=null){if(!needCloud(m[1]))chapter(m[1],m[2],m[3])}
@@ -1352,7 +1410,7 @@ const loginDlg=$("#loginDlg");
 const accountDropdown=$("#accountDropdown"), accountNameBtn=$("#accountNameBtn");
 function toggleAccountDropdown(force){const user=window.gtFirebaseAuth?.currentUser;if(force===false){accountDropdown.classList.remove("on");$("#bProfile").setAttribute("aria-expanded","false");accountNameBtn.setAttribute("aria-expanded","false");return}if(!user){if(!loginDlg.open)loginDlg.showModal();return}const open=typeof force==="boolean"?force:!accountDropdown.classList.contains("on");accountDropdown.classList.toggle("on",open);$("#bProfile").setAttribute("aria-expanded",String(open));accountNameBtn.setAttribute("aria-expanded",String(open))}
 $("#bProfile").onclick=()=>toggleAccountDropdown();accountNameBtn.onclick=()=>toggleAccountDropdown();
-accountDropdown.addEventListener("click",async e=>{const b=e.target.closest("[data-account-action]");if(!b)return;const act=b.dataset.accountAction;if(act!=="language")toggleAccountDropdown(false);if(act==="profile")location.hash="#/profile";else if(act==="wallet"){pfTab="wallet";if(location.hash==="#/profile")profilePage();else location.hash="#/profile"}else if(act==="updates")location.hash="#/updates";else if(act==="language"){toggleAccountDropdown(false);openLang()}else if(act==="settings"){$("#pop").classList.add("on")}else if(act==="help"){alert("Trợ giúp Gác Truyện\n\n• Hồ sơ: chỉnh tên, ảnh đại diện, xem truyện và bài viết của bạn.\n• Ví xu: điểm danh nhận xu, mở khóa chương trả phí.\n• Cập nhật: truyện mới từ tác giả bạn theo dõi.")}else if(act==="logout"){e.preventDefault();e.stopPropagation();const logoutBtn=document.getElementById("accountMenuLogout"),authMsg=document.getElementById("menuAuthMessage");if(logoutBtn.disabled)return;logoutBtn.disabled=true;logoutBtn.setAttribute("aria-busy","true");authMsg.hidden=true;try{if(typeof window.gtSignOut!=="function")throw new Error("Chức năng đăng xuất chưa sẵn sàng. Hãy tải lại trang rồi thử lại.");await window.gtSignOut();accountDropdown.classList.remove("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","false");accountNameBtn?.setAttribute("aria-expanded","false");window.gtShowAuthToast?.("Đã đăng xuất thành công");}catch(error){console.error("Lỗi đăng xuất Firebase:",error);authMsg.textContent=window.gtReadableAuthError?window.gtReadableAuthError(error):(error?.message||"Chưa đăng xuất được. Hãy thử lại.");authMsg.hidden=false;accountDropdown.classList.add("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","true");accountNameBtn?.setAttribute("aria-expanded","true");}finally{logoutBtn.disabled=false;logoutBtn.removeAttribute("aria-busy")}}});
+accountDropdown.addEventListener("click",async e=>{const b=e.target.closest("[data-account-action]");if(!b)return;const act=b.dataset.accountAction;if(act!=="language")toggleAccountDropdown(false);if(act==="profile")location.hash="#/profile";else if(act==="wallet"){pfTab="wallet";if(location.hash==="#/profile")profilePage();else location.hash="#/profile"}else if(act==="shop")location.hash="#/shop";else if(act==="updates")location.hash="#/updates";else if(act==="language"){toggleAccountDropdown(false);openLang()}else if(act==="settings"){$("#pop").classList.add("on")}else if(act==="help"){alert("Trợ giúp Gác Truyện\n\n• Hồ sơ: chỉnh tên, ảnh đại diện, xem truyện và bài viết của bạn.\n• Ví xu: điểm danh nhận xu, mở khóa chương trả phí.\n• Cập nhật: truyện mới từ tác giả bạn theo dõi.")}else if(act==="logout"){e.preventDefault();e.stopPropagation();const logoutBtn=document.getElementById("accountMenuLogout"),authMsg=document.getElementById("menuAuthMessage");if(logoutBtn.disabled)return;logoutBtn.disabled=true;logoutBtn.setAttribute("aria-busy","true");authMsg.hidden=true;try{if(typeof window.gtSignOut!=="function")throw new Error("Chức năng đăng xuất chưa sẵn sàng. Hãy tải lại trang rồi thử lại.");await window.gtSignOut();accountDropdown.classList.remove("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","false");accountNameBtn?.setAttribute("aria-expanded","false");window.gtShowAuthToast?.("Đã đăng xuất thành công");}catch(error){console.error("Lỗi đăng xuất Firebase:",error);authMsg.textContent=window.gtReadableAuthError?window.gtReadableAuthError(error):(error?.message||"Chưa đăng xuất được. Hãy thử lại.");authMsg.hidden=false;accountDropdown.classList.add("on");document.getElementById("bProfile")?.setAttribute("aria-expanded","true");accountNameBtn?.setAttribute("aria-expanded","true");}finally{logoutBtn.disabled=false;logoutBtn.removeAttribute("aria-busy")}}});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleAccountDropdown(false)});
 $("#closeLogin").onclick=()=>loginDlg.close();
 loginDlg.addEventListener("click",e=>{if(e.target===loginDlg&&outside(e,loginDlg))loginDlg.close()});
@@ -1516,7 +1574,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {
   getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, limit,
-  onSnapshot, serverTimestamp, getDoc, getDocFromServer, getDocs, getDocsFromServer, setDoc, writeBatch, where, increment
+  onSnapshot, serverTimestamp, getDoc, getDocFromServer, getDocs, getDocsFromServer, setDoc, writeBatch, where, increment, Timestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 import { getDatabase, ref as rtdbRef, get as rtdbGet, set as rtdbSet, remove as rtdbRemove, update as rtdbUpdate } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 
@@ -1783,16 +1841,41 @@ const cloud = {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     await setDoc(doc(db, "wallets", u.uid), { coins: increment(10), lastDaily: serverTimestamp() }, { merge: true });
   },
+  async entitlement() {
+    const u = auth.currentUser; if (!u) return null;
+    const s = await getDoc(doc(db, "entitlements", u.uid)), d = s.exists() ? s.data() : {};
+    const ms = v => v && v.toMillis ? v.toMillis() : 0;
+    return { plusUntil: ms(d.plusUntil), bonusAt: ms(d.bonusAt) };
+  },
+  async buyPlus(cfg) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const e = await this.entitlement(), until = Math.max(Date.now(), e ? e.plusUntil : 0) + cfg.days * 864e5, batch = writeBatch(db);
+    batch.set(doc(db, "entitlements", u.uid), { plusUntil: Timestamp.fromMillis(until) }, { merge: true });
+    batch.set(doc(db, "wallets", u.uid), { coins: increment(-cfg.price), lastTx: "shop/plus" }, { merge: true });
+    await batch.commit();
+  },
+  async claimPlusBonus(cfg) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    const batch = writeBatch(db);
+    batch.set(doc(db, "entitlements", u.uid), { bonusAt: serverTimestamp() }, { merge: true });
+    batch.set(doc(db, "wallets", u.uid), { coins: increment(cfg.bonus), lastTx: "shop/bonus" }, { merge: true });
+    await batch.commit();
+  },
+  async adminSetPlus(target, days) {
+    const u = auth.currentUser; if (!u) throw new Error("auth");
+    if (!/^[A-Za-z0-9_-]{6,128}$/.test(target) || !(days >= 0)) throw new Error("bad-grant");
+    await setDoc(doc(db, "entitlements", target), { plusUntil: Timestamp.fromMillis(Date.now() + days * 864e5) }, { merge: true });
+  },
   async myUnlocks(docId) {
     const u = auth.currentUser; if (!u) return [];
     const s = await getDocs(query(collection(db, "books", docId, "unlocks"), where("uid", "==", u.uid)));
     return s.docs.map(d => Number(d.data().ch)).filter(n => Number.isInteger(n));
   },
-  async unlock(docId, ch, price, ownerUid) {
+  async unlock(docId, ch, price, ownerUid, paid) {
     const u = auth.currentUser; if (!u) throw new Error("auth");
     const key = u.uid + "_" + ch, batch = writeBatch(db);
-    batch.set(doc(db, "books", docId, "unlocks", key), { uid: u.uid, ownerUid, ch, price, ts: serverTimestamp() });
-    batch.set(doc(db, "wallets", u.uid), { coins: increment(-price), lastTx: docId + "/" + key }, { merge: true });
+    batch.set(doc(db, "books", docId, "unlocks", key), { uid: u.uid, ownerUid, ch, price, paid, ts: serverTimestamp() });
+    batch.set(doc(db, "wallets", u.uid), { coins: increment(-paid), lastTx: docId + "/" + key }, { merge: true });
     await batch.commit();
   },
   async earnings(docIds) {
@@ -2038,7 +2121,7 @@ onAuthStateChanged(auth, user => {
   setTimeout(() => { if (window.gtLoadWallet) window.gtLoadWallet(); }, 400);
   if (user && typeof syncLibrary === "function") setTimeout(async () => { await syncLibrary(); if (typeof publishAllMine === "function") publishAllMine(); }, 700);
   if (location.hash === "#/profile") { if (user) profilePage(); else location.hash = "#/"; }
-  else if (/^#\/(?:u\/[^/]+|following|updates|friends)$|^#\/b\/[^/]+$|^(?:#\/?)?$/.test(location.hash)) route();
+  else if (/^#\/(?:u\/[^/]+|following|updates|shop|friends)$|^#\/b\/[^/]+$|^(?:#\/?)?$/.test(location.hash)) route();
   if(user) {
     menuAuthMessage.hidden=true;
     // Khi đăng nhập thành công, đóng hộp thoại lớn và chỉ hiện thông báo nhỏ.
