@@ -1366,7 +1366,7 @@ function profilePage(){
   if(!ids.length||!window.gtCloud)$("#earnBox").textContent=none;
   else window.gtCloud.earnings(ids).then(r=>{const e=$("#earnBox");if(e)e.innerHTML=r.sales?`${coinHtml(r.coins)} <span class="empty">· ${r.sales} ${ve("lượt mở khóa","unlocks")}</span>`:none}).catch(()=>{const e=$("#earnBox");if(e)e.textContent="–"});
   if(adm)$("#grantBtn").onclick=async()=>{const uid=$("#grantUid").value.trim().replace(/^.*#\/u\//,""),amt=parseInt($("#grantAmt").value),msg=$("#grantMsg"),btn=$("#grantBtn");
-   if(!/^[A-Za-z0-9_-]{6,128}$/.test(uid)||!Number.isInteger(amt)||amt===0){msg.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.");return}
+   if(!/^[A-Za-z0-9_-]{6,128}$/.test(uid)||!Number.isInteger(amt)||amt===0||Math.abs(amt)>1e6){msg.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.")+" (|xu| ≤ 1.000.000)";return}
    btn.disabled=true;try{await window.gtCloud.adminGrant(uid,amt);msg.textContent=ve("Đã cấp "+amt+" xu cho "+uid,"Granted "+amt+" coins to "+uid)}catch(e){console.error(e);msg.textContent=cloudMsg(e)}btn.disabled=false};
   if(adm)$("#lrCfgBtn").onclick=async()=>{const arr=$("#lrCfg").value.split(/[,\s]+/).filter(Boolean).map(x=>parseInt(x)),msg=$("#lrCfgMsg"),btn=$("#lrCfgBtn");
    if(!arr.length||arr.length>60||arr.some(v=>!Number.isInteger(v)||v<0||v>COIN.max)){msg.textContent=ve("Nhập 1–60 số nguyên từ 0 đến "+COIN.max+".","Enter 1–60 whole numbers from 0 to "+COIN.max+".");return}
@@ -1976,7 +1976,7 @@ const cloud = {
   },
   async adminGrant(target, amount) {
     const u = auth.currentUser; if (!u) throw new Error("auth");
-    if (!/^[A-Za-z0-9_-]{6,128}$/.test(target) || !Number.isInteger(amount) || amount === 0) throw new Error("bad-grant");
+    if (!/^[A-Za-z0-9_-]{6,128}$/.test(target) || !Number.isInteger(amount) || amount === 0 || Math.abs(amount) > 1e6) throw new Error("bad-grant");
     await setDoc(doc(db, "wallets", target), { coins: increment(amount) }, { merge: true });
   },
   async unpublishDoc(docId) {
