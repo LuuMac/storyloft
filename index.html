@@ -993,6 +993,7 @@ const COS=[
  {id:"n_grad",k:"name",n:["Gradient tím – xanh","Violet–teal gradient"],p:400}];  /* giá phải khớp prices() trong firestore.rules */
 let inv=[],myCode=null;
 const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.gtCloud.cos(uid);return c&&c[k]?(k==="frame"?" fr-":" nm-")+c[k]:""};
+window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c-"+me.uid+"-"+b.id+(b.pubGen?"_g"+b.pubGen:""):null};
 const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
 const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
 const fmtD=ms=>new Date(ms).toLocaleDateString(L()==="vi"?"vi-VN":L());
@@ -2310,6 +2311,8 @@ let cmtUnsub = null, cmtCtx = null, cmtLimit = 30, cmtItems = [], cmtFull = fals
 // Truyện mẫu dùng chung cho mọi người; truyện tự thêm gắn với tài khoản chủ truyện
 const threadOf = (bookId, ch) => {
   if (!bookId.startsWith("u")) return bookId + "__" + ch;
+  const pub = window.gtCommunityId && window.gtCommunityId(bookId);   // truyện đã đăng: dùng chung luồng với bản cộng đồng
+  if (pub) return pub + "__" + ch;
   const u = auth.currentUser; return u ? u.uid + "_" + bookId + "__" + ch : null;
 };
 function displayName(u) {
