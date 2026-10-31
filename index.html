@@ -888,7 +888,7 @@ function applySet(){
 }
 function pct(b){const p=prog[b.id],tw=twinOf(b),q=tw&&prog[tw.id],d=new Set([...((p&&p.done)||[]),...((q&&q.done)||[])]);return d.size&&b.chapters.length?Math.round(d.size/b.chapters.length*100):0}
 function card(b){const h=hue(b.title);return `<div class="bk"><a class="book" href="#/b/${b.id}"><div class="cover" ${b.cover?`style="background:url('${b.cover}') center/cover" role="img" aria-label="${esc(b.title)}"`:`style="background:linear-gradient(160deg,hsl(${h} 45% 32%),hsl(${(h+40)%360} 50% 20%))"`}>${b.cover?"":`<b>${esc(b.title)}</b><span>${esc(auth(b))}</span>`}</div>
- ${b.cover?`<div class="mtitle">${esc(b.title)}</div>`:""}<div class="meta">${b.cloud?"":twinOf(b)?(pct(b)?`<span>${t("read",pct(b))}</span>`:""):`<span>${t("chs",b.chapters.length)}${pct(b)?" · "+t("read",pct(b)):""}</span>`}${!b.cloud&&b.id.startsWith("u")?pubMeta(b):""}${b.cloud&&pct(b)?`<span>${t("read",pct(b))}</span>`:""}${b.cloud?`<span class="mstat">${statRow(b)}</span>`:""}</div>${pct(b)?`<div class="bar"><i style="width:${pct(b)}%"></i></div>`:""}</a>
+ ${b.cover?`<div class="mtitle">${esc(b.title)}</div>`:""}<div class="meta">${b.cloud?"":twinOf(b)?"":`<span>${t("chs",b.chapters.length)}</span>`}${!b.cloud&&b.id.startsWith("u")?pubMeta(b):""}${b.cloud?`<span class="mstat">${statRow(b)}</span>`:""}</div>${pct(b)?`<div class="bar"><i style="width:${pct(b)}%"></i></div>`:""}</a>
  <button class="fav ${favs.includes(b.id)?"on":""}" data-id="${b.id}" aria-label="${t("favs")}" aria-pressed="${favs.includes(b.id)}">★</button></div>`}
 function home(){
  app.innerHTML=`<h1 id="homeH">${tab==="pub"?ve("Khám phá","Explore"):t("lib")}</h1>
@@ -1005,7 +1005,7 @@ const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.g
 window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c_"+pubDocId(b):null};
 const twinOf=b=>(!b||b.cloud||!b.pubBy)?null:(cloudCache["c_"+pubDocId(b)]||null);
 const ownTwinLocal=cid=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!me||!cid.startsWith("c_"+me.uid+"-"))return null;return mine.find(l=>l.pubBy===me.uid&&"c_"+pubDocId(l)===cid)||null};
-const pubMeta=b=>{const tw=twinOf(b),tag=b.priv?`<span class="pubtag">${ve("Riêng tư","Private")}</span>`:(b.pubBy?`<span class="pubtag on">${ve("Đã đăng","Published")}</span>`:"");return (tw?`<span class="mstat">${statRow(tw)}</span>`:"")+tag};
+const pubMeta=b=>{const tw=twinOf(b),tag=b.priv?`<span class="pubtag">${ve("Riêng tư","Private")}</span>`:"";return (tw?`<span class="mstat">${statRow(tw)}</span>`:"")+tag};
 async function setPrivacy(id,priv){
  const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=mine.find(x=>x.id===id);if(!b||!me||!window.gtCloud)return;
  if(priv&&!confirm(ve("Chuyển sang riêng tư? Truyện sẽ biến mất khỏi Khám phá, và bình luận, lượt thích, đánh giá hiện có sẽ không còn hiển thị.","Make private? The novel will disappear from Explore, and its current comments, likes and ratings will no longer be shown.")))return;
