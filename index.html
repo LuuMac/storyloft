@@ -437,17 +437,6 @@ img{-webkit-user-drag:none;user-drag:none}
 .plusb{display:inline-block;margin-left:8px;padding:0 8px;border-radius:999px;font-size:11px;line-height:19px;font-weight:700;letter-spacing:.02em;color:var(--accink);background:var(--acc);vertical-align:middle}
 .shop-ic{font-size:22px;color:var(--acc)}.shop-ul{margin:4px 0 8px;padding-left:18px;line-height:1.7}
 
-.cos-av{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--acc-soft);font-size:13px;font-weight:700;flex:none}
-.fr-f_ring{box-shadow:0 0 0 3px var(--acc)}
-.fr-f_glow{box-shadow:0 0 0 2px #7dd3fc,0 0 14px 3px rgba(125,211,252,.65)}
-.fr-f_grad{position:relative}
-.fr-f_grad::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:3px;background:linear-gradient(135deg,#f5c542,#e0569b,#7a5cff);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.nm-n_gold{color:#e8b44c}.nm-n_rose{color:#ff8fb1}
-.nm-n_grad{background:linear-gradient(90deg,#8b7bff,#2dd4bf);-webkit-background-clip:text;background-clip:text;color:transparent}
-.shop-card.wide{grid-column:1/-1}
-.cos-h{margin:10px 0 2px;font-size:13px;color:var(--mute);font-weight:600}
-.cos-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
-.cos-row>span:nth-child(2){flex:1;min-width:0}
 
 .pubtag{display:inline-block;padding:0 8px;border-radius:999px;font-size:11px;line-height:18px;border:1px solid var(--line);color:var(--mute)}
 .pubtag.on{color:var(--acc);border-color:var(--acc)}
@@ -993,16 +982,7 @@ let wallet=null;const UNL={};
 const PLUS={price:1000,days:30,discount:30,bonus:50,bonusDays:30};
 let ent=null;const plusOn=()=>!!ent&&ent.plusUntil>Date.now();
 const plusBadge=uid=>window.gtCloud&&window.gtCloud.isPlus&&window.gtCloud.isPlus(uid)?`<span class="plusb" title="Gác Truyện Plus">✦ Plus</span>`:"";
-const COS=[
- {id:"f_ring",k:"frame",n:["Viền xanh ngọc","Teal ring"],p:150},
- {id:"f_grad",k:"frame",n:["Viền cầu vồng","Rainbow ring"],p:300},
- {id:"f_glow",k:"frame",n:["Viền phát sáng","Glowing ring"],p:500},
- {id:"n_gold",k:"name",n:["Vàng ánh kim","Gold"],p:150},
- {id:"n_rose",k:"name",n:["Hồng đào","Peach rose"],p:250},
- {id:"n_grad",k:"name",n:["Gradient tím – xanh","Violet–teal gradient"],p:400}];  /* giá phải khớp prices() trong firestore.rules */
-let inv=[],myCode=null;
-const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.gtCloud.cos(uid);return c&&c[k]?(k==="frame"?" fr-":" nm-")+c[k]:""};
-window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c_"+pubDocId(b):null};
+let myCode=null;
 const twinOf=b=>(!b||b.cloud||!b.pubBy)?null:(cloudCache["c_"+pubDocId(b)]||null);
 const ownTwinLocal=cid=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!me||!cid.startsWith("c_"+me.uid+"-"))return null;return mine.find(l=>l.pubBy===me.uid&&"c_"+pubDocId(l)===cid)||null};
 const pubMeta=b=>{const tw=twinOf(b),tag=b.priv?`<span class="pubtag">${ve("Riêng tư","Private")}</span>`:"";return (tw?`<span class="mstat">${statRow(tw)}</span>`:"")+tag};
@@ -1023,9 +1003,9 @@ const isAdminUser=u=>!!u&&ADMIN_UIDS.includes(u.uid);
 const coinHtml=n=>`<span class="coinb">${IC.coin}${fmtN(n)}</span>`;
 const canDaily=()=>!!wallet&&Date.now()-(wallet.lastDaily||0)>=20*36e5;
 async function loadWallet(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
- if(!u||!window.gtCloud){wallet=null;ent=null;inv=[];myCode=null;refreshWallet();return}
+ if(!u||!window.gtCloud){wallet=null;ent=null;myCode=null;refreshWallet();return}
  try{wallet=await window.gtCloud.wallet();try{loginRewards=await window.gtCloud.loginConfig()}catch(e){}}catch(e){console.error(e);wallet=null}try{ent=await window.gtCloud.entitlement()}catch(e){ent=null}if(!window.__codeTried){window.__codeTried=1;window.gtCloud.ensureCode().then(c=>{myCode=c}).catch(e=>console.error(e))}
-try{inv=await window.gtCloud.inventory();await window.gtCloud.plusOf([u.uid])}catch(e){inv=[]}if(plusOn()&&!window.__plusSynced){window.__plusSynced=1;window.gtCloud.syncPlusPublic().catch(()=>{})}refreshWallet();maybeLoginReward()}
+try{await window.gtCloud.plusOf([u.uid])}catch(e){}if(plusOn()&&!window.__plusSynced){window.__plusSynced=1;window.gtCloud.syncPlusPublic().catch(()=>{})}refreshWallet();maybeLoginReward()}
 window.gtLoadWallet=loadWallet;
 function refreshWallet(){const sl=$("#accountShopLabel");if(sl)sl.textContent=ve("Cửa hàng","Shop")+(plusOn()?" ✦":"");const l=$("#accountCoinsLabel");if(l)l.innerHTML=ve("Ví xu","Coin wallet")+(wallet?` · ${coinHtml(wallet.coins)}`:"");
  const e=$("#wCoins");if(e)e.textContent=wallet?wallet.coins:"–";const pc=$("#pwCoins");if(pc)pc.textContent=wallet?wallet.coins:"–";const st=$("#stCoins");if(st)st.textContent=wallet?fmtN(wallet.coins):"–";
@@ -1203,7 +1183,7 @@ async function authorPage(uid){
   cacheBooks(books);
   let following=fl,followers=st.followers;
   const av=isImgData(pf.avatar)?`<img src="${pf.avatar}" alt="">`:esc((pf.name||"Đ").trim().slice(0,1).toUpperCase()||"Đ");
-  app.innerHTML=back+`<section class="profile-showcase"><div class="profile-showcase-top"><div class="avatar${cosCls(uid,"frame")}">${av}</div><div class="profile-showcase-info"><h1 class="${cosCls(uid,"name").trim()}">${esc(pf.name)}${plusBadge(uid)}</h1><p class="bio">${esc(pf.bio||"")}</p>
+  app.innerHTML=back+`<section class="profile-showcase"><div class="profile-showcase-top"><div class="avatar">${av}</div><div class="profile-showcase-info"><h1>${esc(pf.name)}${plusBadge(uid)}</h1><p class="bio">${esc(pf.bio||"")}</p>
    <div class="profile-stats"><div class="profile-stat"><strong>${st.following}</strong><span>Đang theo dõi</span></div><div class="profile-stat"><strong id="folCount">${followers}</strong><span>Người theo dõi</span></div><div class="profile-stat"><strong>${books.length}</strong><span>Truyện đã đăng</span></div></div></div></div>
    <div class="profile-showcase-actions" style="grid-template-columns:1fr"><button class="btn pri" id="followBtn" type="button"></button></div></section>
    <h2>Truyện của tác giả <span class="empty" style="font:400 14px 'Be Vietnam Pro',sans-serif">(${books.length})</span></h2>
@@ -1218,19 +1198,12 @@ async function authorPage(uid){
 }
 const SHOP=[
  {id:"plus"},
- {id:"coins",ic:"●",name:["Gói xu","Coin packs"],desc:["Nạp xu bằng tiền thật để mở khóa nhiều chương hơn.","Top up coins with real money to unlock more chapters."]},
- {id:"cosmetic"}];
+ {id:"coins",ic:"●",name:["Gói xu","Coin packs"],desc:["Nạp xu bằng tiền thật để mở khóa nhiều chương hơn.","Top up coins with real money to unlock more chapters."]}];
 const plusCard=()=>{const on=plusOn(),canB=on&&Date.now()-(ent.bonusAt||0)>=PLUS.bonusDays*864e5,buy=on?["Gia hạn · {0} xu / {1} ngày","Renew · {0} coins / {1} days"]:["Mua · {0} xu / {1} ngày","Buy · {0} coins / {1} days"];
  return `<div class="shop-card plus"><div class="shop-ic">✦</div><h3>Gác Truyện Plus</h3><p class="bkm" style="margin:0">${on?vf("Đang hoạt động đến {0}","Active until {0}",fmtD(ent.plusUntil)):ve("Chưa kích hoạt","Not active")}</p>
  <ul class="shop-ul"><li>${vf("Giảm {0}% giá mọi chương trả phí","{0}% off every paid chapter",PLUS.discount)}</li><li>${vf("Nhận {0} xu mỗi {1} ngày","Get {0} coins every {1} days",PLUS.bonus,PLUS.bonusDays)}</li></ul>
  <div class="pw-actions"><button class="btn pri" id="shBuy" type="button">${vf(buy[0],buy[1],PLUS.price,PLUS.days)}</button>${canB?`<button class="btn" id="shBonus" type="button">${vf("Nhận {0} xu thưởng","Claim {0} bonus coins",PLUS.bonus)}</button>`:""}</div><p class="bkm" id="shMsg" style="margin:0"></p></div>`};
 const soonCard=i=>`<div class="shop-card soon"><div class="shop-ic">${i.ic}</div><h3>${ve(i.name[0],i.name[1])}</h3><p class="bkm" style="margin:0">${ve(i.desc[0],i.desc[1])}</p><div class="pw-actions"><button class="btn" type="button" disabled>${ve("Sắp ra mắt","Coming soon")}</button></div></div>`;
-const cosCard=uid=>{const c=(window.gtCloud.cos(uid))||{},row=i=>{const own=inv.includes(i.id),on=c[i.k]===i.id,pv=i.k==="frame"?`<span class="cos-av fr-${i.id}">A</span>`:`<b class="nm-${i.id}" style="min-width:32px;text-align:center">Aa</b>`,
-  bt=!own?`<button class="btn" type="button" data-buy="${i.id}">${ve("Mua","Buy")} · ${i.p}</button>`:on?`<button class="btn pri" type="button" data-off="${i.k}" title="${ve("Bấm để bỏ dùng","Click to unequip")}">${ve("Đang dùng","In use")}</button>`:`<button class="btn" type="button" data-use="${i.id}">${ve("Dùng","Use")}</button>`;
-  return `<div class="cos-row">${pv}<span>${ve(i.n[0],i.n[1])}</span>${bt}</div>`};
- return `<div class="shop-card wide" id="shCos"><div class="shop-ic">❖</div><h3>${ve("Vật phẩm hồ sơ","Profile items")}</h3>
- <div class="cos-h">${ve("Khung ảnh đại diện","Avatar frames")}</div>${COS.filter(i=>i.k==="frame").map(row).join("")}
- <div class="cos-h">${ve("Màu tên","Name colors")}</div>${COS.filter(i=>i.k==="name").map(row).join("")}<p class="bkm" id="shCMsg" style="margin:6px 0 0"></p></div>`};
 async function shopPage(){
  const h=location.hash,me=window.gtFirebaseAuth?.currentUser,back=`<a href="#/" class="empty">${t("back")}</a>`,title=`<h1 style="margin-top:12px">${ve("Cửa hàng","Shop")}</h1>`;
  if(!me){app.innerHTML=back+title+`<p class="empty">${ve("Đăng nhập để vào cửa hàng.","Sign in to open the shop.")}</p><button class="btn pri" id="fgIn" type="button">${ve("Đăng nhập","Sign in")}</button>`;$("#fgIn").onclick=()=>loginDlg.showModal();return}
@@ -1240,24 +1213,13 @@ async function shopPage(){
  try{await window.gtCloud.plusOf([me.uid])}catch(e){}
  if(location.hash!==h)return;
  const adm=isAdminUser(me);
- app.innerHTML=back+title+`<p style="margin:6px 0 0">${ve("Số dư của bạn:","Your balance:")} ${wallet?coinHtml(wallet.coins):"–"}</p><div class="shop-grid">${SHOP.map(i=>i.id==="plus"?plusCard():i.id==="cosmetic"?cosCard(me.uid):soonCard(i)).join("")}</div>
- ${adm?`<h3 style="margin:26px 0 8px">${ve("Quản trị: tặng Plus","Admin: gift Plus")}</h3><div class="pf-compose"><input id="shUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}"><input id="shDays" type="number" min="0" placeholder="${ve("Số ngày (0 để thu hồi)","Days (0 to revoke)")}"><button class="btn" id="shGrant" type="button">${ve("Áp dụng","Apply")}</button><p class="bkm" id="shGMsg"></p></div>
- <h3 style="margin:22px 0 8px">${ve("Quản trị: tặng vật phẩm","Admin: gift items")}</h3><div class="pf-compose"><input id="shiUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}"><select id="shiItem" style="width:100%;margin:8px 0">${COS.map(i=>`<option value="${i.id}">${ve(i.n[0],i.n[1])}</option>`).join("")}</select><div class="pw-actions"><button class="btn pri" id="shiGive" type="button">${ve("Tặng","Gift")}</button><button class="btn" id="shiTake" type="button">${ve("Thu hồi","Revoke")}</button></div><p class="bkm" id="shiMsg"></p></div>`:""}`;
+ app.innerHTML=back+title+`<p style="margin:6px 0 0">${ve("Số dư của bạn:","Your balance:")} ${wallet?coinHtml(wallet.coins):"–"}</p><div class="shop-grid">${SHOP.map(i=>i.id==="plus"?plusCard():soonCard(i)).join("")}</div>
+ ${adm?`<h3 style="margin:26px 0 8px">${ve("Quản trị: tặng Plus","Admin: gift Plus")}</h3><div class="pf-compose"><input id="shUid" placeholder="${ve("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)")}"><input id="shDays" type="number" min="0" placeholder="${ve("Số ngày (0 để thu hồi)","Days (0 to revoke)")}"><button class="btn" id="shGrant" type="button">${ve("Áp dụng","Apply")}</button><p class="bkm" id="shGMsg"></p></div>`:""}`;
  const msg=$("#shMsg"),bb=$("#shBuy");
  const done=async()=>{wallet=await window.gtCloud.wallet();ent=await window.gtCloud.entitlement();refreshWallet();if(location.hash===h)shopPage()};
  if(bb)bb.onclick=async()=>{if(!wallet||wallet.coins<PLUS.price){msg.textContent=ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more.");return}
   bb.disabled=true;try{await window.gtCloud.buyPlus(PLUS);if(window.gtShowAuthToast)window.gtShowAuthToast(ve("Mua thành công!","Purchase successful!"));await done()}catch(e){console.error(e);msg.textContent=cloudMsg(e);bb.disabled=false}};
- const cb=$("#shCos");if(cb)cb.onclick=async e=>{const b=e.target.closest("button");if(!b)return;const cm=$("#shCMsg"),cur=window.gtCloud.cos(me.uid)||{frame:"",name:""};
-  try{b.disabled=true;
-   if(b.dataset.buy){const it=COS.find(x=>x.id===b.dataset.buy);if(!wallet||wallet.coins<it.p){cm.textContent=ve("Bạn chưa đủ xu. Điểm danh mỗi ngày để nhận thêm.","Not enough coins. Check in daily for more.");b.disabled=false;return}
-    await window.gtCloud.buyItem(it.id,it.p);if(window.gtShowAuthToast)window.gtShowAuthToast(ve("Mua thành công!","Purchase successful!"));wallet=await window.gtCloud.wallet();inv=await window.gtCloud.inventory();refreshWallet()}
-   else if(b.dataset.use){const it=COS.find(x=>x.id===b.dataset.use);await window.gtCloud.equip({...cur,[it.k]:it.id})}
-   else if(b.dataset.off)await window.gtCloud.equip({...cur,[b.dataset.off]:""});
-   if(location.hash===h)shopPage()}catch(er){console.error(er);cm.textContent=cloudMsg(er);b.disabled=false}};
  const bo=$("#shBonus");if(bo)bo.onclick=async()=>{bo.disabled=true;try{await window.gtCloud.claimPlusBonus(PLUS);await done()}catch(e){console.error(e);msg.textContent=cloudMsg(e);bo.disabled=false}};
- const gi=$("#shiGive"),ti=$("#shiTake");
- const itemOp=(fn,ok)=>async()=>{const m=$("#shiMsg");try{const uid=await window.gtCloud.resolveUser($("#shiUid").value);await fn(uid,$("#shiItem").value);m.textContent=ve(ok[0],ok[1])}catch(e){console.error(e);m.textContent=cloudMsg(e)}};
- if(gi){gi.onclick=itemOp((u,i)=>window.gtCloud.adminGiveItem(u,i),["Đã tặng vật phẩm.","Item gifted."]);ti.onclick=itemOp((u,i)=>window.gtCloud.adminRevokeItem(u,i),["Đã thu hồi vật phẩm.","Item revoked."])}
  const g=$("#shGrant");if(g)g.onclick=async()=>{const raw=$("#shUid").value.trim(),d=parseInt($("#shDays").value),gm=$("#shGMsg");
   if(!raw||!(d>=0)){gm.textContent=ve("Nhập ID người dùng và số xu hợp lệ.","Enter a valid user ID and amount.");return}
   g.disabled=true;try{const uid=await window.gtCloud.resolveUser(raw);await window.gtCloud.adminSetPlus(uid,d);gm.textContent="OK"}catch(e){console.error(e);gm.textContent=cloudMsg(e)}g.disabled=false}};
@@ -1369,8 +1331,8 @@ function profilePage(){
  setTimeout(fillMyCode,0);
  app.innerHTML=`<a href="#/" class="empty">${t("back")}</a>
  <section class="pf-card"><div class="pf-cover"></div>
-  <div class="pf-body"><div class="pf-av${cosCls(me&&me.uid,"frame")}" id="profileAvatarView">${av}</div>
-   <div class="pf-main"><h1 class="pf-name${cosCls(me&&me.uid,"name")}">${esc(profile.name||ve("Độc giả","Reader"))}${plusOn()?`<span class="plusb">✦ Plus</span>`:""}</h1><p class="bkm" id="pfCode" style="margin:2px 0 6px"></p><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
+  <div class="pf-body"><div class="pf-av" id="profileAvatarView">${av}</div>
+   <div class="pf-main"><h1 class="pf-name">${esc(profile.name||ve("Độc giả","Reader"))}${plusOn()?`<span class="plusb">✦ Plus</span>`:""}</h1><p class="bkm" id="pfCode" style="margin:2px 0 6px"></p><p class="pf-bio${profile.bio?"":" muted"}">${esc(profile.bio||ve("Chưa có giới thiệu. Bấm “Chỉnh sửa hồ sơ” để thêm.","No bio yet. Tap “Edit profile” to add one."))}</p></div>
    <div class="pf-actions"><button class="btn pri" id="editProfileBtn" type="button">${ve("Chỉnh sửa hồ sơ","Edit profile")}</button><button class="btn" id="shareProfileBtn" type="button">${ve("Chia sẻ","Share")}</button></div></div>
   <div class="pf-stats"><button type="button" id="stFollowingBtn"><strong id="stFollowing">–</strong><span>${ve("Đang theo dõi","Following")}</span></button><div><strong id="stFollowers">–</strong><span>${ve("Người theo dõi","Followers")}</span></div><div><strong>${pubCount}</strong><span>${ve("Truyện đã đăng","Published")}</span></div><button type="button" id="stCoinsBtn"><strong id="stCoins">${wallet?fmtN(wallet.coins):"–"}</strong><span>${ve("Xu","Coins")}</span></button></div>
  </section>
@@ -1723,7 +1685,7 @@ async function deleteChapters(docId, from, to) {
     await batch.commit();
   }
 }
-const plusMap = new Map(), cosMap = new Map();
+const plusMap = new Map();
 const cloud = {
   async toggle(authorUid) {
     const user = auth.currentUser;
@@ -1946,14 +1908,10 @@ const cloud = {
   async plusOf(uids) {
     const need = [...new Set(uids)].filter(x => x && !plusMap.has(x));
     await Promise.all(need.map(async id => {
-      try {
-        const [s, c] = await Promise.all([getDoc(doc(db, "plusPublic", id)), getDoc(doc(db, "cosmetics", id)).catch(() => null)]);
-        cosMap.set(id, c && c.exists() ? { frame: String(c.data().frame || ""), name: String(c.data().name || "") } : null);
-        plusMap.set(id, s.exists() && s.data().until && s.data().until.toMillis ? s.data().until.toMillis() : 0);
-      } catch (e) { plusMap.set(id, 0); cosMap.set(id, null); }
+      try { const s = await getDoc(doc(db, "plusPublic", id)); plusMap.set(id, s.exists() && s.data().until && s.data().until.toMillis ? s.data().until.toMillis() : 0); }
+      catch (e) { plusMap.set(id, 0); }
     }));
   },
-  cos(uid) { return cosMap.get(uid) || null; },
   async ensureCode() {
     const u = auth.currentUser; if (!u) return null;
     const mine = await getDoc(doc(db, "userCodes", u.uid));
@@ -1986,42 +1944,6 @@ const cloud = {
     if (/^\d{10}$/.test(v)) return this.uidFromCode(v);
     if (/^[A-Za-z0-9_-]{6,128}$/.test(v)) return v;
     throw new Error("bad-id");
-  },
-  async adminGiveItem(target, id) {
-    if (!auth.currentUser) throw new Error("auth");
-    if (!/^[fn]_[a-z]+$/.test(id)) throw new Error("bad-grant");
-    const r = doc(db, "inventory", target, "items", id);
-    if ((await getDoc(r)).exists()) return;
-    await setDoc(r, { ts: serverTimestamp() });
-  },
-  async adminRevokeItem(target, id) {
-    if (!auth.currentUser) throw new Error("auth");
-    if (!/^[fn]_[a-z]+$/.test(id)) throw new Error("bad-grant");
-    const b = writeBatch(db); b.delete(doc(db, "inventory", target, "items", id));
-    const c = await getDoc(doc(db, "cosmetics", target));
-    if (c.exists()) {
-      const d = c.data(), v = { frame: String(d.frame || ""), name: String(d.name || "") };
-      if (v.frame === id) v.frame = ""; if (v.name === id) v.name = "";
-      b.set(doc(db, "cosmetics", target), v);
-    }
-    await b.commit(); cosMap.delete(target);
-  },
-  async inventory() {
-    const u = auth.currentUser; if (!u) return [];
-    const s = await getDocs(collection(db, "inventory", u.uid, "items"));
-    return s.docs.map(d => d.id);
-  },
-  async buyItem(id, price) {
-    const u = auth.currentUser; if (!u) throw new Error("auth");
-    const batch = writeBatch(db);
-    batch.set(doc(db, "inventory", u.uid, "items", id), { ts: serverTimestamp() });
-    batch.set(doc(db, "wallets", u.uid), { coins: increment(-price), lastTx: "shop/item:" + id }, { merge: true });
-    await batch.commit();
-  },
-  async equip(c) {
-    const u = auth.currentUser; if (!u) throw new Error("auth");
-    const v = { frame: String(c.frame || ""), name: String(c.name || "") };
-    await setDoc(doc(db, "cosmetics", u.uid), v); cosMap.set(u.uid, v);
   },
   isPlus(uid) { return (plusMap.get(uid) || 0) > Date.now(); },
   async syncPlusPublic() {
@@ -2371,15 +2293,14 @@ function cmtForm() {
   ta.onkeydown = e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") cmtSend(); };
   cq("#cmtSend").onclick = cmtSend;
 }
-const cosCl = (uid, k) => { const c = cloud.cos(uid); return c && c[k] ? (k === "frame" ? " fr-" : " nm-") + c[k] : ""; };
 function cmtList() {
   const ul = cq("#cmtList"), me = auth.currentUser; if (!ul) return;
   cq("#cmtTitle").textContent = ctx("Bình luận", "Comments") + (cmtItems.length ? " (" + cmtItems.length + (cmtFull ? "+" : "") + ")" : "");
   if (cmtErr) { ul.innerHTML = `<li class="empty">${cesc(cmtErr)}</li>`; cq("#cmtMore").innerHTML = ""; return; }
   ul.innerHTML = cmtItems.length ? cmtItems.map(c => {
     const d = c.ts && c.ts.toDate ? c.ts.toDate() : new Date();
-    return `<li class="cmt-item"><div class="cmt-av${cosCl(c.uid, "frame")}" aria-hidden="true">${cesc((c.name || "?").trim().slice(0, 1).toUpperCase())}</div>
-    <div style="flex:1;min-width:0"><div class="cmt-meta" style="display:flex;align-items:center"><span><b class="${cosCl(c.uid, "name").trim()}">${cesc(c.name)}</b>${cloud.isPlus(c.uid) ? `<span class="plusb">✦ Plus</span>` : ""} ${cesc(ago(d))}</span>${me && c.uid === me.uid ? `<button class="cmt-del" data-id="${cesc(c.id)}" type="button">${ctx("Xoá", "Delete")}</button>` : ""}</div>
+    return `<li class="cmt-item"><div class="cmt-av" aria-hidden="true">${cesc((c.name || "?").trim().slice(0, 1).toUpperCase())}</div>
+    <div style="flex:1;min-width:0"><div class="cmt-meta" style="display:flex;align-items:center"><span><b>${cesc(c.name)}</b>${cloud.isPlus(c.uid) ? `<span class="plusb">✦ Plus</span>` : ""} ${cesc(ago(d))}</span>${me && c.uid === me.uid ? `<button class="cmt-del" data-id="${cesc(c.id)}" type="button">${ctx("Xoá", "Delete")}</button>` : ""}</div>
     <p class="cmt-body">${cesc(c.text)}</p></div></li>`;
   }).join("") : `<li class="empty" style="padding:14px 0;border-top:1px solid var(--line)">${cmtCtx && cmtCtx.thread ? ctx("Chưa có bình luận nào. Hãy là người đầu tiên!", "No comments yet. Be the first!") : ""}</li>`;
   ul.querySelectorAll(".cmt-del").forEach(b => b.onclick = async () => {
