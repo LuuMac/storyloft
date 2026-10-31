@@ -448,6 +448,10 @@ img{-webkit-user-drag:none;user-drag:none}
 .cos-h{margin:10px 0 2px;font-size:13px;color:var(--mute);font-weight:600}
 .cos-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-top:1px solid var(--line)}
 .cos-row>span:nth-child(2){flex:1;min-width:0}
+
+.pubtag{display:inline-block;padding:0 8px;border-radius:999px;font-size:11px;line-height:18px;border:1px solid var(--line);color:var(--mute)}
+.pubtag.on{color:var(--acc);border-color:var(--acc)}
+.meta .pubtag{margin-left:6px}
 </style>
 </head>
 <body>
@@ -701,7 +705,7 @@ x("Ngày","Day|第|Day|Day|Día|Jour|Tag|Dia|День");
 x("Thích nhiều","Most liked|最多点赞|いいね数順|좋아요순|Más gustadas|Les plus aimés|Am beliebtesten|Mais curtidos|Больше всего лайков");
 x("Đọc nhiều","Most read|阅读最多|閲覧数順|조회순|Más leídas|Les plus lus|Meistgelesen|Mais lidos|Самые читаемые");
 x("Đánh giá cao","Top rated|评分最高|高評価順|평점 높은순|Mejor valoradas|Les mieux notés|Bestbewertet|Mais bem avaliados|С высоким рейтингом");
-x("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Cộng đồng để lên bảng!","No ranking data yet. Like, rate or read novels in the Community tab to get on the board!|暂无排行数据。去社区标签页点赞、评分或阅读小说，让它们上榜吧！|ランキングのデータはまだありません。コミュニティタブで小説にいいね・評価・閲覧をして、ランクインさせましょう！|아직 랭킹 데이터가 없습니다. 커뮤니티 탭에서 소설에 좋아요, 평가, 읽기를 하면 순위에 오릅니다!|Aún no hay datos de clasificación. ¡Da me gusta, valora o lee novelas en la pestaña Comunidad para aparecer!|Pas encore de données de classement. Aimez, notez ou lisez des romans dans l’onglet Communauté pour y figurer !|Noch keine Ranglistendaten. Like, bewerte oder lies Romane im Tab „Community“, damit sie in die Rangliste kommen!|Ainda não há dados de ranking. Curta, avalie ou leia romances na aba Comunidade para entrar no ranking!|Данных для рейтинга пока нет. Ставьте лайки, оценивайте или читайте романы во вкладке «Сообщество», чтобы попасть в список!");
+x("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Khám phá để lên bảng!","No ranking data yet. Like, rate or read novels in the Explore tab to get on the board!|暂无排行数据。去社区标签页点赞、评分或阅读小说，让它们上榜吧！|ランキングのデータはまだありません。コミュニティタブで小説にいいね・評価・閲覧をして、ランクインさせましょう！|아직 랭킹 데이터가 없습니다. 커뮤니티 탭에서 소설에 좋아요, 평가, 읽기를 하면 순위에 오릅니다!|Aún no hay datos de clasificación. ¡Da me gusta, valora o lee novelas en la pestaña Comunidad para aparecer!|Pas encore de données de classement. Aimez, notez ou lisez des romans dans l’onglet Communauté pour y figurer !|Noch keine Ranglistendaten. Like, bewerte oder lies Romane im Tab „Community“, damit sie in die Rangliste kommen!|Ainda não há dados de ranking. Curta, avalie ou leia romances na aba Comunidade para entrar no ranking!|Данных для рейтинга пока нет. Ставьте лайки, оценивайте или читайте романы во вкладке «Сообщество», чтобы попасть в список!");
 x("Tính trên 100 truyện nhiều lượt thích nhất.","Based on the 100 most-liked novels.|基于点赞最多的 100 部小说统计。|いいね数の多い上位100作品をもとに集計しています。|좋아요가 많은 상위 100편을 기준으로 합니다.|Basado en las 100 novelas con más me gusta.|Basé sur les 100 romans les plus aimés.|Basiert auf den 100 meistgelikten Romanen.|Baseado nos 100 romances mais curtidos.|На основе 100 романов с наибольшим числом лайков.");
 x("Xếp theo điểm đã cân bằng theo số lượt chấm: truyện chỉ có 1 lượt 5 sao không vượt được truyện nhiều người chấm.","Ranked by a score weighted by the number of ratings, so a single 5-star vote can't beat a widely rated novel.|按评分人数加权计分：只有 1 个五星评分的小说无法超过评分人数多的小说。|評価数で重み付けしたスコアで順位を決めています。5つ星が1件だけの作品が、多くの人に評価された作品を上回ることはありません。|평가 수를 반영한 가중 점수로 순위를 매깁니다. 별 다섯 개가 한 번뿐인 소설은 많은 사람이 평가한 소설을 앞지를 수 없습니다.|Se ordena con una puntuación ponderada por el número de valoraciones, así que una sola de 5 estrellas no supera a una novela muy valorada.|Classement par score pondéré selon le nombre de notes : un seul vote 5 étoiles ne dépasse pas un roman très noté.|Die Rangfolge nutzt eine nach Anzahl der Bewertungen gewichtete Punktzahl, sodass eine einzelne 5-Sterne-Stimme einen vielfach bewerteten Roman nicht übertrifft.|A ordem usa uma pontuação ponderada pelo número de avaliações; uma única nota 5 estrelas não supera um romance muito avaliado.|Рейтинг считается по баллу с учётом числа оценок, поэтому одна пятизвёздочная оценка не обгонит роман с множеством оценок.");
 x("Bảng được làm mới mỗi phút.","The board refreshes every minute.|榜单每分钟刷新一次。|ランキングは1分ごとに更新されます。|랭킹은 1분마다 갱신됩니다.|La clasificación se actualiza cada minuto.|Le classement est actualisé chaque minute.|Die Rangliste wird jede Minute aktualisiert.|O ranking é atualizado a cada minuto.|Рейтинг обновляется каждую минуту.");
@@ -709,7 +713,7 @@ x("Đã đăng cho mọi người đọc","Published for everyone to read|已发
 x("+ Theo dõi","+ Follow|+ 关注|+ フォロー|+ 팔로우|+ Seguir|+ Suivre|+ Folgen|+ Seguir|+ Подписаться");
 x("← Hồ sơ","← Profile|← 个人资料|← プロフィール|← 프로필|← Perfil|← Profil|← Profil|← Perfil|← Профиль");
 x("Đăng nhập để xem cập nhật từ các tác giả bạn theo dõi.","Sign in to see updates from authors you follow.|登录后可查看你关注的作者的更新。|ログインすると、フォロー中の作者の更新を確認できます。|로그인하면 팔로우한 작가의 업데이트를 볼 수 있습니다.|Inicia sesión para ver las novedades de los autores que sigues.|Connectez-vous pour voir les nouveautés des auteurs que vous suivez.|Melde dich an, um Neuigkeiten der Autoren zu sehen, denen du folgst.|Entre para ver as novidades dos autores que você segue.|Войдите, чтобы видеть обновления авторов, на которых вы подписаны.");
-x("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.|你还没有关注任何作者。在社区标签页打开一部小说，点击作者名字，再选择关注。|まだ誰もフォローしていません。コミュニティタブで小説を開き、作者名をタップして「フォロー」を押してください。|아직 팔로우한 작가가 없습니다. 커뮤니티 탭에서 소설을 열고 작가 이름을 눌러 팔로우하세요.|Aún no sigues a nadie. Abre una novela en la pestaña Comunidad, toca el nombre del autor y pulsa Seguir.|Vous ne suivez personne pour l’instant. Ouvrez un roman dans l’onglet Communauté, touchez le nom de l’auteur et appuyez sur Suivre.|Du folgst noch niemandem. Öffne im Tab „Community“ einen Roman, tippe auf den Namen des Autors und wähle Folgen.|Você ainda não segue ninguém. Abra um romance na aba Comunidade, toque no nome do autor e pressione Seguir.|Вы пока ни на кого не подписаны. Откройте роман во вкладке «Сообщество», нажмите на имя автора и выберите «Подписаться».");
+x("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Khám phá, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Explore tab, tap the author's name and press Follow.|你还没有关注任何作者。在社区标签页打开一部小说，点击作者名字，再选择关注。|まだ誰もフォローしていません。コミュニティタブで小説を開き、作者名をタップして「フォロー」を押してください。|아직 팔로우한 작가가 없습니다. 커뮤니티 탭에서 소설을 열고 작가 이름을 눌러 팔로우하세요.|Aún no sigues a nadie. Abre una novela en la pestaña Comunidad, toca el nombre del autor y pulsa Seguir.|Vous ne suivez personne pour l’instant. Ouvrez un roman dans l’onglet Communauté, touchez le nom de l’auteur et appuyez sur Suivre.|Du folgst noch niemandem. Öffne im Tab „Community“ einen Roman, tippe auf den Namen des Autors und wähle Folgen.|Você ainda não segue ninguém. Abra um romance na aba Comunidade, toque no nome do autor e pressione Seguir.|Вы пока ни на кого не подписаны. Откройте роман во вкладке «Сообщество», нажмите на имя автора и выберите «Подписаться».");
 x("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.|你关注的作者还没有发布小说。|フォロー中の作者はまだ小説を公開していません。|팔로우한 작가가 아직 게시한 소설이 없습니다.|Los autores que sigues aún no han publicado nada.|Les auteurs que vous suivez n’ont encore rien publié.|Die Autoren, denen du folgst, haben noch nichts veröffentlicht.|Os autores que você segue ainda não publicaram nada.|Авторы, на которых вы подписаны, пока ничего не опубликовали.");
 x("Xoá truyện này khỏi cộng đồng? Không thể hoàn tác.","Delete this novel from the community? This can't be undone.|要从社区删除这部小说吗？此操作无法撤销。|この小説をコミュニティから削除しますか？元に戻せません。|이 소설을 커뮤니티에서 삭제할까요? 되돌릴 수 없습니다.|¿Eliminar esta novela de la comunidad? No se puede deshacer.|Supprimer ce roman de la communauté ? Cette action est irréversible.|Diesen Roman aus der Community löschen? Das kann nicht rückgängig gemacht werden.|Excluir este romance da comunidade? Isso não pode ser desfeito.|Удалить этот роман из сообщества? Это действие нельзя отменить.");
 x("Đang khôi phục…","Restoring…|正在恢复…|復元中…|복원 중…|Restaurando…|Restauration…|Wird wiederhergestellt…|Restaurando…|Восстановление…");
@@ -817,6 +821,11 @@ x("Thu hồi","Revoke|收回|取り消し|회수|Retirar|Retirer|Entziehen|Retir
 x("Đã tặng vật phẩm.","Item gifted.|已赠送物品。|アイテムを付与しました。|아이템을 선물했습니다.|Objeto regalado.|Objet offert.|Item geschenkt.|Item presenteado.|Предмет подарен.");
 x("Đã thu hồi vật phẩm.","Item revoked.|已收回物品。|アイテムを取り消しました。|아이템을 회수했습니다.|Objeto retirado.|Objet retiré.|Item entzogen.|Item retirado.|Предмет отозван.");
 x("ID 10 số (hoặc UID / liên kết hồ sơ)","10-digit ID (or UID / profile link)|10 位 ID（或 UID / 个人主页链接）|10桁のID（またはUID／プロフィールのリンク）|10자리 ID(또는 UID / 프로필 링크)|ID de 10 dígitos (o UID / enlace del perfil)|ID à 10 chiffres (ou UID / lien du profil)|10-stellige ID (oder UID / Profillink)|ID de 10 dígitos (ou UID / link do perfil)|10-значный ID (или UID / ссылка на профиль)");
+x("Khám phá","Explore|探索|探す|탐색|Explorar|Explorer|Entdecken|Explorar|Обзор");
+x("Riêng tư","Private|私密|非公開|비공개|Privado|Privé|Privat|Privado|Личное");
+x("Chuyển sang riêng tư","Make private|设为私密|非公開にする|비공개로 전환|Hacer privado|Passer en privé|Privat stellen|Tornar privado|Сделать личным");
+x("Đăng công khai","Publish publicly|公开发布|公開する|공개하기|Publicar para todos|Publier pour tous|Öffentlich machen|Publicar para todos|Опубликовать для всех");
+x("Chuyển sang riêng tư? Truyện sẽ biến mất khỏi Khám phá, và bình luận, lượt thích, đánh giá hiện có sẽ không còn hiển thị.","Make private? The novel will disappear from Explore, and its current comments, likes and ratings will no longer be shown.|设为私密吗？小说将从“探索”中消失，现有的评论、点赞和评分将不再显示。|非公開にしますか？小説は「探す」から消え、現在のコメント・いいね・評価は表示されなくなります。|비공개로 전환할까요? 소설이 탐색에서 사라지고 현재 댓글, 좋아요, 평가가 더 이상 표시되지 않습니다.|¿Hacerla privada? La novela desaparecerá de Explorar y sus comentarios, me gusta y valoraciones actuales dejarán de mostrarse.|Passer en privé ? Le roman disparaîtra d’Explorer et ses commentaires, mentions « j’aime » et notes actuels ne seront plus affichés.|Privat stellen? Der Roman verschwindet aus „Entdecken“, und vorhandene Kommentare, Likes und Bewertungen werden nicht mehr angezeigt.|Tornar privado? O romance sairá de Explorar e seus comentários, curtidas e avaliações atuais deixarão de ser exibidos.|Сделать личным? Роман исчезнет из раздела «Обзор», а текущие комментарии, лайки и оценки перестанут отображаться.");
 
 const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
 const stLabel=k=>STATUS[k]?ve(STATUS[k][0],STATUS[k][1]):"";
@@ -877,19 +886,19 @@ function applySet(){
  document.querySelectorAll("#lhs button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===st.lh)));
  ls.set("gt.set",st);
 }
-function pct(b){const p=prog[b.id];return p?Math.round(((p.done||[]).length/b.chapters.length)*100):0}
+function pct(b){const p=prog[b.id],tw=twinOf(b),q=tw&&prog[tw.id],d=new Set([...((p&&p.done)||[]),...((q&&q.done)||[])]);return d.size&&b.chapters.length?Math.round(d.size/b.chapters.length*100):0}
 function card(b){const h=hue(b.title);return `<div class="bk"><a class="book" href="#/b/${b.id}"><div class="cover" ${b.cover?`style="background:url('${b.cover}') center/cover" role="img" aria-label="${esc(b.title)}"`:`style="background:linear-gradient(160deg,hsl(${h} 45% 32%),hsl(${(h+40)%360} 50% 20%))"`}>${b.cover?"":`<b>${esc(b.title)}</b><span>${esc(auth(b))}</span>`}</div>
- ${b.cover?`<div class="mtitle">${esc(b.title)}</div>`:""}<div class="meta">${b.cloud?"":`<span>${t("chs",b.chapters.length)}${pct(b)?" · "+t("read",pct(b)):""}</span>`}${b.cloud&&pct(b)?`<span>${t("read",pct(b))}</span>`:""}${b.cloud?`<span class="mstat">${statRow(b)}</span>`:""}</div>${pct(b)?`<div class="bar"><i style="width:${pct(b)}%"></i></div>`:""}</a>
+ ${b.cover?`<div class="mtitle">${esc(b.title)}</div>`:""}<div class="meta">${b.cloud?"":twinOf(b)?(pct(b)?`<span>${t("read",pct(b))}</span>`:""):`<span>${t("chs",b.chapters.length)}${pct(b)?" · "+t("read",pct(b)):""}</span>`}${!b.cloud&&b.id.startsWith("u")?pubMeta(b):""}${b.cloud&&pct(b)?`<span>${t("read",pct(b))}</span>`:""}${b.cloud?`<span class="mstat">${statRow(b)}</span>`:""}</div>${pct(b)?`<div class="bar"><i style="width:${pct(b)}%"></i></div>`:""}</a>
  <button class="fav ${favs.includes(b.id)?"on":""}" data-id="${b.id}" aria-label="${t("favs")}" aria-pressed="${favs.includes(b.id)}">★</button></div>`}
 function home(){
- app.innerHTML=`<h1 id="homeH">${tab==="pub"?ve("Cộng đồng","Community"):t("lib")}</h1>
+ app.innerHTML=`<h1 id="homeH">${tab==="pub"?ve("Khám phá","Explore"):t("lib")}</h1>
  <div class="tools"><input id="q" type="search" placeholder="${t("search")}" value="${esc(q)}" aria-label="${t("search")}">
- <div class="tabs" id="tabs">${[["all",t("all")],["fav",t("favs")],["go",t("going")],["pub",ve("Cộng đồng","Community")],["rank",ve("Xếp hạng","Ranking")]].map(([k,l])=>`<button data-k="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div><div class="subbar" id="commBar" ${tab==="pub"?"":"hidden"}><select id="commSort" aria-label="${ve("Sắp xếp","Sort")}"><option value="new">${ve("Mới cập nhật","Recently updated")}</option><option value="likes">${ve("Nhiều lượt thích","Most liked")}</option><option value="reads">${ve("Nhiều lượt đọc","Most read")}</option></select><button id="commReload" type="button" aria-label="${ve("Tải lại","Reload")}" title="${ve("Tải lại","Reload")}">↻</button></div></div>
+ <div class="tabs" id="tabs">${[["all",t("all")],["fav",t("favs")],["go",t("going")],["pub",ve("Khám phá","Explore")],["rank",ve("Xếp hạng","Ranking")]].map(([k,l])=>`<button data-k="${k}" aria-pressed="${tab===k}">${l}</button>`).join("")}</div><div class="subbar" id="commBar" ${tab==="pub"?"":"hidden"}><select id="commSort" aria-label="${ve("Sắp xếp","Sort")}"><option value="new">${ve("Mới cập nhật","Recently updated")}</option><option value="likes">${ve("Nhiều lượt thích","Most liked")}</option><option value="reads">${ve("Nhiều lượt đọc","Most read")}</option></select><button id="commReload" type="button" aria-label="${ve("Tải lại","Reload")}" title="${ve("Tải lại","Reload")}">↻</button></div></div>
  <div class="shelf" id="shelf"></div>
  <div class="homefoot"><p class="empty" id="syncNote">${syncNoteHtml()}</p><div class="foot"><span class="empty" id="stat"></span></div></div>`;
  shelf();libCloud();if(commState!=="ok"||Date.now()-commAt>15000)loadComm();
  $("#q").oninput=e=>{q=e.target.value;shelf()};
- $("#tabs").onclick=e=>{if(e.target.dataset.k==="rank"){location.hash="#/rank";return}if(e.target.dataset.k){tab=e.target.dataset.k;document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.k===tab)));$("#commBar").hidden=tab!=="pub";$("#homeH").textContent=tab==="pub"?ve("Cộng đồng","Community"):t("lib");if(tab==="pub"&&(commState!=="ok"||Date.now()-commAt>15000))loadComm();else shelf()}};
+ $("#tabs").onclick=e=>{if(e.target.dataset.k==="rank"){location.hash="#/rank";return}if(e.target.dataset.k){tab=e.target.dataset.k;document.querySelectorAll("#tabs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.k===tab)));$("#commBar").hidden=tab!=="pub";$("#homeH").textContent=tab==="pub"?ve("Khám phá","Explore"):t("lib");if(tab==="pub"&&(commState!=="ok"||Date.now()-commAt>15000))loadComm();else shelf()}};
  $("#commReload").onclick=()=>{commAt=0;loadComm()};
  $("#commSort").value=commSort;$("#commSort").onchange=e=>{commSort=e.target.value;commAt=0;loadComm()};
  $("#syncBtn").onclick=()=>{if(window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser)syncLibrary();else loginDlg.showModal()};
@@ -897,7 +906,7 @@ function home(){
 }
 function shelf(){
  const k=q.trim().toLowerCase(),pub=tab==="pub";
- const commList=commIds.map(id=>cloudCache[id]).filter(Boolean);let src;if(pub)src=commList;else{src=libAll();{const twin=new Set(src.filter(b=>b.pubBy).map(b=>"c_"+pubDocId(b)));src=src.filter(b=>!(b.cloud&&twin.has(b.id)))}if(tab==="all"){const have=new Set(src.map(b=>b.id));const meU=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,ownLocal=meU?src.filter(b=>b.id.startsWith("u")):[];src.forEach(b=>{if(b.pubBy)have.add("c_"+pubDocId(b))});commList.forEach(b=>{if(!have.has(b.id)&&!(meU&&ownLocal.some(l=>b.id.startsWith("c_"+meU.uid+"-"+l.id)))){have.add(b.id);src.push(b)}})}}
+ const commList=commIds.map(id=>cloudCache[id]).filter(Boolean);let src;if(pub){const me1=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;src=commList.map(b=>(me1&&b.ownerUid===me1.uid&&ownTwinLocal(b.id))||b)}else{src=libAll();{const twin=new Set(src.filter(b=>b.pubBy).map(b=>"c_"+pubDocId(b)));src=src.filter(b=>!(b.cloud&&twin.has(b.id)))}if(tab==="all"){const have=new Set(src.map(b=>b.id));const meU=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,ownLocal=meU?src.filter(b=>b.id.startsWith("u")):[];src.forEach(b=>{if(b.pubBy)have.add("c_"+pubDocId(b))});commList.forEach(b=>{if(!have.has(b.id)&&!(meU&&ownLocal.some(l=>b.id.startsWith("c_"+meU.uid+"-"+l.id)))){have.add(b.id);src.push(b)}})}}
  const list=src.filter(b=>(!k||(b.title+" "+(b.author||"")+" "+(b.ownerName||"")+" "+(b.tags||[]).join(" ")+" "+(b.desc||"")+" "+(b.genre||"")).toLowerCase().includes(k))&&(!tagf||(b.tags||[]).includes(tagf))&&(pub||tab==="all"||(tab==="fav"?favs.includes(b.id):prog[b.id]&&prog[b.id].last!=null&&pct(b)<100)));
  const none=pub?(commState==="loading"?ve("Đang tải truyện cộng đồng…","Loading community novels…"):commState==="err"?commErr:(commState==="ok"&&!commIds.length&&pub?ve("Chưa có truyện nào được đăng. Hãy là người đầu tiên!","Nothing has been published yet. Be the first!"):t("none"))):t("none");
  $("#shelf").innerHTML=list.length?list.map(card).join(""):`<p class="empty">${esc(none)}</p>`;
@@ -994,6 +1003,19 @@ const COS=[
 let inv=[],myCode=null;
 const cosCls=(uid,k)=>{const c=uid&&window.gtCloud&&window.gtCloud.cos&&window.gtCloud.cos(uid);return c&&c[k]?(k==="frame"?" fr-":" nm-")+c[k]:""};
 window.gtCommunityId=id=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=me&&myBooks.find(x=>x.id===id);return b&&b.pubBy&&b.pubBy===me.uid?"c_"+pubDocId(b):null};
+const twinOf=b=>(!b||b.cloud||!b.pubBy)?null:(cloudCache["c_"+pubDocId(b)]||null);
+const ownTwinLocal=cid=>{const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!me||!cid.startsWith("c_"+me.uid+"-"))return null;return mine.find(l=>l.pubBy===me.uid&&"c_"+pubDocId(l)===cid)||null};
+const pubMeta=b=>{const tw=twinOf(b),tag=b.priv?`<span class="pubtag">${ve("Riêng tư","Private")}</span>`:(b.pubBy?`<span class="pubtag on">${ve("Đã đăng","Published")}</span>`:"");return (tw?`<span class="mstat">${statRow(tw)}</span>`:"")+tag};
+async function setPrivacy(id,priv){
+ const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser,b=mine.find(x=>x.id===id);if(!b||!me||!window.gtCloud)return;
+ if(priv&&!confirm(ve("Chuyển sang riêng tư? Truyện sẽ biến mất khỏi Khám phá, và bình luận, lượt thích, đánh giá hiện có sẽ không còn hiển thị.","Make private? The novel will disappear from Explore, and its current comments, likes and ratings will no longer be shown.")))return;
+ try{
+  if(priv){const cid="c_"+pubDocId(b);if(b.pubBy===me.uid)await window.gtCloud.unpublish(id,b.pubGen||0);delete cloudCache[cid];commIds=commIds.filter(x=>x!==cid);
+   mine=mine.map(x=>x.id===id?{...x,priv:true,pubBy:null,pubGen:(x.pubGen||0)+1,dirty:true,ut:Date.now()}:x)}
+  else mine=mine.map(x=>x.id===id?{...x,priv:false,dirty:true,ut:Date.now()}:x);
+  ls.set("gt.mine",mine);commAt=0;syncLibrary();
+  if(!priv)await autoPublish(id,true);
+  route()}catch(e){console.error(e);alert(cloudMsg(e))}}
 const payFor=p=>plusOn()?Math.ceil(p*(100-PLUS.discount)/100):p;
 const vf=(vi,en,...a)=>ve(vi,en).replace(/\{(\d)\}/g,(m,i)=>a[i]);
 const fmtD=ms=>new Date(ms).toLocaleDateString(L()==="vi"?"vi-VN":L());
@@ -1118,7 +1140,7 @@ async function rankPage(){
  try{
   const cat=rankCat,data=await rankData(cat);if(location.hash!==h||cat!==rankCat)return;
   const box=$("#rankBody");if(!box)return;
-  if(!data.length){box.innerHTML=`<p class="empty">${ve("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Cộng đồng để lên bảng!","No ranking data yet. Like, rate or read novels in the Community tab to get on the board!")}</p>`;return}
+  if(!data.length){box.innerHTML=`<p class="empty">${ve("Chưa có dữ liệu xếp hạng. Hãy thích, đánh giá hoặc đọc truyện ở tab Khám phá để lên bảng!","No ranking data yet. Like, rate or read novels in the Explore tab to get on the board!")}</p>`;return}
   const medal=i=>`<span class="rk n${i<3?i+1:0}">${i+1}</span>`;
   const note=cat==="authors"?ve("Tính trên 100 truyện nhiều lượt thích nhất.","Based on the 100 most-liked novels."):cat==="rated"?ve("Xếp theo điểm đã cân bằng theo số lượt chấm: truyện chỉ có 1 lượt 5 sao không vượt được truyện nhiều người chấm.","Ranked by a score weighted by the number of ratings, so a single 5-star vote can't beat a widely rated novel."):ve("Bảng được làm mới mỗi phút.","The board refreshes every minute.");
   box.innerHTML=`<ol class="rank">${data.map((x,i)=>cat==="authors"
@@ -1150,7 +1172,7 @@ function needCloud(id){
 async function autoPublish(id,quiet){
  const b=mine.find(x=>x.id===id),me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
  if(!b||!me||!window.gtCloud)return;
- if((b.pubBy&&b.pubBy!==me.uid)||(b.own&&b.own!==me.uid))return;
+ if(b.priv||(b.pubBy&&b.pubBy!==me.uid)||(b.own&&b.own!==me.uid))return;
  try{await window.gtCloud.publish(b);
   mine=mine.map(x=>x.id===id?{...x,own:me.uid,pubBy:me.uid,pubAt:Date.now(),dirty:false,ut:Date.now()}:x);ls.set("gt.mine",mine);commAt=0;
   delete cloudCache["c_"+me.uid+"-"+id+(b.pubGen?"_g"+b.pubGen:"")];
@@ -1160,7 +1182,7 @@ async function autoPublish(id,quiet){
 }
 async function publishAllMine(){
  const me=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!me||!window.gtCloud)return;
- for(const b of mine.slice()){if(b.pubBy||(b.own&&b.own!==me.uid))continue;await autoPublish(b.id,true)}
+ for(const b of mine.slice()){if(b.priv||b.pubBy||(b.own&&b.own!==me.uid))continue;await autoPublish(b.id,true)}
 }
 async function syncLegacyPosts(){
  const old=ls.get("gt.posts",[]);if(!old.length||!window.gtCloud)return;
@@ -1252,7 +1274,7 @@ async function updatesPage(){
   const G=[[ve("Hôm nay","Today"),x=>now-x.updatedAt<day],[ve("Tuần này","This week"),x=>now-x.updatedAt<7*day],[ve("Trước đó","Earlier"),()=>true]],rest=books.slice(0,60);
   const row=b=>`<li><a href="#/b/${esc(b.id)}"><span>${esc(b.title)} <span class="bkm">· ${esc(b.ownerName||"")} · ${t("chs",b.chapters.length)}</span>${b.updatedAt>seen?` <span class="tag on" style="padding:1px 8px;font-size:11px">${ve("Mới","New")}</span>`:""}</span><span class="bkm">${esc(relTime(b.updatedAt))}</span></a></li>`;
   const sec=G.map(([lab,f])=>{const g=rest.filter(f);g.forEach(x=>rest.splice(rest.indexOf(x),1));return g.length?`<h2 style="margin-top:24px">${lab}</h2><ul class="chlist">${g.map(row).join("")}</ul>`:""}).join("");
-  app.innerHTML=back+title+(!list.length?`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.")}</p><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a>`:sec||`<p class="empty">${ve("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.")}</p>`)+(list.length?`<p style="margin-top:22px"><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a></p>`:"");
+  app.innerHTML=back+title+(!list.length?`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Khám phá, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Explore tab, tap the author's name and press Follow.")}</p><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a>`:sec||`<p class="empty">${ve("Các tác giả bạn theo dõi chưa đăng truyện nào.","The authors you follow haven't published anything yet.")}</p>`)+(list.length?`<p style="margin-top:22px"><a class="btn" href="#/following">${ve("Tác giả đang theo dõi","Authors you follow")}</a></p>`:"");
   ls.set("gt.followSeen",Date.now());
  }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
 }
@@ -1267,7 +1289,7 @@ async function followingPage(){
   const seen=ls.get("gt.followSeen",0);
   app.innerHTML=back+title+(list.length?`<div class="tagrow">${list.map(x=>`<a class="tag" href="#/u/${esc(x.id)}">${esc(x.name)}</a>`).join("")}</div>
    <p style="margin-top:20px"><a class="btn pri" href="#/updates">${ve("Xem truyện mới cập nhật","See latest updates")}</a></p>`
-   :`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Cộng đồng, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Community tab, tap the author's name and press Follow.")}</p>`);
+   :`<p class="empty">${ve("Bạn chưa theo dõi tác giả nào. Mở một truyện trong tab Khám phá, bấm tên tác giả rồi chọn Theo dõi.","You aren't following anyone yet. Open a novel in the Explore tab, tap the author's name and press Follow.")}</p>`);
   
  }catch(e){console.error(e);if(location.hash===h)app.innerHTML=back+title+`<p class="empty">${esc(cloudMsg(e))}</p>`}
 }
@@ -1287,18 +1309,20 @@ function bindOwnCloud(b){
   catch(e){console.error(e);alert(cloudMsg(e));rs.disabled=false;rs.textContent=ve("Khôi phục vào thư viện để sửa","Restore to my library to edit")}};
 }
 function book(id){
+ {const l0=ownTwinLocal(id);if(l0){location.replace("#/b/"+l0.id);return}}
  const b=all().find(x=>x.id===id);if(!b)return location.hash="#/";
  const p=prog[id]||{done:[]},cont=p.last??0,bl=bms[id]||[],fv=favs.includes(id),me=window.gtFirebaseAuth?.currentUser;
  const own=id.startsWith("u"),pubd=!!(own&&me&&b.pubBy===me.uid),foreign=!!(own&&me&&b.pubBy&&b.pubBy!==me.uid),lk='style="color:var(--acc);text-decoration:underline"';
+ setTimeout(()=>{const pt=$("#pubToggle");if(pt)pt.onclick=()=>setPrivacy(id,!b.priv)},0);
  app.innerHTML=`<a href="#/" class="empty">${t("back")}</a>
  <section class="head hero">
   <div class="hero-cover">${b.cover?`<img class="bcv" src="${b.cover}" alt="">`:`<div class="cover" style="background:linear-gradient(160deg,hsl(${hue(b.title)} 45% 32%),hsl(${(hue(b.title)+40)%360} 50% 20%))"><b>${esc(b.title)}</b></div>`}</div>
   <div class="hero-info">
    <h1>${esc(b.title)}</h1>
    <p class="hero-by">${esc(auth(b))}</p>
-   <div class="chips">${[stLabel(b.status),b.genre?esc(b.genre):"",pct(b)?t("read",pct(b)):"",hasPay(b)?IC.coin+" "+ve("Có chương trả xu","Paid chapters"):""].filter(Boolean).map(x=>`<span>${x}</span>`).join("")}</div>
+   <div class="chips">${[stLabel(b.status),own&&b.priv?ve("Riêng tư","Private"):"",b.genre?esc(b.genre):"",pct(b)?t("read",pct(b)):"",hasPay(b)?IC.coin+" "+ve("Có chương trả xu","Paid chapters"):""].filter(Boolean).map(x=>`<span>${x}</span>`).join("")}</div>
    ${b.cloud&&b.ownerUid?`<p class="hero-post">${ve("Đăng bởi ","Posted by ")}<a href="#/u/${esc(b.ownerUid)}" class="lnk">${esc(b.ownerName||ve("Độc giả","Reader"))}</a>${b.updatedAt?" · "+esc(relTime(b.updatedAt)):""}</p>`:""}
-   <div id="bStats">${statRow(b)}</div>${b.cloud&&b.ownerUid?`<div class="follow-box" id="followBox"></div>`:""}
+   <div id="bStats">${statRow(twinOf(b)||b)}</div>${b.cloud&&b.ownerUid?`<div class="follow-box" id="followBox"></div>`:""}
   </div>
  </section>
  ${b.desc?`<section class="desc-box"><h3 class="desc-h"><i aria-hidden="true"></i>${t("desc")}</h3><p class="desc">${esc(b.desc)}</p></section>`:""}
@@ -1309,7 +1333,7 @@ function book(id){
    <button class="btn" id="fv" aria-pressed="${fv}">${fv?t("favd"):t("fav")}</button>${b.cloud?`<button class="btn" id="likeBtn" type="button" aria-pressed="false">♥ ${ve("Thích","Like")}</button>`:""}
   </div>
   ${b.cloud?`<div id="rateRow" class="rate"><span>${ve("Đánh giá","Rate")}</span>${[1,2,3,4,5].map(i=>`<button class="star" type="button" data-s="${i}" aria-label="${i} ${ve("sao","stars")}">★</button>`).join("")}</div>`:""}
-  ${own?`<div class="acts3">${foreign?"":`<button class="btn" id="ed">${t("edit")}</button>`}<button class="btn danger" id="del">${t("del")}</button></div>`:""}${b.cloud&&me&&b.ownerUid===me.uid?`<div class="acts3"><button class="btn" id="cRestore" type="button">${ve("Khôi phục vào thư viện để sửa","Restore to my library to edit")}</button><button class="btn danger" id="cDel" type="button">${ve("Xoá truyện","Delete novel")}</button></div>`:""}
+  ${own?`<div class="acts3">${foreign||!me?"":`<button class="btn" id="pubToggle" type="button">${b.priv?ve("Đăng công khai","Publish publicly"):ve("Chuyển sang riêng tư","Make private")}</button>`}${foreign?"":`<button class="btn" id="ed">${t("edit")}</button>`}<button class="btn danger" id="del">${t("del")}</button></div>`:""}${b.cloud&&me&&b.ownerUid===me.uid?`<div class="acts3"><button class="btn" id="cRestore" type="button">${ve("Khôi phục vào thư viện để sửa","Restore to my library to edit")}</button><button class="btn danger" id="cDel" type="button">${ve("Xoá truyện","Delete novel")}</button></div>`:""}
  </div>
  <div class="tagrow">${(b.tags||[]).map(g=>`<button class="tag" data-g="${esc(g)}">#${esc(g)}</button>`).join("")}</div>
  <ul class="chlist">${b.chapters.map((c,i)=>`<li><a href="#/b/${id}/c/${i}" class="${(p.done||[]).includes(i)?"done":""}"><span>${esc(c.t)} <span class="bkm">· ${t("min",mins(c))}</span>${(()=>{const pr=chPrice(b,i);if(pr<=0)return"";const ok=(me&&me.uid===b.ownerUid)||(UNL[b.id]&&UNL[b.id].has(i));return ok?` <span class="bkm">· ${ve("đã mở","unlocked")}</span>`:` ${coinHtml(pr)}`})()}</span><span>${(p.done||[]).includes(i)?t("done"):p.last===i?t("cur"):""}</span></a></li>`).join("")}</ul>
@@ -1424,6 +1448,7 @@ function readImage(file,done,max=900){
 }
 let onScroll;
 function chapter(id,n,pi){
+ {const l0=ownTwinLocal(id);if(l0){location.replace("#/b/"+l0.id+"/c/"+n);return}}
  const b=all().find(x=>x.id===id);n=+n;if(!b||!b.chapters[n])return location.hash="#/";
  {const me0=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;
   if(b.cloud&&chPrice(b,n)>0&&!(me0&&me0.uid===b.ownerUid)){
