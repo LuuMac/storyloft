@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://firestore.googleapis.com" crossorigin>
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js">
+<link rel="modulepreload" href="https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js">
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Gác Truyện – Đọc tiểu thuyết</title>
@@ -1209,10 +1216,22 @@ async function rankPage(){
  }catch(e){console.error(e);const box=$("#rankBody");if(box&&location.hash===h)box.innerHTML=`<p class="empty">${esc(cloudMsg(e))}</p>`}
 }
 window.gtReloadComm=()=>{commAt=0;if(document.getElementById("shelf"))loadComm()};
+let commUnsub=null,commSubSort="";
 function loadComm(){
- const go=()=>{commState="loading";sh();window.gtCloud.listBooks(40,commSort).then(l=>{commIds=cacheBooks(l).map(b=>b.id);commState="ok";commAt=Date.now()}).catch(e=>{console.error(e);commState="err";commErr=cloudMsg(e)}).finally(()=>{sh()})};
- if(window.gtCloud)go();else{commState="loading";sh();addEventListener("gtcloud",go,{once:true})}
+ const go=()=>{
+  if(commUnsub&&commSubSort===commSort&&commAt!==0)return;
+  if(commUnsub){commUnsub();commUnsub=null}
+  if(commState!=="ok"){commState="loading";sh()}
+  commSubSort=commSort;let first=true;
+  commUnsub=window.gtCloud.watchBooks(40,commSort,(l,info)=>{
+   const same=!first&&info&&info.changes===0;first=false;
+   commIds=cacheBooks(l).map(b=>b.id);commState="ok";commAt=Date.now();
+   if(!same)sh()},
+   e=>{console.error(e);commState="err";commErr=cloudMsg(e);sh()});
+ };
+ if(window.gtCloud)go();else{if(commState!=="ok"){commState="loading";sh()}addEventListener("gtcloud",go,{once:true})}
 }
+setTimeout(()=>{if(["","#","#/"].includes(location.hash))loadComm()},0);
 function libCloud(){
  const ids=[...new Set(favs.concat(Object.keys(prog)))].filter(i=>i.startsWith("c_")&&!cloudCache[i]&&!cloudMissing.has(i));
  if(!ids.length)return;
@@ -1689,7 +1708,10 @@ addEventListener("keydown",e=>{if(dlg.open||/INPUT|TEXTAREA/.test(document.activ
  const m=location.hash.match(/^#\/b\/([^/]+)\/c\/(\d+)/);if(!m)return;const b=all().find(x=>x.id===m[1]),n=+m[2];if(!b)return;
  if(e.key==="ArrowRight"&&n<b.chapters.length-1)location.hash=`#/b/${m[1]}/c/${n+1}`;
  if(e.key==="ArrowLeft"&&n>0)location.hash=`#/b/${m[1]}/c/${n-1}`});
-document.addEventListener("visibilitychange",()=>{if(document.hidden)return;if(tab==="pub"&&$("#shelf")&&Date.now()-commAt>15000)loadComm();if(Date.now()-syncAt>120000)syncLibrary()});
+let quietAt=0;
+async function refreshQuiet(){const u=window.gtFirebaseAuth&&window.gtFirebaseAuth.currentUser;if(!u||!window.gtCloud)return;try{wallet=await window.gtCloud.wallet();ent=await window.gtCloud.entitlement();refreshWallet()}catch(e){}}
+document.addEventListener("visibilitychange",()=>{if(document.hidden)return;if(tab==="pub"&&$("#shelf")&&Date.now()-commAt>15000)loadComm();if(Date.now()-syncAt>120000)syncLibrary();if(Date.now()-quietAt>30000){quietAt=Date.now();refreshQuiet()}});
+addEventListener("online",()=>{commAt=0;if($("#shelf"))loadComm();syncAt=0;syncLibrary()});
 const langDlg=$("#langDlg");
 const LANG_ALIAS={vi:"vietnamese viet nam",en:"english anh my",zh:"chinese trung quoc hoa",ja:"japanese nhat ban",ko:"korean han quoc",es:"spanish tay ban nha",fr:"french phap",de:"german duc",pt:"portuguese bo dao nha",ru:"russian nga"};
 const fold=x=>String(x).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/đ/g,"d");
@@ -1717,7 +1739,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
 import {
   getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, limit,
-  onSnapshot, serverTimestamp, getDoc, getDocFromServer, getDocs, getDocsFromServer, setDoc, writeBatch, where, increment, Timestamp, arrayUnion
+  onSnapshot, serverTimestamp, getDoc, getDocFromServer, getDocs, getDocsFromServer, setDoc, writeBatch, where, increment, Timestamp, arrayUnion, initializeFirestore, persistentLocalCache, persistentMultipleTabManager
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 import { getDatabase, ref as rtdbRef, get as rtdbGet, set as rtdbSet, remove as rtdbRemove, update as rtdbUpdate } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-database.js";
 
@@ -2100,6 +2122,11 @@ const cloud = {
     const s = await getDocsFromServer(qy);
     return s.docs.map(d => toBook(d.id, d.data()));
   },
+  watchBooks(n, sort, onData, onErr) {
+    const f = sort === "likes" ? "likeCount" : sort === "reads" ? "readCount" : sort === "rated" ? "ratingCount" : "updatedAt";
+    const qy = query(collection(db, "books"), orderBy(f, "desc"), limit(n));
+    return onSnapshot(qy, s => onData(s.docs.map(d => toBook(d.id, d.data({ serverTimestamps: "estimate" }))), { changes: s.docChanges().length, fromCache: s.metadata.fromCache }), onErr);
+  },
   async getBooks(ids) {
     const rs = await Promise.allSettled(ids.map(id => getDoc(doc(db, "books", id.slice(2)))));
     const out = []; let err = null;
@@ -2329,7 +2356,9 @@ onAuthStateChanged(auth, user => {
 window.gtFirebaseAuth = auth;
 
 /* ================= Bình luận ================= */
-const db = getFirestore(appFirebase);
+let db;
+try { db = initializeFirestore(appFirebase, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) }); }
+catch (e) { db = getFirestore(appFirebase); }
 const gL = () => (window.gtL ? window.gtL() : "vi"), ctx = (vi, en) => window.gtVe ? window.gtVe(vi, en) : (gL() === "vi" ? vi : en);
 const cesc = x => String(x ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const cq = s => document.querySelector(s);
