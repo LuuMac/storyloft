@@ -890,6 +890,8 @@ x("Riêng tư","Private|私密|非公開|비공개|Privado|Privé|Privat|Privado
 x("Chuyển sang riêng tư","Make private|设为私密|非公開にする|비공개로 전환|Hacer privado|Passer en privé|Privat stellen|Tornar privado|Сделать личным");
 x("Đăng công khai","Publish publicly|公开发布|公開する|공개하기|Publicar para todos|Publier pour tous|Öffentlich machen|Publicar para todos|Опубликовать для всех");
 x("Chuyển sang riêng tư? Truyện sẽ biến mất khỏi Khám phá, và bình luận, lượt thích, đánh giá hiện có sẽ không còn hiển thị.","Make private? The novel will disappear from Explore, and its current comments, likes and ratings will no longer be shown.|设为私密吗？小说将从“探索”中消失，现有的评论、点赞和评分将不再显示。|非公開にしますか？小説は「探す」から消え、現在のコメント・いいね・評価は表示されなくなります。|비공개로 전환할까요? 소설이 탐색에서 사라지고 현재 댓글, 좋아요, 평가가 더 이상 표시되지 않습니다.|¿Hacerla privada? La novela desaparecerá de Explorar y sus comentarios, me gusta y valoraciones actuales dejarán de mostrarse.|Passer en privé ? Le roman disparaîtra d’Explorer et ses commentaires, mentions « j’aime » et notes actuels ne seront plus affichés.|Privat stellen? Der Roman verschwindet aus „Entdecken“, und vorhandene Kommentare, Likes und Bewertungen werden nicht mehr angezeigt.|Tornar privado? O romance sairá de Explorar e seus comentários, curtidas e avaliações atuais deixarão de ser exibidos.|Сделать личным? Роман исчезнет из раздела «Обзор», а текущие комментарии, лайки и оценки перестанут отображаться.");
+x("Xoá chương {0}{1}? Các chương sau sẽ được đánh số lại.","Delete chapter {0}{1}? Later chapters will be renumbered.|要删除第 {0} 章{1}吗？之后的章节将重新编号。|第{0}章{1}を削除しますか？以降の章は番号が振り直されます。|{0}장{1}을 삭제할까요? 이후 장의 번호가 다시 매겨집니다.|¿Eliminar el capítulo {0}{1}? Los siguientes se renumerarán.|Supprimer le chapitre {0}{1} ? Les suivants seront renumérotés.|Kapitel {0}{1} löschen? Die folgenden Kapitel werden neu nummeriert.|Excluir o capítulo {0}{1}? Os seguintes serão renumerados.|Удалить главу {0}{1}? Следующие главы будут пронумерованы заново.");
+x("Truyện đang công khai: bình luận và chương người đọc đã mở khoá được gắn theo số chương nên có thể bị lệch.","This novel is public: comments and chapters readers unlocked are tied to chapter numbers and may shift.|这部小说是公开的：评论和读者已解锁的章节按章节编号绑定，可能会错位。|この小説は公開中です。コメントや読者が解放した章は章番号に紐づくため、ずれる可能性があります。|이 소설은 공개 상태입니다. 댓글과 독자가 잠금 해제한 장은 장 번호에 묶여 있어 어긋날 수 있습니다.|Esta novela es pública: los comentarios y los capítulos desbloqueados por los lectores dependen del número de capítulo y podrían desfasarse.|Ce roman est public : les commentaires et les chapitres débloqués par les lecteurs dépendent du numéro de chapitre et peuvent être décalés.|Dieser Roman ist öffentlich: Kommentare und von Lesern freigeschaltete Kapitel sind an die Kapitelnummer gebunden und können verrutschen.|Este romance é público: comentários e capítulos desbloqueados pelos leitores dependem do número do capítulo e podem ficar desalinhados.|Роман опубликован: комментарии и открытые читателями главы привязаны к номеру главы и могут сместиться.");
 
 const STATUS={ongoing:["Đang ra","Ongoing"],completed:["Đã hoàn thành","Completed"],paused:["Tạm ngưng","On hiatus"]};
 const stLabel=k=>STATUS[k]?ve(STATUS[k][0],STATUS[k][1]):"";
@@ -1627,7 +1629,7 @@ function openChapterEditor(id,idx){
  $("#cht").value=c.t||"";$("#cht").placeholder=ve("Chưa đặt tiêu đề","Untitled")+" "+n;
  $("#chx").value=c.x||"";$("#chx").placeholder=ve("Viết hoặc dán nội dung chương vào đây…","Write or paste the chapter text here…");
  $("#chCancel").textContent=ve("Huỷ","Cancel");$("#chSave").textContent=ve("Lưu chương","Save chapter");$("#chDel").textContent=ve("Xoá chương","Delete chapter");
- $("#chDel").hidden=isNew||idx!==b.chapters.length-1||b.chapters.length<2;
+ $("#chDel").hidden=isNew||b.chapters.length<2;
  updateChStats();$("#chDlg").showModal();$("#chx").focus()}
 $("#chx").addEventListener("input",updateChStats);
 $("#chCancel").onclick=()=>$("#chDlg").close();
@@ -1644,12 +1646,23 @@ $("#chSave").onclick=()=>{
  mine=next;$("#chDlg").close();syncLibrary();autoPublish(id);
  if(location.hash.startsWith("#/b/"+id))route()};
 $("#chDel").onclick=()=>{
- const {id}=chCtx||{},b=mine.find(x=>x.id===id);if(!b||b.chapters.length<2)return;
- if(!confirm(ve("Xoá chương cuối này?","Delete this last chapter?")))return;
- const len=b.chapters.length-1,next=mine.map(v=>v.id===id?{...v,chapters:v.chapters.slice(0,len),ut:Date.now(),dirty:!!v.pubBy||v.dirty}:v);
+ const {id,idx}=chCtx||{},b=mine.find(x=>x.id===id);
+ if(!b||b.chapters.length<2||!Number.isInteger(idx)||idx<0||idx>=b.chapters.length)return;
+ const last=idx===b.chapters.length-1,ttl=String(b.chapters[idx].t||"").trim();
+ let msg=last?ve("Xoá chương cuối này?","Delete this last chapter?"):vf("Xoá chương {0}{1}? Các chương sau sẽ được đánh số lại.","Delete chapter {0}{1}? Later chapters will be renumbered.",idx+1,ttl?" \u201c"+ttl+"\u201d":"");
+ if(b.pubBy&&!b.priv&&!last)msg+="\n\n"+ve("Truyện đang công khai: bình luận và chương người đọc đã mở khoá được gắn theo số chương nên có thể bị lệch.","This novel is public: comments and chapters readers unlocked are tied to chapter numbers and may shift.");
+ if(!confirm(msg))return;
+ const len=b.chapters.length-1,down=i=>i>idx?i-1:i;
+ let pay=b.pay;
+ if(pay&&typeof pay==="object"){const over={};Object.keys(pay.over||{}).forEach(k=>{const n=+k;if(n!==idx)over[String(down(n))]=pay.over[k]});pay={...pay,over,from:pay.from>idx?pay.from-1:pay.from}}
+ const next=mine.map(v=>v.id===id?{...v,chapters:v.chapters.filter((_,i)=>i!==idx),...(pay?{pay}:{}),ut:Date.now(),dirty:!!v.pubBy||v.dirty}:v);
  if(!ls.set("gt.mine",next))return;mine=next;
- const pr=prog[id];if(pr){pr.done=(pr.done||[]).filter(i=>i<len);if(pr.last>=len)pr.last=len-1;ls.set("gt.prog",prog)}
- if(bms[id]){bms[id]=bms[id].filter(m=>m.c<len);ls.set("gt.bm",bms)}
+ const keys=[id];if(b.pubBy)keys.push("c_"+pubDocId(b));
+ keys.forEach(k=>{
+  const pr=prog[k];
+  if(pr){pr.done=[...new Set((pr.done||[]).filter(i=>i!==idx).map(down))];if(pr.last!=null)pr.last=pr.last===idx?Math.max(0,Math.min(idx,len-1)):down(pr.last)}
+  if(bms[k])bms[k]=bms[k].filter(m=>m.c!==idx).map(m=>m.c>idx?{...m,c:m.c-1}:m)});
+ ls.set("gt.prog",prog);ls.set("gt.bm",bms);
  $("#chDlg").close();syncLibrary();autoPublish(id);if(location.hash.startsWith("#/b/"+id))route()};
 $("#dc").onclick=()=>dlg.close();
 let editId=null,cover=null;
