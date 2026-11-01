@@ -441,6 +441,71 @@ img{-webkit-user-drag:none;user-drag:none}
 .pubtag{display:inline-block;padding:0 8px;border-radius:999px;font-size:11px;line-height:18px;border:1px solid var(--line);color:var(--mute)}
 .pubtag.on{color:var(--acc);border-color:var(--acc)}
 .meta .pubtag{margin-left:6px}
+
+/* ===== Chủ đề Halloween ===== */
+:root[data-theme="halloween"]{--bg:#0d0614;--panel:rgba(30,14,46,.88);--ink:#f6ecff;--mute:#b9a6d3;--line:rgba(190,140,255,.22);--acc:#ff8a2b;--accink:#1d0a00;--acc-soft:rgba(255,138,43,.16);color-scheme:dark}
+:root[data-theme="halloween"] body{background:radial-gradient(ellipse at 15% 0%,rgba(255,122,24,.16),transparent 42%),radial-gradient(ellipse at 88% 14%,rgba(126,58,242,.26),transparent 46%),linear-gradient(180deg,#0d0614 0%,#12061c 55%,#0a0410 100%);background-attachment:fixed;color:var(--ink)}
+:root[data-theme="halloween"] body:before{background-image:radial-gradient(1px 1px at 8% 16%,#ffb878 99%,transparent),radial-gradient(1px 1px at 27% 69%,#c79bff 99%,transparent),radial-gradient(2px 2px at 63% 22%,#ff9a4d 99%,transparent),radial-gradient(1px 1px at 82% 78%,#e2c4ff 99%,transparent),radial-gradient(1px 1px at 46% 91%,#ffb878 99%,transparent);background-size:231px 247px,263px 211px,307px 281px,251px 233px,293px 271px}
+:root[data-theme="halloween"] .top{background:rgba(13,6,20,.84);border-bottom:1px solid rgba(255,138,43,.2)}
+:root[data-theme="halloween"] .btn,:root[data-theme="halloween"] .tabs button,:root[data-theme="halloween"] .tag{background:rgba(40,20,60,.82);border-color:rgba(200,150,255,.26);color:#f0e4ff}
+:root[data-theme="halloween"] .btn:hover,:root[data-theme="halloween"] .tabs button:hover,:root[data-theme="halloween"] .tag:hover{border-color:rgba(255,138,43,.7);box-shadow:0 5px 22px rgba(255,100,0,.2)}
+:root[data-theme="halloween"] .btn.pri{background:linear-gradient(135deg,#ffb25c,#ff7a18);border-color:transparent;color:#1d0a00;box-shadow:0 5px 22px rgba(255,120,30,.3)}
+:root[data-theme="halloween"] .tools input{background:rgba(22,10,34,.9);border-color:rgba(200,150,255,.26);color:var(--ink)}
+:root[data-theme="halloween"] .bk{border-color:rgba(255,138,43,.16);background:linear-gradient(145deg,rgba(42,20,62,.9),rgba(16,8,26,.9))}
+:root[data-theme="halloween"] .bk:hover{border-color:rgba(255,138,43,.6);box-shadow:0 18px 40px rgba(0,0,0,.38),0 0 26px rgba(255,120,30,.2)}
+:root[data-theme="halloween"] .mtitle{color:#fff1df}
+:root[data-theme="halloween"] .meta{color:#bfa9d8}
+:root[data-theme="halloween"] .badge{background:rgba(255,138,43,.16);color:#ffc58a}
+:root[data-theme="halloween"] .homefoot{border-color:rgba(200,150,255,.18)}
+:root[data-theme="halloween"] .pop{background:#1a0b2a;border-color:rgba(200,150,255,.3)}
+:root[data-theme="halloween"]::before{content:"";position:fixed;top:-70px;right:-50px;width:280px;height:280px;border-radius:50%;pointer-events:none;z-index:-2;background:radial-gradient(circle at 42% 42%,#fff2cf 0%,#ffdf9a 38%,rgba(255,190,110,.25) 60%,transparent 72%);opacity:.22}
+:root[data-theme="halloween"]::after{content:"";position:fixed;top:12%;left:-200px;width:180px;height:50px;pointer-events:none;z-index:-1;opacity:.65;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 50'%3E%3Cdefs%3E%3Cpath id='b' d='M20 8C17 3 12 2 5 6C9 7 10 10 11 14C13 11 16 11 17 14C18 12 19 11 20 11C21 11 22 12 23 14C24 11 27 11 29 14C30 10 31 7 35 6C28 2 23 3 20 8Z M17.5 8.5L18.5 4L20 7L21.5 4L22.5 8.5Z'/%3E%3C/defs%3E%3Cg fill='%23c9a8ff' fill-opacity='.75'%3E%3Cuse href='%23b' transform='translate(0 12)'/%3E%3Cuse href='%23b' transform='translate(62 0) scale(.7)'/%3E%3Cuse href='%23b' transform='translate(112 20) scale(1.15)'/%3E%3C/g%3E%3C/svg%3E") no-repeat center/contain}
+:root[data-theme="halloween"] body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;opacity:.95;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23cdb8ff' stroke-opacity='.38' stroke-width='1'%3E%3Cpath d='M0 0L100 0M0 0L0 100M0 0L86 52M0 0L52 86M0 0L100 24M0 0L24 100'/%3E%3Cpath d='M30 0Q22 22 0 30M55 0Q40 40 0 55M80 0Q60 60 0 80'/%3E%3C/g%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 56'%3E%3Cdefs%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='4'/%3E%3C/filter%3E%3C/defs%3E%3Cellipse cx='32' cy='34' rx='30' ry='23' fill='%23ff7a18' opacity='.45' filter='url(%23g)'/%3E%3Cellipse cx='32' cy='33' rx='26' ry='20' fill='%23e8650c'/%3E%3Cellipse cx='20' cy='33' rx='14' ry='19' fill='%23ff7a18'/%3E%3Cellipse cx='44' cy='33' rx='14' ry='19' fill='%23ff7a18'/%3E%3Cellipse cx='32' cy='33' rx='10' ry='20' fill='%23ff9334'/%3E%3Cpath d='M29 13Q31 4 37 6Q34 10 35 14Z' fill='%234a8a24'/%3E%3Cpath d='M18 29L25 29L21.5 22Z M39 29L46 29L42.5 22Z' fill='%23ffe08a'/%3E%3Cpath d='M20 38L25 42L29 38L33 42L37 38L41 42L45 38L44 46Q32 52 20 46Z' fill='%23ffe08a'/%3E%3C/svg%3E"),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 56'%3E%3Cdefs%3E%3Cfilter id='g'%3E%3CfeGaussianBlur stdDeviation='4'/%3E%3C/filter%3E%3C/defs%3E%3Cellipse cx='32' cy='34' rx='30' ry='23' fill='%23ff7a18' opacity='.45' filter='url(%23g)'/%3E%3Cellipse cx='32' cy='33' rx='26' ry='20' fill='%23e8650c'/%3E%3Cellipse cx='20' cy='33' rx='14' ry='19' fill='%23ff7a18'/%3E%3Cellipse cx='44' cy='33' rx='14' ry='19' fill='%23ff7a18'/%3E%3Cellipse cx='32' cy='33' rx='10' ry='20' fill='%23ff9334'/%3E%3Cpath d='M29 13Q31 4 37 6Q34 10 35 14Z' fill='%234a8a24'/%3E%3Cpath d='M18 29L25 29L21.5 22Z M39 29L46 29L42.5 22Z' fill='%23ffe08a'/%3E%3Cpath d='M20 38L25 42L29 38L33 42L37 38L41 42L45 38L44 46Q32 52 20 46Z' fill='%23ffe08a'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left top,left 14px bottom -8px,right 22px bottom -10px;background-size:130px,72px,56px}
+@keyframes hwBats{0%{transform:translate(0,0)}25%{transform:translate(32vw,-30px)}50%{transform:translate(62vw,22px)}75%{transform:translate(88vw,-20px)}100%{transform:translate(118vw,12px)}}
+@keyframes hwMoon{0%,100%{opacity:.18}50%{opacity:.28}}
+@keyframes hwFlicker{0%,100%{opacity:.95}30%{opacity:.82}34%{opacity:1}62%{opacity:.88}}
+@media (prefers-reduced-motion:no-preference){
+:root[data-theme="halloween"]::before{animation:hwMoon 9s ease-in-out infinite}
+:root[data-theme="halloween"]::after{animation:hwBats 26s linear infinite}
+:root[data-theme="halloween"] body::after{animation:hwFlicker 5s ease-in-out infinite}
+}
+
+:root[data-theme="halloween"]::before{background:radial-gradient(circle at 32% 36%,rgba(190,150,90,.38) 0 7%,transparent 8%),radial-gradient(circle at 58% 56%,rgba(190,150,90,.3) 0 9%,transparent 10%),radial-gradient(circle at 66% 28%,rgba(190,150,90,.28) 0 5%,transparent 6%),radial-gradient(circle at 42% 42%,#fff2cf 0%,#ffdf9a 38%,rgba(255,190,110,.25) 60%,transparent 72%);width:300px;height:300px;opacity:.3}
+:root[data-theme="halloween"]::after{content:none}
+:root[data-theme="halloween"] .brand{text-shadow:0 0 14px rgba(255,138,43,.55)}
+#hwDecor{position:fixed;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+:root:not([data-theme="halloween"]) #hwDecor{display:none}
+#hwDecor .hw-web{position:absolute;top:0;right:0;width:130px;height:130px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23cdb8ff' stroke-opacity='.38' stroke-width='1'%3E%3Cpath d='M0 0L100 0M0 0L0 100M0 0L86 52M0 0L52 86M0 0L100 24M0 0L24 100'/%3E%3Cpath d='M30 0Q22 22 0 30M55 0Q40 40 0 55M80 0Q60 60 0 80'/%3E%3C/g%3E%3C/svg%3E") no-repeat top left/contain;transform:scaleX(-1)}
+#hwDecor .hw-yard{position:absolute;left:0;right:0;bottom:0;height:84px;opacity:.8;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 90'%3E%3Cpath d='M0 90V72Q60 64 120 72T240 70T360 72T420 68V90Z' fill='%2316081f'/%3E%3Cg fill='%231d0c2c' stroke='%233a1f5c' stroke-width='.8'%3E%3Cpath d='M40 72V48Q40 39 49 39Q58 39 58 48V72Z'/%3E%3Cpath d='M96 72V56Q96 50 102 50Q108 50 108 56V72Z'/%3E%3Cpath d='M214 72V44Q214 34 225 34Q236 34 236 44V72Z'/%3E%3Cpath d='M330 72V52Q330 45 337 45Q344 45 344 52V72Z'/%3E%3C/g%3E%3Cg fill='none' stroke='%232a1445' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M158 72V40M150 49H166'/%3E%3Cpath d='M284 72V52Q282 42 274 36M284 54Q290 44 300 40M280 46Q274 42 268 43'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom/auto 84px}
+#hwDecor .hw-fog{position:absolute;left:-20%;bottom:0;width:140%;height:130px;background:radial-gradient(ellipse at 30% 100%,rgba(190,150,255,.2),transparent 60%),radial-gradient(ellipse at 75% 100%,rgba(255,150,70,.13),transparent 60%)}
+#hwDecor .hw-fog.f2{height:90px;opacity:.7;background:radial-gradient(ellipse at 60% 100%,rgba(210,190,255,.18),transparent 62%)}
+#hwDecor .hw-ghost{position:absolute;width:calc(46px*var(--sc));opacity:.26;filter:drop-shadow(0 0 12px rgba(220,200,255,.75))}
+#hwDecor .hw-ghost svg{display:block;width:100%}
+#hwDecor .hw-spider{position:absolute;top:0;width:34px;margin-left:-17px;transform-origin:50% 0}
+#hwDecor .hw-thread{display:block;width:1px;height:var(--len);margin:0 auto;background:linear-gradient(rgba(220,200,255,0),rgba(220,200,255,.6))}
+#hwDecor .hw-spider svg{display:block;width:34px;height:30px}
+#hwDecor .hw-fly{position:absolute;left:-90px;width:var(--w);opacity:.7}
+#hwDecor .hw-fly svg{display:block;width:100%;transform-origin:50% 60%}
+#hwDecor .hw-ember{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:#ffb25c;box-shadow:0 0 9px 2px rgba(255,138,43,.75);opacity:0}
+@keyframes hwFly{0%{transform:translate(-90px,0)}25%{transform:translate(25vw,-26px)}50%{transform:translate(50vw,14px)}75%{transform:translate(75vw,-18px)}100%{transform:translate(calc(100vw + 120px),6px)}}
+@keyframes hwFlyR{0%{transform:translate(calc(100vw + 120px),0) scaleX(-1)}25%{transform:translate(75vw,-22px) scaleX(-1)}50%{transform:translate(50vw,16px) scaleX(-1)}75%{transform:translate(25vw,-14px) scaleX(-1)}100%{transform:translate(-120px,8px) scaleX(-1)}}
+@keyframes hwFlap{from{transform:scaleY(1)}to{transform:scaleY(.45)}}
+@keyframes hwFloat{0%{transform:translate(0,0) rotate(-3deg);opacity:.2}50%{opacity:.34}100%{transform:translate(22px,-30px) rotate(4deg);opacity:.22}}
+@keyframes hwSwing{0%{transform:rotate(-5deg) translateY(0)}100%{transform:rotate(5deg) translateY(16px)}}
+@keyframes hwRise{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:.9}100%{transform:translateY(-105vh) translateX(26px);opacity:0}}
+@keyframes hwFog{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+@keyframes hwGlow{0%,100%{text-shadow:0 0 12px rgba(255,138,43,.45)}50%{text-shadow:0 0 22px rgba(255,138,43,.95)}}
+@media (prefers-reduced-motion:no-preference){
+#hwDecor .hw-fly{animation:hwFly var(--dur) linear var(--dl) infinite}
+#hwDecor .hw-fly.rev{animation-name:hwFlyR}
+#hwDecor .hw-fly svg{animation:hwFlap .34s ease-in-out infinite alternate}
+#hwDecor .hw-ghost{animation:hwFloat var(--dur) ease-in-out infinite alternate}
+#hwDecor .hw-spider{animation:hwSwing var(--dur) ease-in-out infinite alternate}
+#hwDecor .hw-ember{animation:hwRise var(--d) linear var(--t) infinite}
+#hwDecor .hw-fog{animation:hwFog 22s ease-in-out infinite alternate}
+#hwDecor .hw-fog.f2{animation-duration:31s;animation-direction:alternate-reverse}
+:root[data-theme="halloween"] .brand{animation:hwGlow 4.5s ease-in-out infinite}
+}
 </style>
 </head>
 <body>
@@ -483,7 +548,7 @@ img{-webkit-user-drag:none;user-drag:none}
   <label>Giãn dòng</label>
   <div class="seg" id="lhs"><button data-v="1.6">Chặt</button><button data-v="1.85">Vừa</button><button data-v="2.1">Thoáng</button></div>
   <label>Nền</label>
-  <div class="seg" id="ths"><button data-v="light">Sáng</button><button data-v="sepia">Giấy</button><button data-v="dark">Tối</button></div>
+  <div class="seg" id="ths"><button data-v="light">Sáng</button><button data-v="sepia">Giấy</button><button data-v="dark">Tối</button><button data-v="halloween">Halloween</button></div>
 </div>
 <main id="app" class="wrap"></main>
 <div id="authToast" role="status" aria-live="polite"></div>
@@ -865,13 +930,25 @@ function applyLang(){document.documentElement.lang=L();document.title=t("title")
  SEL.forEach(([q,k,a])=>{const e=document.querySelector(q);if(e)a?e.setAttribute(a,t(k)):e.textContent=t(k)});
  {const lg=LANGS.find(x=>x[0]===L())||LANGS[0],lab=$("#accountLanguageLabel")||$("#lgn");if(lab)lab.textContent=t("lang")+": "+lg[1]}
  document.querySelectorAll("#lgs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===L())));window.gtL=L;if(window.gtLang)window.gtLang()}
+
+const HW_BAT='<svg class="hw-bat" viewBox="0 0 40 18" aria-hidden="true"><path fill="#c9a8ff" d="M20 8C17 3 12 2 5 6C9 7 10 10 11 14C13 11 16 11 17 14C18 12 19 11 20 11C21 11 22 12 23 14C24 11 27 11 29 14C30 10 31 7 35 6C28 2 23 3 20 8Z M17.5 8.5L18.5 4L20 7L21.5 4L22.5 8.5Z"/></svg>';
+const HW_GHOST='<svg viewBox="0 0 48 60" aria-hidden="true"><path fill="#f4ecff" d="M24 2C12 2 5 11 5 24V56L12 50L18 57L24 50L30 57L36 50L43 56V24C43 11 36 2 24 2Z"/><ellipse cx="17" cy="24" rx="3.2" ry="4.6" fill="#1a0b2a"/><ellipse cx="31" cy="24" rx="3.2" ry="4.6" fill="#1a0b2a"/><ellipse cx="24" cy="35" rx="3" ry="4.2" fill="#1a0b2a"/></svg>';
+const HW_SPIDER='<svg viewBox="0 0 32 30" aria-hidden="true"><g fill="none" stroke="#b88cff" stroke-width="1.3" stroke-linecap="round"><path d="M10 15Q4 9 2 11M10 17Q3 17 1 21M11 19Q6 24 4 28M12 13Q8 6 6 4M22 15Q28 9 30 11M22 17Q29 17 31 21M21 19Q26 24 28 28M20 13Q24 6 26 4"/></g><circle cx="16" cy="17" r="6.5" fill="#2b1647" stroke="#b88cff" stroke-width="1.2"/><circle cx="16" cy="10.5" r="3.6" fill="#2b1647" stroke="#b88cff" stroke-width="1.2"/><circle cx="14.6" cy="10" r=".9" fill="#ff5a5a"/><circle cx="17.4" cy="10" r=".9" fill="#ff5a5a"/></svg>';
+function hwHTML(){
+ const bats=[[14,22,0,34,0],[28,30,-9,26,1],[9,26,-14,40,0],[38,34,-22,22,1]].map(([top,dur,dl,w,rev])=>`<div class="hw-fly${rev?" rev":""}" style="top:${top}%;--dur:${dur}s;--dl:${dl}s;--w:${w}px">${HW_BAT}</div>`).join("");
+ const ghosts=[[6,30,1,7],[88,52,.8,9],[47,18,.65,11]].map(([l,b,sc,du])=>`<div class="hw-ghost" style="left:${l}%;bottom:${b}%;--sc:${sc};--dur:${du}s">${HW_GHOST}</div>`).join("");
+ const spiders=[[4,140,4.6],[93,100,5.4]].map(([l,len,du])=>`<div class="hw-spider" style="left:${l}%;--len:${len}px;--dur:${du}s"><i class="hw-thread"></i>${HW_SPIDER}</div>`).join("");
+ const embers=Array.from({length:16},(_,i)=>`<i class="hw-ember" style="left:${((i*6.3+3)%97).toFixed(1)}%;--d:${(9+(i%5)*2.2).toFixed(1)}s;--t:-${(i*1.7).toFixed(1)}s"></i>`).join("");
+ return '<div class="hw-fog"></div><div class="hw-fog f2"></div><div class="hw-yard"></div><div class="hw-web"></div>'+ghosts+spiders+bats+embers}
+function hwDecor(on){let d=document.getElementById("hwDecor");if(!on){if(d)d.remove();return}if(d)return;d=document.createElement("div");d.id="hwDecor";d.setAttribute("aria-hidden","true");d.innerHTML=hwHTML();document.body.prepend(d)}
+function hwOn(){const d=new Date(),m=d.getMonth(),g=d.getDate();return (m===9&&g>=24)||(m===10&&g<=2)}
 function applySet(){
  applyLang();
  const r=document.documentElement;
- if(st.th)r.dataset.theme=st.th;else delete r.dataset.theme;
+ const th=st.th||(hwOn()?"halloween":null);if(th)r.dataset.theme=th;else delete r.dataset.theme;hwDecor(th==="halloween");
  r.style.setProperty("--fs",st.fs+"px");r.style.setProperty("--ff",st.ff==="sans"?'"Be Vietnam Pro",system-ui,sans-serif':'"Literata",Georgia,serif');
  document.querySelectorAll("#ffs button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===(st.ff||"serif"))));r.style.setProperty("--lh",st.lh);
- document.querySelectorAll("#ths button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===st.th)));
+ document.querySelectorAll("#ths button").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.v===(st.th||(hwOn()?"halloween":null)))));
  document.querySelectorAll("#lhs button").forEach(b=>b.setAttribute("aria-pressed",String(+b.dataset.v===st.lh)));
  ls.set("gt.set",st);
 }
